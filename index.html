@@ -7,325 +7,113 @@
     <link rel="icon" type="image/png" href="ChatGPT Image 13 Jul 2026, 14.31.46.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
-        body {
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; background: #cbd5e0;
-            padding: 20px; overflow: hidden;
-        }
-
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #cbd5e0; padding: 20px; overflow: hidden; }
         .card-perspective { perspective: 2200px; width: 100%; max-width: 950px; }
-
-        .card-3d {
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .card-3d { position: relative; transform-style: preserve-3d; transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1); }
         .card-3d.dragging { transition: none; }
-
         .face-depan { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-
-        .face-belakang {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            backface-visibility: hidden; -webkit-backface-visibility: hidden;
-            transform: rotateY(180deg);
-        }
-
-        .id-card-wide {
-            background: #ffffff; border-radius: 20px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
-            border: 2px solid #1a2a6c;
-            overflow: hidden; display: flex; flex-direction: column;
-            min-height: 555px;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #1a2a6c, #2a3a8c); color: white;
-            padding: 22px 24px; text-align: center; border-bottom: 5px solid #f1c40f;
-            flex-shrink: 0;
-        }
+        .face-belakang { position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); }
+        .id-card-wide { background: #ffffff; border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.25); border: 2px solid #1a2a6c; overflow: hidden; display: flex; flex-direction: column; min-height: 555px; }
+        .header { background: linear-gradient(135deg, #1a2a6c, #2a3a8c); color: white; padding: 22px 24px; text-align: center; border-bottom: 5px solid #f1c40f; flex-shrink: 0; }
         .header h1 { font-size: 26px; letter-spacing: 5px; text-transform: uppercase; font-weight: 800; text-shadow: 0 3px 6px rgba(0,0,0,0.2); }
-
-        .main-content {
-            flex: 1; display: flex; padding: 40px 50px 0;
-            align-items: flex-start;
-        }
-
+        .main-content { flex: 1; display: flex; padding: 40px 50px 0; align-items: flex-start; }
         .photo-area { flex: 0 0 220px; margin-right: 45px; }
-        .photo-box {
-            width: 220px; height: 270px; border: 4px solid #1a2a6c;
-            border-radius: 12px; overflow: hidden; background: #f0f0f0;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
+        .photo-box { width: 220px; height: 270px; border: 4px solid #1a2a6c; border-radius: 12px; overflow: hidden; background: #f0f0f0; box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
         .photo-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
         .details-area { flex: 1; display: flex; flex-direction: column; }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: repeat(4, 1fr);
-            gap: 0 20px;
-            height: 270px;
-        }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: repeat(4, 1fr); gap: 0 20px; height: 270px; }
         .full-width { grid-column: span 3; }
         .info-block { display: flex; flex-direction: column; justify-content: center; }
-
         .info-label { font-weight: 700; color: #7f8c8d; text-transform: uppercase; font-size: 10.5px; letter-spacing: 1px; margin-bottom: 4px; }
         .info-value { font-size: 16px; font-weight: 800; color: #1a2a6c; line-height: 1.3; }
-
-        .button-row {
-            display: flex; align-items: center; gap: 20px;
-            padding: 22px 50px 0; flex-shrink: 0;
-        }
-        .button-row .status-tag {
-            flex: 0 0 220px; text-align: center; background: #27ae60; color: white;
-            padding: 11px 0; border-radius: 50px; font-weight: 700; font-size: 13px;
-            letter-spacing: 1px; box-shadow: 0 4px 12px rgba(39,174,96,0.3);
-        }
-        .button-row .btn-trigger {
-            flex: 1; background: #1a2a6c; color: #ffffff;
-            border: 2px solid #f1c40f; padding: 11px 0; border-radius: 50px;
-            font-size: 12.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-            cursor: pointer; box-shadow: 0 5px 15px rgba(26,42,108,0.2); transition: all 0.3s ease;
-        }
+        .button-row { display: flex; align-items: center; gap: 20px; padding: 22px 50px 0; flex-shrink: 0; }
+        .button-row .status-tag { flex: 0 0 220px; text-align: center; background: #27ae60; color: white; padding: 11px 0; border-radius: 50px; font-weight: 700; font-size: 13px; letter-spacing: 1px; box-shadow: 0 4px 12px rgba(39,174,96,0.3); }
+        .button-row .btn-trigger { flex: 1; background: #1a2a6c; color: #ffffff; border: 2px solid #f1c40f; padding: 11px 0; border-radius: 50px; font-size: 12.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; box-shadow: 0 5px 15px rgba(26,42,108,0.2); transition: all 0.3s ease; }
         .button-row .btn-trigger:hover { background: #f1c40f; color: #1a2a6c; border-color: #1a2a6c; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(241,196,15,0.3); }
-
-        .front-footer {
-            text-align: center; padding: 8px 20px; font-size: 10px;
-            color: #94a3b8; font-weight: 600; letter-spacing: 0.5px;
-            border-top: 1px solid #e2e8f0; flex-shrink: 0;
-        }
+        .front-footer { text-align: center; padding: 8px 20px; font-size: 10px; color: #94a3b8; font-weight: 600; letter-spacing: 0.5px; border-top: 1px solid #e2e8f0; flex-shrink: 0; }
         .bottom-border { height: 12px; background: #1a2a6c; width: 100%; flex-shrink: 0; }
-
         .back-content { flex: 1; display: flex; padding: 30px 40px; align-items: stretch; }
-
-        .back-left {
-            flex: 0 0 220px; margin-right: 40px;
-            display: flex; flex-direction: column; align-items: center;
-            gap: 8px;
-        }
-
-        .back-img-box {
-            width: 220px; height: 200px; border: 4px solid #1a2a6c;
-            border-radius: 12px; overflow: hidden; background: #f8f8f8;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12); flex-shrink: 0;
-            padding: 8px;
-        }
+        .back-left { flex: 0 0 220px; margin-right: 40px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .back-img-box { width: 220px; height: 200px; border: 4px solid #1a2a6c; border-radius: 12px; overflow: hidden; background: #f8f8f8; box-shadow: 0 8px 20px rgba(0,0,0,0.12); flex-shrink: 0; padding: 8px; }
         .back-img-box img { width: 100%; height: 100%; object-fit: contain; display: block; }
-
-        .back-ttd {
-            width: 100%; flex-shrink: 0;
-            display: flex; flex-direction: column; align-items: center;
-        }
-
+        .back-ttd { width: 100%; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
         .back-ttd-img { height: 85px; width: auto; object-fit: contain; opacity: 1; }
-
-        .back-img-label {
-            width: 100%; text-align: center; background: #1a2a6c; color: #f1c40f;
-            padding: 9px 0; border-radius: 50px; font-weight: 700; font-size: 10.5px;
-            letter-spacing: 2px; text-transform: uppercase; flex-shrink: 0;
-        }
-
+        .back-img-label { width: 100%; text-align: center; background: #1a2a6c; color: #f1c40f; padding: 9px 0; border-radius: 50px; font-weight: 700; font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; flex-shrink: 0; }
         .back-right { flex: 1; display: flex; flex-direction: column; }
-
         .bk-section { margin-bottom: 10px; flex-shrink: 0; }
         .bk-section:last-of-type { margin-bottom: 0; }
-
-        .bk-heading {
-            font-size: 9px; font-weight: 800; color: #1a2a6c; text-transform: uppercase;
-            letter-spacing: 2px; margin-bottom: 5px; padding-bottom: 4px;
-            border-bottom: 1.5px solid #e2e8f0;
-        }
-
+        .bk-heading { font-size: 9px; font-weight: 800; color: #1a2a6c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; padding-bottom: 4px; border-bottom: 1.5px solid #e2e8f0; }
         .bk-para { font-size: 10px; color: #334155; font-weight: 500; line-height: 1.6; text-align: justify; margin: 0; }
-
         .bk-list { list-style: none; display: flex; flex-direction: column; gap: 3px; margin: 0; }
-        .bk-list li {
-            font-size: 10px; color: #334155; font-weight: 500; line-height: 1.55;
-            text-align: justify; padding-left: 22px; position: relative;
-        }
-        .bk-list li::before {
-            content: attr(data-num); position: absolute; left: 0; top: 0;
-            font-weight: 800; color: #1a2a6c; font-size: 9.5px;
-        }
+        .bk-list li { font-size: 10px; color: #334155; font-weight: 500; line-height: 1.55; text-align: justify; padding-left: 22px; position: relative; }
+        .bk-list li::before { content: attr(data-num); position: absolute; left: 0; top: 0; font-weight: 800; color: #1a2a6c; font-size: 9.5px; }
 
-        .side-panel {
-            position: fixed; top: 50%; right: 20px; transform: translateY(-50%);
-            z-index: 10000; display: flex; flex-direction: column; gap: 6px;
-            animation: spIn 0.5s ease-out 0.3s both;
-        }
+        .side-panel { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 6px; animation: spIn 0.5s ease-out 0.3s both; }
         @keyframes spIn { from { opacity: 0; transform: translateY(-50%) translateX(25px); } to { opacity: 1; transform: translateY(-50%) translateX(0); } }
-
-        .sp-btn {
-            width: 46px; height: 46px; border-radius: 50%;
-            background: #1a2a6c; border: 2px solid rgba(241,196,15,0.4); color: #f1c40f;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-size: 15px; transition: all 0.3s ease;
-            position: relative; box-shadow: 0 3px 12px rgba(26,42,108,0.3);
-        }
+        .sp-btn { width: 46px; height: 46px; border-radius: 50%; background: #1a2a6c; border: 2px solid rgba(241,196,15,0.4); color: #f1c40f; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 15px; transition: all 0.3s ease; position: relative; box-shadow: 0 3px 12px rgba(26,42,108,0.3); }
         .sp-btn:hover { background: #f1c40f; color: #1a2a6c; border-color: #1a2a6c; transform: scale(1.12); box-shadow: 0 5px 20px rgba(241,196,15,0.35); }
         .sp-btn.on { background: #f1c40f; color: #1a2a6c; border-color: #1a2a6c; }
         .sp-btn.on:hover { background: #1a2a6c; color: #f1c40f; border-color: #f1c40f; }
         .sp-btn.disabled { opacity: 0.3; pointer-events: none; }
-
-        .sp-btn::after {
-            content: attr(data-tip); position: absolute; right: calc(100% + 12px); top: 50%;
-            transform: translateY(-50%); background: #1a2a6c; color: #f1c40f;
-            padding: 5px 14px; border-radius: 8px; font-size: 11px; font-weight: 600;
-            white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2); font-family: 'Segoe UI', sans-serif;
-        }
+        .sp-btn::after { content: attr(data-tip); position: absolute; right: calc(100% + 12px); top: 50%; transform: translateY(-50%); background: #1a2a6c; color: #f1c40f; padding: 5px 14px; border-radius: 8px; font-size: 11px; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.2); font-family: 'Segoe UI', sans-serif; }
         .sp-btn:hover::after { opacity: 1; }
         .sp-sep { width: 24px; height: 1px; background: rgba(241,196,15,0.3); margin: 2px auto; }
-
-        .toast-msg {
-            position: fixed; bottom: 24px; left: 50%;
-            transform: translateX(-50%) translateY(50px);
-            background: #1a2a6c; border: 2px solid #f1c40f;
-            padding: 10px 26px; border-radius: 50px; color: #f1c40f;
-            font-size: 12px; font-weight: 600; z-index: 20000; opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-            pointer-events: none; white-space: nowrap;
-        }
+        .toast-msg { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(50px); background: #1a2a6c; border: 2px solid #f1c40f; padding: 10px 26px; border-radius: 50px; color: #f1c40f; font-size: 12px; font-weight: 600; z-index: 20000; opacity: 0; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events: none; white-space: nowrap; }
         .toast-msg.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(26,42,108,0.75);
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 99999;
-        }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26,42,108,0.75); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 99999; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-
-        .modal-panel {
-            background: #ffffff; width: 90%; max-width: 680px; border-radius: 20px;
-            border: 3px solid #1a2a6c; box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-            overflow: hidden; transform: scale(0.85); transition: all 0.3s ease;
-        }
+        .modal-panel { background: #ffffff; width: 90%; max-width: 680px; border-radius: 20px; border: 3px solid #1a2a6c; box-shadow: 0 30px 60px rgba(0,0,0,0.4); overflow: hidden; transform: scale(0.85); transition: all 0.3s ease; }
         .modal-overlay.active .modal-panel { transform: scale(1); }
-
-        .modal-header {
-            background: linear-gradient(135deg, #1a2a6c, #2a3a8c); color: #ffffff;
-            padding: 16px 18px; text-align: center; position: relative; border-bottom: 4px solid #f1c40f;
-        }
+        .modal-header { background: linear-gradient(135deg, #1a2a6c, #2a3a8c); color: #ffffff; padding: 16px 18px; text-align: center; position: relative; border-bottom: 4px solid #f1c40f; }
         .modal-header h2 { font-size: 15px; letter-spacing: 3px; font-weight: 800; text-transform: uppercase; }
-
-        .modal-close {
-            position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
-            background: none; border: none; color: #ffffff; font-size: 28px;
-            cursor: pointer; transition: color 0.2s; line-height: 1;
-        }
+        .modal-close { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ffffff; font-size: 28px; cursor: pointer; transition: color 0.2s; line-height: 1; }
         .modal-close:hover { color: #f1c40f; }
-
         .modal-content { padding: 28px 30px; max-height: 72vh; overflow-y: auto; }
-
-        .section-title {
-            font-size: 10.5px; font-weight: 700; color: #7f8c8d; text-transform: uppercase;
-            letter-spacing: 2px; margin-bottom: 14px; border-left: 3px solid #1a2a6c; padding-left: 8px;
-        }
-
+        .section-title { font-size: 10.5px; font-weight: 700; color: #7f8c8d; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; border-left: 3px solid #1a2a6c; padding-left: 8px; }
         .icon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
         .icon-grid:last-child { margin-bottom: 0; }
-
-        .social-icon {
-            background: #ffffff; border-radius: 12px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-decoration: none; padding: 14px 8px 12px;
-            transition: all 0.2s ease; border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            min-height: 82px;
-        }
-        .social-icon img, .social-icon svg {
-            width: 32px; height: 32px; object-fit: contain;
-            margin-bottom: 8px; flex-shrink: 0;
-        }
-        .social-icon span {
-            font-size: 10.5px; font-weight: 700; color: #334155;
-            text-align: center; line-height: 1.25;
-        }
+        .social-icon { background: #ffffff; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; padding: 14px 8px 12px; transition: all 0.2s ease; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); min-height: 82px; }
+        .social-icon img, .social-icon svg { width: 32px; height: 32px; object-fit: contain; margin-bottom: 8px; flex-shrink: 0; }
+        .social-icon span { font-size: 10.5px; font-weight: 700; color: #334155; text-align: center; line-height: 1.25; }
         .social-icon:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(26,42,108,0.15); border-color: #1a2a6c; background: #f8fafc; }
-
         .platform-grid .social-icon { height: 88px; min-height: 88px; overflow: hidden; }
         .platform-grid .social-icon span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; display: block; }
         .platform-grid .social-icon img { margin-bottom: 6px; }
-
         .portofolio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 0; }
         .portofolio-grid .social-icon { height: 88px; min-height: 88px; }
 
         .modal-email { z-index: 100000; }
-        .modal-email .modal-panel { max-width: 640px; width: 92%; }
+        .modal-email .modal-panel { max-width: 720px; width: 94%; }
         .modal-email .modal-header { background: linear-gradient(135deg, #ea4335, #c62828); border-bottom-color: #f1c40f; }
-
-        .email-form { padding: 20px 28px 24px; }
-
-        .ef-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-        .ef-full { margin-bottom: 14px; }
-
-        .email-form label {
-            display: block; font-size: 10px; font-weight: 700; color: #1a2a6c;
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
-        }
-
-        .email-form input[type="text"],
-        .email-form input[type="email"],
-        .email-form textarea {
-            width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 10px;
-            font-size: 14px; font-family: 'Segoe UI', sans-serif; color: #334155;
-            transition: border-color 0.15s; outline: none; background: #f8fafc;
-        }
-        .email-form input:focus, .email-form textarea:focus { border-color: #ea4335; background: #fff; }
-        .email-form textarea { min-height: 80px; resize: vertical; }
-
-        .ef-upload-box {
-            border: 2px dashed #cbd5e1; border-radius: 10px; padding: 14px;
-            text-align: center; cursor: pointer; transition: all 0.2s; background: #f8fafc;
-            position: relative;
-        }
-        .ef-upload-box:hover { border-color: #ea4335; background: #fff5f5; }
-        .ef-upload-box.over { border-color: #ea4335; background: #fee2e2; }
-        .ef-upload-box input[type="file"] {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; cursor: pointer; z-index: 2;
-        }
-        .ef-upload-icon { font-size: 22px; color: #94a3b8; margin-bottom: 2px; pointer-events: none; }
-        .ef-upload-text { font-size: 11px; color: #64748b; font-weight: 600; pointer-events: none; }
-        .ef-upload-text b { color: #ea4335; }
-        .ef-upload-hint { font-size: 9px; color: #94a3b8; margin-top: 2px; pointer-events: none; }
-
-        .ef-files { margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
-        .ef-file {
-            display: flex; align-items: center; gap: 8px; padding: 6px 10px;
-            background: #f1f5f9; border-radius: 8px; font-size: 11px; border: 1px solid #e2e8f0;
-        }
-        .ef-file .efn { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #334155; font-weight: 600; }
-        .ef-file .efs { color: #94a3b8; font-size: 9px; font-weight: 600; flex-shrink: 0; }
-        .ef-file .efx { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 16px; padding: 0 2px; flex-shrink: 0; line-height: 1; }
-        .ef-file .efx:hover { transform: scale(1.3); }
-
-        .ef-note {
-            margin-top: 6px; padding: 6px 10px; background: #eff6ff; border: 1px solid #bfdbfe;
-            border-radius: 8px; font-size: 9px; color: #1e40af; line-height: 1.4;
-        }
-        .ef-note b { margin-right: 2px; }
-
-        .btn-send {
-            width: 100%; padding: 12px; border: none; border-radius: 50px;
-            background: linear-gradient(135deg, #ea4335, #c62828); color: #fff;
-            font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-            cursor: pointer; transition: all 0.25s; box-shadow: 0 5px 15px rgba(234,67,53,0.3);
-        }
-        .btn-send:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(234,67,53,0.4); }
-        .btn-send:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        .btn-send .spin {
-            display: inline-block; width: 14px; height: 14px;
-            border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
-            border-radius: 50%; animation: sp 0.6s linear infinite;
-            margin-right: 8px; vertical-align: middle;
-        }
-        @keyframes sp { to { transform: rotate(360deg); } }
-
-        .emsg { text-align: center; padding: 8px; border-radius: 10px; margin-top: 8px; font-size: 11px; font-weight: 600; display: none; }
+        .email-form-wrap { padding: 22px 26px 18px; }
+        .email-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+        .email-kiri { display: flex; flex-direction: column; gap: 10px; }
+        .email-kanan { display: flex; flex-direction: column; gap: 10px; }
+        .fg label { display: block; font-size: 10.5px; font-weight: 700; color: #1a2a6c; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+        .fg input[type="text"], .fg input[type="email"], .fg textarea { width: 100%; padding: 9px 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 13px; font-family: 'Segoe UI', sans-serif; color: #334155; transition: border-color 0.15s; outline: none; background: #f8fafc; }
+        .fg input:focus, .fg textarea:focus { border-color: #ea4335; background: #fff; }
+        .fg textarea { min-height: 76px; resize: vertical; }
+        .drop-zone { border: 2px dashed #cbd5e1; border-radius: 10px; padding: 12px 10px; text-align: center; cursor: pointer; transition: all 0.2s; background: #f8fafc; position: relative; }
+        .drop-zone:hover { border-color: #ea4335; background: #fff5f5; }
+        .drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+        .dz-icon { font-size: 20px; color: #94a3b8; margin-bottom: 2px; }
+        .dz-text { font-size: 10px; color: #64748b; font-weight: 600; }
+        .dz-text b { color: #ea4335; }
+        .dz-hint { font-size: 8.5px; color: #94a3b8; margin-top: 1px; }
+        .flist { display: flex; flex-direction: column; gap: 3px; }
+        .fitem { display: flex; align-items: center; gap: 6px; padding: 5px 8px; background: #f1f5f9; border-radius: 6px; font-size: 10px; border: 1px solid #e2e8f0; }
+        .fitem .fn { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #334155; font-weight: 600; }
+        .fitem .fs { color: #94a3b8; font-size: 8.5px; font-weight: 600; flex-shrink: 0; }
+        .fitem .fx { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 14px; padding: 0 2px; flex-shrink: 0; line-height: 1; }
+        .fitem .fx:hover { transform: scale(1.3); }
+        .note-kecil { padding: 5px 8px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 8.5px; color: #1e40af; line-height: 1.4; }
+        .btn-send { width: 100%; padding: 11px; border: none; border-radius: 50px; background: linear-gradient(135deg, #ea4335, #c62828); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.25s; box-shadow: 0 5px 15px rgba(234,67,53,0.3); display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 42px; }
+        .btn-send:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(234,67,53,0.4); }
+        .btn-send:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+        .spinner { display: inline-block; width: 15px; height: 15px; border: 2.5px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .emsg { text-align: center; padding: 10px 14px; border-radius: 8px; font-size: 10.5px; font-weight: 600; display: none; line-height: 1.5; margin-top: 12px; }
         .emsg.ok { display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .emsg.no { display: block; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
 
@@ -348,15 +136,12 @@
             .icon-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
             .platform-grid .social-icon { height: 82px; min-height: 82px; }
             .portofolio-grid { grid-template-columns: 1fr 1fr; }
-            .side-panel {
-                top: auto; bottom: 12px; right: 50%; transform: translateX(50%);
-                flex-direction: row; animation-name: spInM;
-            }
+            .side-panel { top: auto; bottom: 12px; right: 50%; transform: translateX(50%); flex-direction: row; animation-name: spInM; }
             @keyframes spInM { from { opacity: 0; transform: translateX(50%) translateY(25px); } to { opacity: 1; transform: translateX(50%) translateY(0); } }
             .sp-sep { width: 1px; height: 24px; margin: auto 2px; }
             .sp-btn::after { display: none; }
             .front-footer { display: none; }
-            .ef-row { grid-template-columns: 1fr; }
+            .email-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
             .icon-grid { grid-template-columns: repeat(2, 1fr); }
@@ -366,8 +151,8 @@
             .full-width { grid-column: span 1; }
             .sp-btn { width: 40px; height: 40px; font-size: 13px; }
             .modal-content { padding: 20px 16px; }
-            .email-form { padding: 16px 16px 20px; }
-            .modal-email .modal-panel { width: 96%; }
+            .email-form-wrap { padding: 16px 14px 14px; }
+            .modal-email .modal-panel { width: 97%; }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -376,7 +161,6 @@
 
     <div class="card-perspective">
         <div class="card-3d" id="card3d">
-
             <div class="face-depan">
                 <div class="id-card-wide">
                     <div class="header"><h1>ID CARD PERSONAL DIGITAL</h1></div>
@@ -386,38 +170,14 @@
                         </div>
                         <div class="details-area">
                             <div class="info-grid">
-                                <div class="info-block full-width">
-                                    <span class="info-label">Nama Lengkap</span>
-                                    <span class="info-value">MUHAMMAD FAJRI MUNAWAR</span>
-                                </div>
-                                <div class="info-block full-width">
-                                    <span class="info-label">Jabatan / Posisi Resmi</span>
-                                    <span class="info-value">FOUNDER & DIREKTUR UTAMA</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Nomor Identitas</span>
-                                    <span class="info-value">GN-01280703008</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Jenis Kelamin</span>
-                                    <span class="info-value">LAKI-LAKI</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Golongan Darah</span>
-                                    <span class="info-value">B</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Tempat, Tanggal Lahir</span>
-                                    <span class="info-value">JAKARTA, 28 JULI 2003</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Kewarganegaraan</span>
-                                    <span class="info-value">INDONESIA</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Agama</span>
-                                    <span class="info-value">ISLAM</span>
-                                </div>
+                                <div class="info-block full-width"><span class="info-label">Nama Lengkap</span><span class="info-value">MUHAMMAD FAJRI MUNAWAR</span></div>
+                                <div class="info-block full-width"><span class="info-label">Jabatan / Posisi Resmi</span><span class="info-value">FOUNDER & DIREKTUR UTAMA</span></div>
+                                <div class="info-block"><span class="info-label">Nomor Identitas</span><span class="info-value">GN-01280703008</span></div>
+                                <div class="info-block"><span class="info-label">Jenis Kelamin</span><span class="info-value">LAKI-LAKI</span></div>
+                                <div class="info-block"><span class="info-label">Golongan Darah</span><span class="info-value">B</span></div>
+                                <div class="info-block"><span class="info-label">Tempat, Tanggal Lahir</span><span class="info-value">JAKARTA, 28 JULI 2003</span></div>
+                                <div class="info-block"><span class="info-label">Kewarganegaraan</span><span class="info-value">INDONESIA</span></div>
+                                <div class="info-block"><span class="info-label">Agama</span><span class="info-value">ISLAM</span></div>
                             </div>
                         </div>
                     </div>
@@ -429,16 +189,13 @@
                     <div class="bottom-border"></div>
                 </div>
             </div>
-
             <div class="face-belakang">
                 <div class="id-card-wide">
                     <div class="header"><h1>ID CARD PERSONAL DIGITAL</h1></div>
                     <div class="back-content">
                         <div class="back-left">
                             <div class="back-img-box"><img src="ChatGPT Image 19 Mei 2026, 12.59.03(1).png" alt="Tanda Pengenal Sah"></div>
-                            <div class="back-ttd">
-                                <img class="back-ttd-img" src="ChatGPT Image 13 Jul 2026, 05.08.28(1).png" alt="Tanda Tangan">
-                            </div>
+                            <div class="back-ttd"><img class="back-ttd-img" src="ChatGPT Image 13 Jul 2026, 05.08.28(1).png" alt="Tanda Tangan"></div>
                             <div class="back-img-label">Tanda Pengenal Sah</div>
                         </div>
                         <div class="back-right">
@@ -465,7 +222,6 @@
                     <div class="bottom-border"></div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -529,53 +285,58 @@
                 <h2>Kirim Pesan via Gmail</h2>
                 <button class="modal-close" id="btnCloseEmail">&times;</button>
             </div>
-            <form class="email-form" id="emailForm">
-
-                <!-- ⬇️⬇️⬇️ GANTI INI ⬇️⬇️⬇️ -->
-                <input type="hidden" name="access_key" value="PASTE_ACCESS_KEY_KAMU_DISINI">
-                <!-- ⬆️⬆️⬆️ GANTI INI ⬆️⬆️⬆️ -->
-
-                <input type="hidden" name="subject" value="Pesan Baru dari Website ID Card">
-                <input type="hidden" name="from_name" value="Website ID Card">
-
-                <div class="ef-row">
-                    <div>
-                        <label>Nama Pengirim</label>
-                        <input type="text" name="name" placeholder="Masukkan nama Anda" required autocomplete="name">
+            <div class="email-form-wrap">
+                <form id="emailForm">
+                    <div class="email-grid">
+                        <div class="email-kiri">
+                            <div class="fg">
+                                <label>Nama Pengirim</label>
+                                <input type="text" id="eNama" placeholder="Masukkan nama Anda" required>
+                            </div>
+                            <div class="fg">
+                                <label>Email Pengirim</label>
+                                <input type="email" id="eEmail" placeholder="contoh@email.com" required>
+                            </div>
+                            <div class="fg">
+                                <label>Subjek</label>
+                                <input type="text" id="eSubjek" placeholder="Perihal pesan Anda" required>
+                            </div>
+                            <div class="fg">
+                                <label>Pesan</label>
+                                <textarea id="ePesan" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                            </div>
+                        </div>
+                        <div class="email-kanan">
+                            <div class="fg">
+                                <label>Lampiran File</label>
+                                <div class="drop-zone" id="dropZone">
+                                    <input type="file" id="fileIn" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.mp4,.mov,.avi,.mkv,.mp3,.wav">
+                                    <div class="dz-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                                    <div class="dz-text">Klik atau <b>seret file</b></div>
+                                    <div class="dz-hint">Gambar, Dok, Video (maks 25MB)</div>
+                                </div>
+                                <div class="flist" id="flist"></div>
+                            </div>
+                            <div class="note-kecil">
+                                <i class="fa-solid fa-circle-info"></i> Video besar? Upload ke drive.google.com lalu paste link-nya di kolom Pesan.
+                            </div>
+                            <button type="submit" class="btn-send" id="btnKirim">
+                                <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <label>Email Pengirim</label>
-                        <input type="email" name="email" placeholder="contoh@email.com" required autocomplete="email">
-                    </div>
-                </div>
-                <div class="ef-full">
-                    <label>Subjek</label>
-                    <input type="text" name="subyek" placeholder="Perihal pesan Anda" required>
-                </div>
-                <div class="ef-full">
-                    <label>Pesan</label>
-                    <textarea name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
-                </div>
-                <div class="ef-full">
-                    <label>Lampiran (Gambar, Dokumen, Video)</label>
-                    <div class="ef-upload-box" id="dropZone">
-                        <input type="file" id="fileIn" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.mp4,.mov,.avi,.mkv,.mp3,.wav">
-                        <div class="ef-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                        <div class="ef-upload-text">Klik atau <b>seret file ke sini</b></div>
-                        <div class="ef-upload-hint">Maks 5MB per file</div>
-                    </div>
-                    <div class="ef-files" id="efFiles"></div>
-                    <div class="ef-note"><b><i class="fa-solid fa-circle-info"></i></b> Video besar? Upload ke drive.google.com lalu paste link-nya di kolom Pesan.</div>
-                </div>
-                <button type="submit" class="btn-send" id="btnSend"><i class="fa-solid fa-paper-plane"></i>&nbsp; Kirim Pesan</button>
-                <div class="emsg" id="emsg"></div>
-            </form>
+                    <div class="emsg" id="emsg"></div>
+                </form>
+            </div>
         </div>
     </div>
 
     <div class="toast-msg" id="toastEl"></div>
 
     <script>
+    (function() {
+
+        /* ===== KARTU 3D ===== */
         var card3d = document.getElementById('card3d');
         var toastEl = document.getElementById('toastEl');
         var modalEl = document.getElementById('modalLink');
@@ -589,13 +350,7 @@
         function normAngle(a) { return ((a % 360) + 360) % 360; }
         function showingBack() { var n = normAngle(angle); return n > 90 && n < 270; }
         function applyTransform() { card3d.style.transform = 'rotateY(' + angle + 'deg)'; }
-
-        function toast(msg) {
-            toastEl.textContent = msg;
-            toastEl.classList.add('show');
-            clearTimeout(toastTm);
-            toastTm = setTimeout(function() { toastEl.classList.remove('show'); }, 2000);
-        }
+        function toast(m) { toastEl.textContent = m; toastEl.classList.add('show'); clearTimeout(toastTm); toastTm = setTimeout(function(){ toastEl.classList.remove('show'); }, 2000); }
 
         function updateButtons() {
             var btns = document.querySelectorAll('.sp-btn');
@@ -606,147 +361,146 @@
             else { if (showingBack()) document.getElementById('spBack').classList.add('on'); else document.getElementById('spFront').classList.add('on'); }
         }
 
-        function snapTo(targetAngle, callback) {
-            isSnapping = true;
-            card3d.classList.remove('dragging');
-            var startAngle = angle, diff = targetAngle - startAngle;
-            if (diff > 180) diff -= 360;
-            if (diff < -180) diff += 360;
-            var endAngle = startAngle + diff;
-            var startTime = performance.now(), duration = 800;
+        function snapTo(ta, cb) {
+            isSnapping = true; card3d.classList.remove('dragging');
+            var sa = angle, d = ta - sa;
+            if (d > 180) d -= 360; if (d < -180) d += 360;
+            var ea = sa + d, st = performance.now(), du = 800;
             function step(now) {
-                var t = Math.min((now - startTime) / duration, 1);
-                t = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-                angle = startAngle + diff * t;
-                applyTransform();
+                var t = Math.min((now - st) / du, 1);
+                t = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+                angle = sa + d * t; applyTransform();
                 if (t < 1) requestAnimationFrame(step);
-                else { angle = normAngle(endAngle); applyTransform(); isSnapping = false; updateButtons(); if (callback) callback(); }
+                else { angle = normAngle(ea); applyTransform(); isSnapping = false; updateButtons(); if (cb) cb(); }
             }
             requestAnimationFrame(step);
         }
 
-        function setMode(newMode) {
-            if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; }
-            isDragging = false; card3d.style.cursor = '';
-            mode = newMode; updateButtons();
-        }
-
-        function doFlip() { if (locked()) return; if (mode === '360' || mode === 'auto') { exitToNormal(); return; } snapTo(showingBack() ? 0 : 180, function() { toast(showingBack() ? 'Sisi belakang' : 'Sisi depan'); }); }
-        function goFront() { if (locked()) return; if (mode === '360' || mode === 'auto') { exitToNormal(); return; } snapTo(0, function() { toast('Sisi depan'); }); }
-        function goBack() { if (locked()) return; if (mode === '360' || mode === 'auto') { exitToNormal(); return; } snapTo(180, function() { toast('Sisi belakang'); }); }
+        function setMode(m) { if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; } isDragging = false; card3d.style.cursor = ''; mode = m; updateButtons(); }
+        function doFlip() { if (locked()) return; if (mode==='360'||mode==='auto') { exitN(); return; } snapTo(showingBack()?0:180, function(){ toast(showingBack()?'Sisi belakang':'Sisi depan'); }); }
+        function goFront() { if (locked()) return; if (mode==='360'||mode==='auto') { exitN(); return; } snapTo(0, function(){ toast('Sisi depan'); }); }
+        function goBack() { if (locked()) return; if (mode==='360'||mode==='auto') { exitN(); return; } snapTo(180, function(){ toast('Sisi belakang'); }); }
         function enter360() { setMode('360'); card3d.classList.add('dragging'); card3d.style.cursor = 'grab'; toast('Mode 360 — seret kartu'); }
-        function exitToNormal() { card3d.classList.remove('dragging'); setMode('normal'); var n = normAngle(angle); snapTo((n > 90 && n < 270) ? 180 : 0, function() { toast(showingBack() ? 'Sisi belakang' : 'Sisi depan'); }); }
-        function toggle360() { if (locked()) return; if (mode === '360' || mode === 'auto') exitToNormal(); else enter360(); }
+        function exitN() { card3d.classList.remove('dragging'); setMode('normal'); var n = normAngle(angle); snapTo((n>90&&n<270)?180:0, function(){ toast(showingBack()?'Sisi belakang':'Sisi depan'); }); }
+        function toggle360() { if (locked()) return; if (mode==='360'||mode==='auto') exitN(); else enter360(); }
+        function startAuto() { if (mode!=='360') { setMode('360'); card3d.classList.add('dragging'); card3d.style.cursor='grab'; } mode='auto'; updateButtons(); toast('Putar otomatis aktif'); (function lp(){ if(mode!=='auto') return; angle+=0.35; applyTransform(); autoRAF=requestAnimationFrame(lp); })(); }
+        function stopAuto() { if(mode!=='auto') return; mode='360'; if(autoRAF){cancelAnimationFrame(autoRAF);autoRAF=null;} updateButtons(); toast('Auto putar berhenti'); }
+        function toggleAuto() { if (locked()) return; if (mode==='auto') stopAuto(); else startAuto(); }
+        function doReset() { if (locked()) return; card3d.classList.remove('dragging'); setMode('normal'); snapTo(0, function(){ toast('Posisi direset'); }); }
+        function openModal() { isModalOpen=true; modalEl.classList.add('active'); updateButtons(); }
+        function closeModal() { isModalOpen=false; modalEl.classList.remove('active'); updateButtons(); }
+        function openEmailModal() { isEmailOpen=true; modalEmailEl.classList.add('active'); updateButtons(); }
+        function closeEmailModal() { isEmailOpen=false; modalEmailEl.classList.remove('active'); updateButtons(); }
 
-        function startAuto() {
-            if (mode !== '360') { setMode('360'); card3d.classList.add('dragging'); card3d.style.cursor = 'grab'; }
-            mode = 'auto'; updateButtons(); toast('Putar otomatis aktif');
-            (function loop() { if (mode !== 'auto') return; angle += 0.35; applyTransform(); autoRAF = requestAnimationFrame(loop); })();
-        }
-        function stopAuto() { if (mode !== 'auto') return; mode = '360'; if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; } updateButtons(); toast('Auto putar berhenti'); }
-        function toggleAuto() { if (locked()) return; if (mode === 'auto') stopAuto(); else startAuto(); }
-        function doReset() { if (locked()) return; card3d.classList.remove('dragging'); setMode('normal'); snapTo(0, function() { toast('Posisi direset'); }); }
-
-        function openModal() { isModalOpen = true; modalEl.classList.add('active'); updateButtons(); }
-        function closeModal() { isModalOpen = false; modalEl.classList.remove('active'); updateButtons(); }
-        function openEmailModal() { isEmailOpen = true; modalEmailEl.classList.add('active'); updateButtons(); }
-        function closeEmailModal() { isEmailOpen = false; modalEmailEl.classList.remove('active'); updateButtons(); }
-
-        var myFiles = [];
-        var dropZone = document.getElementById('dropZone');
+        /* ===== FILE UPLOAD ===== */
+        var flistEl = document.getElementById('flist');
         var fileIn = document.getElementById('fileIn');
-        var efFiles = document.getElementById('efFiles');
-
-        function fmtSize(b) { if (b < 1024) return b + ' B'; if (b < 1048576) return (b / 1024).toFixed(1) + ' KB'; return (b / 1048576).toFixed(1) + ' MB'; }
-
+        function fmtSize(b) { if(b<1024) return b+' B'; if(b<1048576) return (b/1024).toFixed(1)+' KB'; return (b/1048576).toFixed(1)+' MB'; }
         function renderFiles() {
-            efFiles.innerHTML = '';
-            for (var i = 0; i < myFiles.length; i++) {
-                var d = document.createElement('div');
-                d.className = 'ef-file';
-                d.innerHTML = '<span class="efn">' + myFiles[i].name + '</span><span class="efs">' + fmtSize(myFiles[i].size) + '</span><button type="button" class="efx" data-i="' + i + '">&times;</button>';
-                efFiles.appendChild(d);
+            flistEl.innerHTML = '';
+            for (var i = 0; i < fileIn.files.length; i++) {
+                var d = document.createElement('div'); d.className = 'fitem';
+                d.innerHTML = '<span class="fn">'+fileIn.files[i].name+'</span><span class="fs">'+fmtSize(fileIn.files[i].size)+'</span><button type="button" class="fx" data-i="'+i+'">&times;</button>';
+                flistEl.appendChild(d);
             }
         }
+        fileIn.addEventListener('change', renderFiles);
+        flistEl.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('fx')) return;
+            var idx = parseInt(e.target.dataset.i), dt = new DataTransfer();
+            for (var i = 0; i < fileIn.files.length; i++) { if (i !== idx) dt.items.add(fileIn.files[i]); }
+            fileIn.files = dt.files; renderFiles();
+        });
+        document.getElementById('dropZone').addEventListener('dragover', function(e){ e.preventDefault(); this.style.borderColor='#ea4335'; });
+        document.getElementById('dropZone').addEventListener('dragleave', function(){ this.style.borderColor=''; });
+        document.getElementById('dropZone').addEventListener('drop', function(e){ e.preventDefault(); this.style.borderColor=''; });
 
-        function addFiles(files) {
-            for (var i = 0; i < files.length; i++) {
-                if (files[i].size > 5242880) { toast('File "' + files[i].name + '" terlalu besar (maks 5MB)'); continue; }
-                myFiles.push(files[i]);
-            }
-            renderFiles();
-        }
+        /* ===== KIRIM EMAIL VIA WEB3FORMS — API KEY SUDAH TERMASUK ===== */
+        var emailForm = document.getElementById('emailForm');
+        var emsg = document.getElementById('emsg');
+        var btnKirim = document.getElementById('btnKirim');
 
-        fileIn.addEventListener('change', function() { addFiles(this.files); this.value = ''; });
-        efFiles.addEventListener('click', function(e) { if (e.target.classList.contains('efx')) { myFiles.splice(parseInt(e.target.dataset.i), 1); renderFiles(); } });
-        dropZone.addEventListener('dragover', function(e) { e.preventDefault(); this.classList.add('over'); });
-        dropZone.addEventListener('dragleave', function() { this.classList.remove('over'); });
-        dropZone.addEventListener('drop', function(e) { e.preventDefault(); this.classList.remove('over'); addFiles(e.dataTransfer.files); });
-
-        document.getElementById('emailForm').addEventListener('submit', function(e) {
+        emailForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            var btn = document.getElementById('btnSend');
-            var msg = document.getElementById('emsg');
-            var form = this;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spin"></span> Mengirim...';
-            msg.className = 'emsg'; msg.style.display = 'none';
-            var fd = new FormData(form);
-            fd.delete('attachment');
-            for (var i = 0; i < myFiles.length; i++) fd.append('attachment', myFiles[i]);
-            fd.set('subject', form.elements['subyek'].value);
-            fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
-            .then(function(r) { return r.json(); })
-            .then(function(d) {
-                if (d.success) { msg.textContent = '✅ Pesan berhasil dikirim ke muhfajrimunawar@gmail.com!'; msg.className = 'emsg ok'; form.reset(); myFiles = []; renderFiles(); }
-                else { throw new Error(d.message || 'Gagal'); }
-            })
-            .catch(function() { msg.textContent = '❌ Gagal mengirim. Cek koneksi & access key.'; msg.className = 'emsg no'; })
-            .finally(function() { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>&nbsp; Kirim Pesan'; msg.style.display = 'block'; });
-        });
 
-        function onDragStart(clientX, target) {
-            if (mode !== '360' && mode !== 'auto') return;
-            if (isSnapping || isModalOpen || isEmailOpen) return;
-            if (!card3d.contains(target)) return;
-            if (mode === 'auto') { if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; } mode = '360'; updateButtons(); }
-            isDragging = true; dragStartX = clientX; dragStartAngle = angle; card3d.style.cursor = 'grabbing';
-        }
-        function onDragMove(clientX) { if (!isDragging) return; angle = dragStartAngle + (clientX - dragStartX) * 0.4; applyTransform(); }
-        function onDragEnd() { if (!isDragging) return; isDragging = false; if (mode === '360') card3d.style.cursor = 'grab'; }
+            var nama   = document.getElementById('eNama').value.trim();
+            var email  = document.getElementById('eEmail').value.trim();
+            var subjek = document.getElementById('eSubjek').value.trim();
+            var pesan  = document.getElementById('ePesan').value.trim();
 
-        document.addEventListener('mousedown', function(e) {
-            if ((mode === '360' || mode === 'auto') && !isModalOpen && !isEmailOpen && !isSnapping && card3d.contains(e.target)) {
-                e.preventDefault();
+            if (!nama || !email || !subjek || !pesan) {
+                emsg.textContent = 'Semua kolom wajib diisi.';
+                emsg.className = 'emsg no'; return;
             }
-            onDragStart(e.clientX, e.target);
-        });
-        document.addEventListener('mousemove', function(e) { onDragMove(e.clientX); });
-        document.addEventListener('mouseup', function() { onDragEnd(); });
-        document.addEventListener('touchstart', function(e) { if (e.touches.length !== 1) return; onDragStart(e.touches[0].clientX, e.target); }, { passive: true });
-        document.addEventListener('touchmove', function(e) { if (e.touches.length !== 1) return; onDragMove(e.touches[0].clientX); }, { passive: true });
-        document.addEventListener('touchend', function() { onDragEnd(); });
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                emsg.textContent = 'Format email tidak valid.';
+                emsg.className = 'emsg no'; return;
+            }
 
+            btnKirim.disabled = true;
+            btnKirim.innerHTML = '<span class="spinner"></span> Mengirim...';
+            emsg.className = 'emsg'; emsg.style.display = 'none';
+
+            /* Bangun FormData sesuai format Web3Forms */
+            var fd = new FormData();
+            fd.append('access_key', 'fd279caf-ff27-4f11-a1a4-cded43c0f864');
+            fd.append('name', nama);
+            fd.append('email', email);
+            fd.append('subject', subjek);
+            fd.append('message', 'Nama: ' + nama + '\nEmail: ' + email + '\n\n' + pesan);
+
+            /* Lampiran file jika ada */
+            for (var i = 0; i < fileIn.files.length; i++) {
+                fd.append('attachment', fileIn.files[i]);
+            }
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: fd
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.success) {
+                    emsg.innerHTML = '<i class="fa-solid fa-circle-check"></i> Pesan berhasil dikirim ke muhfajrimunawar@gmail.com!';
+                    emsg.className = 'emsg ok'; emsg.style.display = 'block';
+                    emailForm.reset(); flistEl.innerHTML = '';
+                } else {
+                    emsg.textContent = 'Gagal mengirim: ' + (data.message || 'Coba lagi.');
+                    emsg.className = 'emsg no'; emsg.style.display = 'block';
+                }
+            })
+            .catch(function() {
+                emsg.textContent = 'Gagal terhubung ke server. Cek koneksi internet lalu coba lagi.';
+                emsg.className = 'emsg no'; emsg.style.display = 'block';
+            })
+            .finally(function() {
+                btnKirim.disabled = false;
+                btnKirim.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Pesan';
+            });
+        });
+
+        /* ===== DRAG KARTU ===== */
+        function onDS(cx, tgt) { if(mode!=='360'&&mode!=='auto') return; if(isSnapping||isModalOpen||isEmailOpen) return; if(!card3d.contains(tgt)) return; if(mode==='auto'){if(autoRAF){cancelAnimationFrame(autoRAF);autoRAF=null;}mode='360';updateButtons();} isDragging=true; dragStartX=cx; dragStartAngle=angle; card3d.style.cursor='grabbing'; }
+        function onDM(cx) { if(!isDragging) return; angle=dragStartAngle+(cx-dragStartX)*0.4; applyTransform(); }
+        function onDE() { if(!isDragging) return; isDragging=false; if(mode==='360') card3d.style.cursor='grab'; }
+        document.addEventListener('mousedown', function(e){ if((mode==='360'||mode==='auto')&&!isModalOpen&&!isEmailOpen&&!isSnapping&&card3d.contains(e.target)) e.preventDefault(); onDS(e.clientX,e.target); });
+        document.addEventListener('mousemove', function(e){ onDM(e.clientX); });
+        document.addEventListener('mouseup', function(){ onDE(); });
+        document.addEventListener('touchstart', function(e){ if(e.touches.length!==1) return; onDS(e.touches[0].clientX,e.target); }, {passive:true});
+        document.addEventListener('touchmove', function(e){ if(e.touches.length!==1) return; onDM(e.touches[0].clientX); }, {passive:true});
+        document.addEventListener('touchend', function(){ onDE(); });
+
+        /* ===== KEYBOARD ===== */
         document.addEventListener('keydown', function(e) {
-            if (isEmailOpen) { if (e.key === 'Escape') closeEmailModal(); return; }
-            if (isModalOpen) { if (e.key === 'Escape') closeModal(); return; }
-            switch (e.key) {
+            if (isEmailOpen) { if(e.key==='Escape') closeEmailModal(); return; }
+            if (isModalOpen) { if(e.key==='Escape') closeModal(); return; }
+            switch(e.key) {
                 case ' ': e.preventDefault(); doFlip(); break;
                 case '3': toggle360(); break;
                 case 'a': case 'A': toggleAuto(); break;
                 case 'r': case 'R': doReset(); break;
-                case 'ArrowLeft':
-                    if ((mode === '360' || mode === 'auto') && !isSnapping) {
-                        e.preventDefault();
-                        if (mode === 'auto') { if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; } mode = '360'; updateButtons(); }
-                        angle -= 5; applyTransform();
-                    } break;
-                case 'ArrowRight':
-                    if ((mode === '360' || mode === 'auto') && !isSnapping) {
-                        e.preventDefault();
-                        if (mode === 'auto') { if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; } mode = '360'; updateButtons(); }
-                        angle += 5; applyTransform();
-                    } break;
+                case 'ArrowLeft': if((mode==='360'||mode==='auto')&&!isSnapping){e.preventDefault();if(mode==='auto'){if(autoRAF){cancelAnimationFrame(autoRAF);autoRAF=null;}mode='360';updateButtons();}angle-=5;applyTransform();} break;
+                case 'ArrowRight': if((mode==='360'||mode==='auto')&&!isSnapping){e.preventDefault();if(mode==='auto'){if(autoRAF){cancelAnimationFrame(autoRAF);autoRAF=null;}mode='360';updateButtons();}angle+=5;applyTransform();} break;
             }
         });
 
@@ -758,12 +512,13 @@
         document.getElementById('spReset').addEventListener('click', doReset);
         document.getElementById('btnOpenModal').addEventListener('click', openModal);
         document.getElementById('btnCloseModal').addEventListener('click', closeModal);
-        modalEl.addEventListener('click', function(e) { if (e.target === modalEl) closeModal(); });
+        modalEl.addEventListener('click', function(e){ if(e.target===modalEl) closeModal(); });
         document.getElementById('btnOpenEmail').addEventListener('click', openEmailModal);
         document.getElementById('btnCloseEmail').addEventListener('click', closeEmailModal);
-        modalEmailEl.addEventListener('click', function(e) { if (e.target === modalEmailEl) closeEmailModal(); });
+        modalEmailEl.addEventListener('click', function(e){ if(e.target===modalEmailEl) closeEmailModal(); });
 
         updateButtons();
+    })();
     </script>
 </body>
 </html>
