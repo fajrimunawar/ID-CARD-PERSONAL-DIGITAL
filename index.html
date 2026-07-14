@@ -34,7 +34,6 @@
             user-select: text;
         }
 
-        /* ===== KARTU ===== */
         .card-perspective {
             perspective: 2200px;
             width: 100%;
@@ -200,6 +199,8 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(26, 42, 108, 0.2);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
         }
 
         .button-row .btn-trigger:hover {
@@ -228,7 +229,6 @@
             flex-shrink: 0;
         }
 
-        /* ===== SISI BELAKANG ===== */
         .back-content {
             flex: 1;
             display: flex;
@@ -356,7 +356,6 @@
             font-size: 9.5px;
         }
 
-        /* ===== PANEL KONTROL SAMPING ===== */
         .side-panel {
             position: fixed;
             top: 50%;
@@ -447,7 +446,6 @@
             margin: 2px auto;
         }
 
-        /* ===== TOAST ===== */
         .toast-msg {
             position: fixed;
             bottom: 24px;
@@ -472,7 +470,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* ===== MODAL LINK ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -539,6 +536,7 @@
             cursor: pointer;
             transition: color 0.2s;
             line-height: 1;
+            z-index: 5;
         }
 
         .modal-close:hover {
@@ -629,7 +627,6 @@
             margin-bottom: 6px;
         }
 
-        /* ===== MODAL EMAIL ===== */
         .modal-email {
             z-index: 100000;
         }
@@ -813,7 +810,6 @@
             border: 1px solid #f5c6cb;
         }
 
-        /* ===== EFEK HOLOGRAM ===== */
         .hologram-effect {
             position: absolute;
             top: 0;
@@ -879,7 +875,6 @@
             mix-blend-mode: overlay;
         }
 
-        /* ===== TABLET (max-width: 850px) ===== */
         @media (max-width: 850px) {
             body {
                 overflow-y: auto;
@@ -978,7 +973,6 @@
                 width: 100%;
             }
 
-            /* Panel kontrol pindah ke bawah */
             .side-panel {
                 top: auto;
                 bottom: 16px;
@@ -1032,7 +1026,6 @@
             }
         }
 
-        /* ===== HP KECIL (max-width: 480px) ===== */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
@@ -1129,7 +1122,6 @@
             }
         }
 
-        /* ===== PRINT PROTECTION ===== */
         @media print {
             body { display: none !important; }
             html::after {
@@ -1149,7 +1141,6 @@
     <div class="card-perspective" id="cardPerspective">
         <div class="card-3d" id="card3d">
 
-            <!-- SISI DEPAN -->
             <div class="face-depan">
                 <div class="id-card-wide">
                     <div class="header">
@@ -1208,7 +1199,6 @@
                 </div>
             </div>
 
-            <!-- SISI BELAKANG -->
             <div class="face-belakang">
                 <div class="id-card-wide">
                     <div class="header">
@@ -1253,7 +1243,6 @@
         </div>
     </div>
 
-    <!-- PANEL KONTROL -->
     <div class="side-panel" id="sidePanel">
         <button class="sp-btn" id="spFlip" data-tip="Balik Kartu"><i class="fa-solid fa-rotate"></i></button>
         <button class="sp-btn" id="spFront" data-tip="Sisi Depan"><i class="fa-solid fa-id-card"></i></button>
@@ -1265,7 +1254,6 @@
         <button class="sp-btn" id="spReset" data-tip="Reset"><i class="fa-solid fa-arrow-rotate-left"></i></button>
     </div>
 
-    <!-- MODAL LINK -->
     <div class="modal-overlay" id="modalLink">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1304,12 +1292,13 @@
                     <a href="#" class="social-icon"><img src="ZEARVIS_TEKNOLOGI.png" alt="ZEARVIS"><span>ZEARVIS TEKNOLOGI</span></a>
                     <a href="#" class="social-icon"><img src="SIRANKARTA.png" alt="SIRANKARTA"><span>SIRANKARTA</span></a>
                     <a href="#" class="social-icon"><img src="XEAGIS_INDUSTRI.png" alt="XEAGIS"><span>XEAGIS INDUSTRI</span></a>
+                    <a href="#" class="social-icon"><img src="DANABATRI.png" alt="DANABATRI"><span>DANABATRI</span></a>
+                    <a href="#" class="social-icon"><img src="PORINVEX.png" alt="PORINVEX"><span>PORINVEX</span></a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL EMAIL -->
     <div class="modal-overlay modal-email" id="modalEmail">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1510,7 +1499,6 @@
         function openEmailModal() { isEmailOpen = true; modalEmailEl.classList.add('active'); updateButtons(); }
         function closeEmailModal() { isEmailOpen = false; modalEmailEl.classList.remove('active'); updateButtons(); }
 
-        /* ===== KIRIM EMAIL VIA WEB3FORMS ===== */
         var emailForm = document.getElementById('emailForm');
         var emsg = document.getElementById('emsg');
         var btnKirim = document.getElementById('btnKirim');
@@ -1566,7 +1554,6 @@
             });
         });
 
-        /* ===== KIRIM VIA GMAIL ===== */
         document.getElementById('btnGmail').addEventListener('click', function() {
             var nama = document.getElementById('eNama').value.trim();
             var email = document.getElementById('eEmail').value.trim();
@@ -1591,7 +1578,6 @@
             emsg.style.display = 'block';
         });
 
-        /* ===== DRAG KARTU ===== */
         function onDragStart(clientX, target) {
             if (mode !== '360' && mode !== 'auto') return;
             if (isSnapping || isModalOpen || isEmailOpen) return;
@@ -1637,7 +1623,6 @@
         }, { passive: true });
         document.addEventListener('touchend', function() { onDragEnd(); });
 
-        /* ===== KEYBOARD ===== */
         document.addEventListener('keydown', function(e) {
             var tag = e.target.tagName.toLowerCase();
             if (tag === 'input' || tag === 'textarea') return;
@@ -1665,7 +1650,6 @@
             }
         });
 
-        /* ===== EVENT LISTENER ===== */
         document.getElementById('spFlip').addEventListener('click', doFlip);
         document.getElementById('spFront').addEventListener('click', goFront);
         document.getElementById('spBack').addEventListener('click', goBack);
@@ -1681,7 +1665,6 @@
 
         updateButtons();
 
-        /* ===== EFEK HOLOGRAM ===== */
         var cardPerspective = document.getElementById('cardPerspective');
         var holoFront = document.getElementById('holoFront');
         var holoBack = document.getElementById('holoBack');
@@ -1696,7 +1679,6 @@
             holoBack.style.setProperty('--holo-y', y + '%');
         });
 
-        /* ===== ANTI COPY ===== */
         document.addEventListener('contextmenu', function(e) {
             var t = e.target.tagName.toLowerCase();
             if (t !== 'input' && t !== 'textarea') e.preventDefault();
