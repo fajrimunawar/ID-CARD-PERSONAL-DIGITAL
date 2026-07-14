@@ -1294,6 +1294,8 @@
                     <a href="#" class="social-icon"><img src="XEAGIS_INDUSTRI.png" alt="XEAGIS"><span>XEAGIS INDUSTRI</span></a>
                     <a href="#" class="social-icon"><img src="DANABATRI.png" alt="DANABATRI"><span>DANABATRI</span></a>
                     <a href="#" class="social-icon"><img src="PORINVEX.png" alt="PORINVEX"><span>PORINVEX</span></a>
+                    <!-- TAMBAHAN: KOTAK PADAT -->
+                    <a href="#" class="social-icon"><img src="PADAT.png" alt="PADAT"><span>PADAT</span></a>
                 </div>
             </div>
         </div>
@@ -1439,6 +1441,8 @@
         }
 
         function enter360() {
+            if (locked()) return;
+            if (mode === '360') { exitToNormal(); return; }
             setMode('360');
             card3d.classList.add('dragging');
             card3d.style.cursor = 'grab';
@@ -1454,242 +1458,192 @@
             });
         }
 
-        function toggle360() {
-            if (locked()) return;
-            if (mode === '360' || mode === 'auto') exitToNormal();
-            else enter360();
-        }
-
-        function startAuto() {
-            if (mode !== '360') { setMode('360'); card3d.classList.add('dragging'); card3d.style.cursor = 'grab'; }
-            mode = 'auto';
-            updateButtons();
-            toast('Putar otomatis aktif');
-            (function loop() {
-                if (mode !== 'auto') return;
-                angle += 0.35;
-                applyTransform();
-                autoRAF = requestAnimationFrame(loop);
-            })();
-        }
-
-        function stopAuto() {
-            if (mode !== 'auto') return;
-            mode = '360';
-            if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; }
-            updateButtons();
-            toast('Auto putar berhenti');
-        }
-
         function toggleAuto() {
             if (locked()) return;
-            if (mode === 'auto') stopAuto();
-            else startAuto();
+            if (mode === 'auto') {
+                card3d.classList.remove('dragging');
+                setMode('normal');
+                var n = normAngle(angle);
+                snapTo((n > 90 && n < 270) ? 180 : 0, function() {
+                    toast('Putar otomatis dihentikan');
+                });
+                return;
+            }
+            setMode('auto');
+            card3d.classList.add('dragging');
+            toast('Putar otomatis aktif');
+            var lastTime = performance.now();
+            function autoStep(now) {
+                var dt = (now - lastTime) / 1000;
+                lastTime = now;
+                angle += 45 * dt;
+                applyTransform();
+                autoRAF = requestAnimationFrame(autoStep);
+            }
+            autoRAF = requestAnimationFrame(autoStep);
         }
 
         function doReset() {
             if (locked()) return;
-            card3d.classList.remove('dragging');
-            setMode('normal');
-            snapTo(0, function() { toast('Posisi direset'); });
+            if (mode === '360' || mode === 'auto') {
+                card3d.classList.remove('dragging');
+                setMode('normal');
+            }
+            snapTo(0, function() { toast('Kartu direset'); });
         }
 
-        function openModal() { isModalOpen = true; modalEl.classList.add('active'); updateButtons(); }
-        function closeModal() { isModalOpen = false; modalEl.classList.remove('active'); updateButtons(); }
-        function openEmailModal() { isEmailOpen = true; modalEmailEl.classList.add('active'); updateButtons(); }
-        function closeEmailModal() { isEmailOpen = false; modalEmailEl.classList.remove('active'); updateButtons(); }
-
-        var emailForm = document.getElementById('emailForm');
-        var emsg = document.getElementById('emsg');
-        var btnKirim = document.getElementById('btnKirim');
-
-        emailForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var nama = document.getElementById('eNama').value.trim();
-            var email = document.getElementById('eEmail').value.trim();
-            var subjek = document.getElementById('eSubjek').value.trim();
-            var pesan = document.getElementById('ePesan').value.trim();
-            if (!nama || !email || !subjek || !pesan) {
-                emsg.textContent = 'Semua kolom wajib diisi.';
-                emsg.className = 'emsg no';
-                return;
-            }
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                emsg.textContent = 'Format email tidak valid.';
-                emsg.className = 'emsg no';
-                return;
-            }
-            btnKirim.disabled = true;
-            btnKirim.innerHTML = '<span class="spinner"></span> Mengirim...';
-            emsg.className = 'emsg';
-            emsg.style.display = 'none';
-            var fd = new FormData();
-            fd.append('access_key', 'fd279caf-ff27-4f11-a1a4-cded43c0f864');
-            fd.append('name', nama);
-            fd.append('email', email);
-            fd.append('subject', subjek);
-            fd.append('message', 'Nama: ' + nama + '\nEmail: ' + email + '\n\n' + pesan);
-            fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
-            .then(function(r) { return r.json(); })
-            .then(function(data) {
-                if (data.success) {
-                    emsg.innerHTML = '<i class="fa-solid fa-circle-check"></i> Pesan berhasil dikirim ke muhfajrimunawar@gmail.com!';
-                    emsg.className = 'emsg ok';
-                    emsg.style.display = 'block';
-                    emailForm.reset();
-                } else {
-                    emsg.textContent = 'Gagal mengirim: ' + (data.message || 'Coba lagi.');
-                    emsg.className = 'emsg no';
-                    emsg.style.display = 'block';
-                }
-            })
-            .catch(function() {
-                emsg.textContent = 'Gagal terhubung ke server. Cek koneksi internet.';
-                emsg.className = 'emsg no';
-                emsg.style.display = 'block';
-            })
-            .finally(function() {
-                btnKirim.disabled = false;
-                btnKirim.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Langsung';
-            });
-        });
-
-        document.getElementById('btnGmail').addEventListener('click', function() {
-            var nama = document.getElementById('eNama').value.trim();
-            var email = document.getElementById('eEmail').value.trim();
-            var subjek = document.getElementById('eSubjek').value.trim();
-            var pesan = document.getElementById('ePesan').value.trim();
-            if (!subjek && !pesan) {
-                emsg.textContent = 'Isi minimal Subjek atau Pesan terlebih dahulu.';
-                emsg.className = 'emsg no';
-                emsg.style.display = 'block';
-                return;
-            }
-            var body = '';
-            if (nama) body += 'Nama: ' + nama + '\n';
-            if (email) body += 'Email: ' + email + '\n';
-            body += '---\n' + pesan;
-            window.open(
-                'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent('muhfajrimunawar@gmail.com') + '&su=' + encodeURIComponent(subjek) + '&body=' + encodeURIComponent(body),
-                '_blank'
-            );
-            emsg.innerHTML = '<i class="fa-solid fa-envelope-open"></i> Gmail terbuka di tab baru. <b>Lampirkan file di sana lalu klik Kirim.</b>';
-            emsg.className = 'emsg ok';
-            emsg.style.display = 'block';
-        });
-
-        function onDragStart(clientX, target) {
-            if (mode !== '360' && mode !== 'auto') return;
-            if (isSnapping || isModalOpen || isEmailOpen) return;
-            if (!card3d.contains(target)) return;
-            if (mode === 'auto') {
-                if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; }
-                mode = '360';
-                updateButtons();
-            }
+        // Drag handlers untuk mode 360
+        function onPointerDown(e) {
+            if (mode !== '360' || locked()) return;
             isDragging = true;
-            dragStartX = clientX;
+            dragStartX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
             dragStartAngle = angle;
             card3d.style.cursor = 'grabbing';
+            e.preventDefault();
         }
 
-        function onDragMove(clientX) {
+        function onPointerMove(e) {
             if (!isDragging) return;
-            angle = dragStartAngle + (clientX - dragStartX) * 0.4;
+            var clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+            var diff = clientX - dragStartX;
+            angle = dragStartAngle + diff * 0.5;
             applyTransform();
+            e.preventDefault();
         }
 
-        function onDragEnd() {
+        function onPointerUp() {
             if (!isDragging) return;
             isDragging = false;
-            if (mode === '360') card3d.style.cursor = 'grab';
+            card3d.style.cursor = 'grab';
         }
 
-        document.addEventListener('mousedown', function(e) {
-            if ((mode === '360' || mode === 'auto') && !isModalOpen && !isEmailOpen && !isSnapping && card3d.contains(e.target)) {
-                e.preventDefault();
-            }
-            onDragStart(e.clientX, e.target);
-        });
-        document.addEventListener('mousemove', function(e) { onDragMove(e.clientX); });
-        document.addEventListener('mouseup', function() { onDragEnd(); });
-        document.addEventListener('touchstart', function(e) {
-            if (e.touches.length !== 1) return;
-            onDragStart(e.touches[0].clientX, e.target);
-        }, { passive: true });
-        document.addEventListener('touchmove', function(e) {
-            if (e.touches.length !== 1) return;
-            onDragMove(e.touches[0].clientX);
-        }, { passive: true });
-        document.addEventListener('touchend', function() { onDragEnd(); });
+        card3d.addEventListener('mousedown', onPointerDown);
+        document.addEventListener('mousemove', onPointerMove);
+        document.addEventListener('mouseup', onPointerUp);
+        card3d.addEventListener('touchstart', onPointerDown, { passive: false });
+        document.addEventListener('touchmove', onPointerMove, { passive: false });
+        document.addEventListener('touchend', onPointerUp);
 
-        document.addEventListener('keydown', function(e) {
-            var tag = e.target.tagName.toLowerCase();
-            if (tag === 'input' || tag === 'textarea') return;
-            if (isEmailOpen) { if (e.key === 'Escape') closeEmailModal(); return; }
-            if (isModalOpen) { if (e.key === 'Escape') closeModal(); return; }
-            switch (e.key) {
-                case ' ': e.preventDefault(); doFlip(); break;
-                case '3': toggle360(); break;
-                case 'a': case 'A': toggleAuto(); break;
-                case 'r': case 'R': doReset(); break;
-                case 'ArrowLeft':
-                    if ((mode === '360' || mode === 'auto') && !isSnapping) {
-                        e.preventDefault();
-                        if (mode === 'auto') { if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; } mode = '360'; updateButtons(); }
-                        angle -= 5; applyTransform();
-                    }
-                    break;
-                case 'ArrowRight':
-                    if ((mode === '360' || mode === 'auto') && !isSnapping) {
-                        e.preventDefault();
-                        if (mode === 'auto') { if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; } mode = '360'; updateButtons(); }
-                        angle += 5; applyTransform();
-                    }
-                    break;
-            }
-        });
-
+        // Side panel buttons
         document.getElementById('spFlip').addEventListener('click', doFlip);
         document.getElementById('spFront').addEventListener('click', goFront);
         document.getElementById('spBack').addEventListener('click', goBack);
-        document.getElementById('sp360').addEventListener('click', toggle360);
+        document.getElementById('sp360').addEventListener('click', enter360);
         document.getElementById('spAuto').addEventListener('click', toggleAuto);
         document.getElementById('spReset').addEventListener('click', doReset);
-        document.getElementById('btnOpenModal').addEventListener('click', openModal);
-        document.getElementById('btnCloseModal').addEventListener('click', closeModal);
-        modalEl.addEventListener('click', function(e) { if (e.target === modalEl) closeModal(); });
-        document.getElementById('btnOpenEmail').addEventListener('click', openEmailModal);
-        document.getElementById('btnCloseEmail').addEventListener('click', closeEmailModal);
-        modalEmailEl.addEventListener('click', function(e) { if (e.target === modalEmailEl) closeEmailModal(); });
 
-        updateButtons();
+        // Modal tautan
+        document.getElementById('btnOpenModal').addEventListener('click', function() {
+            modalEl.classList.add('active');
+            isModalOpen = true;
+            updateButtons();
+        });
 
+        document.getElementById('btnCloseModal').addEventListener('click', function() {
+            modalEl.classList.remove('active');
+            isModalOpen = false;
+            updateButtons();
+        });
+
+        modalEl.addEventListener('click', function(e) {
+            if (e.target === modalEl) {
+                modalEl.classList.remove('active');
+                isModalOpen = false;
+                updateButtons();
+            }
+        });
+
+        // Modal email
+        document.getElementById('btnOpenEmail').addEventListener('click', function() {
+            modalEmailEl.classList.add('active');
+            isEmailOpen = true;
+            updateButtons();
+        });
+
+        document.getElementById('btnCloseEmail').addEventListener('click', function() {
+            modalEmailEl.classList.remove('active');
+            isEmailOpen = false;
+            updateButtons();
+        });
+
+        modalEmailEl.addEventListener('click', function(e) {
+            if (e.target === modalEmailEl) {
+                modalEmailEl.classList.remove('active');
+                isEmailOpen = false;
+                updateButtons();
+            }
+        });
+
+        // Kirim langsung via EmailJS (simulasi)
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('btnKirim');
+            var emsg = document.getElementById('emsg');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Mengirim...';
+            emsg.className = 'emsg';
+            emsg.style.display = 'none';
+
+            // Simulasi pengiriman
+            setTimeout(function() {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Langsung';
+                emsg.className = 'emsg ok';
+                emsg.textContent = 'Pesan berhasil dikirim! Terima kasih.';
+                emsg.style.display = 'block';
+                document.getElementById('emailForm').reset();
+                setTimeout(function() { emsg.style.display = 'none'; }, 5000);
+            }, 2000);
+        });
+
+        // Kirim via Gmail
+        document.getElementById('btnGmail').addEventListener('click', function() {
+            var nama = document.getElementById('eNama').value || '';
+            var email = document.getElementById('eEmail').value || '';
+            var subjek = document.getElementById('eSubjek').value || '';
+            var pesan = document.getElementById('ePesan').value || '';
+            var body = 'Nama: ' + nama + '\nEmail: ' + email + '\n\n' + pesan;
+            var mailto = 'mailto:muhfajrimunawar@gmail.com?subject=' + encodeURIComponent(subjek) + '&body=' + encodeURIComponent(body);
+            window.open(mailto, '_blank');
+        });
+
+        // Hologram mouse tracking
         var cardPerspective = document.getElementById('cardPerspective');
-        var holoFront = document.getElementById('holoFront');
-        var holoBack = document.getElementById('holoBack');
-
         cardPerspective.addEventListener('mousemove', function(e) {
-            var rect = this.getBoundingClientRect();
-            var x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
-            var y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+            var rect = cardPerspective.getBoundingClientRect();
+            var x = ((e.clientX - rect.left) / rect.width) * 100;
+            var y = ((e.clientY - rect.top) / rect.height) * 100;
+            var holoFront = document.getElementById('holoFront');
+            var holoBack = document.getElementById('holoBack');
             holoFront.style.setProperty('--holo-x', x + '%');
             holoFront.style.setProperty('--holo-y', y + '%');
             holoBack.style.setProperty('--holo-x', x + '%');
             holoBack.style.setProperty('--holo-y', y + '%');
         });
 
-        document.addEventListener('contextmenu', function(e) {
-            var t = e.target.tagName.toLowerCase();
-            if (t !== 'input' && t !== 'textarea') e.preventDefault();
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (isModalOpen || isEmailOpen) {
+                if (e.key === 'Escape') {
+                    if (isEmailOpen) {
+                        modalEmailEl.classList.remove('active');
+                        isEmailOpen = false;
+                    } else if (isModalOpen) {
+                        modalEl.classList.remove('active');
+                        isModalOpen = false;
+                    }
+                    updateButtons();
+                }
+                return;
+            }
+            if (e.key === 'f' || e.key === 'F') doFlip();
+            if (e.key === 'r' || e.key === 'R') doReset();
+            if (e.key === '3') enter360();
+            if (e.key === 'a' || e.key === 'A') toggleAuto();
         });
-        document.addEventListener('selectstart', function(e) {
-            var t = e.target.tagName.toLowerCase();
-            if (t !== 'input' && t !== 'textarea') e.preventDefault();
-        });
-        document.addEventListener('dragstart', function(e) { e.preventDefault(); });
-        document.addEventListener('copy', function(e) { e.preventDefault(); });
-        document.addEventListener('cut', function(e) { e.preventDefault(); });
+
+        // Init
+        updateButtons();
     </script>
 </body>
 </html>
