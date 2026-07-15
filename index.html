@@ -356,6 +356,7 @@
             font-size: 9.5px;
         }
 
+        /* === SIDE PANEL === */
         .side-panel {
             position: fixed;
             top: 50%;
@@ -446,6 +447,7 @@
             margin: 2px auto;
         }
 
+        /* === TOAST === */
         .toast-msg {
             position: fixed;
             bottom: 24px;
@@ -470,6 +472,7 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* === MODAL UMUM === */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -654,6 +657,7 @@
             opacity: 0.5;
         }
 
+        /* === MODAL EMAIL === */
         .modal-email {
             z-index: 100000;
         }
@@ -837,7 +841,7 @@
             border: 1px solid #f5c6cb;
         }
 
-        /* === WhatsApp Picker Modal === */
+        /* === MODAL WHATSAPP PICKER === */
         .modal-wa {
             z-index: 100001;
         }
@@ -929,6 +933,7 @@
             transform: translateX(3px);
         }
 
+        /* === HOLOGRAM === */
         .hologram-effect {
             position: absolute;
             top: 0;
@@ -994,6 +999,7 @@
             mix-blend-mode: overlay;
         }
 
+        /* === RESPONSIF TABLET === */
         @media (max-width: 850px) {
             body {
                 overflow-y: auto;
@@ -1155,6 +1161,7 @@
             }
         }
 
+        /* === RESPONSIF HP === */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
@@ -1299,6 +1306,9 @@
 </head>
 <body>
 
+    <!-- =============================================
+         KARTU ID 3D
+    ============================================= -->
     <div class="card-perspective" id="cardPerspective">
         <div class="card-3d" id="card3d">
 
@@ -1406,7 +1416,9 @@
         </div>
     </div>
 
-    <!-- === SIDE PANEL === -->
+    <!-- =============================================
+         SIDE PANEL KONTROL KARTU
+    ============================================= -->
     <div class="side-panel" id="sidePanel">
         <button class="sp-btn" id="spFlip" data-tip="Balik Kartu"><i class="fa-solid fa-rotate"></i></button>
         <button class="sp-btn" id="spFront" data-tip="Sisi Depan"><i class="fa-solid fa-id-card"></i></button>
@@ -1418,7 +1430,9 @@
         <button class="sp-btn" id="spReset" data-tip="Reset"><i class="fa-solid fa-arrow-rotate-left"></i></button>
     </div>
 
-    <!-- === MODAL TAUTAN RESMI === -->
+    <!-- =============================================
+         MODAL TAUTAN RESMI & KONEKSI
+    ============================================= -->
     <div class="modal-overlay" id="modalLink">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1430,7 +1444,7 @@
                 <div class="section-title">Media Sosial & Komunikasi</div>
                 <div class="icon-grid">
 
-                    <!-- WhatsApp — diklik buka picker nomor -->
+                    <!-- WhatsApp — klik buka picker nomor -->
                     <div class="social-icon" id="btnOpenWA">
                         <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
                         <span>WhatsApp</span>
@@ -1440,58 +1454,71 @@
                         <img src="https://img.icons8.com/color/96/000000/instagram-new.png" alt="IG">
                         <span>Instagram</span>
                     </a>
+
                     <a href="https://www.tiktok.com/@jrimunawar028?_r=1&_t=ZS-97zSoKRaBU7" target="_blank" class="social-icon">
                         <img src="https://img.icons8.com/color/96/000000/tiktok--v1.png" alt="TT">
                         <span>TikTok</span>
                     </a>
+
                     <a href="#" class="social-icon">
                         <img src="https://img.icons8.com/color/96/000000/twitterx--v1.png" alt="X">
                         <span>Twitter X</span>
                     </a>
+
                     <a href="https://www.youtube.com/@jrimunawar.028" target="_blank" class="social-icon">
                         <img src="https://img.icons8.com/color/96/000000/youtube-play.png" alt="YT">
                         <span>YouTube</span>
                     </a>
+
                     <a href="#" class="social-icon">
                         <img src="https://img.icons8.com/color/96/000000/facebook-new.png" alt="FB">
                         <span>Facebook</span>
                     </a>
+
                     <a href="#" class="social-icon">
                         <img src="https://img.icons8.com/color/96/000000/linkedin.png" alt="LN">
                         <span>LinkedIn</span>
                     </a>
+
                     <div class="social-icon" id="btnOpenEmail">
                         <img src="https://img.icons8.com/color/96/000000/gmail-new.png" alt="GM">
                         <span>Gmail</span>
                     </div>
+
                     <a href="#" class="social-icon">
                         <img src="https://img.icons8.com/color/96/000000/telegram-app.png" alt="TG">
                         <span>Telegram</span>
                     </a>
+
                     <a href="#" class="social-icon">
                         <img src="https://img.icons8.com/color/96/000000/discord-new-logo.png" alt="DC">
                         <span>Discord</span>
                     </a>
+
                     <a href="#" class="social-icon">
                         <img src="https://img.icons8.com/color/96/000000/facebook-messenger.png" alt="MS">
                         <span>Messenger</span>
                     </a>
+
                     <a href="#" class="social-icon">
                         <img src="https://img.icons8.com/color/96/000000/microsoft-teams.png" alt="MT">
                         <span>Microsoft Teams</span>
                     </a>
+
                     <a href="#" class="social-icon">
                         <img src="WECHAT.png" alt="WC">
                         <span>WeChat</span>
                     </a>
+
+                    <!-- Threads (menggantikan Snapchat) -->
                     <a href="#" class="social-icon">
-                        <img src="SNAPCHAT(1).jpg" alt="SC">
-                        <span>Snapchat</span>
+                        <img src="https://img.icons8.com/color/96/threads.png" alt="TH">
+                        <span>Threads</span>
                     </a>
 
                     <!-- Google Maps (menggantikan Skype) -->
                     <a href="https://maps.google.com" target="_blank" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/google-maps-new.png" alt="GM">
+                        <img src="https://img.icons8.com/color/96/google-maps-new.png" alt="MAP">
                         <span>Google Maps</span>
                     </a>
 
@@ -1575,7 +1602,9 @@
         </div>
     </div>
 
-    <!-- === MODAL WHATSAPP PICKER === -->
+    <!-- =============================================
+         MODAL WHATSAPP PICKER
+    ============================================= -->
     <div class="modal-overlay modal-wa" id="modalWA">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1586,7 +1615,6 @@
                 <p class="wa-picker-title">Pilih nomor yang ingin Anda hubungi melalui WhatsApp</p>
                 <div class="wa-number-list">
 
-                    <!-- Nomor 1: Pribadi -->
                     <a href="https://wa.me/6282254512722" target="_blank" class="wa-number-item">
                         <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
                         <div class="wa-number-info">
@@ -1596,7 +1624,6 @@
                         <i class="fa-solid fa-arrow-right wa-number-arrow"></i>
                     </a>
 
-                    <!-- Nomor 2: Perusahaan -->
                     <a href="https://wa.me/6202122540700" target="_blank" class="wa-number-item">
                         <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
                         <div class="wa-number-info">
@@ -1606,7 +1633,6 @@
                         <i class="fa-solid fa-arrow-right wa-number-arrow"></i>
                     </a>
 
-                    <!-- Nomor 3: Asisten -->
                     <a href="https://wa.me/6285693943122" target="_blank" class="wa-number-item">
                         <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
                         <div class="wa-number-info">
@@ -1621,7 +1647,9 @@
         </div>
     </div>
 
-    <!-- === MODAL EMAIL === -->
+    <!-- =============================================
+         MODAL EMAIL
+    ============================================= -->
     <div class="modal-overlay modal-email" id="modalEmail">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1667,12 +1695,16 @@
         </div>
     </div>
 
+    <!-- TOAST NOTIFIKASI -->
     <div class="toast-msg" id="toastEl"></div>
 
+    <!-- =============================================
+         JAVASCRIPT
+    ============================================= -->
     <script>
-        /* =============================================
-           VARIABEL UTAMA
-        ============================================= */
+        /* -----------------------------------------
+           Variabel Utama
+        ----------------------------------------- */
         var card3d = document.getElementById('card3d');
         var toastEl = document.getElementById('toastEl');
         var modalEl = document.getElementById('modalLink');
@@ -1690,9 +1722,9 @@
         var dragStartAngle = 0;
         var autoRAF = null;
 
-        /* =============================================
-           FUNGSI HELPER
-        ============================================= */
+        /* -----------------------------------------
+           Fungsi Helper
+        ----------------------------------------- */
         function locked() {
             return isModalOpen || isEmailOpen || isWAOpen || isSnapping;
         }
@@ -1719,9 +1751,9 @@
             }, 2000);
         }
 
-        /* =============================================
-           UPDATE TOMBOL SIDE PANEL
-        ============================================= */
+        /* -----------------------------------------
+           Update Tombol Side Panel
+        ----------------------------------------- */
         function updateButtons() {
             var btns = document.querySelectorAll('.sp-btn');
             for (var i = 0; i < btns.length; i++) {
@@ -1746,9 +1778,9 @@
             }
         }
 
-        /* =============================================
-           SNAP ANIMASI KARTU
-        ============================================= */
+        /* -----------------------------------------
+           Animasi Snap Kartu
+        ----------------------------------------- */
         function snapTo(targetAngle, callback) {
             isSnapping = true;
             card3d.classList.remove('dragging');
@@ -1762,7 +1794,6 @@
 
             function step(now) {
                 var t = Math.min((now - startTime) / duration, 1);
-                /* ease-out cubic */
                 var ease = 1 - Math.pow(1 - t, 3);
                 angle = startAngle + diff * ease;
                 applyTransform();
@@ -1779,9 +1810,9 @@
             requestAnimationFrame(step);
         }
 
-        /* =============================================
-           MODAL BUKA / TUTUP
-        ============================================= */
+        /* -----------------------------------------
+           Buka / Tutup Modal
+        ----------------------------------------- */
         function openModal() {
             isModalOpen = true;
             modalEl.classList.add('active');
@@ -1818,9 +1849,9 @@
             updateButtons();
         }
 
-        /* =============================================
-           EVENT LISTENER MODAL
-        ============================================= */
+        /* -----------------------------------------
+           Event Listener Modal
+        ----------------------------------------- */
         document.getElementById('btnOpenModal').addEventListener('click', openModal);
         document.getElementById('btnCloseModal').addEventListener('click', closeModal);
         document.getElementById('btnOpenEmail').addEventListener('click', openEmail);
@@ -1828,7 +1859,6 @@
         document.getElementById('btnOpenWA').addEventListener('click', openWA);
         document.getElementById('btnCloseWA').addEventListener('click', closeWA);
 
-        /* Tutup modal saat klik overlay */
         modalEl.addEventListener('click', function(e) {
             if (e.target === modalEl) closeModal();
         });
@@ -1839,9 +1869,9 @@
             if (e.target === modalWAEl) closeWA();
         });
 
-        /* =============================================
-           SIDE PANEL BUTTONS
-        ============================================= */
+        /* -----------------------------------------
+           Side Panel: Tombol Kontrol
+        ----------------------------------------- */
         document.getElementById('spFlip').addEventListener('click', function() {
             if (locked()) return;
             if (mode === 'auto') stopAuto();
@@ -1921,7 +1951,6 @@
             mode = 'normal';
             cancelAnimationFrame(autoRAF);
             card3d.classList.remove('dragging');
-            /* Snap ke posisi terdekat (0 atau 180) */
             var target = showingBack() ? 180 : 0;
             snapTo(target);
         }
@@ -1937,9 +1966,9 @@
             toast('Reset');
         });
 
-        /* =============================================
-           DRAG UNTUK MEMUTAR KARTU
-        ============================================= */
+        /* -----------------------------------------
+           Drag untuk Memutar Kartu
+        ----------------------------------------- */
         var perspEl = document.getElementById('cardPerspective');
 
         perspEl.addEventListener('mousedown', dragStart);
@@ -1974,7 +2003,6 @@
             if (!isDragging) return;
             isDragging = false;
             card3d.classList.remove('dragging');
-            /* Snap ke sisi terdekat */
             var n = normAngle(angle);
             var target;
             if (n <= 90 || n >= 270) {
@@ -1985,9 +2013,9 @@
             snapTo(target);
         }
 
-        /* =============================================
-           HOLOGRAM EFFECT MOUSE TRACKING
-        ============================================= */
+        /* -----------------------------------------
+           Efek Hologram (Mouse Tracking)
+        ----------------------------------------- */
         var holoFront = document.getElementById('holoFront');
         var holoBack = document.getElementById('holoBack');
 
@@ -1995,16 +2023,15 @@
             var rect = perspEl.getBoundingClientRect();
             var x = ((e.clientX - rect.left) / rect.width) * 100;
             var y = ((e.clientY - rect.top) / rect.height) * 100;
-            var val = x + '% ' + y + '%';
             holoFront.style.setProperty('--holo-x', x + '%');
             holoFront.style.setProperty('--holo-y', y + '%');
             holoBack.style.setProperty('--holo-x', x + '%');
             holoBack.style.setProperty('--holo-y', y + '%');
         });
 
-        /* =============================================
-           FORM EMAIL
-        ============================================= */
+        /* -----------------------------------------
+           Form Email
+        ----------------------------------------- */
         var emailForm = document.getElementById('emailForm');
         var emsgEl = document.getElementById('emsg');
         var btnKirim = document.getElementById('btnKirim');
@@ -2018,6 +2045,7 @@
 
             if (!nama || !email || !subjek || !pesan) {
                 emsgEl.className = 'emsg no';
+                emsgEl.style.display = 'block';
                 emsgEl.textContent = 'Semua field wajib diisi.';
                 return;
             }
@@ -2027,7 +2055,6 @@
             emsgEl.className = 'emsg';
             emsgEl.style.display = 'none';
 
-            /* Simulasi pengiriman (ganti dengan endpoint asli) */
             setTimeout(function() {
                 btnKirim.disabled = false;
                 btnKirim.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Langsung';
@@ -2057,9 +2084,9 @@
             window.open(mailto, '_blank');
         });
 
-        /* =============================================
-           KEYBOARD: ESC UNTUK TUTUP MODAL
-        ============================================= */
+        /* -----------------------------------------
+           Keyboard: ESC Tutup Modal
+        ----------------------------------------- */
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 if (isWAOpen) closeWA();
@@ -2068,9 +2095,9 @@
             }
         });
 
-        /* =============================================
-           INISIALISASI
-        ============================================= */
+        /* -----------------------------------------
+           Inisialisasi
+        ----------------------------------------- */
         updateButtons();
     </script>
 </body>
