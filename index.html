@@ -44,9 +44,17 @@
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            /* KUNCI: cursor default, baru grab kalau mode geser aktif */
+            cursor: default;
         }
 
-        .card-3d.no-transition {
+        /* Mode geser aktif */
+        .card-3d.free-mode {
+            cursor: grab;
+        }
+
+        .card-3d.free-mode.dragging {
+            cursor: grabbing;
             transition: none;
         }
 
@@ -138,9 +146,7 @@
             height: 270px;
         }
 
-        .full-width {
-            grid-column: span 3;
-        }
+        .full-width { grid-column: span 3; }
 
         .info-block {
             display: flex;
@@ -172,7 +178,7 @@
             flex-shrink: 0;
         }
 
-        .button-row .status-tag {
+        .status-tag {
             flex: 0 0 220px;
             text-align: center;
             background: #27ae60;
@@ -185,7 +191,7 @@
             box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
         }
 
-        .button-row .btn-trigger {
+        .btn-trigger {
             flex: 1;
             background: #1a2a6c;
             color: #ffffff;
@@ -203,7 +209,7 @@
             z-index: 10;
         }
 
-        .button-row .btn-trigger:hover {
+        .btn-trigger:hover {
             background: #f1c40f;
             color: #1a2a6c;
             border-color: #1a2a6c;
@@ -276,7 +282,6 @@
             height: 85px;
             width: auto;
             object-fit: contain;
-            opacity: 1;
         }
 
         .back-img-label {
@@ -303,10 +308,7 @@
             margin-bottom: 10px;
             flex-shrink: 0;
         }
-
-        .bk-section:last-of-type {
-            margin-bottom: 0;
-        }
+        .bk-section:last-of-type { margin-bottom: 0; }
 
         .bk-heading {
             font-size: 9px;
@@ -356,6 +358,84 @@
             font-size: 9.5px;
         }
 
+        /* === HOLOGRAM — HANYA MUNCUL SAAT GESER DI MODE BEBAS === */
+        .hologram-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 6;
+            border-radius: 18px;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-3d.dragging .hologram-effect {
+            opacity: 1;
+        }
+
+        .hologram-effect::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0%, rgba(255,0,255,0.06) 8%, transparent 16%,
+                rgba(0,255,255,0.06) 24%, transparent 32%,
+                rgba(255,255,0,0.05) 40%, transparent 48%,
+                rgba(0,255,128,0.05) 56%, transparent 64%,
+                rgba(255,128,0,0.05) 72%, transparent 80%,
+                rgba(128,0,255,0.06) 88%, transparent 100%
+            );
+            animation: holoSpin 8s linear infinite;
+        }
+
+        @keyframes holoSpin { to { transform: rotate(360deg); } }
+
+        .hologram-effect::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(
+                circle at var(--hx, 50%) var(--hy, 50%),
+                rgba(255,255,255,0.18) 0%, rgba(255,200,255,0.06) 25%,
+                rgba(200,255,255,0.04) 45%, transparent 65%
+            );
+            mix-blend-mode: overlay;
+        }
+
+        /* === INDIKATOR MODE GESER === */
+        .mode-badge {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            background: rgba(26, 42, 108, 0.9);
+            color: #f1c40f;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 8;
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .mode-badge.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* === SIDE PANEL === */
         .side-panel {
             position: fixed;
@@ -389,6 +469,7 @@
             transition: all 0.3s ease;
             position: relative;
             box-shadow: 0 3px 12px rgba(26, 42, 108, 0.3);
+            outline: none;
         }
 
         .sp-btn:hover {
@@ -397,6 +478,11 @@
             border-color: #1a2a6c;
             transform: scale(1.12);
             box-shadow: 0 5px 20px rgba(241, 196, 15, 0.35);
+        }
+
+        .sp-btn:focus-visible {
+            outline: 2px solid #f1c40f;
+            outline-offset: 3px;
         }
 
         .sp-btn.on {
@@ -411,7 +497,7 @@
             border-color: #f1c40f;
         }
 
-        .sp-btn.disabled {
+        .sp-btn.locked {
             opacity: 0.3;
             pointer-events: none;
         }
@@ -436,9 +522,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        .sp-btn:hover::after {
-            opacity: 1;
-        }
+        .sp-btn:hover::after { opacity: 1; }
 
         .sp-sep {
             width: 24px;
@@ -472,15 +556,14 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* === MODAL UMUM === */
+        /* === MODAL BASE === */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(26, 42, 108, 0.75);
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -507,9 +590,7 @@
             transition: all 0.3s ease;
         }
 
-        .modal-overlay.active .modal-panel {
-            transform: scale(1);
-        }
+        .modal-overlay.active .modal-panel { transform: scale(1); }
 
         .modal-header {
             background: linear-gradient(135deg, #1a2a6c, #2a3a8c);
@@ -543,9 +624,7 @@
             z-index: 5;
         }
 
-        .modal-close:hover {
-            color: #f1c40f;
-        }
+        .modal-close:hover { color: #f1c40f; }
 
         .modal-content {
             padding: 32px 36px 36px;
@@ -553,23 +632,9 @@
             overflow-y: auto;
         }
 
-        .modal-content::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .modal-content::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb {
-            background: #1a2a6c;
-            border-radius: 10px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb:hover {
-            background: #2a3a8c;
-        }
+        .modal-content::-webkit-scrollbar { width: 6px; }
+        .modal-content::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+        .modal-content::-webkit-scrollbar-thumb { background: #1a2a6c; border-radius: 10px; }
 
         .section-title {
             font-size: 10.5px;
@@ -588,10 +653,7 @@
             gap: 14px;
             margin-bottom: 36px;
         }
-
-        .icon-grid:last-child {
-            margin-bottom: 0;
-        }
+        .icon-grid:last-child { margin-bottom: 0; }
 
         .social-icon {
             background: #ffffff;
@@ -610,8 +672,7 @@
         }
 
         .social-icon img {
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             object-fit: contain;
             margin-bottom: 8px;
             flex-shrink: 0;
@@ -633,22 +694,15 @@
         }
 
         .platform-grid .social-icon {
-            height: 88px;
-            min-height: 88px;
-            overflow: hidden;
+            height: 88px; min-height: 88px; overflow: hidden;
         }
 
         .platform-grid .social-icon span {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 100%;
-            display: block;
+            overflow: hidden; text-overflow: ellipsis;
+            white-space: nowrap; max-width: 100%; display: block;
         }
 
-        .platform-grid .social-icon img {
-            margin-bottom: 6px;
-        }
+        .platform-grid .social-icon img { margin-bottom: 6px; }
 
         .section-divider {
             height: 1px;
@@ -658,663 +712,204 @@
         }
 
         /* === MODAL EMAIL === */
-        .modal-email {
-            z-index: 100000;
-        }
-
-        .modal-email .modal-panel {
-            max-width: 680px;
-            width: 92%;
-        }
-
+        .modal-email { z-index: 100000; }
+        .modal-email .modal-panel { max-width: 680px; width: 92%; }
         .modal-email .modal-header {
             background: linear-gradient(135deg, #ea4335, #c62828);
             border-bottom-color: #f1c40f;
         }
 
-        .email-form {
-            padding: 24px 28px;
-        }
-
-        .email-2col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .email-2col .fg {
-            margin-bottom: 12px;
-        }
-
-        .email-kanan {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .email-form { padding: 24px 28px; }
+        .email-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .email-2col .fg { margin-bottom: 12px; }
+        .email-kanan { display: flex; flex-direction: column; gap: 12px; }
 
         .email-form label {
             display: block;
-            font-size: 11px;
-            font-weight: 700;
-            color: #1a2a6c;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+            font-size: 11px; font-weight: 700;
+            color: #1a2a6c; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 5px;
         }
 
         .email-form input[type="text"],
         .email-form input[type="email"],
         .email-form textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 14px;
-            font-family: 'Segoe UI', sans-serif;
-            color: #334155;
-            transition: border-color 0.15s;
-            outline: none;
-            background: #f8fafc;
+            width: 100%; padding: 10px 14px;
+            border: 2px solid #e2e8f0; border-radius: 10px;
+            font-size: 14px; font-family: 'Segoe UI', sans-serif;
+            color: #334155; transition: border-color 0.15s;
+            outline: none; background: #f8fafc;
         }
 
         .email-form input:focus,
         .email-form textarea:focus {
-            border-color: #ea4335;
-            background: #fff;
+            border-color: #ea4335; background: #fff;
         }
 
-        .email-form textarea {
-            min-height: 90px;
-            resize: vertical;
-        }
+        .email-form textarea { min-height: 90px; resize: vertical; }
 
         .note-box {
-            padding: 8px 10px;
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: 8px;
-            font-size: 9px;
-            color: #1e40af;
-            line-height: 1.5;
+            padding: 8px 10px; background: #eff6ff;
+            border: 1px solid #bfdbfe; border-radius: 8px;
+            font-size: 9px; color: #1e40af; line-height: 1.5;
         }
-
-        .note-box b {
-            color: #1e3a8a;
-        }
+        .note-box b { color: #1e3a8a; }
 
         .btn-send {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 50px;
+            width: 100%; padding: 12px; border: none; border-radius: 50px;
             background: linear-gradient(135deg, #ea4335, #c62828);
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
+            color: #fff; font-size: 12px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
             transition: all 0.25s;
             box-shadow: 0 5px 15px rgba(234, 67, 53, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            min-height: 44px;
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; min-height: 44px;
         }
-
-        .btn-send:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(234, 67, 53, 0.4);
-        }
-
-        .btn-send:disabled {
-            opacity: 0.65;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .btn-send:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(234, 67, 53, 0.4); }
 
         .btn-gmail {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #1a2a6c;
-            border-radius: 50px;
-            background: #fff;
-            color: #1a2a6c;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.25s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            min-height: 44px;
+            width: 100%; padding: 12px; border: 2px solid #1a2a6c;
+            border-radius: 50px; background: #fff; color: #1a2a6c;
+            font-size: 11px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.25s;
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; min-height: 44px;
         }
-
         .btn-gmail:hover {
-            background: #1a2a6c;
-            color: #f1c40f;
+            background: #1a2a6c; color: #f1c40f;
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(26, 42, 108, 0.2);
         }
 
-        .spinner {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            border: 2.5px solid rgba(255, 255, 255, 0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-            flex-shrink: 0;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         .emsg {
-            text-align: center;
-            padding: 10px 14px;
-            border-radius: 10px;
-            margin-top: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            display: none;
-            line-height: 1.5;
+            text-align: center; padding: 10px 14px; border-radius: 10px;
+            margin-top: 12px; font-size: 11px; font-weight: 600;
+            display: none; line-height: 1.5;
         }
+        .emsg.ok { display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .emsg.no { display: block; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
 
-        .emsg.ok {
-            display: block;
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .emsg.no {
-            display: block;
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        /* === MODAL WHATSAPP PICKER === */
-        .modal-wa {
-            z-index: 100001;
-        }
-
-        .modal-wa .modal-panel {
-            max-width: 440px;
-            width: 90%;
-        }
-
+        /* === MODAL WA === */
+        .modal-wa { z-index: 100001; }
+        .modal-wa .modal-panel { max-width: 440px; width: 90%; }
         .modal-wa .modal-header {
             background: linear-gradient(135deg, #25D366, #128C7E);
             border-bottom-color: #f1c40f;
         }
 
-        .wa-picker {
-            padding: 28px 24px 32px;
-        }
-
+        .wa-picker { padding: 28px 24px 32px; }
         .wa-picker-title {
-            text-align: center;
-            font-size: 12px;
-            font-weight: 600;
-            color: #64748b;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            text-align: center; font-size: 12px; font-weight: 600;
+            color: #64748b; margin-bottom: 20px; line-height: 1.5;
         }
 
-        .wa-number-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .wa-number-list { display: flex; flex-direction: column; gap: 12px; }
 
         .wa-number-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 14px 18px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-decoration: none;
+            display: flex; align-items: center; gap: 14px;
+            background: #f8fafc; border: 2px solid #e2e8f0;
+            border-radius: 14px; padding: 14px 18px; cursor: pointer;
+            transition: all 0.25s ease; text-decoration: none;
         }
-
         .wa-number-item:hover {
-            border-color: #25D366;
-            background: #f0fdf4;
+            border-color: #25D366; background: #f0fdf4;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.15);
         }
-
-        .wa-number-item img {
-            width: 38px;
-            height: 38px;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-
-        .wa-number-info {
-            flex: 1;
-        }
-
-        .wa-number-label {
-            font-size: 12px;
-            font-weight: 800;
-            color: #1a2a6c;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 3px;
-        }
-
-        .wa-number-value {
-            font-size: 15px;
-            font-weight: 700;
-            color: #334155;
-            letter-spacing: 1px;
-        }
-
-        .wa-number-arrow {
-            color: #25D366;
-            font-size: 16px;
-            flex-shrink: 0;
-            transition: transform 0.2s;
-        }
-
-        .wa-number-item:hover .wa-number-arrow {
-            transform: translateX(3px);
-        }
-
-        /* === HOLOGRAM === */
-        .hologram-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 6;
-            border-radius: 18px;
-            overflow: hidden;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .card-perspective:hover .hologram-effect {
-            opacity: 1;
-        }
-
-        .hologram-effect::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0%,
-                rgba(255, 0, 255, 0.06) 8%,
-                transparent 16%,
-                rgba(0, 255, 255, 0.06) 24%,
-                transparent 32%,
-                rgba(255, 255, 0, 0.05) 40%,
-                transparent 48%,
-                rgba(0, 255, 128, 0.05) 56%,
-                transparent 64%,
-                rgba(255, 128, 0, 0.05) 72%,
-                transparent 80%,
-                rgba(128, 0, 255, 0.06) 88%,
-                transparent 100%
-            );
-            animation: holoSpin 8s linear infinite;
-        }
-
-        @keyframes holoSpin {
-            to { transform: rotate(360deg); }
-        }
-
-        .hologram-effect::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                circle at 50% 50%,
-                rgba(255, 255, 255, 0.18) 0%,
-                rgba(255, 200, 255, 0.06) 25%,
-                rgba(200, 255, 255, 0.04) 45%,
-                transparent 65%
-            );
-            mix-blend-mode: overlay;
-        }
+        .wa-number-item img { width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; }
+        .wa-number-info { flex: 1; }
+        .wa-number-label { font-size: 12px; font-weight: 800; color: #1a2a6c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+        .wa-number-value { font-size: 15px; font-weight: 700; color: #334155; letter-spacing: 1px; }
+        .wa-number-arrow { color: #25D366; font-size: 16px; flex-shrink: 0; transition: transform 0.2s; }
+        .wa-number-item:hover .wa-number-arrow { transform: translateX(3px); }
 
         /* === RESPONSIF TABLET === */
         @media (max-width: 850px) {
-            body {
-                overflow-y: auto;
-                padding: 16px;
-            }
-
-            .id-card-wide {
-                min-height: auto;
-            }
-
-            .header {
-                padding: 16px 18px;
-            }
-
-            .header h1 {
-                font-size: 18px;
-                letter-spacing: 3px;
-            }
-
-            .main-content {
-                flex-direction: column;
-                padding: 24px 20px 0;
-                align-items: center;
-            }
-
-            .photo-area {
-                margin-right: 0;
-                margin-bottom: 20px;
-            }
-
-            .photo-box {
-                width: 180px;
-                height: 220px;
-            }
-
-            .details-area {
-                width: 100%;
-            }
-
-            .info-grid {
-                height: auto;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto;
-                gap: 12px;
-            }
-
-            .full-width {
-                grid-column: span 2;
-            }
-
-            .info-value {
-                font-size: 14px;
-            }
-
-            .button-row {
-                flex-direction: column;
-                padding: 18px 20px 0;
-                gap: 10px;
-            }
-
-            .button-row .status-tag {
-                flex: none;
-                width: 100%;
-            }
-
-            .button-row .btn-trigger {
-                font-size: 11px;
-                letter-spacing: 1.5px;
-                padding: 10px 0;
-            }
-
-            .front-footer {
-                padding: 10px 16px;
-                font-size: 9px;
-            }
-
-            .back-content {
-                flex-direction: column;
-                padding: 24px 20px;
-                align-items: center;
-            }
-
-            .back-left {
-                margin-right: 0;
-                margin-bottom: 20px;
-                width: 100%;
-            }
-
-            .back-img-box {
-                width: 180px;
-                height: 160px;
-                margin: 0 auto;
-            }
-
-            .back-right {
-                width: 100%;
-            }
-
+            body { overflow-y: auto; padding: 16px; }
+            .id-card-wide { min-height: auto; }
+            .header { padding: 16px 18px; }
+            .header h1 { font-size: 18px; letter-spacing: 3px; }
+            .main-content { flex-direction: column; padding: 24px 20px 0; align-items: center; }
+            .photo-area { margin-right: 0; margin-bottom: 20px; }
+            .photo-box { width: 180px; height: 220px; }
+            .details-area { width: 100%; }
+            .info-grid { height: auto; grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 12px; }
+            .full-width { grid-column: span 2; }
+            .info-value { font-size: 14px; }
+            .button-row { flex-direction: column; padding: 18px 20px 0; gap: 10px; }
+            .status-tag { flex: none; width: 100%; }
+            .btn-trigger { font-size: 11px; letter-spacing: 1.5px; padding: 10px 0; }
+            .front-footer { padding: 10px 16px; font-size: 9px; }
+            .back-content { flex-direction: column; padding: 24px 20px; align-items: center; }
+            .back-left { margin-right: 0; margin-bottom: 20px; width: 100%; }
+            .back-img-box { width: 180px; height: 160px; margin: 0 auto; }
+            .back-right { width: 100%; }
             .side-panel {
-                top: auto;
-                bottom: 16px;
-                right: 50%;
-                transform: translateX(50%);
-                flex-direction: row;
-                animation-name: spInMobile;
+                top: auto; bottom: 16px; right: 50%; transform: translateX(50%);
+                flex-direction: row; animation-name: spInM;
             }
-
-            @keyframes spInMobile {
+            @keyframes spInM {
                 from { opacity: 0; transform: translateX(50%) translateY(25px); }
                 to { opacity: 1; transform: translateX(50%) translateY(0); }
             }
-
-            .sp-sep {
-                width: 1px;
-                height: 24px;
-                margin: auto 2px;
-            }
-
-            .sp-btn {
-                width: 42px;
-                height: 42px;
-                font-size: 14px;
-            }
-
-            .sp-btn::after {
-                display: none;
-            }
-
-            .modal-panel {
-                max-width: 95%;
-            }
-
-            .modal-content {
-                padding: 24px 20px 28px;
-                max-height: 75vh;
-            }
-
-            .icon-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 12px;
-                margin-bottom: 28px;
-            }
-
-            .platform-grid .social-icon {
-                height: 82px;
-                min-height: 82px;
-            }
-
-            .section-divider {
-                margin-bottom: 22px;
-            }
-
-            .email-2col {
-                grid-template-columns: 1fr;
-            }
-
-            .email-form {
-                padding: 18px 16px;
-            }
+            .sp-sep { width: 1px; height: 24px; margin: auto 2px; }
+            .sp-btn { width: 42px; height: 42px; font-size: 14px; }
+            .sp-btn::after { display: none; }
+            .modal-panel { max-width: 95%; }
+            .modal-content { padding: 24px 20px 28px; max-height: 75vh; }
+            .icon-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+            .platform-grid .social-icon { height: 82px; min-height: 82px; }
+            .section-divider { margin-bottom: 22px; }
+            .email-2col { grid-template-columns: 1fr; }
+            .email-form { padding: 18px 16px; }
         }
 
         /* === RESPONSIF HP === */
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-
-            .header h1 {
-                font-size: 14px;
-                letter-spacing: 2px;
-            }
-
-            .photo-box {
-                width: 150px;
-                height: 185px;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-
-            .info-label {
-                font-size: 9px;
-            }
-
-            .info-value {
-                font-size: 12px;
-            }
-
-            .icon-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-                margin-bottom: 24px;
-            }
-
-            .platform-grid .social-icon {
-                height: 76px;
-                min-height: 76px;
-            }
-
-            .social-icon {
-                padding: 10px 6px 8px;
-                min-height: 70px;
-            }
-
-            .social-icon img {
-                width: 26px;
-                height: 26px;
-                margin-bottom: 6px;
-            }
-
-            .social-icon span {
-                font-size: 9px;
-            }
-
-            .sp-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 12px;
-            }
-
-            .back-img-box {
-                width: 150px;
-                height: 140px;
-            }
-
-            .bk-para {
-                font-size: 9px;
-            }
-
-            .bk-list li {
-                font-size: 9px;
-            }
-
-            .bk-heading {
-                font-size: 8px;
-            }
-
-            .modal-email .modal-panel {
-                width: 96%;
-            }
-
-            .modal-wa .modal-panel {
-                width: 96%;
-            }
-
-            .wa-number-item {
-                padding: 12px 14px;
-                gap: 10px;
-            }
-
-            .wa-number-item img {
-                width: 32px;
-                height: 32px;
-            }
-
-            .wa-number-label {
-                font-size: 10.5px;
-            }
-
-            .wa-number-value {
-                font-size: 13px;
-            }
-
-            .toast-msg {
-                font-size: 10px;
-                padding: 8px 18px;
-            }
-
-            .front-footer {
-                font-size: 8px;
-                padding: 8px 12px;
-            }
-
-            .back-img-label {
-                font-size: 9px;
-                padding: 7px 0;
-            }
-
-            .section-title {
-                font-size: 9.5px;
-                margin-bottom: 14px;
-            }
-
-            .section-divider {
-                margin-bottom: 18px;
-            }
+            body { padding: 10px; }
+            .header h1 { font-size: 14px; letter-spacing: 2px; }
+            .photo-box { width: 150px; height: 185px; }
+            .info-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .info-label { font-size: 9px; }
+            .info-value { font-size: 12px; }
+            .icon-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 24px; }
+            .platform-grid .social-icon { height: 76px; min-height: 76px; }
+            .social-icon { padding: 10px 6px 8px; min-height: 70px; }
+            .social-icon img { width: 26px; height: 26px; margin-bottom: 6px; }
+            .social-icon span { font-size: 9px; }
+            .sp-btn { width: 38px; height: 38px; font-size: 12px; }
+            .back-img-box { width: 150px; height: 140px; }
+            .bk-para, .bk-list li { font-size: 9px; }
+            .bk-heading { font-size: 8px; }
+            .modal-email .modal-panel, .modal-wa .modal-panel { width: 96%; }
+            .wa-number-item { padding: 12px 14px; gap: 10px; }
+            .wa-number-item img { width: 32px; height: 32px; }
+            .wa-number-label { font-size: 10.5px; }
+            .wa-number-value { font-size: 13px; }
+            .toast-msg { font-size: 10px; padding: 8px 18px; }
+            .front-footer { font-size: 8px; padding: 8px 12px; }
+            .back-img-label { font-size: 9px; padding: 7px 0; }
+            .section-title { font-size: 9.5px; margin-bottom: 14px; }
+            .section-divider { margin-bottom: 18px; }
         }
 
         @media print {
             body { display: none !important; }
-            html::after {
-                content: 'DOKUMEN DILINDUNGI';
-                display: block;
-                text-align: center;
-                padding: 100px;
-                font-size: 24px;
-                color: #000;
-            }
+            html::after { content: 'DOKUMEN DILINDUNGI'; display: block; text-align: center; padding: 100px; font-size: 24px; color: #000; }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- =============================================
-         KARTU ID 3D
-    ============================================= -->
+    <!-- ========== KARTU ID ========== -->
     <div class="card-perspective" id="cardPerspective">
         <div class="card-3d" id="card3d">
 
-            <!-- === SISI DEPAN === -->
+            <!-- SISI DEPAN -->
             <div class="face-depan">
                 <div class="id-card-wide">
+                    <div class="mode-badge" id="modeBadge"><i class="fa-solid fa-hand-pointer"></i>&ensp;Mode Geser Aktif</div>
                     <div class="header">
                         <h1>ID CARD PERSONAL DIGITAL</h1>
                     </div>
@@ -1371,9 +966,10 @@
                 </div>
             </div>
 
-            <!-- === SISI BELAKANG === -->
+            <!-- SISI BELAKANG -->
             <div class="face-belakang">
                 <div class="id-card-wide">
+                    <div class="mode-badge" id="modeBadgeBack"><i class="fa-solid fa-hand-pointer"></i>&ensp;Mode Geser Aktif</div>
                     <div class="header">
                         <h1>ID CARD PERSONAL DIGITAL</h1>
                     </div>
@@ -1416,23 +1012,22 @@
         </div>
     </div>
 
-    <!-- =============================================
-         SIDE PANEL KONTROL KARTU
-    ============================================= -->
+    <!-- ========== SIDE PANEL ========== -->
     <div class="side-panel" id="sidePanel">
         <button class="sp-btn" id="spFlip" data-tip="Balik Kartu"><i class="fa-solid fa-rotate"></i></button>
-        <button class="sp-btn" id="spFront" data-tip="Sisi Depan"><i class="fa-solid fa-id-card"></i></button>
+        <button class="sp-btn on" id="spFront" data-tip="Sisi Depan"><i class="fa-solid fa-id-card"></i></button>
         <button class="sp-btn" id="spBack" data-tip="Sisi Belakang"><i class="fa-solid fa-id-card-clip"></i></button>
         <div class="sp-sep"></div>
-        <button class="sp-btn" id="sp360" data-tip="Putar 360"><i class="fa-solid fa-cube"></i></button>
+        <button class="sp-btn" id="sp360" data-tip="Mode Geser"><i class="fa-solid fa-cube"></i></button>
         <button class="sp-btn" id="spAuto" data-tip="Putar Otomatis"><i class="fa-solid fa-sync"></i></button>
         <div class="sp-sep"></div>
         <button class="sp-btn" id="spReset" data-tip="Reset"><i class="fa-solid fa-arrow-rotate-left"></i></button>
     </div>
 
-    <!-- =============================================
-         MODAL TAUTAN RESMI & KONEKSI
-    ============================================= -->
+    <!-- ========== TOAST ========== -->
+    <div class="toast-msg" id="toastMsg"></div>
+
+    <!-- ========== MODAL TAUTAN ========== -->
     <div class="modal-overlay" id="modalLink">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1440,152 +1035,82 @@
                 <button class="modal-close" id="btnCloseModal">&times;</button>
             </div>
             <div class="modal-content">
-
                 <div class="section-title">Media Sosial & Komunikasi</div>
                 <div class="icon-grid">
-
                     <div class="social-icon" id="btnOpenWA">
-                        <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
-                        <span>WhatsApp</span>
+                        <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA"><span>WhatsApp</span>
                     </div>
-
                     <a href="https://www.instagram.com/jri_munawar/?hl=id" target="_blank" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/instagram-new.png" alt="IG">
-                        <span>Instagram</span>
+                        <img src="https://img.icons8.com/color/96/000000/instagram-new.png" alt="IG"><span>Instagram</span>
                     </a>
-
                     <a href="https://www.tiktok.com/@jrimunawar028?_r=1&_t=ZS-97zSoKRaBU7" target="_blank" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/tiktok--v1.png" alt="TT">
-                        <span>TikTok</span>
+                        <img src="https://img.icons8.com/color/96/000000/tiktok--v1.png" alt="TT"><span>TikTok</span>
                     </a>
-
                     <a href="#" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/twitterx--v1.png" alt="X">
-                        <span>Twitter X</span>
+                        <img src="https://img.icons8.com/color/96/000000/twitterx--v1.png" alt="X"><span>Twitter X</span>
                     </a>
-
                     <a href="https://www.youtube.com/@jrimunawar.028" target="_blank" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/youtube-play.png" alt="YT">
-                        <span>YouTube</span>
+                        <img src="https://img.icons8.com/color/96/000000/youtube-play.png" alt="YT"><span>YouTube</span>
                     </a>
-
                     <a href="#" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/facebook-new.png" alt="FB">
-                        <span>Facebook</span>
+                        <img src="https://img.icons8.com/color/96/000000/facebook-new.png" alt="FB"><span>Facebook</span>
                     </a>
-
                     <a href="#" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/linkedin.png" alt="LN">
-                        <span>LinkedIn</span>
+                        <img src="https://img.icons8.com/color/96/000000/linkedin.png" alt="LN"><span>LinkedIn</span>
                     </a>
-
                     <div class="social-icon" id="btnOpenEmail">
-                        <img src="https://img.icons8.com/color/96/000000/gmail-new.png" alt="GM">
-                        <span>Gmail</span>
+                        <img src="https://img.icons8.com/color/96/000000/gmail-new.png" alt="GM"><span>Gmail</span>
                     </div>
-
                     <a href="#" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/telegram-app.png" alt="TG">
-                        <span>Telegram</span>
+                        <img src="https://img.icons8.com/color/96/000000/telegram-app.png" alt="TG"><span>Telegram</span>
                     </a>
-
                     <a href="#" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/discord-new-logo.png" alt="DC">
-                        <span>Discord</span>
+                        <img src="https://img.icons8.com/color/96/000000/discord-new-logo.png" alt="DC"><span>Discord</span>
                     </a>
-
                     <a href="#" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/facebook-messenger.png" alt="MS">
-                        <span>Messenger</span>
+                        <img src="https://img.icons8.com/color/96/000000/facebook-messenger.png" alt="MS"><span>Messenger</span>
                     </a>
-
                     <a href="#" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/000000/microsoft-teams.png" alt="MT">
-                        <span>Microsoft Teams</span>
+                        <img src="https://img.icons8.com/color/96/000000/microsoft-teams.png" alt="MT"><span>Microsoft Teams</span>
                     </a>
-
                     <a href="#" class="social-icon">
-                        <img src="WECHAT.png" alt="WC">
-                        <span>WeChat</span>
+                        <img src="WECHAT.png" alt="WC"><span>WeChat</span>
                     </a>
-
                     <a href="#" class="social-icon">
-                        <img src="images(1).jpg" alt="TH">
-                        <span>Threads</span>
+                        <img src="images(1).jpg" alt="TH"><span>Threads</span>
                     </a>
-
                     <a href="https://maps.google.com" target="_blank" class="social-icon">
-                        <img src="https://img.icons8.com/color/96/google-maps-new.png" alt="MAP">
-                        <span>Google Maps</span>
+                        <img src="https://img.icons8.com/color/96/google-maps-new.png" alt="MAP"><span>Google Maps</span>
                     </a>
-
                     <a href="#" class="social-icon">
-                        <img src="BEREAL.png" alt="BR">
-                        <span>BeReal</span>
+                        <img src="BEREAL.png" alt="BR"><span>BeReal</span>
                     </a>
                 </div>
-
                 <div class="section-divider"></div>
-
                 <div class="section-title">Platform Bisnis & Website Internal</div>
                 <div class="icon-grid platform-grid">
-                    <a href="#" class="social-icon">
-                        <img src="Untitled_design-removebg-preview.png" alt="GEINA">
-                        <span>GEINIA NASIONAL</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image 12 Jul 2026, 22.17.14(1).png" alt="UNEVRAS">
-                        <span>UNEVRAS INTERNATIONAL HCAP</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image Jul 5, 2026, 02_05_25 PM(1).png" alt="JRI">
-                        <span>PT JRI MUNAWAR GROUP</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image 5 Jul 2026, 14.36.14(1).png" alt="VLEPING">
-                        <span>VLEPING</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image Jul 11, 2026, 06_17_43 PM(1).png" alt="UNISANTARA">
-                        <span>UNISANTARA MEDIA DIGITAL</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image 15 Jul 2026, 17.20.56(1).png" alt="KONEKDA">
-                        <span>KONEKDA</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image Jul 15, 2026, 12_06_33 PM(1).png" alt="ZEARVIS">
-                        <span>ZEARVIS TEKNOLOGI</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image 15 Jul 2026, 17.29.07(1).png" alt="SIRANKARTA">
-                        <span>SIRANKARTA</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image 15 Jul 2026, 12.06.43(1).png" alt="XEAGIS">
-                        <span>XEAGIS INDUSTRI</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="DANABATRI.png" alt="DANABATRI">
-                        <span>DANABATRI</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image 15 Jul 2026, 17.35.12(1).png" alt="MUNAWAR">
-                        <span>MUNAWAR CORP</span>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <img src="ChatGPT Image 15 Jul 2026, 17.40.08(1).png" alt="FINANCE">
-                        <span>MUNAWAR FINANCE</span>
-                    </a>
+                    <a href="#" class="social-icon"><img src="Untitled_design-removebg-preview.png" alt="GEINA"><span>GEINIA NASIONAL</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image 12 Jul 2026, 22.17.14(1).png" alt="UNEVRAS"><span>UNEVRAS INTERNATIONAL HCAP</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 5, 2026, 02_05_25 PM(1).png" alt="JRI"><span>PT JRI MUNAWAR GROUP</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image 5 Jul 2026, 14.36.14(1).png" alt="VLEPING"><span>VLEPING</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 11, 2026, 06_17_43 PM(1).png" alt="UNISANTARA"><span>UNISANTARA MEDIA DIGITAL</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 17.20.56(1).png" alt="KONEKDA"><span>KONEKDA</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 12_06_33 PM(1).png" alt="ZEARVIS"><span>ZEARVIS TEKNOLOGI</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 17.29.07(1).png" alt="SIRANKARTA"><span>SIRANKARTA</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 12.06.43(1).png" alt="XEAGIS"><span>XEAGIS INDUSTRI</span></a>
+                    <a href="#" class="social-icon"><img src="DANABATRI.png" alt="DANABATRI"><span>DANABATRI</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 17.11.28(1).png" alt="PORINVEX"><span>PORINVEX</span></a>
+                    <a href="#" class="social-icon"><img src="PADAT.png" alt="PADAT"><span>PADAT</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 14, 2026, 11_59_39 PM(1).png" alt="BEARBALCK"><span>BEARBALCK SECURITY</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 12.10.15(1).png" alt="AXITORIUM"><span>AXITORIUM LAB</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 15, 2026, 12_08_43 AM(1).png" alt="WEILMY"><span>WEILMY</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 15, 2026, 12_01_46 AM(1).png" alt="SIRAVEX"><span>SIRAVEX</span></a>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <!-- =============================================
-         MODAL WHATSAPP PICKER
-    ============================================= -->
+    <!-- ========== MODAL WA ========== -->
     <div class="modal-overlay modal-wa" id="modalWA">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1593,32 +1118,30 @@
                 <button class="modal-close" id="btnCloseWA">&times;</button>
             </div>
             <div class="wa-picker">
-                <p class="wa-picker-title">Pilih salah satu nomor WhatsApp untuk menghubungi</p>
+                <p class="wa-picker-title">Pilih salah satu nomor WhatsApp di bawah ini untuk menghubungi:</p>
                 <div class="wa-number-list">
-                    <a class="wa-number-item" href="https://wa.me/6281234567890" target="_blank">
+                    <a class="wa-number-item" href="https://wa.me/6281234567890?text=Halo" target="_blank">
                         <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
                         <div class="wa-number-info">
                             <div class="wa-number-label">Nomor Utama</div>
-                            <div class="wa-number-value">+62 812-3456-7890</div>
+                            <div class="wa-number-value">+62 812-xxxx-xxxx</div>
                         </div>
-                        <div class="wa-number-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <span class="wa-number-arrow"><i class="fa-solid fa-arrow-right"></i></span>
                     </a>
-                    <a class="wa-number-item" href="https://wa.me/6289876543210" target="_blank">
+                    <a class="wa-number-item" href="https://wa.me/6289876543210?text=Halo" target="_blank">
                         <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
                         <div class="wa-number-info">
                             <div class="wa-number-label">Nomor Bisnis</div>
-                            <div class="wa-number-value">+62 898-7654-3210</div>
+                            <div class="wa-number-value">+62 898-xxxx-xxxx</div>
                         </div>
-                        <div class="wa-number-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <span class="wa-number-arrow"><i class="fa-solid fa-arrow-right"></i></span>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- =============================================
-         MODAL EMAIL
-    ============================================= -->
+    <!-- ========== MODAL EMAIL ========== -->
     <div class="modal-overlay modal-email" id="modalEmail">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1628,398 +1151,410 @@
             <div class="email-form">
                 <div class="email-2col">
                     <div class="fg">
-                        <label for="emNama">Nama Anda</label>
-                        <input type="text" id="emNama" placeholder="Masukkan nama lengkap">
+                        <label for="emNama">Nama Pengirim</label>
+                        <input type="text" id="emNama" placeholder="Masukkan nama Anda">
                     </div>
                     <div class="fg">
-                        <label for="emEmail">Email Anda</label>
+                        <label for="emEmail">Email Pengirim</label>
                         <input type="email" id="emEmail" placeholder="email@contoh.com">
                     </div>
                 </div>
-                <div class="fg" style="margin-bottom:12px;">
-                    <label for="emSubjek">Subjek</label>
-                    <input type="text" id="emSubjek" placeholder="Subjek pesan">
-                </div>
-                <div class="fg" style="margin-bottom:14px;">
-                    <label for="emPesan">Pesan</label>
-                    <textarea id="emPesan" placeholder="Tulis pesan Anda di sini..."></textarea>
-                </div>
                 <div class="email-kanan">
+                    <div class="fg">
+                        <label for="emSubjek">Subjek</label>
+                        <input type="text" id="emSubjek" placeholder="Subjek pesan">
+                    </div>
+                    <div class="fg">
+                        <label for="emPesan">Pesan</label>
+                        <textarea id="emPesan" placeholder="Tulis pesan Anda di sini..."></textarea>
+                    </div>
+                    <div class="note-box">
+                        <b>Catatan:</b> Email akan dikirim melalui aplikasi Gmail bawaan perangkat Anda. Pastikan Gmail sudah terinstal dan login.
+                    </div>
                     <button class="btn-send" id="btnSendEmail">
-                        <span id="sendText">Kirim Pesan</span>
+                        <i class="fa-solid fa-paper-plane"></i> Kirim via Gmail
                     </button>
-                    <button class="btn-gmail" id="btnGmail">
-                        <i class="fa-solid fa-envelope"></i>
-                        <span>Buka di Gmail</span>
+                    <button class="btn-gmail" id="btnOpenGmail">
+                        <i class="fa-solid fa-envelope"></i> Buka Gmail Langsung
                     </button>
+                    <div class="emsg" id="emsgBox"></div>
                 </div>
-                <div class="note-box" style="margin-top:14px;">
-                    <b>Catatan:</b> Pesan akan dikirim melalui layanan email. Pastikan data yang Anda masukkan sudah benar.
-                </div>
-                <div class="emsg" id="emsgBox"></div>
             </div>
         </div>
     </div>
 
-    <!-- =============================================
-         TOAST
-    ============================================= -->
-    <div class="toast-msg" id="toastEl"></div>
-
-    <!-- =============================================
-         JAVASCRIPT
-    ============================================= -->
+    <!-- ========== JAVASCRIPT ========== -->
     <script>
     (function() {
+        'use strict';
 
-        var card3d = document.getElementById('card3d');
-        var cardPerspective = document.getElementById('cardPerspective');
-        var spFlip = document.getElementById('spFlip');
+        /* ===== ELEMEN ===== */
+        var card3d   = document.getElementById('card3d');
+        var cardPersp = document.getElementById('cardPerspective');
+        var holoF    = document.getElementById('holoFront');
+        var holoB    = document.getElementById('holoBack');
+        var badgeF   = document.getElementById('modeBadge');
+        var badgeB   = document.getElementById('modeBadgeBack');
+        var toastEl  = document.getElementById('toastMsg');
+
+        var spFlip  = document.getElementById('spFlip');
         var spFront = document.getElementById('spFront');
-        var spBack = document.getElementById('spBack');
-        var sp360 = document.getElementById('sp360');
-        var spAuto = document.getElementById('spAuto');
+        var spBack  = document.getElementById('spBack');
+        var sp360   = document.getElementById('sp360');
+        var spAuto  = document.getElementById('spAuto');
         var spReset = document.getElementById('spReset');
 
-        /* ===== STATE ===== */
+        var modalLink  = document.getElementById('modalLink');
+        var modalWA    = document.getElementById('modalWA');
+        var modalEmail = document.getElementById('modalEmail');
+
+        /* ==========================================================
+           STATE
+           freeMode = false → KARTU TERKUNCI TOTAL, TIDAK BISA DIGESER
+           freeMode = true  → kartu bisa digeser bebas
+        ========================================================== */
+        var rotY = 0;
+        var rotX = 0;
         var isFlipped = false;
-        var dragMode = false;
-        var autoRotating = false;
-        var autoRAF = null;
+        var freeMode = false;       // KUNCI UTAMA: default TERKUNCI
         var isDragging = false;
+        var dragReady = false;
         var dragStartX = 0;
-        var dragBaseAngle = 0;
-        var dragLiveAngle = 0;
+        var dragStartY = 0;
+        var dragBaseY = 0;
+        var dragBaseX = 0;
+        var autoOn = false;
+        var autoId = null;
+        var toastTmr = null;
 
-        /* ===== FUNGSI DASAR ===== */
-        function setAngle(deg) {
-            card3d.style.transform = 'rotateY(' + deg + 'deg)';
+        var DEADZONE = 15; // Minimal geser 15px baru kartu bergerak
+
+        /* ===== UTILITAS ===== */
+        function normY(y) {
+            y = y % 360;
+            if (y > 180) y -= 360;
+            if (y < -180) y += 360;
+            return y;
         }
 
-        function targetAngle() {
-            return isFlipped ? 180 : 0;
+        function isBack(y) {
+            return Math.abs(normY(y)) > 90;
         }
 
-        function transitionOn() {
-            card3d.classList.remove('no-transition');
-        }
-
-        function transitionOff() {
-            card3d.classList.add('no-transition');
-        }
-
-        function killAutoRotate() {
-            if (!autoRotating) return;
-            autoRotating = false;
-            if (autoRAF) {
-                cancelAnimationFrame(autoRAF);
-                autoRAF = null;
-            }
-            spAuto.classList.remove('on');
-            transitionOn();
-            setAngle(targetAngle());
-        }
-
-        function killDragMode() {
-            if (!dragMode) return;
-            dragMode = false;
-            isDragging = false;
-            sp360.classList.remove('on');
-            transitionOn();
-            setAngle(targetAngle());
-        }
-
-        function refreshIndicators() {
+        function apply() {
+            card3d.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+            isFlipped = isBack(rotY);
             spFront.classList.toggle('on', !isFlipped);
             spBack.classList.toggle('on', isFlipped);
         }
 
-        /* ===== TOMBOL: BALIK KARTU ===== */
+        function toast(msg) {
+            toastEl.textContent = msg;
+            toastEl.classList.add('show');
+            if (toastTmr) clearTimeout(toastTmr);
+            toastTmr = setTimeout(function() { toastEl.classList.remove('show'); }, 2000);
+        }
+
+        function openMod(el) { el.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeMod(el) { el.classList.remove('active'); document.body.style.overflow = ''; }
+
+        function stopAuto() {
+            if (autoId) { clearInterval(autoId); autoId = null; }
+            autoOn = false;
+            spAuto.classList.remove('on');
+        }
+
+        function setFreeMode(on) {
+            freeMode = on;
+            sp360.classList.toggle('on', on);
+            card3d.classList.toggle('free-mode', on);
+            badgeF.classList.toggle('show', on);
+            badgeB.classList.toggle('show', on);
+        }
+
+        function snapAndApply() {
+            rotX = 0;
+            rotY = normY(rotY);
+            if (Math.abs(rotY) <= 90) rotY = 0;
+            else rotY = rotY > 0 ? 180 : -180;
+            apply();
+        }
+
+        /* ==========================================================
+           TOMBOL: MODE GESER (360)
+           Klik sekali = AKTIFKAN mode geser bebas
+           Klik lagi = MATIKAN mode geser + snap ke posisi tetap
+        ========================================================== */
+        sp360.addEventListener('click', function() {
+            stopAuto();
+
+            if (freeMode) {
+                // Matikan mode geser
+                setFreeMode(false);
+                snapAndApply();
+                toast('Mode Geser Dimatikan');
+            } else {
+                // Aktifkan mode geser
+                setFreeMode(true);
+                toast('Mode Geser Aktif — Geser kartu sekarang');
+            }
+        });
+
+        /* ===== TOMBOL: BALIK ===== */
         spFlip.addEventListener('click', function() {
-            killAutoRotate();
-            killDragMode();
-            isFlipped = !isFlipped;
-            transitionOn();
-            setAngle(targetAngle());
-            refreshIndicators();
-            showToast(isFlipped ? 'Sisi Belakang' : 'Sisi Depan');
+            stopAuto();
+            rotX = 0;
+            rotY = isFlipped ? 0 : 180;
+            apply();
+            toast(isFlipped ? 'Sisi Depan' : 'Sisi Belakang');
         });
 
         /* ===== TOMBOL: SISI DEPAN ===== */
         spFront.addEventListener('click', function() {
-            killAutoRotate();
-            killDragMode();
-            isFlipped = false;
-            transitionOn();
-            setAngle(0);
-            refreshIndicators();
-            showToast('Sisi Depan');
+            stopAuto();
+            rotY = 0; rotX = 0;
+            apply();
+            toast('Sisi Depan');
         });
 
         /* ===== TOMBOL: SISI BELAKANG ===== */
         spBack.addEventListener('click', function() {
-            killAutoRotate();
-            killDragMode();
-            isFlipped = true;
-            transitionOn();
-            setAngle(180);
-            refreshIndicators();
-            showToast('Sisi Belakang');
-        });
-
-        /* ===== TOMBOL: PUTAR 360 (MODE DRAG) =====
-           Klik ON  → kamu bisa geser bulak-balik
-           Klik OFF → drag dimatikan */
-        sp360.addEventListener('click', function() {
-            killAutoRotate();
-
-            if (dragMode) {
-                killDragMode();
-                showToast('Mode Putar 360 Dimatikan');
-            } else {
-                dragMode = true;
-                sp360.classList.add('on');
-                showToast('Mode Putar 360 Aktif - Geser Kartu');
-            }
-        });
-
-        /* ===== DRAG / SWIPE =====
-           Arah: geser kanan = kartu putar kanan, geser kiri = kartu putar kiri
-           Sensitivitas tinggi supaya langsung responsif tanpa delay */
-        function onDragStart(clientX) {
-            if (!dragMode) return;
-            isDragging = true;
-            dragStartX = clientX;
-            dragBaseAngle = targetAngle();
-            dragLiveAngle = dragBaseAngle;
-            transitionOff();
-        }
-
-        function onDragMove(clientX) {
-            if (!dragMode || !isDragging) return;
-            var deltaX = clientX - dragStartX;
-            /* geser kanan (deltaX positif) → sudut bertambah → kartu putar ke kanan
-               geser kiri  (deltaX negatif) → sudut berkurang → kartu putar ke kiri
-               sensitivitas 1.5 = 1px geser = 1.5 derajat putaran */
-            dragLiveAngle = dragBaseAngle + (deltaX * 1.5);
-            setAngle(dragLiveAngle);
-        }
-
-        function onDragEnd() {
-            if (!dragMode || !isDragging) return;
-            isDragging = false;
-            /* Setelah lepas, tentukan kartu berhenti di sisi mana
-               berdasarkan posisi sudut terakhir */
-            var normalized = ((dragLiveAngle % 360) + 360) % 360;
-            if (normalized > 90 && normalized < 270) {
-                isFlipped = true;
-            } else {
-                isFlipped = false;
-            }
-            transitionOn();
-            setAngle(targetAngle());
-            refreshIndicators();
-        }
-
-        /* Mouse */
-        cardPerspective.addEventListener('mousedown', function(e) {
-            if (!dragMode) return;
-            e.preventDefault();
-            onDragStart(e.clientX);
-        });
-        document.addEventListener('mousemove', function(e) {
-            onDragMove(e.clientX);
-        });
-        document.addEventListener('mouseup', function() {
-            onDragEnd();
-        });
-
-        /* Touch (HP/tablet) */
-        cardPerspective.addEventListener('touchstart', function(e) {
-            if (!dragMode) return;
-            onDragStart(e.touches[0].clientX);
-        }, { passive: true });
-        document.addEventListener('touchmove', function(e) {
-            if (!dragMode || !isDragging) return;
-            onDragMove(e.touches[0].clientX);
-        }, { passive: true });
-        document.addEventListener('touchend', function() {
-            onDragEnd();
+            stopAuto();
+            rotY = 180; rotX = 0;
+            apply();
+            toast('Sisi Belakang');
         });
 
         /* ===== TOMBOL: PUTAR OTOMATIS ===== */
         spAuto.addEventListener('click', function() {
-            killDragMode();
-
-            if (autoRotating) {
-                killAutoRotate();
-                showToast('Putar Otomatis Dimatikan');
-            } else {
-                autoRotating = true;
-                spAuto.classList.add('on');
-                transitionOff();
-
-                var sudut = targetAngle();
-
-                function loopPutar() {
-                    if (!autoRotating) return;
-                    sudut += 0.5;
-                    if (sudut >= 360) sudut -= 360;
-                    setAngle(sudut);
-                    autoRAF = requestAnimationFrame(loopPutar);
+            if (autoOn) {
+                stopAuto();
+                if (freeMode) {
+                    // Kalau masih free mode, jangan snap — biar user lanjut geser
+                } else {
+                    snapAndApply();
                 }
-
-                showToast('Putar Otomatis Aktif');
-                autoRAF = requestAnimationFrame(loopPutar);
+                toast('Putar Otomatis Dimatikan');
+            } else {
+                // Aktifkan auto rotate
+                autoOn = true;
+                spAuto.classList.add('on');
+                rotX = 0;
+                autoId = setInterval(function() {
+                    rotY += 0.4;
+                    card3d.style.transform = 'rotateX(0deg) rotateY(' + rotY + 'deg)';
+                    isFlipped = isBack(rotY);
+                    spFront.classList.toggle('on', !isFlipped);
+                    spBack.classList.toggle('on', isFlipped);
+                }, 16);
+                toast('Putar Otomatis Aktif');
             }
         });
 
         /* ===== TOMBOL: RESET ===== */
         spReset.addEventListener('click', function() {
-            killAutoRotate();
-            killDragMode();
-            isFlipped = false;
-            transitionOn();
-            setAngle(0);
-            refreshIndicators();
-            showToast('Kartu Direset');
+            stopAuto();
+            setFreeMode(false); // KUNCI KEMBALI
+            rotY = 0; rotX = 0;
+            apply();
+            toast('Kartu Direset & Dikunci');
         });
 
-        refreshIndicators();
+        /* ==========================================================
+           DRAG / GESER — HANYA BEKERJA KALAU freeMode = true
+           Kalau freeMode = false, SEMUA event drag DIABAIKAN TOTAL
+        ========================================================== */
 
-        /* ===== TOAST ===== */
-        var toastEl = document.getElementById('toastEl');
-        var toastTimer = null;
-
-        function showToast(pesan) {
-            toastEl.textContent = pesan;
-            toastEl.classList.add('show');
-            if (toastTimer) clearTimeout(toastTimer);
-            toastTimer = setTimeout(function() {
-                toastEl.classList.remove('show');
-            }, 1800);
-        }
-
-        /* ===== MODAL: TAUTAN RESMI ===== */
-        var modalLink = document.getElementById('modalLink');
-
-        document.getElementById('btnOpenModal').addEventListener('click', function() {
-            modalLink.classList.add('active');
+        /* --- MOUSE DOWN --- */
+        card3d.addEventListener('mousedown', function(e) {
+            // LANGSUNG TOLAK kalau bukan free mode
+            if (!freeMode) return;
+            if (e.target.closest('button') || e.target.closest('a')) return;
+            e.preventDefault();
+            prepDrag(e.clientX, e.clientY);
         });
 
-        document.getElementById('btnCloseModal').addEventListener('click', function() {
-            modalLink.classList.remove('active');
-        });
+        /* --- MOUSE MOVE --- */
+        document.addEventListener('mousemove', function(e) {
+            // TOLAK kalau bukan free mode
+            if (!freeMode) return;
+            if (!dragReady && !isDragging) return;
 
-        modalLink.addEventListener('click', function(e) {
-            if (e.target === modalLink) modalLink.classList.remove('active');
-        });
-
-        /* ===== MODAL: WHATSAPP PICKER ===== */
-        var modalWA = document.getElementById('modalWA');
-
-        document.getElementById('btnOpenWA').addEventListener('click', function() {
-            modalWA.classList.add('active');
-        });
-
-        document.getElementById('btnCloseWA').addEventListener('click', function() {
-            modalWA.classList.remove('active');
-        });
-
-        modalWA.addEventListener('click', function(e) {
-            if (e.target === modalWA) modalWA.classList.remove('active');
-        });
-
-        /* ===== MODAL: EMAIL ===== */
-        var modalEmail = document.getElementById('modalEmail');
-        var emsgBox = document.getElementById('emsgBox');
-        var sendText = document.getElementById('sendText');
-        var btnSendEmail = document.getElementById('btnSendEmail');
-
-        document.getElementById('btnOpenEmail').addEventListener('click', function() {
-            modalEmail.classList.add('active');
-        });
-
-        document.getElementById('btnCloseEmail').addEventListener('click', function() {
-            modalEmail.classList.remove('active');
-            sembunyikanEmailMsg();
-        });
-
-        modalEmail.addEventListener('click', function(e) {
-            if (e.target === modalEmail) {
-                modalEmail.classList.remove('active');
-                sembunyikanEmailMsg();
+            if (isDragging) {
+                e.preventDefault();
+                doDrag(e.clientX, e.clientY);
+            } else if (dragReady) {
+                var dx = Math.abs(e.clientX - dragStartX);
+                var dy = Math.abs(e.clientY - dragStartY);
+                if (dx > DEADZONE || dy > DEADZONE) {
+                    isDragging = true;
+                    stopAuto();
+                    card3d.classList.add('dragging');
+                    doDrag(e.clientX, e.clientY);
+                }
             }
         });
 
-        function tampilEmailMsg(teks, tipe) {
-            emsgBox.textContent = teks;
-            emsgBox.className = 'emsg ' + tipe;
+        /* --- MOUSE UP --- */
+        document.addEventListener('mouseup', function() {
+            if (!freeMode) return;
+            endDrag();
+        });
+
+        /* --- TOUCH START --- */
+        card3d.addEventListener('touchstart', function(e) {
+            if (!freeMode) return;
+            if (e.target.closest('button') || e.target.closest('a')) return;
+            var t = e.touches[0];
+            prepDrag(t.clientX, t.clientY);
+        }, { passive: true });
+
+        /* --- TOUCH MOVE --- */
+        document.addEventListener('touchmove', function(e) {
+            if (!freeMode) return;
+            if (!dragReady && !isDragging) return;
+            var t = e.touches[0];
+
+            if (isDragging) {
+                e.preventDefault();
+                doDrag(t.clientX, t.clientY);
+            } else if (dragReady) {
+                var dx = Math.abs(t.clientX - dragStartX);
+                var dy = Math.abs(t.clientY - dragStartY);
+                if (dx > DEADZONE || dy > DEADZONE) {
+                    isDragging = true;
+                    stopAuto();
+                    card3d.classList.add('dragging');
+                    doDrag(t.clientX, t.clientY);
+                }
+            }
+        }, { passive: false });
+
+        /* --- TOUCH END --- */
+        document.addEventListener('touchend', function() {
+            if (!freeMode) return;
+            endDrag();
+        });
+
+        document.addEventListener('touchcancel', function() {
+            if (!freeMode) return;
+            endDrag();
+        });
+
+        function prepDrag(cx, cy) {
+            dragReady = true;
+            isDragging = false;
+            dragStartX = cx;
+            dragStartY = cy;
+            dragBaseY = rotY;
+            dragBaseX = rotX;
         }
 
-        function sembunyikanEmailMsg() {
-            emsgBox.className = 'emsg';
-            emsgBox.textContent = '';
+        function doDrag(cx, cy) {
+            var dx = cx - dragStartX;
+            var dy = cy - dragStartY;
+            rotY = dragBaseY + dx * 0.35;
+            rotX = dragBaseX - dy * 0.2;
+            rotX = Math.max(-30, Math.min(30, rotX));
+
+            card3d.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+            isFlipped = isBack(rotY);
+            spFront.classList.toggle('on', !isFlipped);
+            spBack.classList.toggle('on', isFlipped);
+
+            // Update hologram posisi
+            var r = cardPersp.getBoundingClientRect();
+            var hx = Math.max(0, Math.min(100, ((cx - r.left) / r.width) * 100));
+            var hy = Math.max(0, Math.min(100, ((cy - r.top) / r.height) * 100));
+            holoF.style.setProperty('--hx', hx + '%');
+            holoF.style.setProperty('--hy', hy + '%');
+            holoB.style.setProperty('--hx', hx + '%');
+            holoB.style.setProperty('--hy', hy + '%');
         }
 
-        document.getElementById('btnGmail').addEventListener('click', function() {
-            var nama = document.getElementById('emNama').value.trim();
+        function endDrag() {
+            if (!dragReady && !isDragging) return;
+            card3d.classList.remove('dragging');
+
+            if (isDragging) {
+                // Setelah selesai geser, snap ke posisi terdekat
+                snapAndApply();
+            }
+
+            isDragging = false;
+            dragReady = false;
+        }
+
+        /* ===== MODAL: TAUTAN ===== */
+        document.getElementById('btnOpenModal').addEventListener('click', function(e) {
+            e.stopPropagation(); openMod(modalLink);
+        });
+        document.getElementById('btnCloseModal').addEventListener('click', function() { closeMod(modalLink); });
+        modalLink.addEventListener('click', function(e) { if (e.target === modalLink) closeMod(modalLink); });
+
+        /* ===== MODAL: WA ===== */
+        document.getElementById('btnOpenWA').addEventListener('click', function() { openMod(modalWA); });
+        document.getElementById('btnCloseWA').addEventListener('click', function() { closeMod(modalWA); });
+        modalWA.addEventListener('click', function(e) { if (e.target === modalWA) closeMod(modalWA); });
+
+        /* ===== MODAL: EMAIL ===== */
+        document.getElementById('btnOpenEmail').addEventListener('click', function() { openMod(modalEmail); });
+        document.getElementById('btnCloseEmail').addEventListener('click', function() { closeMod(modalEmail); });
+        modalEmail.addEventListener('click', function(e) { if (e.target === modalEmail) closeMod(modalEmail); });
+
+        document.getElementById('btnSendEmail').addEventListener('click', function() {
+            var nama  = document.getElementById('emNama').value.trim();
             var email = document.getElementById('emEmail').value.trim();
-            var subjek = document.getElementById('emSubjek').value.trim();
+            var subj  = document.getElementById('emSubjek').value.trim();
+            var pesan = document.getElementById('emPesan').value.trim();
+            var emsg  = document.getElementById('emsgBox');
+            emsg.className = 'emsg'; emsg.style.display = 'none';
+
+            if (!email) {
+                emsg.textContent = 'Alamat email pengirim wajib diisi.';
+                emsg.className = 'emsg no'; return;
+            }
+
+            var body = '';
+            if (nama) body += 'Nama: ' + nama + '\n';
+            body += 'Email: ' + email + '\n\n';
+            if (pesan) body += pesan;
+
+            window.location.href = 'mailto:jrimunawar@gmail.com' +
+                '?subject=' + encodeURIComponent(subj || '(Tanpa Subjek)') +
+                '&body=' + encodeURIComponent(body);
+
+            emsg.textContent = 'Membuka aplikasi email...';
+            emsg.className = 'emsg ok';
+        });
+
+        document.getElementById('btnOpenGmail').addEventListener('click', function() {
+            var nama  = document.getElementById('emNama').value.trim();
+            var email = document.getElementById('emEmail').value.trim();
+            var subj  = document.getElementById('emSubjek').value.trim();
             var pesan = document.getElementById('emPesan').value.trim();
 
             var body = '';
             if (nama) body += 'Nama: ' + nama + '\n';
-            if (email) body += 'Email: ' + email + '\n';
-            body += '\n' + pesan;
+            if (email) body += 'Email: ' + email + '\n\n';
+            if (pesan) body += pesan;
 
-            var mailto = 'mailto:muhfajrimunawar@gmail.com'
-                + '?subject=' + encodeURIComponent(subjek || 'Pesan dari ID Card')
-                + '&body=' + encodeURIComponent(body);
-
-            window.open(mailto, '_blank');
+            window.open('https://mail.google.com/mail/?view=cm&fs=1&to=jrimunawar@gmail.com' +
+                '&su=' + encodeURIComponent(subj || '(Tanpa Subjek)') +
+                '&body=' + encodeURIComponent(body), '_blank');
         });
 
-        btnSendEmail.addEventListener('click', function() {
-            var nama = document.getElementById('emNama').value.trim();
-            var email = document.getElementById('emEmail').value.trim();
-            var pesan = document.getElementById('emPesan').value.trim();
-
-            if (!nama || !email || !pesan) {
-                tampilEmailMsg('Mohon lengkapi Nama, Email, dan Pesan.', 'no');
-                return;
-            }
-
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                tampilEmailMsg('Format email tidak valid.', 'no');
-                return;
-            }
-
-            btnSendEmail.disabled = true;
-            sendText.innerHTML = '<span class="spinner"></span> Mengirim...';
-            sembunyikanEmailMsg();
-
-            setTimeout(function() {
-                btnSendEmail.disabled = false;
-                sendText.textContent = 'Kirim Pesan';
-                tampilEmailMsg('Pesan berhasil dikirim!', 'ok');
-
-                document.getElementById('emNama').value = '';
-                document.getElementById('emEmail').value = '';
-                document.getElementById('emSubjek').value = '';
-                document.getElementById('emPesan').value = '';
-            }, 2000);
-        });
-
-        /* ===== TUTUP SEMUA MODAL DENGAN ESC ===== */
+        /* ===== ESC TUTUP MODAL ===== */
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                modalLink.classList.remove('active');
-                modalWA.classList.remove('active');
-                modalEmail.classList.remove('active');
-                sembunyikanEmailMsg();
+                if (modalEmail.classList.contains('active')) closeMod(modalEmail);
+                else if (modalWA.classList.contains('active')) closeMod(modalWA);
+                else if (modalLink.classList.contains('active')) closeMod(modalLink);
             }
         });
+
+        /* ===== INIT ===== */
+        apply();
 
     })();
     </script>
