@@ -603,6 +603,7 @@
             border: 1px solid #e2e8f0;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             min-height: 82px;
+            cursor: pointer;
         }
 
         .social-icon img {
@@ -834,6 +835,98 @@
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
+        }
+
+        /* === WhatsApp Picker Modal === */
+        .modal-wa {
+            z-index: 100001;
+        }
+
+        .modal-wa .modal-panel {
+            max-width: 440px;
+            width: 90%;
+        }
+
+        .modal-wa .modal-header {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-bottom-color: #f1c40f;
+        }
+
+        .wa-picker {
+            padding: 28px 24px 32px;
+        }
+
+        .wa-picker-title {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .wa-number-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .wa-number-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+
+        .wa-number-item:hover {
+            border-color: #25D366;
+            background: #f0fdf4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.15);
+        }
+
+        .wa-number-item img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .wa-number-info {
+            flex: 1;
+        }
+
+        .wa-number-label {
+            font-size: 12px;
+            font-weight: 800;
+            color: #1a2a6c;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+
+        .wa-number-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: #334155;
+            letter-spacing: 1px;
+        }
+
+        .wa-number-arrow {
+            color: #25D366;
+            font-size: 16px;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+
+        .wa-number-item:hover .wa-number-arrow {
+            transform: translateX(3px);
         }
 
         .hologram-effect {
@@ -1143,6 +1236,28 @@
                 width: 96%;
             }
 
+            .modal-wa .modal-panel {
+                width: 96%;
+            }
+
+            .wa-number-item {
+                padding: 12px 14px;
+                gap: 10px;
+            }
+
+            .wa-number-item img {
+                width: 32px;
+                height: 32px;
+            }
+
+            .wa-number-label {
+                font-size: 10.5px;
+            }
+
+            .wa-number-value {
+                font-size: 13px;
+            }
+
             .toast-msg {
                 font-size: 10px;
                 padding: 8px 18px;
@@ -1187,6 +1302,7 @@
     <div class="card-perspective" id="cardPerspective">
         <div class="card-3d" id="card3d">
 
+            <!-- === SISI DEPAN === -->
             <div class="face-depan">
                 <div class="id-card-wide">
                     <div class="header">
@@ -1245,6 +1361,7 @@
                 </div>
             </div>
 
+            <!-- === SISI BELAKANG === -->
             <div class="face-belakang">
                 <div class="id-card-wide">
                     <div class="header">
@@ -1289,6 +1406,7 @@
         </div>
     </div>
 
+    <!-- === SIDE PANEL === -->
     <div class="side-panel" id="sidePanel">
         <button class="sp-btn" id="spFlip" data-tip="Balik Kartu"><i class="fa-solid fa-rotate"></i></button>
         <button class="sp-btn" id="spFront" data-tip="Sisi Depan"><i class="fa-solid fa-id-card"></i></button>
@@ -1300,6 +1418,7 @@
         <button class="sp-btn" id="spReset" data-tip="Reset"><i class="fa-solid fa-arrow-rotate-left"></i></button>
     </div>
 
+    <!-- === MODAL TAUTAN RESMI === -->
     <div class="modal-overlay" id="modalLink">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1310,50 +1429,199 @@
 
                 <div class="section-title">Media Sosial & Komunikasi</div>
                 <div class="icon-grid">
-                    <a href="https://wa.me/6282254512722" target="_blank" class="social-icon"><img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA"><span>WhatsApp</span></a>
-                    <a href="https://www.instagram.com/jri_munawar/?hl=id" target="_blank" class="social-icon"><img src="https://img.icons8.com/color/96/000000/instagram-new.png" alt="IG"><span>Instagram</span></a>
-                    <a href="https://www.tiktok.com/@jrimunawar028?_r=1&_t=ZS-97zSoKRaBU7" target="_blank" class="social-icon"><img src="https://img.icons8.com/color/96/000000/tiktok--v1.png" alt="TT"><span>TikTok</span></a>
-                    <a href="#" class="social-icon"><img src="https://img.icons8.com/color/96/000000/twitterx--v1.png" alt="X"><span>Twitter X</span></a>
-                    <a href="https://www.youtube.com/@jrimunawar.028" target="_blank" class="social-icon"><img src="https://img.icons8.com/color/96/000000/youtube-play.png" alt="YT"><span>YouTube</span></a>
-                    <a href="#" class="social-icon"><img src="https://img.icons8.com/color/96/000000/facebook-new.png" alt="FB"><span>Facebook</span></a>
-                    <a href="#" class="social-icon"><img src="https://img.icons8.com/color/96/000000/linkedin.png" alt="LN"><span>LinkedIn</span></a>
-                    <div class="social-icon" id="btnOpenEmail"><img src="https://img.icons8.com/color/96/000000/gmail-new.png" alt="GM"><span>Gmail</span></div>
-                    <a href="#" class="social-icon"><img src="https://img.icons8.com/color/96/000000/telegram-app.png" alt="TG"><span>Telegram</span></a>
-                    <a href="#" class="social-icon"><img src="https://img.icons8.com/color/96/000000/discord-new-logo.png" alt="DC"><span>Discord</span></a>
-                    <a href="#" class="social-icon"><img src="https://img.icons8.com/color/96/000000/facebook-messenger.png" alt="MS"><span>Messenger</span></a>
-                    <a href="#" class="social-icon"><img src="https://img.icons8.com/color/96/000000/microsoft-teams.png" alt="MT"><span>Microsoft Teams</span></a>
-                    <a href="#" class="social-icon"><img src="WECHAT.png" alt="WC"><span>WeChat</span></a>
-                    <a href="#" class="social-icon"><img src="SNAPCHAT(1).jpg" alt="SC"><span>Snapchat</span></a>
-                    <a href="#" class="social-icon"><img src="https://img.icons8.com/color/96/000000/skype.png" alt="SK"><span>Skype</span></a>
-                    <a href="#" class="social-icon"><img src="BEREAL.png" alt="BR"><span>BeReal</span></a>
+
+                    <!-- WhatsApp — diklik buka picker nomor -->
+                    <div class="social-icon" id="btnOpenWA">
+                        <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
+                        <span>WhatsApp</span>
+                    </div>
+
+                    <a href="https://www.instagram.com/jri_munawar/?hl=id" target="_blank" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/instagram-new.png" alt="IG">
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@jrimunawar028?_r=1&_t=ZS-97zSoKRaBU7" target="_blank" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/tiktok--v1.png" alt="TT">
+                        <span>TikTok</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/twitterx--v1.png" alt="X">
+                        <span>Twitter X</span>
+                    </a>
+                    <a href="https://www.youtube.com/@jrimunawar.028" target="_blank" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/youtube-play.png" alt="YT">
+                        <span>YouTube</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/facebook-new.png" alt="FB">
+                        <span>Facebook</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/linkedin.png" alt="LN">
+                        <span>LinkedIn</span>
+                    </a>
+                    <div class="social-icon" id="btnOpenEmail">
+                        <img src="https://img.icons8.com/color/96/000000/gmail-new.png" alt="GM">
+                        <span>Gmail</span>
+                    </div>
+                    <a href="#" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/telegram-app.png" alt="TG">
+                        <span>Telegram</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/discord-new-logo.png" alt="DC">
+                        <span>Discord</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/facebook-messenger.png" alt="MS">
+                        <span>Messenger</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/microsoft-teams.png" alt="MT">
+                        <span>Microsoft Teams</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="WECHAT.png" alt="WC">
+                        <span>WeChat</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="SNAPCHAT(1).jpg" alt="SC">
+                        <span>Snapchat</span>
+                    </a>
+
+                    <!-- Google Maps (menggantikan Skype) -->
+                    <a href="https://maps.google.com" target="_blank" class="social-icon">
+                        <img src="https://img.icons8.com/color/96/000000/google-maps-new.png" alt="GM">
+                        <span>Google Maps</span>
+                    </a>
+
+                    <a href="#" class="social-icon">
+                        <img src="BEREAL.png" alt="BR">
+                        <span>BeReal</span>
+                    </a>
                 </div>
 
                 <div class="section-divider"></div>
 
                 <div class="section-title">Platform Bisnis & Website Internal</div>
                 <div class="icon-grid platform-grid">
-                    <a href="#" class="social-icon"><img src="Untitled_design-removebg-preview.png" alt="GEINA"><span>GEINIA NASIONAL</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image 12 Jul 2026, 22.17.14(1).png" alt="UNEVRAS"><span>UNEVRAS INTERNATIONAL HCAP</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 5, 2026, 02_05_25 PM(1).png" alt="JRI"><span>PT JRI MUNAWAR GROUP</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image 5 Jul 2026, 14.36.14(1).png" alt="VLEPING"><span>VLEPING</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 11, 2026, 06_17_43 PM(1).png" alt="UNISANTARA"><span>UNISANTARA MEDIA DIGITAL</span></a>
-                    <a href="#" class="social-icon"><img src="KONEKDA.png" alt="KONEKDA"><span>KONEKDA</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 15, 2026, 12_06_33 PM(1).png"ZEARVIS"><span>ZEARVIS TEKNOLOGI</span></a>
-                    <a href="#" class="social-icon"><img src="SIRANKARTA.png" alt="SIRANKARTA"><span>SIRANKARTA</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 12.06.43(1).png" alt="XEAGIS"><span>XEAGIS INDUSTRI</span></a>
-                    <a href="#" class="social-icon"><img src="DANABATRI.png" alt="DANABATRI"><span>DANABATRI</span></a>
-                    <a href="#" class="social-icon"><img src="PORINVEX.png" alt="PORINVEX"><span>PORINVEX</span></a>
-                    <a href="#" class="social-icon"><img src="PADAT.png" alt="PADAT"><span>PADAT</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 14, 2026, 11_59_39 PM(1).png" alt="BEARBALCK"><span>BEARBALCK SECURITY</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 12.10.15(1).png" alt="AXITORIUM"><span>AXITORIUM LAB</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 15, 2026, 12_08_43 AM(1).png" alt="WEILMY"><span>WEILMY</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 15, 2026, 12_01_46 AM(1).png" alt="SIRAVEX"><span>SIRAVEX</span></a>
+                    <a href="#" class="social-icon">
+                        <img src="Untitled_design-removebg-preview.png" alt="GEINA">
+                        <span>GEINIA NASIONAL</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image 12 Jul 2026, 22.17.14(1).png" alt="UNEVRAS">
+                        <span>UNEVRAS INTERNATIONAL HCAP</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image Jul 5, 2026, 02_05_25 PM(1).png" alt="JRI">
+                        <span>PT JRI MUNAWAR GROUP</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image 5 Jul 2026, 14.36.14(1).png" alt="VLEPING">
+                        <span>VLEPING</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image Jul 11, 2026, 06_17_43 PM(1).png" alt="UNISANTARA">
+                        <span>UNISANTARA MEDIA DIGITAL</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image 15 Jul 2026, 17.20.56(1).png" alt="KONEKDA">
+                        <span>KONEKDA</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image 15 Jul 2026, 12_06_33 PM(1).png" alt="ZEARVIS">
+                        <span>ZEARVIS TEKNOLOGI</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image 15 Jul 2026, 17.29.07(1).png" alt="SIRANKARTA">
+                        <span>SIRANKARTA</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image 15 Jul 2026, 12.06.43(1).png" alt="XEAGIS">
+                        <span>XEAGIS INDUSTRI</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="DANABATRI.png" alt="DANABATRI">
+                        <span>DANABATRI</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image 15 Jul 2026, 17.11.28(1).png" alt="PORINVEX">
+                        <span>PORINVEX</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="PADAT.png" alt="PADAT">
+                        <span>PADAT</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image Jul 14, 2026, 11_59_39 PM(1).png" alt="BEARBALCK">
+                        <span>BEARBALCK SECURITY</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image 15 Jul 2026, 12.10.15(1).png" alt="AXITORIUM">
+                        <span>AXITORIUM LAB</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image Jul 15, 2026, 12_08_43 AM(1).png" alt="WEILMY">
+                        <span>WEILMY</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="ChatGPT Image Jul 15, 2026, 12_01_46 AM(1).png" alt="SIRAVEX">
+                        <span>SIRAVEX</span>
+                    </a>
                 </div>
 
             </div>
         </div>
     </div>
 
+    <!-- === MODAL WHATSAPP PICKER === -->
+    <div class="modal-overlay modal-wa" id="modalWA">
+        <div class="modal-panel">
+            <div class="modal-header">
+                <h2>Pilih Nomor WhatsApp</h2>
+                <button class="modal-close" id="btnCloseWA">&times;</button>
+            </div>
+            <div class="wa-picker">
+                <p class="wa-picker-title">Pilih nomor yang ingin Anda hubungi melalui WhatsApp</p>
+                <div class="wa-number-list">
+
+                    <!-- Nomor 1: Pribadi -->
+                    <a href="https://wa.me/6282254512722" target="_blank" class="wa-number-item">
+                        <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
+                        <div class="wa-number-info">
+                            <div class="wa-number-label">Nomor Pribadi</div>
+                            <div class="wa-number-value">0822-5451-2722</div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right wa-number-arrow"></i>
+                    </a>
+
+                    <!-- Nomor 2: Perusahaan -->
+                    <a href="https://wa.me/6202122540700" target="_blank" class="wa-number-item">
+                        <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
+                        <div class="wa-number-info">
+                            <div class="wa-number-label">Nomor Perusahaan</div>
+                            <div class="wa-number-value">021-2254-0700</div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right wa-number-arrow"></i>
+                    </a>
+
+                    <!-- Nomor 3: Asisten -->
+                    <a href="https://wa.me/6285693943122" target="_blank" class="wa-number-item">
+                        <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WA">
+                        <div class="wa-number-info">
+                            <div class="wa-number-label">Nomor Asisten</div>
+                            <div class="wa-number-value">0856-9394-3122</div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right wa-number-arrow"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === MODAL EMAIL === -->
     <div class="modal-overlay modal-email" id="modalEmail">
         <div class="modal-panel">
             <div class="modal-header">
@@ -1402,42 +1670,85 @@
     <div class="toast-msg" id="toastEl"></div>
 
     <script>
+        /* =============================================
+           VARIABEL UTAMA
+        ============================================= */
         var card3d = document.getElementById('card3d');
         var toastEl = document.getElementById('toastEl');
         var modalEl = document.getElementById('modalLink');
         var modalEmailEl = document.getElementById('modalEmail');
+        var modalWAEl = document.getElementById('modalWA');
         var toastTm = null;
-        var angle = 0, mode = 'normal', isSnapping = false, isDragging = false;
-        var isModalOpen = false, isEmailOpen = false;
-        var dragStartX = 0, dragStartAngle = 0, autoRAF = null;
+        var angle = 0;
+        var mode = 'normal';
+        var isSnapping = false;
+        var isDragging = false;
+        var isModalOpen = false;
+        var isEmailOpen = false;
+        var isWAOpen = false;
+        var dragStartX = 0;
+        var dragStartAngle = 0;
+        var autoRAF = null;
 
-        function locked() { return isModalOpen || isEmailOpen || isSnapping; }
-        function normAngle(a) { return ((a % 360) + 360) % 360; }
-        function showingBack() { var n = normAngle(angle); return n > 90 && n < 270; }
-        function applyTransform() { card3d.style.transform = 'rotateY(' + angle + 'deg)'; }
+        /* =============================================
+           FUNGSI HELPER
+        ============================================= */
+        function locked() {
+            return isModalOpen || isEmailOpen || isWAOpen || isSnapping;
+        }
+
+        function normAngle(a) {
+            return ((a % 360) + 360) % 360;
+        }
+
+        function showingBack() {
+            var n = normAngle(angle);
+            return n > 90 && n < 270;
+        }
+
+        function applyTransform() {
+            card3d.style.transform = 'rotateY(' + angle + 'deg)';
+        }
 
         function toast(msg) {
             toastEl.textContent = msg;
             toastEl.classList.add('show');
             clearTimeout(toastTm);
-            toastTm = setTimeout(function() { toastEl.classList.remove('show'); }, 2000);
+            toastTm = setTimeout(function() {
+                toastEl.classList.remove('show');
+            }, 2000);
         }
 
+        /* =============================================
+           UPDATE TOMBOL SIDE PANEL
+        ============================================= */
         function updateButtons() {
             var btns = document.querySelectorAll('.sp-btn');
-            for (var i = 0; i < btns.length; i++) btns[i].classList.remove('on', 'disabled');
-            if (isModalOpen || isEmailOpen) {
-                for (var j = 0; j < btns.length; j++) btns[j].classList.add('disabled');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove('on', 'disabled');
+            }
+            if (isModalOpen || isEmailOpen || isWAOpen) {
+                for (var j = 0; j < btns.length; j++) {
+                    btns[j].classList.add('disabled');
+                }
                 return;
             }
-            if (mode === 'auto') document.getElementById('spAuto').classList.add('on');
-            else if (mode === '360') document.getElementById('sp360').classList.add('on');
-            else {
-                if (showingBack()) document.getElementById('spBack').classList.add('on');
-                else document.getElementById('spFront').classList.add('on');
+            if (mode === 'auto') {
+                document.getElementById('spAuto').classList.add('on');
+            } else if (mode === '360') {
+                document.getElementById('sp360').classList.add('on');
+            } else {
+                if (showingBack()) {
+                    document.getElementById('spBack').classList.add('on');
+                } else {
+                    document.getElementById('spFront').classList.add('on');
+                }
             }
         }
 
+        /* =============================================
+           SNAP ANIMASI KARTU
+        ============================================= */
         function snapTo(targetAngle, callback) {
             isSnapping = true;
             card3d.classList.remove('dragging');
@@ -1448,14 +1759,17 @@
             var endAngle = startAngle + diff;
             var startTime = performance.now();
             var duration = 800;
+
             function step(now) {
                 var t = Math.min((now - startTime) / duration, 1);
-                t = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-                angle = startAngle + diff * t;
+                /* ease-out cubic */
+                var ease = 1 - Math.pow(1 - t, 3);
+                angle = startAngle + diff * ease;
                 applyTransform();
-                if (t < 1) requestAnimationFrame(step);
-                else {
-                    angle = normAngle(endAngle);
+                if (t < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    angle = endAngle;
                     applyTransform();
                     isSnapping = false;
                     updateButtons();
@@ -1465,227 +1779,298 @@
             requestAnimationFrame(step);
         }
 
-        function setMode(newMode) {
-            if (autoRAF) { cancelAnimationFrame(autoRAF); autoRAF = null; }
-            isDragging = false;
-            card3d.style.cursor = '';
-            mode = newMode;
-            updateButtons();
-        }
-
-        function doFlip() {
-            if (locked()) return;
-            if (mode === '360' || mode === 'auto') { exitToNormal(); return; }
-            snapTo(showingBack() ? 0 : 180, function() {
-                toast(showingBack() ? 'Sisi belakang' : 'Sisi depan');
-            });
-        }
-
-        function goFront() {
-            if (locked()) return;
-            if (mode === '360' || mode === 'auto') { exitToNormal(); return; }
-            snapTo(0, function() { toast('Sisi depan'); });
-        }
-
-        function goBack() {
-            if (locked()) return;
-            if (mode === '360' || mode === 'auto') { exitToNormal(); return; }
-            snapTo(180, function() { toast('Sisi belakang'); });
-        }
-
-        function enter360() {
-            if (locked()) return;
-            if (mode === '360') { exitToNormal(); return; }
-            setMode('360');
-            card3d.classList.add('dragging');
-            card3d.style.cursor = 'grab';
-            toast('Mode 360 — seret kartu');
-        }
-
-        function exitToNormal() {
-            card3d.classList.remove('dragging');
-            setMode('normal');
-            var n = normAngle(angle);
-            snapTo((n > 90 && n < 270) ? 180 : 0, function() {
-                toast(showingBack() ? 'Sisi belakang' : 'Sisi depan');
-            });
-        }
-
-        function toggleAuto() {
-            if (locked()) return;
-            if (mode === 'auto') {
-                card3d.classList.remove('dragging');
-                setMode('normal');
-                var n = normAngle(angle);
-                snapTo((n > 90 && n < 270) ? 180 : 0, function() {
-                    toast('Putar otomatis dihentikan');
-                });
-                return;
-            }
-            setMode('auto');
-            card3d.classList.add('dragging');
-            toast('Putar otomatis aktif');
-            var lastTime = performance.now();
-            function autoStep(now) {
-                var dt = (now - lastTime) / 1000;
-                lastTime = now;
-                angle += 45 * dt;
-                applyTransform();
-                autoRAF = requestAnimationFrame(autoStep);
-            }
-            autoRAF = requestAnimationFrame(autoStep);
-        }
-
-        function doReset() {
-            if (locked()) return;
-            if (mode === '360' || mode === 'auto') {
-                card3d.classList.remove('dragging');
-                setMode('normal');
-            }
-            snapTo(0, function() { toast('Kartu direset'); });
-        }
-
-        function onPointerDown(e) {
-            if (mode !== '360' || locked()) return;
-            isDragging = true;
-            dragStartX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-            dragStartAngle = angle;
-            card3d.style.cursor = 'grabbing';
-            e.preventDefault();
-        }
-
-        function onPointerMove(e) {
-            if (!isDragging) return;
-            var clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-            var diff = clientX - dragStartX;
-            angle = dragStartAngle + diff * 0.5;
-            applyTransform();
-            e.preventDefault();
-        }
-
-        function onPointerUp() {
-            if (!isDragging) return;
-            isDragging = false;
-            card3d.style.cursor = 'grab';
-        }
-
-        card3d.addEventListener('mousedown', onPointerDown);
-        document.addEventListener('mousemove', onPointerMove);
-        document.addEventListener('mouseup', onPointerUp);
-        card3d.addEventListener('touchstart', onPointerDown, { passive: false });
-        document.addEventListener('touchmove', onPointerMove, { passive: false });
-        document.addEventListener('touchend', onPointerUp);
-
-        document.getElementById('spFlip').addEventListener('click', doFlip);
-        document.getElementById('spFront').addEventListener('click', goFront);
-        document.getElementById('spBack').addEventListener('click', goBack);
-        document.getElementById('sp360').addEventListener('click', enter360);
-        document.getElementById('spAuto').addEventListener('click', toggleAuto);
-        document.getElementById('spReset').addEventListener('click', doReset);
-
-        document.getElementById('btnOpenModal').addEventListener('click', function() {
-            modalEl.classList.add('active');
+        /* =============================================
+           MODAL BUKA / TUTUP
+        ============================================= */
+        function openModal() {
             isModalOpen = true;
+            modalEl.classList.add('active');
             updateButtons();
-        });
+        }
 
-        document.getElementById('btnCloseModal').addEventListener('click', function() {
-            modalEl.classList.remove('active');
+        function closeModal() {
             isModalOpen = false;
+            modalEl.classList.remove('active');
             updateButtons();
-        });
+        }
 
-        modalEl.addEventListener('click', function(e) {
-            if (e.target === modalEl) {
-                modalEl.classList.remove('active');
-                isModalOpen = false;
-                updateButtons();
-            }
-        });
-
-        document.getElementById('btnOpenEmail').addEventListener('click', function() {
-            modalEmailEl.classList.add('active');
+        function openEmail() {
             isEmailOpen = true;
+            modalEmailEl.classList.add('active');
             updateButtons();
-        });
+        }
 
-        document.getElementById('btnCloseEmail').addEventListener('click', function() {
-            modalEmailEl.classList.remove('active');
+        function closeEmail() {
             isEmailOpen = false;
+            modalEmailEl.classList.remove('active');
+            updateButtons();
+        }
+
+        function openWA() {
+            isWAOpen = true;
+            modalWAEl.classList.add('active');
+            updateButtons();
+        }
+
+        function closeWA() {
+            isWAOpen = false;
+            modalWAEl.classList.remove('active');
+            updateButtons();
+        }
+
+        /* =============================================
+           EVENT LISTENER MODAL
+        ============================================= */
+        document.getElementById('btnOpenModal').addEventListener('click', openModal);
+        document.getElementById('btnCloseModal').addEventListener('click', closeModal);
+        document.getElementById('btnOpenEmail').addEventListener('click', openEmail);
+        document.getElementById('btnCloseEmail').addEventListener('click', closeEmail);
+        document.getElementById('btnOpenWA').addEventListener('click', openWA);
+        document.getElementById('btnCloseWA').addEventListener('click', closeWA);
+
+        /* Tutup modal saat klik overlay */
+        modalEl.addEventListener('click', function(e) {
+            if (e.target === modalEl) closeModal();
+        });
+        modalEmailEl.addEventListener('click', function(e) {
+            if (e.target === modalEmailEl) closeEmail();
+        });
+        modalWAEl.addEventListener('click', function(e) {
+            if (e.target === modalWAEl) closeWA();
+        });
+
+        /* =============================================
+           SIDE PANEL BUTTONS
+        ============================================= */
+        document.getElementById('spFlip').addEventListener('click', function() {
+            if (locked()) return;
+            if (mode === 'auto') stopAuto();
+            if (mode === '360') { mode = 'normal'; }
+            var target = showingBack() ? 0 : 180;
+            snapTo(target);
+            toast(showingBack() ? 'Sisi Depan' : 'Sisi Belakang');
+        });
+
+        document.getElementById('spFront').addEventListener('click', function() {
+            if (locked()) return;
+            if (mode === 'auto') stopAuto();
+            if (mode === '360') { mode = 'normal'; }
+            snapTo(0);
+            toast('Sisi Depan');
+        });
+
+        document.getElementById('spBack').addEventListener('click', function() {
+            if (locked()) return;
+            if (mode === 'auto') stopAuto();
+            if (mode === '360') { mode = 'normal'; }
+            snapTo(180);
+            toast('Sisi Belakang');
+        });
+
+        document.getElementById('sp360').addEventListener('click', function() {
+            if (locked()) return;
+            if (mode === 'auto') stopAuto();
+            if (mode === '360') {
+                mode = 'normal';
+                snapTo(showingBack() ? 180 : 0);
+                toast('Berhenti 360');
+            } else {
+                mode = '360';
+                isSnapping = false;
+                card3d.classList.add('dragging');
+                toast('Putar 360');
+                spin360();
+            }
             updateButtons();
         });
 
-        modalEmailEl.addEventListener('click', function(e) {
-            if (e.target === modalEmailEl) {
-                modalEmailEl.classList.remove('active');
-                isEmailOpen = false;
-                updateButtons();
+        function spin360() {
+            if (mode !== '360' || locked()) return;
+            angle += 0.6;
+            applyTransform();
+            autoRAF = requestAnimationFrame(spin360);
+        }
+
+        document.getElementById('spAuto').addEventListener('click', function() {
+            if (locked()) return;
+            if (mode === '360') {
+                cancelAnimationFrame(autoRAF);
+                card3d.classList.remove('dragging');
             }
+            if (mode === 'auto') {
+                stopAuto();
+                toast('Berhenti Otomatis');
+            } else {
+                mode = 'auto';
+                isSnapping = false;
+                card3d.classList.add('dragging');
+                toast('Putar Otomatis');
+                autoFlip();
+            }
+            updateButtons();
         });
 
-        document.getElementById('emailForm').addEventListener('submit', function(e) {
+        function autoFlip() {
+            if (mode !== 'auto' || locked()) return;
+            angle += 0.35;
+            applyTransform();
+            autoRAF = requestAnimationFrame(autoFlip);
+        }
+
+        function stopAuto() {
+            mode = 'normal';
+            cancelAnimationFrame(autoRAF);
+            card3d.classList.remove('dragging');
+            /* Snap ke posisi terdekat (0 atau 180) */
+            var target = showingBack() ? 180 : 0;
+            snapTo(target);
+        }
+
+        document.getElementById('spReset').addEventListener('click', function() {
+            if (locked()) return;
+            if (mode === 'auto' || mode === '360') {
+                cancelAnimationFrame(autoRAF);
+                card3d.classList.remove('dragging');
+            }
+            mode = 'normal';
+            snapTo(0);
+            toast('Reset');
+        });
+
+        /* =============================================
+           DRAG UNTUK MEMUTAR KARTU
+        ============================================= */
+        var perspEl = document.getElementById('cardPerspective');
+
+        perspEl.addEventListener('mousedown', dragStart);
+        perspEl.addEventListener('touchstart', dragStart, { passive: false });
+
+        function dragStart(e) {
+            if (locked()) return;
+            if (mode === 'auto' || mode === '360') return;
             e.preventDefault();
-            var btn = document.getElementById('btnKirim');
-            var emsg = document.getElementById('emsg');
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> Mengirim...';
-            emsg.className = 'emsg';
-            emsg.style.display = 'none';
+            isDragging = true;
+            card3d.classList.add('dragging');
+            dragStartX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            dragStartAngle = angle;
+        }
 
-            setTimeout(function() {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Langsung';
-                emsg.className = 'emsg ok';
-                emsg.textContent = 'Pesan berhasil dikirim! Terima kasih.';
-                emsg.style.display = 'block';
-                document.getElementById('emailForm').reset();
-                setTimeout(function() { emsg.style.display = 'none'; }, 5000);
-            }, 2000);
-        });
+        document.addEventListener('mousemove', dragMove);
+        document.addEventListener('touchmove', dragMove, { passive: false });
 
-        document.getElementById('btnGmail').addEventListener('click', function() {
-            var nama = document.getElementById('eNama').value || '';
-            var email = document.getElementById('eEmail').value || '';
-            var subjek = document.getElementById('eSubjek').value || '';
-            var pesan = document.getElementById('ePesan').value || '';
-            var body = 'Nama: ' + nama + '\nEmail: ' + email + '\n\n' + pesan;
-            var mailto = 'mailto:muhfajrimunawar@gmail.com?subject=' + encodeURIComponent(subjek) + '&body=' + encodeURIComponent(body);
-            window.open(mailto, '_blank');
-        });
+        function dragMove(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            var clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            var diff = clientX - dragStartX;
+            angle = dragStartAngle + diff * 0.4;
+            applyTransform();
+        }
 
-        var cardPerspective = document.getElementById('cardPerspective');
-        cardPerspective.addEventListener('mousemove', function(e) {
-            var rect = cardPerspective.getBoundingClientRect();
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('touchend', dragEnd);
+
+        function dragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            card3d.classList.remove('dragging');
+            /* Snap ke sisi terdekat */
+            var n = normAngle(angle);
+            var target;
+            if (n <= 90 || n >= 270) {
+                target = Math.round(angle / 360) * 360;
+            } else {
+                target = Math.round((angle - 180) / 360) * 360 + 180;
+            }
+            snapTo(target);
+        }
+
+        /* =============================================
+           HOLOGRAM EFFECT MOUSE TRACKING
+        ============================================= */
+        var holoFront = document.getElementById('holoFront');
+        var holoBack = document.getElementById('holoBack');
+
+        perspEl.addEventListener('mousemove', function(e) {
+            var rect = perspEl.getBoundingClientRect();
             var x = ((e.clientX - rect.left) / rect.width) * 100;
             var y = ((e.clientY - rect.top) / rect.height) * 100;
-            var holoFront = document.getElementById('holoFront');
-            var holoBack = document.getElementById('holoBack');
+            var val = x + '% ' + y + '%';
             holoFront.style.setProperty('--holo-x', x + '%');
             holoFront.style.setProperty('--holo-y', y + '%');
             holoBack.style.setProperty('--holo-x', x + '%');
             holoBack.style.setProperty('--holo-y', y + '%');
         });
 
-        document.addEventListener('keydown', function(e) {
-            if (isModalOpen || isEmailOpen) {
-                if (e.key === 'Escape') {
-                    if (isEmailOpen) {
-                        modalEmailEl.classList.remove('active');
-                        isEmailOpen = false;
-                    } else if (isModalOpen) {
-                        modalEl.classList.remove('active');
-                        isModalOpen = false;
-                    }
-                    updateButtons();
-                }
+        /* =============================================
+           FORM EMAIL
+        ============================================= */
+        var emailForm = document.getElementById('emailForm');
+        var emsgEl = document.getElementById('emsg');
+        var btnKirim = document.getElementById('btnKirim');
+
+        emailForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var nama = document.getElementById('eNama').value.trim();
+            var email = document.getElementById('eEmail').value.trim();
+            var subjek = document.getElementById('eSubjek').value.trim();
+            var pesan = document.getElementById('ePesan').value.trim();
+
+            if (!nama || !email || !subjek || !pesan) {
+                emsgEl.className = 'emsg no';
+                emsgEl.textContent = 'Semua field wajib diisi.';
                 return;
             }
-            if (e.key === 'f' || e.key === 'F') doFlip();
-            if (e.key === 'r' || e.key === 'R') doReset();
-            if (e.key === '3') enter360();
-            if (e.key === 'a' || e.key === 'A') toggleAuto();
+
+            btnKirim.disabled = true;
+            btnKirim.innerHTML = '<span class="spinner"></span> Mengirim...';
+            emsgEl.className = 'emsg';
+            emsgEl.style.display = 'none';
+
+            /* Simulasi pengiriman (ganti dengan endpoint asli) */
+            setTimeout(function() {
+                btnKirim.disabled = false;
+                btnKirim.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Langsung';
+                emsgEl.className = 'emsg ok';
+                emsgEl.style.display = 'block';
+                emsgEl.textContent = 'Pesan berhasil dikirim!';
+                emailForm.reset();
+                setTimeout(function() {
+                    emsgEl.className = 'emsg';
+                    emsgEl.style.display = 'none';
+                }, 4000);
+            }, 2000);
         });
 
+        document.getElementById('btnGmail').addEventListener('click', function() {
+            var nama = document.getElementById('eNama').value.trim();
+            var email = document.getElementById('eEmail').value.trim();
+            var subjek = document.getElementById('eSubjek').value.trim();
+            var pesan = document.getElementById('ePesan').value.trim();
+
+            var body = '';
+            if (nama) body += 'Nama: ' + nama + '\n';
+            if (email) body += 'Email: ' + email + '\n';
+            body += '\n' + pesan;
+
+            var mailto = 'mailto:?subject=' + encodeURIComponent(subjek) + '&body=' + encodeURIComponent(body);
+            window.open(mailto, '_blank');
+        });
+
+        /* =============================================
+           KEYBOARD: ESC UNTUK TUTUP MODAL
+        ============================================= */
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (isWAOpen) closeWA();
+                else if (isEmailOpen) closeEmail();
+                else if (isModalOpen) closeModal();
+            }
+        });
+
+        /* =============================================
+           INISIALISASI
+        ============================================= */
         updateButtons();
     </script>
 </body>
