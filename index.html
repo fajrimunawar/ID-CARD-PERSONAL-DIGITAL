@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>muhfajrimunawar</title>
     <link rel="icon" type="image/png" href="ChatGPT Image 13 Jul 2026, 14.31.46.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -27,7 +28,8 @@
             user-select: none;
         }
 
-        input, textarea {
+        input,
+        textarea {
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
@@ -44,11 +46,9 @@
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-            /* KUNCI: cursor default, baru grab kalau mode geser aktif */
             cursor: default;
         }
 
-        /* Mode geser aktif */
         .card-3d.free-mode {
             cursor: grab;
         }
@@ -83,6 +83,7 @@
             display: flex;
             flex-direction: column;
             min-height: 555px;
+            max-height: 555px;
             position: relative;
         }
 
@@ -106,8 +107,10 @@
         .main-content {
             flex: 1;
             display: flex;
-            padding: 40px 50px 0;
-            align-items: flex-start;
+            padding: 35px 50px 0;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
         }
 
         .photo-area {
@@ -136,38 +139,17 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: repeat(4, 1fr);
-            gap: 0 20px;
-            height: 270px;
-        }
-
-        .full-width { grid-column: span 3; }
-
-        .info-block {
-            display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
+            min-height: 200px;
         }
 
-        .info-label {
-            font-weight: 700;
-            color: #7f8c8d;
-            text-transform: uppercase;
-            font-size: 10.5px;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .info-value {
-            font-size: 16px;
-            font-weight: 800;
-            color: #1a2a6c;
-            line-height: 1.3;
+        .empty-space {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
         }
 
         .button-row {
@@ -235,130 +217,34 @@
             flex-shrink: 0;
         }
 
+        /* === SISI BELAKANG === */
         .back-content {
             flex: 1;
             display: flex;
-            padding: 30px 40px;
-            align-items: stretch;
-        }
-
-        .back-left {
-            flex: 0 0 220px;
-            margin-right: 40px;
-            display: flex;
-            flex-direction: column;
+            padding: 20px 30px;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            min-height: 340px;
         }
 
-        .back-img-box {
-            width: 220px;
-            height: 200px;
-            border: 4px solid #1a2a6c;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #f8f8f8;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            flex-shrink: 0;
-            padding: 8px;
-        }
-
-        .back-img-box img {
+        .back-garuda-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             height: 100%;
+            padding: 10px;
+        }
+
+        .back-garuda-container img {
+            width: 85%;
+            max-width: 400px;
+            height: auto;
             object-fit: contain;
             display: block;
         }
 
-        .back-ttd {
-            width: 100%;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .back-ttd-img {
-            height: 85px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .back-img-label {
-            width: 100%;
-            text-align: center;
-            background: #1a2a6c;
-            color: #f1c40f;
-            padding: 9px 0;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 10.5px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            flex-shrink: 0;
-        }
-
-        .back-right {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .bk-section {
-            margin-bottom: 10px;
-            flex-shrink: 0;
-        }
-        .bk-section:last-of-type { margin-bottom: 0; }
-
-        .bk-heading {
-            font-size: 9px;
-            font-weight: 800;
-            color: #1a2a6c;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            padding-bottom: 4px;
-            border-bottom: 1.5px solid #e2e8f0;
-        }
-
-        .bk-para {
-            font-size: 10px;
-            color: #334155;
-            font-weight: 500;
-            line-height: 1.6;
-            text-align: justify;
-            margin: 0;
-        }
-
-        .bk-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            margin: 0;
-        }
-
-        .bk-list li {
-            font-size: 10px;
-            color: #334155;
-            font-weight: 500;
-            line-height: 1.55;
-            text-align: justify;
-            padding-left: 22px;
-            position: relative;
-        }
-
-        .bk-list li::before {
-            content: attr(data-num);
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-weight: 800;
-            color: #1a2a6c;
-            font-size: 9.5px;
-        }
-
-        /* === HOLOGRAM — HANYA MUNCUL SAAT GESER DI MODE BEBAS === */
+        /* === HOLOGRAM === */
         .hologram-effect {
             position: absolute;
             top: 0;
@@ -373,6 +259,7 @@
             transition: opacity 0.3s ease;
         }
 
+        .card-3d:hover .hologram-effect,
         .card-3d.dragging .hologram-effect {
             opacity: 1;
         }
@@ -384,34 +271,35 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0%, rgba(255,0,255,0.06) 8%, transparent 16%,
-                rgba(0,255,255,0.06) 24%, transparent 32%,
-                rgba(255,255,0,0.05) 40%, transparent 48%,
-                rgba(0,255,128,0.05) 56%, transparent 64%,
-                rgba(255,128,0,0.05) 72%, transparent 80%,
-                rgba(128,0,255,0.06) 88%, transparent 100%
-            );
+            background: conic-gradient(from 0deg,
+                    transparent 0%, rgba(255, 0, 255, 0.06) 8%, transparent 16%,
+                    rgba(0, 255, 255, 0.06) 24%, transparent 32%,
+                    rgba(255, 255, 0, 0.05) 40%, transparent 48%,
+                    rgba(0, 255, 128, 0.05) 56%, transparent 64%,
+                    rgba(255, 128, 0, 0.05) 72%, transparent 80%,
+                    rgba(128, 0, 255, 0.06) 88%, transparent 100%);
             animation: holoSpin 8s linear infinite;
         }
 
-        @keyframes holoSpin { to { transform: rotate(360deg); } }
+        @keyframes holoSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         .hologram-effect::after {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(
-                circle at var(--hx, 50%) var(--hy, 50%),
-                rgba(255,255,255,0.18) 0%, rgba(255,200,255,0.06) 25%,
-                rgba(200,255,255,0.04) 45%, transparent 65%
-            );
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--hx, 50%) var(--hy, 50%),
+                    rgba(255, 255, 255, 0.18) 0%, rgba(255, 200, 255, 0.06) 25%,
+                    rgba(200, 255, 255, 0.04) 45%, transparent 65%);
             mix-blend-mode: overlay;
         }
 
-        /* === INDIKATOR MODE GESER === */
         .mode-badge {
             position: absolute;
             top: 12px;
@@ -450,8 +338,14 @@
         }
 
         @keyframes spIn {
-            from { opacity: 0; transform: translateY(-50%) translateX(25px); }
-            to { opacity: 1; transform: translateY(-50%) translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-50%) translateX(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+            }
         }
 
         .sp-btn {
@@ -522,7 +416,9 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        .sp-btn:hover::after { opacity: 1; }
+        .sp-btn:hover::after {
+            opacity: 1;
+        }
 
         .sp-sep {
             width: 24px;
@@ -531,7 +427,6 @@
             margin: 2px auto;
         }
 
-        /* === TOAST === */
         .toast-msg {
             position: fixed;
             bottom: 24px;
@@ -556,14 +451,16 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* === MODAL BASE === */
+        /* === MODAL OVERLAY === */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(26, 42, 108, 0.75);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -571,6 +468,7 @@
             pointer-events: none;
             transition: all 0.3s ease;
             z-index: 99999;
+            padding: 20px;
         }
 
         .modal-overlay.active {
@@ -580,17 +478,19 @@
 
         .modal-panel {
             background: #ffffff;
-            width: 90%;
+            width: 100%;
             max-width: 720px;
             border-radius: 20px;
             border: 3px solid #1a2a6c;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
             overflow: hidden;
-            transform: scale(0.85);
-            transition: all 0.3s ease;
+            transform: scale(0.85) translateY(20px);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .modal-overlay.active .modal-panel { transform: scale(1); }
+        .modal-overlay.active .modal-panel {
+            transform: scale(1) translateY(0);
+        }
 
         .modal-header {
             background: linear-gradient(135deg, #1a2a6c, #2a3a8c);
@@ -624,7 +524,9 @@
             z-index: 5;
         }
 
-        .modal-close:hover { color: #f1c40f; }
+        .modal-close:hover {
+            color: #f1c40f;
+        }
 
         .modal-content {
             padding: 32px 36px 36px;
@@ -632,9 +534,17 @@
             overflow-y: auto;
         }
 
-        .modal-content::-webkit-scrollbar { width: 6px; }
-        .modal-content::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
-        .modal-content::-webkit-scrollbar-thumb { background: #1a2a6c; border-radius: 10px; }
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #1a2a6c;
+            border-radius: 10px;
+        }
 
         .section-title {
             font-size: 10.5px;
@@ -653,7 +563,9 @@
             gap: 14px;
             margin-bottom: 36px;
         }
-        .icon-grid:last-child { margin-bottom: 0; }
+        .icon-grid:last-child {
+            margin-bottom: 0;
+        }
 
         .social-icon {
             background: #ffffff;
@@ -672,7 +584,8 @@
         }
 
         .social-icon img {
-            width: 32px; height: 32px;
+            width: 32px;
+            height: 32px;
             object-fit: contain;
             margin-bottom: 8px;
             flex-shrink: 0;
@@ -694,15 +607,22 @@
         }
 
         .platform-grid .social-icon {
-            height: 88px; min-height: 88px; overflow: hidden;
+            height: 88px;
+            min-height: 88px;
+            overflow: hidden;
         }
 
         .platform-grid .social-icon span {
-            overflow: hidden; text-overflow: ellipsis;
-            white-space: nowrap; max-width: 100%; display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 100%;
+            display: block;
         }
 
-        .platform-grid .social-icon img { margin-bottom: 6px; }
+        .platform-grid .social-icon img {
+            margin-bottom: 6px;
+        }
 
         .section-divider {
             height: 1px;
@@ -711,111 +631,146 @@
             opacity: 0.5;
         }
 
-        /* === MODAL EMAIL === */
+        /* === DESIGN FORM EMAIL PREMIUM (LEBAR KE SAMPING, TANPA IKON) === */
         .modal-email { z-index: 100000; }
-        .modal-email .modal-panel { max-width: 680px; width: 92%; }
+        .modal-email .modal-panel {
+            max-width: 880px; 
+            width: 100%; 
+            border: none; 
+            border-radius: 20px; 
+            box-shadow: 0 40px 100px rgba(26, 42, 108, 0.25);
+        }
         .modal-email .modal-header {
-            background: linear-gradient(135deg, #ea4335, #c62828);
-            border-bottom-color: #f1c40f;
+            background: linear-gradient(135deg, #1a2a6c, #2a3a8c); 
+            padding: 28px 40px; 
+            text-align: left;
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            border-radius: 20px 20px 0 0;
+            border-bottom: 4px solid #f1c40f;
         }
-
-        .email-form { padding: 24px 28px; }
-        .email-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .email-2col .fg { margin-bottom: 12px; }
-        .email-kanan { display: flex; flex-direction: column; gap: 12px; }
-
-        .email-form label {
-            display: block;
-            font-size: 11px; font-weight: 700;
-            color: #1a2a6c; text-transform: uppercase;
-            letter-spacing: 1px; margin-bottom: 5px;
+        .modal-email .modal-header h2 { 
+            font-size: 22px; 
+            letter-spacing: 1px; 
+            margin-bottom: 6px; 
+            text-transform: none; 
+            font-weight: 800; 
         }
-
-        .email-form input[type="text"],
-        .email-form input[type="email"],
-        .email-form textarea {
-            width: 100%; padding: 10px 14px;
-            border: 2px solid #e2e8f0; border-radius: 10px;
-            font-size: 14px; font-family: 'Segoe UI', sans-serif;
-            color: #334155; transition: border-color 0.15s;
-            outline: none; background: #f8fafc;
+        .modal-email .modal-header p { 
+            font-size: 13px; 
+            opacity: 0.9; 
+            font-weight: 400; 
+            text-transform: none; 
+            letter-spacing: 0.5px; 
         }
-
-        .email-form input:focus,
-        .email-form textarea:focus {
-            border-color: #ea4335; background: #fff;
+        .modal-email .modal-close { 
+            position: relative; 
+            top: 0; right: 0; 
+            transform: none; 
+            width: 36px; height: 36px; 
+            background: rgba(0,0,0,0.2); 
+            border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 18px; color: #fff;
+            border: none;
         }
-
-        .email-form textarea { min-height: 90px; resize: vertical; }
-
-        .note-box {
-            padding: 8px 10px; background: #eff6ff;
-            border: 1px solid #bfdbfe; border-radius: 8px;
-            font-size: 9px; color: #1e40af; line-height: 1.5;
+        .modal-email .modal-close:hover {
+            background: rgba(0,0,0,0.4);
         }
-        .note-box b { color: #1e3a8a; }
-
-        .btn-send {
-            width: 100%; padding: 12px; border: none; border-radius: 50px;
-            background: linear-gradient(135deg, #ea4335, #c62828);
-            color: #fff; font-size: 12px; font-weight: 700;
-            letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
-            transition: all 0.25s;
-            box-shadow: 0 5px 15px rgba(234, 67, 53, 0.3);
-            display: flex; align-items: center; justify-content: center;
-            gap: 8px; min-height: 44px;
+        .email-body-wide {
+            padding: 40px; 
+            background: #ffffff; 
+            border-radius: 0 0 20px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 30px;
         }
-        .btn-send:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(234, 67, 53, 0.4); }
-
-        .btn-gmail {
-            width: 100%; padding: 12px; border: 2px solid #1a2a6c;
-            border-radius: 50px; background: #fff; color: #1a2a6c;
-            font-size: 11px; font-weight: 700; letter-spacing: 1px;
-            text-transform: uppercase; cursor: pointer; transition: all 0.25s;
-            display: flex; align-items: center; justify-content: center;
-            gap: 8px; min-height: 44px;
+        .email-col-left { display: flex; flex-direction: column; gap: 20px; }
+        .email-col-right { display: flex; flex-direction: column; gap: 20px; }
+        
+        .form-group-wide { display: flex; flex-direction: column; }
+        .form-group-wide label { 
+            font-size: 13px; 
+            font-weight: 700; 
+            color: #1a2a6c; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            margin-bottom: 10px; 
         }
-        .btn-gmail:hover {
-            background: #1a2a6c; color: #f1c40f;
+        .form-group-wide input,
+        .form-group-wide textarea {
+            width: 100%; 
+            padding: 16px 20px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 12px; 
+            background: #f8fafc; 
+            font-size: 15px; 
+            font-family: 'Segoe UI', sans-serif; 
+            color: #1e293b; 
+            transition: all 0.2s; 
+            outline: none;
+        }
+        .form-group-wide input:focus,
+        .form-group-wide textarea:focus {
+            border-color: #1a2a6c; 
+            background: #ffffff; 
+            box-shadow: 0 4px 12px rgba(26, 42, 108, 0.05);
+        }
+        .form-group-wide textarea {
+            min-height: 220px; 
+            resize: none;
+            height: 100%;
+        }
+        .btn-submit-wide {
+            grid-column: span 2;
+            width: 100%; 
+            padding: 18px; 
+            background: linear-gradient(135deg, #1a2a6c, #2a3a8c); 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 10px 25px rgba(26, 42, 108, 0.2);
+        }
+        .btn-submit-wide:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(26, 42, 108, 0.2);
+            box-shadow: 0 15px 35px rgba(26, 42, 108, 0.3);
         }
-
-        .emsg {
-            text-align: center; padding: 10px 14px; border-radius: 10px;
-            margin-top: 12px; font-size: 11px; font-weight: 600;
-            display: none; line-height: 1.5;
+        .emsg-wide {
+            grid-column: span 2;
+            margin-top: 20px; 
+            text-align: center; 
+            padding: 16px; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            font-size: 14px; 
+            display: none; 
+            line-height: 1.5;
         }
-        .emsg.ok { display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .emsg.no { display: block; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .emsg-wide.ok { display: block; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+        .emsg-wide.no { display: block; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 
         /* === MODAL WA === */
         .modal-wa { z-index: 100001; }
-        .modal-wa .modal-panel { max-width: 440px; width: 90%; }
-        .modal-wa .modal-header {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            border-bottom-color: #f1c40f;
-        }
+        .modal-wa .modal-panel { max-width: 440px; width: 100%; }
+        .modal-wa .modal-header { background: linear-gradient(135deg, #25D366, #128C7E); border-bottom-color: #f1c40f; }
 
         .wa-picker { padding: 28px 24px 32px; }
-        .wa-picker-title {
-            text-align: center; font-size: 12px; font-weight: 600;
-            color: #64748b; margin-bottom: 20px; line-height: 1.5;
-        }
+        .wa-picker-title { text-align: center; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 20px; line-height: 1.5; }
 
         .wa-number-list { display: flex; flex-direction: column; gap: 12px; }
 
         .wa-number-item {
-            display: flex; align-items: center; gap: 14px;
-            background: #f8fafc; border: 2px solid #e2e8f0;
-            border-radius: 14px; padding: 14px 18px; cursor: pointer;
-            transition: all 0.25s ease; text-decoration: none;
+            display: flex; align-items: center; gap: 14px; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 14px; padding: 14px 18px; cursor: pointer; transition: all 0.25s ease; text-decoration: none;
         }
-        .wa-number-item:hover {
-            border-color: #25D366; background: #f0fdf4;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.15);
-        }
+        .wa-number-item:hover { border-color: #25D366; background: #f0fdf4; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.15); }
         .wa-number-item img { width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; }
         .wa-number-info { flex: 1; }
         .wa-number-label { font-size: 12px; font-weight: 800; color: #1a2a6c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
@@ -823,31 +778,23 @@
         .wa-number-arrow { color: #25D366; font-size: 16px; flex-shrink: 0; transition: transform 0.2s; }
         .wa-number-item:hover .wa-number-arrow { transform: translateX(3px); }
 
-        /* === RESPONSIF TABLET === */
+        /* === RESPONSIF === */
         @media (max-width: 850px) {
             body { overflow-y: auto; padding: 16px; }
-            .id-card-wide { min-height: auto; }
+            .id-card-wide { min-height: auto; max-height: none; }
             .header { padding: 16px 18px; }
             .header h1 { font-size: 18px; letter-spacing: 3px; }
-            .main-content { flex-direction: column; padding: 24px 20px 0; align-items: center; }
+            .main-content { flex-direction: column; padding: 24px 20px 0; align-items: center; min-height: auto; }
             .photo-area { margin-right: 0; margin-bottom: 20px; }
             .photo-box { width: 180px; height: 220px; }
-            .details-area { width: 100%; }
-            .info-grid { height: auto; grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 12px; }
-            .full-width { grid-column: span 2; }
-            .info-value { font-size: 14px; }
+            .details-area { width: 100%; min-height: auto; }
             .button-row { flex-direction: column; padding: 18px 20px 0; gap: 10px; }
             .status-tag { flex: none; width: 100%; }
             .btn-trigger { font-size: 11px; letter-spacing: 1.5px; padding: 10px 0; }
             .front-footer { padding: 10px 16px; font-size: 9px; }
-            .back-content { flex-direction: column; padding: 24px 20px; align-items: center; }
-            .back-left { margin-right: 0; margin-bottom: 20px; width: 100%; }
-            .back-img-box { width: 180px; height: 160px; margin: 0 auto; }
-            .back-right { width: 100%; }
-            .side-panel {
-                top: auto; bottom: 16px; right: 50%; transform: translateX(50%);
-                flex-direction: row; animation-name: spInM;
-            }
+            .back-content { padding: 20px 15px; min-height: 200px; }
+            .back-garuda-container img { width: 70%; max-width: 280px; }
+            .side-panel { top: auto; bottom: 16px; right: 50%; transform: translateX(50%); flex-direction: row; animation-name: spInM; }
             @keyframes spInM {
                 from { opacity: 0; transform: translateX(50%) translateY(25px); }
                 to { opacity: 1; transform: translateX(50%) translateY(0); }
@@ -860,27 +807,25 @@
             .icon-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
             .platform-grid .social-icon { height: 82px; min-height: 82px; }
             .section-divider { margin-bottom: 22px; }
-            .email-2col { grid-template-columns: 1fr; }
-            .email-form { padding: 18px 16px; }
+            
+            /* Form Email Responsive ke 1 Kolom di HP */
+            .email-body-wide { grid-template-columns: 1fr; padding: 24px; }
+            .btn-submit-wide, .emsg-wide { grid-column: span 1; }
+            .form-group-wide textarea { min-height: 180px; }
+            .modal-email .modal-header { padding: 20px 24px; flex-direction: column; gap: 15px; text-align: center; }
         }
 
-        /* === RESPONSIF HP === */
         @media (max-width: 480px) {
             body { padding: 10px; }
             .header h1 { font-size: 14px; letter-spacing: 2px; }
             .photo-box { width: 150px; height: 185px; }
-            .info-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .info-label { font-size: 9px; }
-            .info-value { font-size: 12px; }
             .icon-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 24px; }
             .platform-grid .social-icon { height: 76px; min-height: 76px; }
             .social-icon { padding: 10px 6px 8px; min-height: 70px; }
             .social-icon img { width: 26px; height: 26px; margin-bottom: 6px; }
             .social-icon span { font-size: 9px; }
             .sp-btn { width: 38px; height: 38px; font-size: 12px; }
-            .back-img-box { width: 150px; height: 140px; }
-            .bk-para, .bk-list li { font-size: 9px; }
-            .bk-heading { font-size: 8px; }
+            .back-garuda-container img { width: 85%; max-width: 220px; }
             .modal-email .modal-panel, .modal-wa .modal-panel { width: 96%; }
             .wa-number-item { padding: 12px 14px; gap: 10px; }
             .wa-number-item img { width: 32px; height: 32px; }
@@ -888,17 +833,25 @@
             .wa-number-value { font-size: 13px; }
             .toast-msg { font-size: 10px; padding: 8px 18px; }
             .front-footer { font-size: 8px; padding: 8px 12px; }
-            .back-img-label { font-size: 9px; padding: 7px 0; }
             .section-title { font-size: 9.5px; margin-bottom: 14px; }
             .section-divider { margin-bottom: 18px; }
+            .modal-email .modal-header h2 { font-size: 18px; }
+            .modal-email .modal-header p { font-size: 12px; }
+            .email-body-wide { padding: 20px; }
         }
 
         @media print {
             body { display: none !important; }
-            html::after { content: 'DOKUMEN DILINDUNGI'; display: block; text-align: center; padding: 100px; font-size: 24px; color: #000; }
+            html::after {
+                content: 'DOKUMEN DILINDUNGI';
+                display: block;
+                text-align: center;
+                padding: 100px;
+                font-size: 24px;
+                color: #000;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -920,40 +873,7 @@
                             </div>
                         </div>
                         <div class="details-area">
-                            <div class="info-grid">
-                                <div class="info-block full-width">
-                                    <span class="info-label">Nama Lengkap</span>
-                                    <span class="info-value">MUHAMMAD FAJRI MUNAWAR</span>
-                                </div>
-                                <div class="info-block full-width">
-                                    <span class="info-label">Jabatan / Posisi Resmi</span>
-                                    <span class="info-value">FOUNDER & DIREKTUR UTAMA</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Nomor Identitas</span>
-                                    <span class="info-value">GN-01280703008</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Jenis Kelamin</span>
-                                    <span class="info-value">LAKI-LAKI</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Golongan Darah</span>
-                                    <span class="info-value">B</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Tempat, Tanggal Lahir</span>
-                                    <span class="info-value">JAKARTA, 28 JULI 2003</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Kewarganegaraan</span>
-                                    <span class="info-value">INDONESIA</span>
-                                </div>
-                                <div class="info-block">
-                                    <span class="info-label">Agama</span>
-                                    <span class="info-value">ISLAM</span>
-                                </div>
-                            </div>
+                            <div class="empty-space"></div>
                         </div>
                     </div>
                     <div class="button-row">
@@ -974,34 +894,8 @@
                         <h1>ID CARD PERSONAL DIGITAL</h1>
                     </div>
                     <div class="back-content">
-                        <div class="back-left">
-                            <div class="back-img-box">
-                                <img src="ChatGPT Image 19 Mei 2026, 12.59.03(1).png" alt="Tanda Pengenal Sah">
-                            </div>
-                            <div class="back-ttd">
-                                <img class="back-ttd-img" src="ChatGPT Image 13 Jul 2026, 05.08.28(1).png" alt="Tanda Tangan">
-                            </div>
-                            <div class="back-img-label">Tanda Pengenal Sah</div>
-                        </div>
-                        <div class="back-right">
-                            <div class="bk-section">
-                                <div class="bk-heading">Kewenangan dan Kepemilikan</div>
-                                <p class="bk-para">Kartu identitas personal digital ini diterbitkan berdasarkan kewenangan resmi sebagai instrumen verifikasi identitas yang sah dan mengikat secara hukum atas nama Muhammad Fajri Munawar. Kartu ini bersifat eksklusif, dilindungi secara pribadi, dan tidak dapat direplikasi, diduplikasi, maupun dialihkan kepemilikannya kepada pihak mana pun tanpa otorisasi tertulis dari pemegang yang sah.</p>
-                            </div>
-                            <div class="bk-section">
-                                <div class="bk-heading">Klausul Peringatan</div>
-                                <p class="bk-para">Pihak yang menemukan kartu identitas ini di luar kepemilikan yang sah wajib secara proaktif menghubungi pemegang kartu melalui kanal komunikasi resmi yang tercantum pada sisi depan. Pemegang kartu dibebaskan sepenuhnya dari segala bentuk tanggung jawab hukum, material, maupun immaterial atas penyalahgunaan, eksploitasi, atau pemanfaatan tanpa hak yang dilakukan oleh pihak ketiga.</p>
-                            </div>
-                            <div class="bk-section">
-                                <div class="bk-heading">Provisi Ketentuan</div>
-                                <ol class="bk-list">
-                                    <li data-num="1.">Kartu ini berlaku sebagai identitas resmi dan sah untuk keperluan verifikasi, autentikasi, dan validasi data personal dalam lingkup profesional, korporasi, serta kegiatan bisnis yang memerlukan legitimasi identitas pemegang.</li>
-                                    <li data-num="2.">Pemegang kartu menanggung tanggung jawab absolut atas keamanan, kerahasiaan, dan perlindungan integritas seluruh data dan informasi yang tercantum dalam kartu ini dari akses tidak sah oleh pihak manapun.</li>
-                                    <li data-num="3.">Dalam hal kartu ini hilang, rusak, dicuri, atau terindikasi adanya upaya penyalahgunaan, pemegang wajib melaporkan secara tertulis kepada pihak penerbit untuk segera dilakukan pemblokiran dan penerbitan ulang.</li>
-                                    <li data-num="4.">Pemalsuan, penggandaan, pengalihan, maupun segala bentuk penggunaan kartu ini oleh pihak yang tidak berhak tanpa otorisasi tertulis dari pemegang sah diklasifikasikan sebagai tindakan tidak sah dan akan diproses sesuai ketentuan hukum yang berlaku.</li>
-                                    <li data-num="5.">Masa berlaku kartu ini mengacu pada ketentuan yang tercantum dan dapat diperpanjang melalui mekanisme prosedur resmi yang telah ditetapkan oleh pihak penerbit.</li>
-                                </ol>
-                            </div>
+                        <div class="back-garuda-container">
+                            <img src="ChatGPT Image 19 Mei 2026, 12.59.03(1).png" alt="Garuda Pancasila">
                         </div>
                     </div>
                     <div class="bottom-border"></div>
@@ -1024,7 +918,6 @@
         <button class="sp-btn" id="spReset" data-tip="Reset"><i class="fa-solid fa-arrow-rotate-left"></i></button>
     </div>
 
-    <!-- ========== TOAST ========== -->
     <div class="toast-msg" id="toastMsg"></div>
 
     <!-- ========== MODAL TAUTAN ========== -->
@@ -1100,7 +993,7 @@
                     <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 12.06.43(1).png" alt="XEAGIS"><span>XEAGIS INDUSTRI</span></a>
                     <a href="#" class="social-icon"><img src="ChatGPT Image Jul 15, 2026, 10_12_43 PM(1).png" alt="DANABATRI"><span>DANABATRI</span></a>
                     <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 17.11.28(1).png" alt="PORINVEX"><span>PORINVEX</span></a>
-                    <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 21.42.16(1).png" alt="PADAT"><span>PADAT</span></a>
+                    <a href="#" class="social-icon"><img src="ChatGPT Image Jul 15, 2026, 21.42.16(1).png" alt="PADAT"><span>PADAT</span></a>
                     <a href="#" class="social-icon"><img src="ChatGPT Image Jul 14, 2026, 11_59_39 PM(1).png" alt="BEARBALCK"><span>BEARBALCK SECURITY</span></a>
                     <a href="#" class="social-icon"><img src="ChatGPT Image 15 Jul 2026, 12.10.15(1).png" alt="AXITORIUM"><span>AXITORIUM LAB</span></a>
                     <a href="#" class="social-icon"><img src="ChatGPT Image Jul 15, 2026, 12_08_43 AM(1).png" alt="WEILMY"><span>WEILMY</span></a>
@@ -1141,422 +1034,437 @@
         </div>
     </div>
 
-    <!-- ========== MODAL EMAIL ========== -->
+    <!-- ========== MODAL EMAIL (LEBAR KE SAMPING, TANPA IKON) ========== -->
     <div class="modal-overlay modal-email" id="modalEmail">
         <div class="modal-panel">
             <div class="modal-header">
-                <h2>Kirim Email</h2>
+                <div>
+                    <h2>Kirim Pesan Email</h2>
+                    <p>Klik kirim, lalu website Gmail akan terbuka dan pesan Anda sudah otomatis terisi di sana.</p>
+                </div>
                 <button class="modal-close" id="btnCloseEmail">&times;</button>
             </div>
-            <div class="email-form">
-                <div class="email-2col">
-                    <div class="fg">
-                        <label for="emNama">Nama Pengirim</label>
-                        <input type="text" id="emNama" placeholder="Masukkan nama Anda">
+            <div class="email-body-wide">
+                <div class="email-col-left">
+                    <div class="form-group-wide">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="emNama" placeholder="Masukkan nama anda">
                     </div>
-                    <div class="fg">
-                        <label for="emEmail">Email Pengirim</label>
+                    <div class="form-group-wide">
+                        <label>Email Aktif Anda</label>
                         <input type="email" id="emEmail" placeholder="email@contoh.com">
                     </div>
+                    <div class="form-group-wide">
+                        <label>Subjek Pesan</label>
+                        <input type="text" id="emSubjek" placeholder="Masukkan subjek pesan">
+                    </div>
                 </div>
-                <div class="email-kanan">
-                    <div class="fg">
-                        <label for="emSubjek">Subjek</label>
-                        <input type="text" id="emSubjek" placeholder="Subjek pesan">
+                <div class="email-col-right">
+                    <div class="form-group-wide" style="flex:1; display:flex; flex-direction:column;">
+                        <label>Isi Pesan</label>
+                        <textarea id="emPesan" placeholder="Tulis pesan anda di sini..."></textarea>
                     </div>
-                    <div class="fg">
-                        <label for="emPesan">Pesan</label>
-                        <textarea id="emPesan" placeholder="Tulis pesan Anda di sini..."></textarea>
-                    </div>
-                    <div class="note-box">
-                        <b>Catatan:</b> Email akan dikirim melalui aplikasi Gmail bawaan perangkat Anda. Pastikan Gmail sudah terinstal dan login.
-                    </div>
-                    <button class="btn-send" id="btnSendEmail">
-                        <i class="fa-solid fa-paper-plane"></i> Kirim via Gmail
-                    </button>
-                    <button class="btn-gmail" id="btnOpenGmail">
-                        <i class="fa-solid fa-envelope"></i> Buka Gmail Langsung
-                    </button>
-                    <div class="emsg" id="emsgBox"></div>
                 </div>
+                
+                <button class="btn-submit-wide" id="btnSendEmail">Kirim Pesan Sekarang</button>
+                <div class="emsg-wide" id="emsgBox"></div>
             </div>
         </div>
     </div>
 
     <!-- ========== JAVASCRIPT ========== -->
     <script>
-    (function() {
-        'use strict';
+        (function() {
+            'use strict';
 
-        /* ===== ELEMEN ===== */
-        var card3d   = document.getElementById('card3d');
-        var cardPersp = document.getElementById('cardPerspective');
-        var holoF    = document.getElementById('holoFront');
-        var holoB    = document.getElementById('holoBack');
-        var badgeF   = document.getElementById('modeBadge');
-        var badgeB   = document.getElementById('modeBadgeBack');
-        var toastEl  = document.getElementById('toastMsg');
+            /* ===== ELEMEN ===== */
+            var card3d = document.getElementById('card3d');
+            var cardPersp = document.getElementById('cardPerspective');
+            var holoF = document.getElementById('holoFront');
+            var holoB = document.getElementById('holoBack');
+            var badgeF = document.getElementById('modeBadge');
+            var badgeB = document.getElementById('modeBadgeBack');
+            var toastEl = document.getElementById('toastMsg');
 
-        var spFlip  = document.getElementById('spFlip');
-        var spFront = document.getElementById('spFront');
-        var spBack  = document.getElementById('spBack');
-        var sp360   = document.getElementById('sp360');
-        var spAuto  = document.getElementById('spAuto');
-        var spReset = document.getElementById('spReset');
+            var spFlip = document.getElementById('spFlip');
+            var spFront = document.getElementById('spFront');
+            var spBack = document.getElementById('spBack');
+            var sp360 = document.getElementById('sp360');
+            var spAuto = document.getElementById('spAuto');
+            var spReset = document.getElementById('spReset');
 
-        var modalLink  = document.getElementById('modalLink');
-        var modalWA    = document.getElementById('modalWA');
-        var modalEmail = document.getElementById('modalEmail');
+            var modalLink = document.getElementById('modalLink');
+            var modalWA = document.getElementById('modalWA');
+            var modalEmail = document.getElementById('modalEmail');
 
-        /* ==========================================================
-           STATE
-           freeMode = false → KARTU TERKUNCI TOTAL, TIDAK BISA DIGESER
-           freeMode = true  → kartu bisa digeser bebas
-        ========================================================== */
-        var rotY = 0;
-        var rotX = 0;
-        var isFlipped = false;
-        var freeMode = false;       // KUNCI UTAMA: default TERKUNCI
-        var isDragging = false;
-        var dragReady = false;
-        var dragStartX = 0;
-        var dragStartY = 0;
-        var dragBaseY = 0;
-        var dragBaseX = 0;
-        var autoOn = false;
-        var autoId = null;
-        var toastTmr = null;
+            /* ===== STATE ===== */
+            var rotY = 0;
+            var rotX = 0;
+            var isFlipped = false;
+            var freeMode = false;
+            var isDragging = false;
+            var dragReady = false;
+            var dragStartX = 0;
+            var dragStartY = 0;
+            var dragBaseY = 0;
+            var dragBaseX = 0;
+            var autoOn = false;
+            var autoId = null;
+            var toastTmr = null;
 
-        var DEADZONE = 15; // Minimal geser 15px baru kartu bergerak
+            var DEADZONE = 15;
 
-        /* ===== UTILITAS ===== */
-        function normY(y) {
-            y = y % 360;
-            if (y > 180) y -= 360;
-            if (y < -180) y += 360;
-            return y;
-        }
-
-        function isBack(y) {
-            return Math.abs(normY(y)) > 90;
-        }
-
-        function apply() {
-            card3d.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
-            isFlipped = isBack(rotY);
-            spFront.classList.toggle('on', !isFlipped);
-            spBack.classList.toggle('on', isFlipped);
-        }
-
-        function toast(msg) {
-            toastEl.textContent = msg;
-            toastEl.classList.add('show');
-            if (toastTmr) clearTimeout(toastTmr);
-            toastTmr = setTimeout(function() { toastEl.classList.remove('show'); }, 2000);
-        }
-
-        function openMod(el) { el.classList.add('active'); document.body.style.overflow = 'hidden'; }
-        function closeMod(el) { el.classList.remove('active'); document.body.style.overflow = ''; }
-
-        function stopAuto() {
-            if (autoId) { clearInterval(autoId); autoId = null; }
-            autoOn = false;
-            spAuto.classList.remove('on');
-        }
-
-        function setFreeMode(on) {
-            freeMode = on;
-            sp360.classList.toggle('on', on);
-            card3d.classList.toggle('free-mode', on);
-            badgeF.classList.toggle('show', on);
-            badgeB.classList.toggle('show', on);
-        }
-
-        function snapAndApply() {
-            rotX = 0;
-            rotY = normY(rotY);
-            if (Math.abs(rotY) <= 90) rotY = 0;
-            else rotY = rotY > 0 ? 180 : -180;
-            apply();
-        }
-
-        /* ==========================================================
-           TOMBOL: MODE GESER (360)
-           Klik sekali = AKTIFKAN mode geser bebas
-           Klik lagi = MATIKAN mode geser + snap ke posisi tetap
-        ========================================================== */
-        sp360.addEventListener('click', function() {
-            stopAuto();
-
-            if (freeMode) {
-                // Matikan mode geser
-                setFreeMode(false);
-                snapAndApply();
-                toast('Mode Geser Dimatikan');
-            } else {
-                // Aktifkan mode geser
-                setFreeMode(true);
-                toast('Mode Geser Aktif — Geser kartu sekarang');
+            /* ===== UTIL ===== */
+            function normY(y) {
+                y = y % 360;
+                if (y > 180) y -= 360;
+                if (y < -180) y += 360;
+                return y;
             }
-        });
 
-        /* ===== TOMBOL: BALIK ===== */
-        spFlip.addEventListener('click', function() {
-            stopAuto();
-            rotX = 0;
-            rotY = isFlipped ? 0 : 180;
-            apply();
-            toast(isFlipped ? 'Sisi Depan' : 'Sisi Belakang');
-        });
+            function isBack(y) {
+                return Math.abs(normY(y)) > 90;
+            }
 
-        /* ===== TOMBOL: SISI DEPAN ===== */
-        spFront.addEventListener('click', function() {
-            stopAuto();
-            rotY = 0; rotX = 0;
-            apply();
-            toast('Sisi Depan');
-        });
+            function apply() {
+                card3d.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+                isFlipped = isBack(rotY);
+                spFront.classList.toggle('on', !isFlipped);
+                spBack.classList.toggle('on', isFlipped);
+            }
 
-        /* ===== TOMBOL: SISI BELAKANG ===== */
-        spBack.addEventListener('click', function() {
-            stopAuto();
-            rotY = 180; rotX = 0;
-            apply();
-            toast('Sisi Belakang');
-        });
+            function toast(msg) {
+                toastEl.textContent = msg;
+                toastEl.classList.add('show');
+                if (toastTmr) clearTimeout(toastTmr);
+                toastTmr = setTimeout(function() {
+                    toastEl.classList.remove('show');
+                }, 2000);
+            }
 
-        /* ===== TOMBOL: PUTAR OTOMATIS ===== */
-        spAuto.addEventListener('click', function() {
-            if (autoOn) {
+            function openMod(el) {
+                el.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMod(el) {
+                el.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function stopAuto() {
+                if (autoId) {
+                    clearInterval(autoId);
+                    autoId = null;
+                }
+                autoOn = false;
+                spAuto.classList.remove('on');
+            }
+
+            function setFreeMode(on) {
+                freeMode = on;
+                sp360.classList.toggle('on', on);
+                card3d.classList.toggle('free-mode', on);
+                badgeF.classList.toggle('show', on);
+                badgeB.classList.toggle('show', on);
+            }
+
+            function snapAndApply() {
+                rotX = 0;
+                rotY = normY(rotY);
+                if (Math.abs(rotY) <= 90) rotY = 0;
+                else rotY = rotY > 0 ? 180 : -180;
+                apply();
+            }
+
+            /* ===== TOMBOL ===== */
+            sp360.addEventListener('click', function() {
                 stopAuto();
                 if (freeMode) {
-                    // Kalau masih free mode, jangan snap — biar user lanjut geser
+                    setFreeMode(false);
+                    snapAndApply();
+                    toast('Mode Geser Dimatikan');
                 } else {
+                    setFreeMode(true);
+                    toast('Mode Geser Aktif — Geser kartu sekarang');
+                }
+            });
+
+            spFlip.addEventListener('click', function() {
+                stopAuto();
+                rotX = 0;
+                rotY = isFlipped ? 0 : 180;
+                apply();
+                toast(isFlipped ? 'Sisi Depan' : 'Sisi Belakang');
+            });
+
+            spFront.addEventListener('click', function() {
+                stopAuto();
+                rotY = 0;
+                rotX = 0;
+                apply();
+                toast('Sisi Depan');
+            });
+
+            spBack.addEventListener('click', function() {
+                stopAuto();
+                rotY = 180;
+                rotX = 0;
+                apply();
+                toast('Sisi Belakang');
+            });
+
+            spAuto.addEventListener('click', function() {
+                if (autoOn) {
+                    stopAuto();
+                    if (!freeMode) snapAndApply();
+                    toast('Putar Otomatis Dimatikan');
+                } else {
+                    autoOn = true;
+                    spAuto.classList.add('on');
+                    rotX = 0;
+                    autoId = setInterval(function() {
+                        rotY += 0.4;
+                        card3d.style.transform = 'rotateX(0deg) rotateY(' + rotY + 'deg)';
+                        isFlipped = isBack(rotY);
+                        spFront.classList.toggle('on', !isFlipped);
+                        spBack.classList.toggle('on', isFlipped);
+                    }, 16);
+                    toast('Putar Otomatis Aktif');
+                }
+            });
+
+            spReset.addEventListener('click', function() {
+                stopAuto();
+                setFreeMode(false);
+                rotY = 0;
+                rotX = 0;
+                apply();
+                toast('Kartu Direset & Dikunci');
+            });
+
+            /* ===== DRAG & HOVER HOLOGRAM ===== */
+            function updateHolo(cx, cy) {
+                var r = cardPersp.getBoundingClientRect();
+                var hx = Math.max(0, Math.min(100, ((cx - r.left) / r.width) * 100));
+                var hy = Math.max(0, Math.min(100, ((cy - r.top) / r.height) * 100));
+                holoF.style.setProperty('--hx', hx + '%');
+                holoF.style.setProperty('--hy', hy + '%');
+                holoB.style.setProperty('--hx', hx + '%');
+                holoB.style.setProperty('--hy', hy + '%');
+            }
+
+            // Update hologram saat mouse bergerak di atas kartu (tanpa harus drag)
+            cardPersp.addEventListener('mousemove', function(e) {
+                if (!isDragging) {
+                    updateHolo(e.clientX, e.clientY);
+                }
+            });
+
+            cardPersp.addEventListener('touchmove', function(e) {
+                if (e.touches[0] && !isDragging) {
+                    updateHolo(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            card3d.addEventListener('mousedown', function(e) {
+                if (!freeMode) return;
+                if (e.target.closest('button') || e.target.closest('a')) return;
+                e.preventDefault();
+                prepDrag(e.clientX, e.clientY);
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!freeMode) return;
+                if (!dragReady && !isDragging) return;
+
+                if (isDragging) {
+                    e.preventDefault();
+                    doDrag(e.clientX, e.clientY);
+                } else if (dragReady) {
+                    var dx = Math.abs(e.clientX - dragStartX);
+                    var dy = Math.abs(e.clientY - dragStartY);
+                    if (dx > DEADZONE || dy > DEADZONE) {
+                        isDragging = true;
+                        stopAuto();
+                        card3d.classList.add('dragging');
+                        doDrag(e.clientX, e.clientY);
+                    }
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (!freeMode) return;
+                endDrag();
+            });
+
+            card3d.addEventListener('touchstart', function(e) {
+                if (!freeMode) return;
+                if (e.target.closest('button') || e.target.closest('a')) return;
+                var t = e.touches[0];
+                prepDrag(t.clientX, t.clientY);
+            }, { passive: true });
+
+            document.addEventListener('touchmove', function(e) {
+                if (!freeMode) return;
+                if (!dragReady && !isDragging) return;
+                var t = e.touches[0];
+
+                if (isDragging) {
+                    e.preventDefault();
+                    doDrag(t.clientX, t.clientY);
+                } else if (dragReady) {
+                    var dx = Math.abs(t.clientX - dragStartX);
+                    var dy = Math.abs(t.clientY - dragStartY);
+                    if (dx > DEADZONE || dy > DEADZONE) {
+                        isDragging = true;
+                        stopAuto();
+                        card3d.classList.add('dragging');
+                        doDrag(t.clientX, t.clientY);
+                    }
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchend', function() {
+                if (!freeMode) return;
+                endDrag();
+            });
+
+            document.addEventListener('touchcancel', function() {
+                if (!freeMode) return;
+                endDrag();
+            });
+
+            function prepDrag(cx, cy) {
+                dragReady = true;
+                isDragging = false;
+                dragStartX = cx;
+                dragStartY = cy;
+                dragBaseY = rotY;
+                dragBaseX = rotX;
+            }
+
+            function doDrag(cx, cy) {
+                var dx = cx - dragStartX;
+                var dy = cy - dragStartY;
+                rotY = dragBaseY + dx * 0.35;
+                rotX = dragBaseX - dy * 0.2;
+                rotX = Math.max(-30, Math.min(30, rotX));
+
+                card3d.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+                isFlipped = isBack(rotY);
+                spFront.classList.toggle('on', !isFlipped);
+                spBack.classList.toggle('on', isFlipped);
+
+                updateHolo(cx, cy);
+            }
+
+            function endDrag() {
+                if (!dragReady && !isDragging) return;
+                card3d.classList.remove('dragging');
+
+                if (isDragging) {
                     snapAndApply();
                 }
-                toast('Putar Otomatis Dimatikan');
-            } else {
-                // Aktifkan auto rotate
-                autoOn = true;
-                spAuto.classList.add('on');
-                rotX = 0;
-                autoId = setInterval(function() {
-                    rotY += 0.4;
-                    card3d.style.transform = 'rotateX(0deg) rotateY(' + rotY + 'deg)';
-                    isFlipped = isBack(rotY);
-                    spFront.classList.toggle('on', !isFlipped);
-                    spBack.classList.toggle('on', isFlipped);
-                }, 16);
-                toast('Putar Otomatis Aktif');
-            }
-        });
 
-        /* ===== TOMBOL: RESET ===== */
-        spReset.addEventListener('click', function() {
-            stopAuto();
-            setFreeMode(false); // KUNCI KEMBALI
-            rotY = 0; rotX = 0;
+                isDragging = false;
+                dragReady = false;
+            }
+
+            /* ===== MODAL TAUTAN ===== */
+            document.getElementById('btnOpenModal').addEventListener('click', function(e) {
+                e.stopPropagation();
+                openMod(modalLink);
+            });
+            document.getElementById('btnCloseModal').addEventListener('click', function() {
+                closeMod(modalLink);
+            });
+            modalLink.addEventListener('click', function(e) {
+                if (e.target === modalLink) closeMod(modalLink);
+            });
+
+            /* ===== MODAL WA ===== */
+            document.getElementById('btnOpenWA').addEventListener('click', function() {
+                openMod(modalWA);
+            });
+            document.getElementById('btnCloseWA').addEventListener('click', function() {
+                closeMod(modalWA);
+            });
+            modalWA.addEventListener('click', function(e) {
+                if (e.target === modalWA) closeMod(modalWA);
+            });
+
+            /* ===== MODAL EMAIL (LANGSUNG BUKA GMAIL) ===== */
+            document.getElementById('btnOpenEmail').addEventListener('click', function() {
+                openMod(modalEmail);
+            });
+            document.getElementById('btnCloseEmail').addEventListener('click', function() {
+                closeMod(modalEmail);
+            });
+            modalEmail.addEventListener('click', function(e) {
+                if (e.target === modalEmail) closeMod(modalEmail);
+            });
+
+            document.getElementById('btnSendEmail').addEventListener('click', function() {
+                var nama = document.getElementById('emNama').value.trim();
+                var email = document.getElementById('emEmail').value.trim();
+                var subj = document.getElementById('emSubjek').value.trim();
+                var pesan = document.getElementById('emPesan').value.trim();
+                var emsg = document.getElementById('emsgBox');
+                var btn = document.getElementById('btnSendEmail');
+
+                emsg.className = 'emsg-wide';
+                emsg.style.display = 'none';
+
+                if (!email || !pesan) {
+                    emsg.innerHTML = 'Email dan Pesan wajib diisi!';
+                    emsg.className = 'emsg-wide no';
+                    return;
+                }
+
+                btn.innerHTML = 'Sedang Mengarahkan ke Gmail...';
+                btn.disabled = true;
+
+                var body = 'Nama: ' + (nama || '-') + '\n';
+                body += 'Email Pengirim: ' + email + '\n\n';
+                body += 'Pesan:\n' + pesan;
+
+                var gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=muhfajrimunawar@gmail.com' +
+                    '&su=' + encodeURIComponent(subj || 'Pesan dari ID Card Digital') +
+                    '&body=' + encodeURIComponent(body);
+
+                setTimeout(function() {
+                    window.open(gmailUrl, '_blank');
+                    
+                    btn.innerHTML = 'Gmail Telah Dibuka!';
+                    emsg.innerHTML = 'Berhasil! Tab Gmail telah terbuka dan semua teks yang Anda ketik sudah otomatis terisi di sana. Silakan klik tombol "Kirim" di Gmail.';
+                    emsg.className = 'emsg-wide ok';
+                    
+                    document.getElementById('emNama').value = '';
+                    document.getElementById('emEmail').value = '';
+                    document.getElementById('emSubjek').value = '';
+                    document.getElementById('emPesan').value = '';
+
+                    setTimeout(function() {
+                        btn.innerHTML = 'Kirim Pesan Sekarang';
+                        btn.disabled = false;
+                    }, 3000);
+                }, 800);
+            });
+
+            /* ===== ESC ===== */
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (modalEmail.classList.contains('active')) closeMod(modalEmail);
+                    else if (modalWA.classList.contains('active')) closeMod(modalWA);
+                    else if (modalLink.classList.contains('active')) closeMod(modalLink);
+                }
+            });
+
+            /* ===== INIT ===== */
             apply();
-            toast('Kartu Direset & Dikunci');
-        });
 
-        /* ==========================================================
-           DRAG / GESER — HANYA BEKERJA KALAU freeMode = true
-           Kalau freeMode = false, SEMUA event drag DIABAIKAN TOTAL
-        ========================================================== */
-
-        /* --- MOUSE DOWN --- */
-        card3d.addEventListener('mousedown', function(e) {
-            // LANGSUNG TOLAK kalau bukan free mode
-            if (!freeMode) return;
-            if (e.target.closest('button') || e.target.closest('a')) return;
-            e.preventDefault();
-            prepDrag(e.clientX, e.clientY);
-        });
-
-        /* --- MOUSE MOVE --- */
-        document.addEventListener('mousemove', function(e) {
-            // TOLAK kalau bukan free mode
-            if (!freeMode) return;
-            if (!dragReady && !isDragging) return;
-
-            if (isDragging) {
-                e.preventDefault();
-                doDrag(e.clientX, e.clientY);
-            } else if (dragReady) {
-                var dx = Math.abs(e.clientX - dragStartX);
-                var dy = Math.abs(e.clientY - dragStartY);
-                if (dx > DEADZONE || dy > DEADZONE) {
-                    isDragging = true;
-                    stopAuto();
-                    card3d.classList.add('dragging');
-                    doDrag(e.clientX, e.clientY);
-                }
-            }
-        });
-
-        /* --- MOUSE UP --- */
-        document.addEventListener('mouseup', function() {
-            if (!freeMode) return;
-            endDrag();
-        });
-
-        /* --- TOUCH START --- */
-        card3d.addEventListener('touchstart', function(e) {
-            if (!freeMode) return;
-            if (e.target.closest('button') || e.target.closest('a')) return;
-            var t = e.touches[0];
-            prepDrag(t.clientX, t.clientY);
-        }, { passive: true });
-
-        /* --- TOUCH MOVE --- */
-        document.addEventListener('touchmove', function(e) {
-            if (!freeMode) return;
-            if (!dragReady && !isDragging) return;
-            var t = e.touches[0];
-
-            if (isDragging) {
-                e.preventDefault();
-                doDrag(t.clientX, t.clientY);
-            } else if (dragReady) {
-                var dx = Math.abs(t.clientX - dragStartX);
-                var dy = Math.abs(t.clientY - dragStartY);
-                if (dx > DEADZONE || dy > DEADZONE) {
-                    isDragging = true;
-                    stopAuto();
-                    card3d.classList.add('dragging');
-                    doDrag(t.clientX, t.clientY);
-                }
-            }
-        }, { passive: false });
-
-        /* --- TOUCH END --- */
-        document.addEventListener('touchend', function() {
-            if (!freeMode) return;
-            endDrag();
-        });
-
-        document.addEventListener('touchcancel', function() {
-            if (!freeMode) return;
-            endDrag();
-        });
-
-        function prepDrag(cx, cy) {
-            dragReady = true;
-            isDragging = false;
-            dragStartX = cx;
-            dragStartY = cy;
-            dragBaseY = rotY;
-            dragBaseX = rotX;
-        }
-
-        function doDrag(cx, cy) {
-            var dx = cx - dragStartX;
-            var dy = cy - dragStartY;
-            rotY = dragBaseY + dx * 0.35;
-            rotX = dragBaseX - dy * 0.2;
-            rotX = Math.max(-30, Math.min(30, rotX));
-
-            card3d.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
-            isFlipped = isBack(rotY);
-            spFront.classList.toggle('on', !isFlipped);
-            spBack.classList.toggle('on', isFlipped);
-
-            // Update hologram posisi
-            var r = cardPersp.getBoundingClientRect();
-            var hx = Math.max(0, Math.min(100, ((cx - r.left) / r.width) * 100));
-            var hy = Math.max(0, Math.min(100, ((cy - r.top) / r.height) * 100));
-            holoF.style.setProperty('--hx', hx + '%');
-            holoF.style.setProperty('--hy', hy + '%');
-            holoB.style.setProperty('--hx', hx + '%');
-            holoB.style.setProperty('--hy', hy + '%');
-        }
-
-        function endDrag() {
-            if (!dragReady && !isDragging) return;
-            card3d.classList.remove('dragging');
-
-            if (isDragging) {
-                // Setelah selesai geser, snap ke posisi terdekat
-                snapAndApply();
-            }
-
-            isDragging = false;
-            dragReady = false;
-        }
-
-        /* ===== MODAL: TAUTAN ===== */
-        document.getElementById('btnOpenModal').addEventListener('click', function(e) {
-            e.stopPropagation(); openMod(modalLink);
-        });
-        document.getElementById('btnCloseModal').addEventListener('click', function() { closeMod(modalLink); });
-        modalLink.addEventListener('click', function(e) { if (e.target === modalLink) closeMod(modalLink); });
-
-        /* ===== MODAL: WA ===== */
-        document.getElementById('btnOpenWA').addEventListener('click', function() { openMod(modalWA); });
-        document.getElementById('btnCloseWA').addEventListener('click', function() { closeMod(modalWA); });
-        modalWA.addEventListener('click', function(e) { if (e.target === modalWA) closeMod(modalWA); });
-
-        /* ===== MODAL: EMAIL ===== */
-        document.getElementById('btnOpenEmail').addEventListener('click', function() { openMod(modalEmail); });
-        document.getElementById('btnCloseEmail').addEventListener('click', function() { closeMod(modalEmail); });
-        modalEmail.addEventListener('click', function(e) { if (e.target === modalEmail) closeMod(modalEmail); });
-
-        document.getElementById('btnSendEmail').addEventListener('click', function() {
-            var nama  = document.getElementById('emNama').value.trim();
-            var email = document.getElementById('emEmail').value.trim();
-            var subj  = document.getElementById('emSubjek').value.trim();
-            var pesan = document.getElementById('emPesan').value.trim();
-            var emsg  = document.getElementById('emsgBox');
-            emsg.className = 'emsg'; emsg.style.display = 'none';
-
-            if (!email) {
-                emsg.textContent = 'Alamat email pengirim wajib diisi.';
-                emsg.className = 'emsg no'; return;
-            }
-
-            var body = '';
-            if (nama) body += 'Nama: ' + nama + '\n';
-            body += 'Email: ' + email + '\n\n';
-            if (pesan) body += pesan;
-
-            window.location.href = 'mailto:jrimunawar@gmail.com' +
-                '?subject=' + encodeURIComponent(subj || '(Tanpa Subjek)') +
-                '&body=' + encodeURIComponent(body);
-
-            emsg.textContent = 'Membuka aplikasi email...';
-            emsg.className = 'emsg ok';
-        });
-
-        document.getElementById('btnOpenGmail').addEventListener('click', function() {
-            var nama  = document.getElementById('emNama').value.trim();
-            var email = document.getElementById('emEmail').value.trim();
-            var subj  = document.getElementById('emSubjek').value.trim();
-            var pesan = document.getElementById('emPesan').value.trim();
-
-            var body = '';
-            if (nama) body += 'Nama: ' + nama + '\n';
-            if (email) body += 'Email: ' + email + '\n\n';
-            if (pesan) body += pesan;
-
-            window.open('https://mail.google.com/mail/?view=cm&fs=1&to=jrimunawar@gmail.com' +
-                '&su=' + encodeURIComponent(subj || '(Tanpa Subjek)') +
-                '&body=' + encodeURIComponent(body), '_blank');
-        });
-
-        /* ===== ESC TUTUP MODAL ===== */
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                if (modalEmail.classList.contains('active')) closeMod(modalEmail);
-                else if (modalWA.classList.contains('active')) closeMod(modalWA);
-                else if (modalLink.classList.contains('active')) closeMod(modalLink);
-            }
-        });
-
-        /* ===== INIT ===== */
-        apply();
-
-    })();
+        })();
     </script>
 
 </body>
