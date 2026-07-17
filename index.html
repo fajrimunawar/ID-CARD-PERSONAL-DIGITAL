@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -37,36 +37,28 @@
             padding: 20px;
         }
 
-        .loading-screen.done {
-            opacity: 0; visibility: hidden; pointer-events: none;
-        }
+        .loading-screen.done { opacity: 0; visibility: hidden; pointer-events: none; }
 
         .loading-letters-wrap {
-            display: flex; gap: 4px; position: relative; z-index: 2;
-            flex-wrap: nowrap;
+            display: flex; gap: 4px; position: relative; z-index: 2; flex-wrap: nowrap;
         }
 
         .loading-letter {
             font-family: 'Cinzel', serif;
             font-size: 64px; font-weight: 900;
-            opacity: 0;
-            transform: translateY(20px);
+            opacity: 0; transform: translateY(20px);
             animation: letterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .loading-letter.blue {
             background: linear-gradient(180deg, #00d4ff 0%, #0077b6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
             filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4));
         }
 
         .loading-letter.green {
             background: linear-gradient(180deg, #00e676 0%, #00a152 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
             filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.35));
         }
 
@@ -85,10 +77,8 @@
         .loading-bar-track {
             width: 240px; height: 2px;
             background: rgba(255, 255, 255, 0.06);
-            margin-top: 40px; border-radius: 2px;
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeUp 0.5s ease 1.4s forwards;
+            margin-top: 40px; border-radius: 2px; overflow: hidden;
+            opacity: 0; animation: fadeUp 0.5s ease 1.4s forwards;
         }
 
         .loading-bar-fill {
@@ -101,8 +91,7 @@
         @keyframes loadFill { 0% { width: 0%; } 100% { width: 100%; } }
 
         .loading-line-left, .loading-line-right {
-            position: absolute; top: 50%; height: 1px;
-            width: 0;
+            position: absolute; top: 50%; height: 1px; width: 0;
             animation: lineExpand 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
         }
 
@@ -127,9 +116,7 @@
         ============================================ */
         .main-content {
             width: 100%; height: 100vh; position: relative;
-            opacity: 0;
-            transition: opacity 1s ease;
-            overflow: hidden;
+            opacity: 0; transition: opacity 1s ease; overflow: hidden;
         }
 
         .main-content.show { opacity: 1; }
@@ -141,7 +128,7 @@
         }
 
         /* ============================================
-           LOGO POJOK
+           HEADER LOGO
         ============================================ */
         .header-logo-container {
             position: fixed; top: 0; left: 0; padding: 22px 24px;
@@ -163,9 +150,7 @@
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
             pointer-events: none; user-select: none;
             background: linear-gradient(180deg, #00d4ff 0%, #00e676 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
             filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.4));
         }
 
@@ -203,77 +188,59 @@
         }
 
         /* ============================================
-           KABEL LED
+           LED CABLES
         ============================================ */
-        .lines-container {
-            position: relative; flex-grow: 1; height: 100%; pointer-events: none;
+        .lines-container { position: relative; flex-grow: 1; height: 100%; pointer-events: none; }
+
+        .line-stem, .line-splitter-top, .line-splitter-bottom, .line-to-top-box, .line-to-bottom-box {
+            position: absolute; box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
         }
 
         .line-stem {
-            position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+            left: 0; top: 50%; transform: translateY(-50%);
             width: 0; height: 2px;
             background: linear-gradient(90deg, rgba(0,212,255,0.4) 0%, #00d4ff 50%, #00e676 100%);
-            background-size: 200% 100%;
-            box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
-            transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.6s;
+            background-size: 200% 100%; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.6s;
         }
 
         .line-splitter-top {
-            position: absolute; left: 80px; bottom: 50%; width: 2px; height: 0;
+            left: 80px; bottom: 50%; width: 2px; height: 0;
             background: linear-gradient(0deg, rgba(0,212,255,0.4) 0%, #00d4ff 50%, #00e676 100%);
-            background-size: 100% 200%;
-            box-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
-            transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
+            background-size: 100% 200%; transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
         }
 
         .line-splitter-bottom {
-            position: absolute; left: 80px; top: 50%; width: 2px; height: 0;
+            left: 80px; top: 50%; width: 2px; height: 0;
             background: linear-gradient(180deg, rgba(0,212,255,0.4) 0%, #00d4ff 50%, #00e676 100%);
-            background-size: 100% 200%;
+            background-size: 100% 200%; transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
             box-shadow: 0 0 8px rgba(0, 230, 118, 0.8);
-            transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
         }
 
         .line-to-top-box {
-            position: absolute; left: 80px; top: 55px; width: 0; height: 2px;
+            left: 80px; top: 55px; width: 0; height: 2px;
             background: linear-gradient(90deg, #00e676 0%, #00d4ff 50%, rgba(255,255,255,0.2) 100%);
-            background-size: 200% 100%;
+            background-size: 200% 100%; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
             box-shadow: 0 0 8px rgba(0, 230, 118, 0.8);
-            transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
         }
 
         .line-to-bottom-box {
-            position: absolute; left: 80px; bottom: 55px; width: 0; height: 2px;
+            left: 80px; bottom: 55px; width: 0; height: 2px;
             background: linear-gradient(90deg, #00e676 0%, #00d4ff 50%, rgba(255,255,255,0.2) 100%);
-            background-size: 200% 100%;
+            background-size: 200% 100%; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
             box-shadow: 0 0 8px rgba(0, 230, 118, 0.8);
-            transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
         }
 
-        .active-layout .line-stem {
-            width: 80px; animation: ledFlowH 1.5s linear infinite;
-            transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0s;
-        }
-        .active-layout .line-splitter-top {
-            height: 145px; animation: ledFlowUp 1.5s linear infinite;
-            transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
-        }
-        .active-layout .line-splitter-bottom {
-            height: 145px; animation: ledFlowDown 1.5s linear infinite;
-            transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
-        }
-        .active-layout .line-to-top-box,
-        .active-layout .line-to-bottom-box {
-            width: calc(100% - 80px); animation: ledFlowH 1.5s linear infinite;
-            transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.6s;
-        }
+        .active-layout .line-stem { width: 80px; animation: ledFlowH 1.5s linear infinite; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0s; }
+        .active-layout .line-splitter-top { height: 145px; animation: ledFlowUp 1.5s linear infinite; transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s; }
+        .active-layout .line-splitter-bottom { height: 145px; animation: ledFlowDown 1.5s linear infinite; transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s; }
+        .active-layout .line-to-top-box, .active-layout .line-to-bottom-box { width: calc(100% - 80px); animation: ledFlowH 1.5s linear infinite; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.6s; }
 
         @keyframes ledFlowH { 0% { background-position: 200% 0%; } 100% { background-position: -200% 0%; } }
         @keyframes ledFlowUp { 0% { background-position: 0% 200%; } 100% { background-position: 0% -200%; } }
         @keyframes ledFlowDown { 0% { background-position: 0% -200%; } 100% { background-position: 0% 200%; } }
 
         /* ============================================
-           KOTAK KANAN
+           RIGHT INFO BOX
         ============================================ */
         .right-content-wrapper {
             position: relative; display: flex; flex-direction: column;
@@ -290,72 +257,43 @@
                         border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
         }
 
-        .info-box::before,
-        .info-box::after {
-            content: '';
-            position: absolute; left: 50%; transform: translateX(-50%);
-            width: 0; height: 1px;
-            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        .info-box::before, .info-box::after {
+            content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+            width: 0; height: 1px; transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .info-box::before { top: 12px; }
         .info-box::after { bottom: 12px; }
-
-        .info-box.box-top::before,
-        .info-box.box-top::after {
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent);
-        }
-
-        .info-box.box-bottom::before,
-        .info-box.box-bottom::after {
-            background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.25), transparent);
-        }
-
-        .active-layout .info-box::before,
-        .active-layout .info-box::after { width: 80%; }
+        .info-box.box-top::before, .info-box.box-top::after { background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent); }
+        .info-box.box-bottom::before, .info-box.box-bottom::after { background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.25), transparent); }
+        .active-layout .info-box::before, .active-layout .info-box::after { width: 80%; }
 
         .info-box .box-label {
             font-family: 'Montserrat', sans-serif;
-            font-size: 8px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 4px;
-            margin-bottom: 8px; opacity: 0.35;
-            transition: opacity 0.3s ease;
+            font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px;
+            margin-bottom: 8px; opacity: 0.35; transition: opacity 0.3s ease;
         }
-
         .active-layout .info-box .box-label { opacity: 1; }
 
         .info-box .box-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 20px; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 5px;
-            line-height: 1.3; display: inline-block; width: 100%;
-            position: relative; transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 5px; line-height: 1.3;
+            display: inline-block; width: 100%; position: relative; transition: all 0.3s ease;
         }
 
         .box-top .box-label { color: #00d4ff; }
         .box-bottom .box-label { color: #00e676; }
 
         .box-top .box-title {
-            color: transparent;
-            background: linear-gradient(90deg, #00d4ff 0%, #ffffff 50%, #00d4ff 100%);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: transparent; background: linear-gradient(90deg, #00d4ff 0%, #ffffff 50%, #00d4ff 100%);
+            background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-
         .box-bottom .box-title {
-            color: transparent;
-            background: linear-gradient(90deg, #00e676 0%, #ffffff 50%, #00e676 100%);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: transparent; background: linear-gradient(90deg, #00e676 0%, #ffffff 50%, #00e676 100%);
+            background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
 
         .active-layout .box-top .box-title { animation: titleShimmerBlue 3s linear infinite; }
         .active-layout .box-bottom .box-title { animation: titleShimmerGreen 3s linear infinite; }
-
         @keyframes titleShimmerBlue { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         @keyframes titleShimmerGreen { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
@@ -366,29 +304,17 @@
         }
 
         .active-layout .info-box.box-top {
-            border-color: rgba(0, 212, 255, 0.15);
-            background: rgba(0, 212, 255, 0.02);
+            border-color: rgba(0, 212, 255, 0.15); background: rgba(0, 212, 255, 0.02);
             box-shadow: 0 0 25px rgba(0, 212, 255, 0.05), inset 0 0 30px rgba(0, 212, 255, 0.015);
         }
-
         .active-layout .info-box.box-bottom {
-            border-color: rgba(0, 230, 118, 0.15);
-            background: rgba(0, 230, 118, 0.02);
+            border-color: rgba(0, 230, 118, 0.15); background: rgba(0, 230, 118, 0.02);
             box-shadow: 0 0 25px rgba(0, 230, 118, 0.05), inset 0 0 30px rgba(0, 230, 118, 0.015);
         }
 
         .info-box { cursor: pointer; }
-
-        .info-box:hover.box-top {
-            border-color: rgba(0, 212, 255, 0.35);
-            box-shadow: 0 0 35px rgba(0, 212, 255, 0.1), inset 0 0 40px rgba(0, 212, 255, 0.03);
-        }
-
-        .info-box:hover.box-bottom {
-            border-color: rgba(0, 230, 118, 0.35);
-            box-shadow: 0 0 35px rgba(0, 230, 118, 0.1), inset 0 0 40px rgba(0, 230, 118, 0.03);
-        }
-
+        .info-box:hover.box-top { border-color: rgba(0, 212, 255, 0.35); box-shadow: 0 0 35px rgba(0, 212, 255, 0.1), inset 0 0 40px rgba(0, 212, 255, 0.03); }
+        .info-box:hover.box-bottom { border-color: rgba(0, 230, 118, 0.35); box-shadow: 0 0 35px rgba(0, 230, 118, 0.1), inset 0 0 40px rgba(0, 230, 118, 0.03); }
         .info-box:hover .box-label { opacity: 0.7; }
 
         /* ============================================
@@ -399,8 +325,7 @@
             background: rgba(0, 0, 0, 0.92);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             z-index: 200; display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-            padding: 20px;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px;
         }
 
         .overlay-panel.show { opacity: 1; pointer-events: auto; }
@@ -412,9 +337,7 @@
             transform: translateY(28px) scale(0.97);
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: 0 0 120px rgba(0, 230, 118, 0.03);
-            max-height: 92vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            max-height: 92vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
         }
 
         .overlay-panel.show .panel-box { transform: translateY(0) scale(1); }
@@ -429,86 +352,27 @@
             font-family: 'Montserrat', sans-serif; line-height: 1; z-index: 10;
         }
 
-        .panel-close:hover {
-            color: #00e676; border-color: rgba(0, 230, 118, 0.25);
-            background: rgba(0, 230, 118, 0.05);
-        }
+        .panel-close:hover { color: #00e676; border-color: rgba(0, 230, 118, 0.25); background: rgba(0, 230, 118, 0.05); }
 
         .panel-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 6px;
-            text-align: center; padding: 30px 40px 0;
+            font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 6px; text-align: center; padding: 30px 40px 0;
             background: linear-gradient(90deg, #00d4ff, #00e676);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
             filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.2));
         }
 
         /* ============================================
-           SOCIAL PANEL
+           GRID ITEMS (Identical for Social & Build)
         ============================================ */
-        .social-panel-box { padding-bottom: 28px; max-width: 760px; width: 100%; }
+        .social-panel-box, .build-panel-box { padding-bottom: 28px; max-width: 1060px; width: 100%; }
 
-        .social-grid {
-            display: grid; grid-template-columns: repeat(5, 1fr);
-            gap: 10px; padding: 30px 30px;
-        }
-
-        .social-item {
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; gap: 12px;
-            cursor: pointer; padding: 24px 6px 20px; border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.035);
-            background: rgba(255, 255, 255, 0.01);
-            opacity: 0; transform: translateY(12px);
-            transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                        background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .social-item.visible { opacity: 1; transform: translateY(0); }
-
-        .social-item:hover {
-            background: rgba(255, 255, 255, 0.035);
-            border-color: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 20px -6px rgba(0, 0, 0, 0.5);
-        }
-
-        .social-item i {
-            font-size: 30px; color: var(--c);
-            transition: transform 0.2s ease; display: block;
-        }
-
-        .social-item:hover i { transform: scale(1.08); }
-
-        .social-item .social-logo-img {
-            width: 30px; height: 30px; object-fit: contain;
-            display: block; transition: transform 0.2s ease;
-        }
-
-        .social-item:hover .social-logo-img { transform: scale(1.08); }
-
-        .social-item span {
-            font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 600;
-            color: rgba(255, 255, 255, 0.38); text-transform: uppercase;
-            letter-spacing: 0.6px; text-align: center; line-height: 1.2;
-            transition: color 0.2s ease;
-        }
-
-        .social-item:hover span { color: rgba(255, 255, 255, 0.8); }
-
-        /* ============================================
-           BUILD PANEL
-        ============================================ */
-        .build-panel-box { padding-bottom: 28px; max-width: 1060px; width: 100%; }
-
-        .build-grid {
+        .social-grid, .build-grid {
             display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 12px; padding: 28px 28px;
         }
 
-        .build-item {
+        .social-item, .build-item {
             display: flex; align-items: center; gap: 14px;
             cursor: pointer; padding: 16px 16px; border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -518,211 +382,123 @@
                         background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .build-item.visible { opacity: 1; transform: scale(1); }
+        .social-item.visible, .build-item.visible { opacity: 1; transform: scale(1); }
 
-        .build-item:hover {
+        .social-item:hover, .build-item:hover {
             background: rgba(0, 230, 118, 0.04);
             border-color: rgba(0, 230, 118, 0.18);
             box-shadow: 0 4px 24px -6px rgba(0, 230, 118, 0.15);
         }
 
+        /* Styling for icons and logo images (Neat box shape) */
+        .social-item i, 
+        .social-item .social-logo-img, 
         .build-logo {
             width: 48px; height: 48px; min-width: 48px;
             border-radius: 10px; object-fit: contain; padding: 4px;
             background: rgba(255, 255, 255, 0.025);
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: var(--c); /* For Font Awesome icon */
         }
 
+        .social-item:hover i, 
+        .social-item:hover .social-logo-img, 
         .build-item:hover .build-logo {
             background: rgba(0, 230, 118, 0.05);
             border-color: rgba(0, 230, 118, 0.15);
         }
 
-        .build-item span {
+        .social-item span, .build-item span {
             font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 700;
             color: rgba(255, 255, 255, 0.4); text-transform: uppercase;
             letter-spacing: 0.5px; text-align: left; line-height: 1.35;
             transition: color 0.2s ease;
         }
 
-        .build-item:hover span { color: rgba(255, 255, 255, 0.9); }
+        .social-item:hover span, .build-item:hover span { color: rgba(255, 255, 255, 0.9); }
 
-        /* ============================================================
-           RESPONSIVE — TABLET (iPad / Galaxy Tab) max-width: 1024px
-        ============================================================ */
+        /* ============================================
+           RESPONSIVE — TABLET (iPad / Galaxy Tab)
+        ============================================ */
         @media screen and (max-width: 1024px) {
-            .interactive-layout {
-                left: 40px; right: 40px; height: 360px;
-            }
-            .main-title-box {
-                width: 380px; padding: 28px 32px;
-            }
-            .main-title {
-                font-size: 30px; letter-spacing: 3px;
-            }
+            .interactive-layout { left: 40px; right: 40px; height: 360px; }
+            .main-title-box { width: 380px; padding: 28px 32px; }
+            .main-title { font-size: 30px; letter-spacing: 3px; }
             .right-content-wrapper { width: 320px; }
             .info-box { padding: 26px 28px; }
             .info-box .box-title { font-size: 17px; letter-spacing: 4px; }
             .info-box .box-label { font-size: 7.5px; letter-spacing: 3px; }
-
             .loading-letter { font-size: 54px; }
 
-            .social-panel-box { max-width: 90%; }
-            .social-grid {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 8px; padding: 22px 22px;
-            }
-            .social-item { padding: 20px 4px 16px; gap: 10px; }
-            .social-item i { font-size: 28px; }
-            .social-item .social-logo-img { width: 28px; height: 28px; }
-            .social-item span { font-size: 8.5px; }
-
-            .build-panel-box { max-width: 92%; }
-            .build-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px; padding: 22px 22px;
-            }
-            .build-item { padding: 14px; gap: 12px; }
-            .build-logo { width: 44px; height: 44px; min-width: 44px; }
-            .build-item span { font-size: 9px; }
+            .social-grid, .build-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 22px 22px; }
+            .social-item, .build-item { padding: 14px; gap: 12px; }
+            .social-item i, .social-item .social-logo-img, .build-logo { width: 44px; height: 44px; min-width: 44px; font-size: 22px; }
+            .social-item span, .build-item span { font-size: 9px; }
 
             .panel-title { font-size: 13px; letter-spacing: 5px; padding: 26px 30px 0; }
         }
 
-        /* ============================================================
-           RESPONSIVE — MOBILE max-width: 768px
-        ============================================================ */
+        /* ============================================
+           RESPONSIVE — MOBILE
+        ============================================ */
         @media screen and (max-width: 768px) {
-            .hero-section {
-                background-size: cover;
-                background-position: center;
-            }
-
-            .header-logo-container {
-                padding: 14px 16px; height: 64px;
-            }
+            .hero-section { background-size: cover; background-position: center; }
+            .header-logo-container { padding: 14px 16px; height: 64px; }
             .initial-logos img { height: 28px; }
             .initial-logos { gap: 10px; }
             .scrolled-v-logo { font-size: 28px; left: 16px; }
 
             .interactive-layout {
-                left: 16px; right: 16px;
-                flex-direction: column;
-                height: auto;
-                top: 50%;
-                gap: 18px;
-                align-items: stretch;
+                left: 16px; right: 16px; flex-direction: column;
+                height: auto; top: 50%; gap: 18px; align-items: stretch;
             }
-
-            .main-title-box {
-                width: 100%; padding: 22px 20px;
-            }
-            .main-title {
-                font-size: 22px; letter-spacing: 2px; line-height: 1.25;
-            }
-
-            /* Sembunyikan kabel LED di mobile */
+            .main-title-box { width: 100%; padding: 22px 20px; }
+            .main-title { font-size: 22px; letter-spacing: 2px; line-height: 1.25; }
             .lines-container { display: none; }
-
-            .right-content-wrapper {
-                width: 100%; height: auto; gap: 14px;
-                justify-content: flex-start;
-            }
-
-            .info-box {
-                padding: 22px 18px;
-                transform: translateY(20px) scale(0.98);
-            }
-
-            .active-layout .info-box {
-                transform: translateY(0) scale(1);
-            }
-
-            .info-box .box-title {
-                font-size: 15px; letter-spacing: 3px;
-            }
-            .info-box .box-label {
-                font-size: 7px; letter-spacing: 3px;
-            }
+            .right-content-wrapper { width: 100%; height: auto; gap: 14px; justify-content: flex-start; }
+            .info-box { padding: 22px 18px; transform: translateY(20px) scale(0.98); }
+            .active-layout .info-box { transform: translateY(0) scale(1); }
+            .info-box .box-title { font-size: 15px; letter-spacing: 3px; }
+            .info-box .box-label { font-size: 7px; letter-spacing: 3px; }
 
             .loading-letter { font-size: 40px; }
             .loading-bar-track { width: 180px; margin-top: 30px; }
-            .loading-line-left, .loading-line-right {
-                animation: lineExpandMobile 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
-            }
+            .loading-line-left, .loading-line-right { animation: lineExpandMobile 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards; }
             @keyframes lineExpandMobile { to { width: 80px; } }
             .loading-line-left { margin-right: 50px; }
             .loading-line-right { margin-left: 50px; }
 
-            /* Overlay panel jadi scrollable */
-            .overlay-panel {
-                align-items: flex-start;
-                padding: 70px 12px 24px;
-            }
-            .panel-box {
-                max-height: none;
-                margin: auto;
-                width: 100%;
-            }
+            .overlay-panel { align-items: flex-start; padding: 70px 12px 24px; }
+            .panel-box { max-height: none; margin: auto; width: 100%; }
+            .panel-title { font-size: 12px; letter-spacing: 4px; padding: 22px 18px 0; }
 
-            .panel-title {
-                font-size: 12px; letter-spacing: 4px;
-                padding: 22px 18px 0;
-            }
+            .social-panel-box, .build-panel-box { padding-bottom: 20px; }
+            .social-grid, .build-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 16px 14px; }
+            .social-item, .build-item { padding: 12px; gap: 10px; }
+            .social-item i, .social-item .social-logo-img, .build-logo { width: 40px; height: 40px; min-width: 40px; font-size: 20px; }
+            .social-item span, .build-item span { font-size: 8.5px; }
 
-            .social-panel-box { max-width: 100%; width: 100%; padding-bottom: 20px; }
-            .social-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px; padding: 18px 14px;
-            }
-            .social-item { padding: 16px 4px 12px; gap: 8px; }
-            .social-item i { font-size: 26px; }
-            .social-item .social-logo-img { width: 26px; height: 26px; }
-            .social-item span { font-size: 8px; }
-
-            .build-panel-box { max-width: 100%; width: 100%; padding-bottom: 20px; }
-            .build-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px; padding: 16px 14px;
-            }
-            .build-item { padding: 12px; gap: 10px; }
-            .build-logo { width: 40px; height: 40px; min-width: 40px; }
-            .build-item span { font-size: 8.5px; }
-
-            .panel-close {
-                top: 12px; right: 12px;
-                width: 32px; height: 32px;
-                font-size: 20px;
-            }
+            .panel-close { top: 12px; right: 12px; width: 32px; height: 32px; font-size: 20px; }
         }
 
-        /* ============================================================
-           RESPONSIVE — SMALL MOBILE max-width: 380px
-        ============================================================ */
+        /* ============================================
+           RESPONSIVE — SMALL MOBILE
+        ============================================ */
         @media screen and (max-width: 380px) {
             .main-title { font-size: 18px; letter-spacing: 1.5px; }
             .info-box .box-title { font-size: 13px; letter-spacing: 2px; }
             .info-box .box-label { font-size: 6.5px; letter-spacing: 2px; }
             .info-box { padding: 18px 14px; }
-
             .loading-letter { font-size: 32px; }
             .loading-bar-track { width: 150px; }
             .loading-line-left, .loading-line-right { display: none; }
 
-            .social-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 6px; padding: 14px 10px;
-            }
-            .social-item { padding: 14px 4px 10px; gap: 6px; }
-            .social-item i { font-size: 22px; }
-            .social-item .social-logo-img { width: 22px; height: 22px; }
-            .social-item span { font-size: 7px; }
-
-            .build-grid { gap: 6px; padding: 12px 10px; }
-            .build-item { padding: 10px; gap: 8px; }
-            .build-logo { width: 36px; height: 36px; min-width: 36px; }
-            .build-item span { font-size: 8px; }
+            .social-grid, .build-grid { gap: 6px; padding: 12px 10px; }
+            .social-item, .build-item { padding: 10px; gap: 8px; }
+            .social-item i, .social-item .social-logo-img, .build-logo { width: 36px; height: 36px; min-width: 36px; font-size: 18px; }
+            .social-item span, .build-item span { font-size: 8px; }
 
             .header-logo-container { padding: 12px 14px; height: 58px; }
             .initial-logos img { height: 24px; }
@@ -730,28 +506,18 @@
             .scrolled-v-logo { font-size: 24px; left: 14px; }
         }
 
-        /* ============================================================
+        /* ============================================
            RESPONSIVE — LANDSCAPE MOBILE
-        ============================================================ */
+        ============================================ */
         @media screen and (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
-            .interactive-layout {
-                flex-direction: row;
-                height: 280px;
-                gap: 14px;
-            }
+            .interactive-layout { flex-direction: row; height: 280px; gap: 14px; }
             .lines-container { display: block; }
-            .main-title-box {
-                width: 38%; padding: 18px 22px;
-            }
+            .main-title-box { width: 38%; padding: 18px 22px; }
             .main-title { font-size: 20px; letter-spacing: 2px; line-height: 1.2; }
-            .right-content-wrapper {
-                width: 36%; height: 100%;
-                justify-content: space-between;
-            }
+            .right-content-wrapper { width: 36%; height: 100%; justify-content: space-between; }
             .info-box { padding: 18px 14px; }
             .info-box .box-title { font-size: 14px; letter-spacing: 3px; }
             .info-box .box-label { font-size: 7px; margin-bottom: 5px; }
-
             .loading-letter { font-size: 36px; }
         }
     </style>
@@ -808,11 +574,11 @@
                 <div class="right-content-wrapper">
                     <div class="info-box box-top" id="socialBox">
                         <div class="box-label">Social Platform</div>
-                        <div class="box-title" id="socialTrigger">Media Sosial</div>
+                        <div class="box-title" id="socialTrigger">Social Media</div>
                     </div>
                     <div class="info-box box-bottom" id="buildBox">
                         <div class="box-label">Development Project</div>
-                        <div class="box-title" id="buildTrigger">Pembangunan</div>
+                        <div class="box-title" id="buildTrigger">Projects</div>
                     </div>
                 </div>
             </div>
@@ -820,11 +586,11 @@
 
     </div>
 
-    <!-- ===== MEDIA SOSIAL ===== -->
+    <!-- ===== SOCIAL MEDIA ===== -->
     <div class="overlay-panel" id="socialOverlay">
         <div class="panel-box social-panel-box">
             <div class="panel-close" onclick="closePanel('socialOverlay')">&times;</div>
-            <div class="panel-title">Media Sosial</div>
+            <div class="panel-title">Social Media</div>
             <div class="social-grid">
 
                 <div class="social-item" style="--c:#ff0050">
@@ -877,15 +643,19 @@
                     <i class="fa-brands fa-threads"></i><span>Threads</span>
                 </div>
 
+                <div class="social-item" style="--c:#0084FF">
+                    <i class="fa-brands fa-facebook-messenger"></i><span>Messenger</span>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <!-- ===== PEMBANGUNAN ===== -->
+    <!-- ===== PROJECTS ===== -->
     <div class="overlay-panel" id="buildOverlay">
         <div class="panel-box build-panel-box">
             <div class="panel-close" onclick="closePanel('buildOverlay')">&times;</div>
-            <div class="panel-title">Pembangunan</div>
+            <div class="panel-title">Projects</div>
             <div class="build-grid">
 
                 <div class="build-item">
@@ -1030,7 +800,7 @@
             }
         });
 
-        // Cegah double-tap zoom di mobile
+        // Prevent double-tap zoom on mobile
         var lastTouchEnd = 0;
         document.addEventListener('touchend', function(e) {
             var now = Date.now();
@@ -1038,7 +808,7 @@
             lastTouchEnd = now;
         }, { passive: false });
 
-        // Cegah pinch zoom
+        // Prevent pinch zoom
         document.addEventListener('gesturestart', function(e) { e.preventDefault(); });
     </script>
 
