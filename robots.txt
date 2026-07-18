@@ -1,15 +1,11 @@
-# 1. Blokir robot pencari gambar Google
-User-agent: Googlebot-Image
-Disallow: /
-
-# 2. Blokir robot pencari gambar Bing
-User-agent: bingbot-image
-Disallow: /*.jpg$
-Disallow: /*.jpeg$
-Disallow: /*.png$
-Disallow: /*.gif$
-
-# 3. Izinkan pencarian teks biasa untuk halaman website
-User-agent: *
-Allow: /
- 
+1  # 1. Blokir robot pencari gambar Google
+2  User-agent: Googlebot-Image
+3  Disallow: /
+4  
+5  # 2. Blokir robot pencari gambar Bing dan Yahoo
+6  User-agent: Bingbot-Image
+7  Disallow: /
+8  
+9  # 3. Izinkan semua robot untuk mengindeks teks halaman web biasa
+10 User-agent: *
+11 Allow: /
