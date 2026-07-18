@@ -1,5 +1,5 @@
-User-agent: Googlebot-Image
-Disallow: /
-
 User-agent: *
+
 Allow: /
+
+Sitemap: https://infotrink.online/sitemap.xml
