@@ -4,813 +4,857 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>INFOTRINK</title>
-
-    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png">
-    <link rel="shortcut icon" type="image/png" href="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png">
-    <link rel="apple-touch-icon" href="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Cinzel:wght@700;900&display=swap');
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        html, body {
-            width: 100%; max-width: 100%; overflow: hidden;
-            background-color: #000000;
-            font-family: 'Montserrat', sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;800&family=Cinzel:wght@700;900&display=swap');
+        
+        /* Global Reset & Variables */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+        html, body { 
+            width: 100%; 
+            max-width: 100%; 
+            overflow-x: hidden; 
+            background: #000; 
+            font-family: 'Montserrat', sans-serif; 
+            scroll-behavior: smooth; 
+        }
+        body { overflow-y: auto; }
+        :root { 
+            --cy: #00d4ff; 
+            --gr: #00e676; 
         }
 
-        /* ============================================
-           LOADING SCREEN
-        ============================================ */
-        .loading-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000000; z-index: 9999;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-            padding: 20px;
+        /* LOADING SCREEN */
+        .load-scr { 
+            position: fixed; 
+            inset: 0; 
+            background: #000; 
+            z-index: 9999; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            transition: opacity 0.8s ease; 
+        }
+        .load-scr.done { 
+            opacity: 0; 
+            visibility: hidden; 
+            pointer-events: none; 
+        }
+        .load-let-wrap { display: flex; gap: 4px; }
+        .load-let { 
+            font-family: 'Cinzel', serif; 
+            font-size: 64px; 
+            font-weight: 900; 
+            opacity: 0; 
+            transform: translateY(20px); 
+            animation: lin 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+        }
+        .load-let.b { 
+            background: linear-gradient(180deg, var(--cy), #0077b6); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4)); 
+        }
+        .load-let.g { 
+            background: linear-gradient(180deg, var(--gr), #00a152); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.35)); 
+        }
+        .load-let:nth-child(1) { animation-delay: .2s; }
+        .load-let:nth-child(2) { animation-delay: .32s; }
+        .load-let:nth-child(3) { animation-delay: .44s; }
+        .load-let:nth-child(4) { animation-delay: .56s; }
+        .load-let:nth-child(5) { animation-delay: .68s; }
+        .load-let:nth-child(6) { animation-delay: .8s; }
+        .load-let:nth-child(7) { animation-delay: .92s; }
+        .load-let:nth-child(8) { animation-delay: 1.04s; }
+        .load-let:nth-child(9) { animation-delay: 1.16s; }
+        @keyframes lin { to { opacity: 1; transform: translateY(0); } }
+        .load-bar { 
+            width: 240px; 
+            height: 2px; 
+            background: rgba(255,255,255,0.06); 
+            margin-top: 40px; 
+            border-radius: 2px; 
+            overflow: hidden; 
+            opacity: 0; 
+            animation: fu 0.5s ease 1.4s forwards; 
+        }
+        .load-fill { 
+            width: 0%; 
+            height: 100%; 
+            background: linear-gradient(90deg, var(--cy), var(--gr)); 
+            animation: lf 1.2s ease 1.6s forwards; 
+        }
+        @keyframes lf { to { width: 100%; } } 
+        @keyframes fu { to { opacity: 1; } }
+
+        /* HEADER */
+        .hdr { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            padding: 22px 24px; 
+            z-index: 100; 
+            display: flex; 
+            align-items: center; 
+            height: 85px; 
+            perspective: 300px; 
+        }
+        .init-logo { 
+            display: flex; 
+            gap: 14px; 
+            opacity: 1; 
+            transform: translateX(0) scale(1) rotateY(0deg); 
+            transform-style: preserve-3d; 
+            transition: transform 0.6s ease, opacity 0.4s ease; 
+        }
+        .init-logo img { height: 38px; width: auto; }
+        .scr-logo { 
+            position: absolute; 
+            left: 24px; 
+            font-family: 'Cinzel', serif; 
+            font-size: 38px; 
+            font-weight: 900; 
+            opacity: 0; 
+            transform: translateX(-30px) scale(0.7) rotateY(-90deg); 
+            transform-style: preserve-3d; 
+            transition: transform 0.6s ease, opacity 0.4s ease; 
+            background: linear-gradient(180deg, var(--cy), var(--gr)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.4)); 
+        }
+        .hdr.scrolled .init-logo { 
+            opacity: 0; 
+            transform: translateX(-40px) scale(0.8) rotateY(90deg); 
+            pointer-events: none; 
+        }
+        .hdr.scrolled .scr-logo { 
+            opacity: 1; 
+            transform: translateX(0) scale(1) rotateY(0deg); 
+            pointer-events: auto; 
         }
 
-        .loading-screen.done { opacity: 0; visibility: hidden; pointer-events: none; }
+        /* P1 - HERO */
+        .p1 { 
+            width: 100%; 
+            height: 100vh; 
+            position: relative; 
+            opacity: 0; 
+            transition: opacity 1s ease; 
+            overflow: hidden; 
+        }
+        .p1.show { opacity: 1; }
+        .p1-hero { 
+            width: 100%; 
+            height: 100vh; 
+            position: relative; 
+            background: url('ChatGPT Image Jul 9, 2026, 11_38_11 PM.png') center/cover no-repeat; 
+        }
+        .p1-layout { 
+            position: absolute; 
+            left: 80px; 
+            right: 80px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            display: flex; 
+            align-items: center; 
+            height: 400px; 
+        }
+        .p1-box { 
+            background: rgba(255,255,255,0.02); 
+            border: 1px solid rgba(255,255,255,0.15); 
+            padding: 35px 45px; 
+            cursor: pointer; 
+            text-align: left; 
+            outline: none; 
+            width: 520px; 
+            flex-shrink: 0; 
+            transition: all 0.4s ease; 
+            font-family: inherit; 
+        }
+        .p1-box.active { 
+            background: rgba(255,255,255,0.05); 
+            border-color: rgba(0, 212, 255, 0.4); 
+        }
+        .p1-title { 
+            font-weight: 800; 
+            font-size: 38px; 
+            color: #fff; 
+            text-transform: uppercase; 
+            letter-spacing: 4px; 
+            line-height: 1.3; 
+        }
+        .p1-lines { 
+            position: relative; 
+            flex-grow: 1; 
+            height: 100%; 
+            pointer-events: none; 
+        }
+        .l-stem, .l-top, .l-bot, .l-tt, .l-tb { 
+            position: absolute; 
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.6); 
+        }
+        .l-stem { 
+            left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 2px; 
+            background: linear-gradient(90deg, rgba(0,212,255,0.4), var(--cy), var(--gr)); 
+            background-size: 200% 100%; transition: width 0.3s ease 0.6s; 
+        }
+        .l-top { 
+            left: 80px; bottom: 50%; width: 2px; height: 0; 
+            background: linear-gradient(0deg, rgba(0,212,255,0.4), var(--cy), var(--gr)); 
+            background-size: 100% 200%; transition: height 0.3s ease 0.3s; 
+        }
+        .l-bot { 
+            left: 80px; top: 50%; width: 2px; height: 0; 
+            background: linear-gradient(180deg, rgba(0,212,255,0.4), var(--cy), var(--gr)); 
+            background-size: 100% 200%; transition: height 0.3s ease 0.3s; 
+        }
+        .l-tt { 
+            left: 80px; top: 55px; width: 0; height: 2px; 
+            background: linear-gradient(90deg, var(--gr), var(--cy), rgba(255,255,255,0.2)); 
+            background-size: 200% 100%; transition: width 0.3s ease 0.3s; 
+        }
+        .l-tb { 
+            left: 80px; bottom: 55px; width: 0; height: 2px; 
+            background: linear-gradient(90deg, var(--gr), var(--cy), rgba(255,255,255,0.2)); 
+            background-size: 200% 100%; transition: width 0.3s ease 0.3s; 
+        }
+        .active .l-stem { width: 80px; animation: flh 1.5s linear infinite; transition: width 0.3s ease 0s; }
+        .active .l-top { height: 145px; animation: flu 1.5s linear infinite; }
+        .active .l-bot { height: 145px; animation: fld 1.5s linear infinite; }
+        .active .l-tt, .active .l-tb { width: calc(100% - 80px); animation: flh 1.5s linear infinite; transition: width 0.3s ease 0.6s; }
+        @keyframes flh { 0% { background-position: 200% 0%; } 100% { background-position: -200% 0%; } }
+        @keyframes flu { 0% { background-position: 0% 200%; } 100% { background-position: 0% -200%; } }
+        @keyframes fld { 0% { background-position: 0% -200%; } 100% { background-position: 0% 200%; } }
+        .p1-right { 
+            position: relative; display: flex; flex-direction: column; justify-content: space-between; 
+            height: 100%; width: 450px; flex-shrink: 0; 
+        }
+        .p1-info { 
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 34px 40px; 
+            width: 100%; opacity: 0; transform: translateX(-20px) scale(0.98); text-align: center; 
+            cursor: pointer; transition: all 0.4s ease; 
+        }
+        .p1-info::before, .p1-info::after { 
+            content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 0; height: 1px; 
+            transition: width 0.5s ease; background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent); 
+        }
+        .active .p1-info::before, .active .p1-info::after { width: 80%; }
+        .p1-info.lab-top::before, .p1-info.lab-top::after { background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent); }
+        .p1-info.lab-bot::before, .p1-info.lab-bot::after { background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.25), transparent); }
+        .p1-info::before { top: 12px; } .p1-info::after { bottom: 12px; }
+        .p1-lab { 
+            font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; 
+            margin-bottom: 8px; opacity: 0.35; transition: opacity 0.3s ease; 
+        }
+        .active .p1-info .p1-lab { opacity: 1; }
+        .p1-trig { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 5px; line-height: 1.3; }
+        .lab-top .p1-lab { color: var(--cy); } .lab-bot .p1-lab { color: var(--gr); }
+        .lab-top .p1-trig { 
+            color: transparent; background: linear-gradient(90deg, var(--cy), #fff, var(--cy)); 
+            background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: tsb 3s linear infinite; 
+        }
+        .lab-bot .p1-trig { 
+            color: transparent; background: linear-gradient(90deg, var(--gr), #fff, var(--gr)); 
+            background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: tsg 3s linear infinite; 
+        }
+        @keyframes tsb { to { background-position: -200% 0; } } @keyframes tsg { to { background-position: -200% 0; } }
+        .active .p1-info { opacity: 1; transform: translateX(0) scale(1); transition: all 0.4s ease 0.9s; }
 
-        .loading-letters-wrap {
-            display: flex; gap: 4px; position: relative; z-index: 2; flex-wrap: nowrap;
+        /* P2 - Asymmetric Image/Text */
+        .p2 { 
+            width: 100%; min-height: 100vh; position: relative; background: #050507; 
+            display: flex; align-items: center; padding: 120px 80px; overflow: hidden; 
+        }
+        .p2-cont { 
+            max-width: 1200px; width: 100%; margin: 0 auto; display: grid; 
+            grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; 
+        }
+        .p2-left { display: flex; flex-direction: column; gap: 30px; }
+        .p2-label { font-size: 11px; font-weight: 600; color: var(--gr); text-transform: uppercase; letter-spacing: 5px; }
+        .p2-title { font-size: 64px; font-weight: 300; color: #fff; line-height: 1.1; }
+        .p2-title span { font-weight: 800; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .p2-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.6); text-align: justify; }
+        .p2-right { 
+            position: relative; height: 500px; border: 1px solid rgba(255,255,255,0.1); 
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.3); /* Added background to match aesthetic */
+        }
+        .p2-img { 
+            max-width: 100%; 
+            max-height: 100%; 
+            width: auto;
+            height: auto;
+            object-fit: contain; /* PERBAIKAN: Gambar masuk utuh ke dalam kotak tanpa terpotong */
+            opacity: 0.9; 
+            filter: grayscale(20%) contrast(110%); 
+            transition: opacity 0.4s ease; 
+        }
+        .p2-right:hover .p2-img { opacity: 1; }
+        .p2-right::before { 
+            content: ''; position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; 
+            border: 1px solid rgba(0, 212, 255, 0.2); z-index: 2; pointer-events: none; 
         }
 
-        .loading-letter {
-            font-family: 'Cinzel', serif;
-            font-size: 64px; font-weight: 900;
-            opacity: 0; transform: translateY(20px);
-            animation: letterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        /* P3 - Diagonal Split */
+        .p3 { width: 100%; min-height: 100vh; position: relative; background: #000; display: flex; align-items: center; overflow: hidden; }
+        .p3-bg { 
+            position: absolute; top: 0; right: 0; width: 60%; height: 100%; 
+            background: url('ChatGPT Image 18 Jul 2026, 19.17.18.png') center/cover no-repeat; 
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%); 
         }
-
-        .loading-letter.blue {
-            background: linear-gradient(180deg, #00d4ff 0%, #0077b6 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4));
+        .p3-overlay { 
+            position: absolute; top: 0; right: 0; width: 60%; height: 100%; 
+            background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0.4)); 
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%); 
         }
+        .p3-cont { position: relative; z-index: 10; max-width: 600px; padding: 120px 80px; }
+        .p3-label { font-size: 11px; font-weight: 600; color: var(--cy); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 20px; }
+        .p3-title { font-size: 56px; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 30px; }
+        .p3-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.7); text-align: justify; }
 
-        .loading-letter.green {
-            background: linear-gradient(180deg, #00e676 0%, #00a152 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.35));
+        /* P4 - Wheel & Image Panel */
+        .p4 { width: 100%; min-height: 100vh; position: relative; background: #020203; display: flex; align-items: center; justify-content: center; padding: 120px 60px; overflow: hidden; }
+        .p4-cont { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 300px 1fr; gap: 80px; align-items: center; }
+        .p4-wheel { width: 100%; max-width: 300px; margin: 0 auto; aspect-ratio: 1; }
+        .p4-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .p4-slice { fill: transparent; stroke: rgba(255,255,255,0.1); stroke-width: 1.5; cursor: pointer; transition: all 0.3s ease; }
+        .p4-slice:hover { fill: rgba(0, 212, 255, 0.05); }
+        .p4-slice.active { fill: rgba(0, 230, 118, 0.1); stroke: var(--gr); stroke-width: 2; filter: drop-shadow(0 0 10px rgba(0,230,118,0.3)); }
+        .p4-txt { fill: rgba(255,255,255,0.5); font-size: 14px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; transition: all 0.3s ease; }
+        .p4-txt.active { fill: var(--gr); font-size: 16px; }
+        .p4-panel { position: relative; min-height: 400px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
+        .p4-panel-bg { 
+            position: absolute; inset: 0; background-size: cover; background-position: center; 
+            background-repeat: no-repeat; opacity: 0.2; filter: blur(2px); transition: background-image 0.5s ease; 
         }
+        .p4-panel-content { position: relative; z-index: 5; padding: 60px 50px; background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0.6)); height: 100%; min-height: 400px; display: flex; flex-direction: column; justify-content: center; }
+        .p4-label { font-size: 11px; font-weight: 600; color: var(--cy); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; }
+        .p4-title { font-size: 42px; font-weight: 800; color: #fff; margin-bottom: 30px; text-transform: uppercase; }
+        .p4-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.8); text-align: justify; max-width: 90%; }
 
-        .loading-letter:nth-child(1) { animation-delay: 0.2s; }
-        .loading-letter:nth-child(2) { animation-delay: 0.32s; }
-        .loading-letter:nth-child(3) { animation-delay: 0.44s; }
-        .loading-letter:nth-child(4) { animation-delay: 0.56s; }
-        .loading-letter:nth-child(5) { animation-delay: 0.68s; }
-        .loading-letter:nth-child(6) { animation-delay: 0.80s; }
-        .loading-letter:nth-child(7) { animation-delay: 0.92s; }
-        .loading-letter:nth-child(8) { animation-delay: 1.04s; }
-        .loading-letter:nth-child(9) { animation-delay: 1.16s; }
+        /* P5 - Editorial Grid */
+        .p5 { width: 100%; min-height: 100vh; position: relative; background: #030305; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; padding: 120px 80px; }
+        .p5-item { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; background: rgba(10, 10, 24, 0.4); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease; }
+        .p5-item:hover { background: rgba(10, 10, 24, 0.8); border-color: rgba(0, 212, 255, 0.2); }
+        .p5-content { position: relative; z-index: 3; }
+        .p5-num { font-size: 12px; font-weight: 700; color: var(--gr); letter-spacing: 3px; margin-bottom: 10px; }
+        .p5-h { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+        .p5-p { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.6); }
+        .p5-item.large { grid-column: span 2; grid-row: span 2; justify-content: center; }
+        .p5-item.large .p5-h { font-size: 48px; max-width: 600px; }
+        .p5-item.large .p5-p { font-size: 16px; max-width: 500px; }
 
-        @keyframes letterIn { to { opacity: 1; transform: translateY(0); } }
+        /* P6 - 3D Horizon Grid */
+        .p6 { width: 100%; min-height: 100vh; position: relative; background: radial-gradient(circle at 50% 50%, #05050a 0%, #000000 80%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .p6-grid-floor { position: absolute; bottom: 0; left: 50%; width: 200%; height: 50vh; background-image: linear-gradient(rgba(0, 212, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 230, 118, 0.2) 1px, transparent 1px); background-size: 60px 60px; transform: translateX(-50%) perspective(400px) rotateX(70deg); transform-origin: bottom center; mask-image: linear-gradient(to top, black 20%, transparent 90%); -webkit-mask-image: linear-gradient(to top, black 20%, transparent 90%); animation: gridScroll 8s linear infinite; pointer-events: none; }
+        @keyframes gridScroll { 0% { background-position: 0 0; } 100% { background-position: 0 60px; } }
+        .p6-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 250px; background: radial-gradient(ellipse at center, rgba(0, 230, 118, 0.15) 0%, rgba(0, 212, 255, 0.05) 40%, transparent 70%); filter: blur(40px); pointer-events: none; }
+        .p6-horizon { position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--gr), var(--cy), transparent); box-shadow: 0 0 25px var(--gr), 0 0 50px var(--cy); pointer-events: none; }
+        .p6-cont { position: relative; z-index: 10; text-align: center; max-width: 800px; padding: 0 40px; margin-top: -20vh; }
+        .p6-label { font-size: 12px; font-weight: 600; color: var(--cy); text-transform: uppercase; letter-spacing: 6px; margin-bottom: 30px; }
+        .p6-title { font-size: 72px; font-weight: 200; color: #fff; line-height: 1; margin-bottom: 40px; text-shadow: 0 0 30px rgba(0,0,0,0.8); }
+        .p6-title span { display: block; font-weight: 800; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .p6-text { font-size: 16px; line-height: 1.9; color: rgba(255,255,255,0.8); text-align: justify; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
 
-        .loading-bar-track {
-            width: 240px; height: 2px;
-            background: rgba(255, 255, 255, 0.06);
-            margin-top: 40px; border-radius: 2px; overflow: hidden;
-            opacity: 0; animation: fadeUp 0.5s ease 1.4s forwards;
+        /* P7 - Zigzag Alternating */
+        .p7 { width: 100%; min-height: 100vh; position: relative; background: #050507; display: flex; flex-direction: column; justify-content: center; gap: 80px; padding: 140px 80px; }
+        .p7-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; width: 100%; margin: 0 auto; }
+        .p7-row.rev .p7-img-wrap { order: 2; }
+        .p7-img-wrap { height: 400px; overflow: hidden; position: relative; }
+        .p7-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: grayscale(30%); }
+        .p7-img-wrap:hover .p7-img { transform: scale(1.05); filter: grayscale(0%); }
+        .p7-img-wrap::before { content: ''; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,0.1); z-index: 2; pointer-events: none; margin: 20px; }
+        .p7-text-wrap h2 { font-size: 42px; font-weight: 300; color: #fff; margin-bottom: 20px; }
+        .p7-text-wrap h2 b { font-weight: 800; color: var(--cy); }
+        .p7-text-wrap p { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.6); text-align: justify; }
+
+        /* P8 - Timeline */
+        .p8 { width: 100%; min-height: 100vh; position: relative; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 140px 40px; overflow: hidden; }
+        .p8-head { text-align: center; margin-bottom: 80px; }
+        .p8-h-label { font-size: 11px; color: var(--gr); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px; }
+        .p8-h-title { font-size: 56px; font-weight: 200; color: #fff; }
+        .p8-line { width: 2px; height: 60%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2), transparent); position: absolute; top: 20%; left: 50%; transform: translateX(-50%); }
+        .p8-items { position: relative; width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 60px; }
+        .p8-item { width: 45%; position: relative; padding: 30px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
+        .p8-item:nth-child(odd) { align-self: flex-start; text-align: right; border-right: 2px solid var(--cy); }
+        .p8-item:nth-child(even) { align-self: flex-end; text-align: left; border-left: 2px solid var(--gr); }
+        .p8-item h3 { font-size: 24px; color: #fff; margin-bottom: 10px; font-weight: 700; }
+        .p8-item p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+        .p8-num { font-family: 'Cinzel', serif; font-size: 64px; font-weight: 900; color: rgba(255,255,255,0.03); position: absolute; top: 10px; }
+        .p8-item:nth-child(odd) .p8-num { right: 20px; } .p8-item:nth-child(even) .p8-num { left: 20px; }
+
+        /* P9 - Manifesto */
+        .p9 { width: 100%; min-height: 100vh; position: relative; background: #020203; display: flex; align-items: center; justify-content: center; padding: 120px 40px; overflow: hidden; }
+        .p9::before { content: 'I'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Cinzel', serif; font-size: 600px; font-weight: 900; color: rgba(255,255,255,0.01); pointer-events: none; }
+        .p9-cont { position: relative; z-index: 10; max-width: 800px; text-align: center; }
+        .p9-line { width: 100px; height: 1px; background: var(--cy); margin: 0 auto 40px auto; }
+        .p9-title { font-size: 48px; font-weight: 300; color: rgba(255,255,255,0.9); line-height: 1.3; margin-bottom: 40px; }
+        .p9-title b { font-weight: 800; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .p9-text { font-size: 16px; line-height: 1.9; color: rgba(255,255,255,0.5); text-align: justify; }
+
+        /* P10 - Image Triptych */
+        .p10 { width: 100%; min-height: 100vh; position: relative; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 100px 40px; }
+        .p10-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; max-width: 1200px; width: 100%; }
+        .p10-card { position: relative; overflow: hidden; height: 450px; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; border: 1px solid rgba(255,255,255,0.1); }
+        .p10-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: opacity 0.4s ease, transform 0.6s ease; z-index: 1; filter: grayscale(50%); }
+        .p10-card:hover .p10-img { opacity: 0.8; transform: scale(1.05); }
+        .p10-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.9), transparent 70%); z-index: 2; }
+        .p10-overlay { position: relative; z-index: 3; }
+        .p10-h { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
+        .p10-line { width: 40px; height: 1px; background: var(--gr); margin-bottom: 15px; }
+        .p10-p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7); }
+
+        /* P11 - Finale */
+        .p11 { width: 100%; min-height: 100vh; position: relative; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 40px; overflow: hidden; }
+        .p11-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; max-width: 90vw; max-height: 90vh; background: radial-gradient(circle, rgba(0, 230, 118, 0.05) 0%, transparent 70%); pointer-events: none; }
+        .p11-cont { position: relative; z-index: 10; max-width: 700px; text-align: center; }
+        .p11-label { font-size: 12px; font-weight: 600; color: var(--cy); text-transform: uppercase; letter-spacing: 6px; margin-bottom: 30px; }
+        .p11-title { font-size: 56px; font-weight: 200; color: #fff; line-height: 1.1; margin-bottom: 40px; }
+        .p11-title b { font-weight: 800; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .p11-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.5); text-align: justify; margin-bottom: 60px; }
+        .p11-divider { width: 1px; height: 60px; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.3), transparent); margin: 0 auto 40px auto; }
+        .p11-footer { position: absolute; bottom: 40px; left: 0; width: 100%; text-align: center; z-index: 10; }
+        .p11-line { width: 80px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 15px auto; }
+        .p11-copy { font-size: 10px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 3px; }
+        .p11-copy span { color: rgba(0, 230, 118, 0.4); }
+
+        /* OVERLAY PANEL */
+        .ovl { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
+        .ovl.show { opacity: 1; pointer-events: auto; }
+        .ovl-box { background: rgba(10,10,24,0.98); border: 1px solid rgba(0, 230, 118, 0.1); border-radius: 18px; position: relative; transform: translateY(28px) scale(0.97); transition: transform 0.5s ease; max-height: 92vh; overflow-y: auto; max-width: 1100px; width: 100%; }
+        .ovl.show .ovl-box { transform: translateY(0) scale(1); }
+        .ovl-close { position: absolute; top: 16px; right: 16px; font-size: 22px; color: rgba(255,255,255,0.2); cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; z-index: 10; }
+        .ovl-close:hover { color: var(--gr); border-color: rgba(0, 230, 118, 0.25); }
+        .ovl-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 6px; text-align: center; padding: 30px 40px 0; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .ovl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 30px; }
+        .ovl-item { display: flex; align-items: center; gap: 15px; cursor: pointer; padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); opacity: 0; transform: scale(0.9); transition: all 0.3s ease; }
+        .ovl-item.vis { opacity: 1; transform: scale(1); }
+        .ovl-item:hover { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.2); transform: scale(1.02); }
+        .ovl-item i, .ovl-item .ovl-logo { width: 52px; height: 52px; min-width: 52px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--c); flex-shrink: 0; transition: all 0.2s ease; }
+        .ovl-item .ovl-logo { object-fit: contain; padding: 6px; }
+        .ovl-item:hover i, .ovl-item:hover .ovl-logo { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.15); }
+        .ovl-item span { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3; }
+        .ovl-item:hover span { color: #fff; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .p1-layout { left: 40px; right: 40px; height: 360px; } .p1-box { width: 380px; padding: 28px 32px; } .p1-title { font-size: 30px; letter-spacing: 3px; } .p1-right { width: 320px; } .p1-info { padding: 26px 28px; }
+            .p2-cont, .p7-row { grid-template-columns: 1fr; gap: 40px; } .p2-right { height: 350px; } .p7-row.rev .p7-img-wrap { order: 0; } .p7-img-wrap { height: 300px; }
+            .p3-bg, .p3-overlay { width: 100%; clip-path: none; } .p3-cont { max-width: 100%; padding: 100px 40px; }
+            .p4-cont { grid-template-columns: 1fr; gap: 60px; } .p4-wheel { max-width: 260px; }
+            .p5 { grid-template-columns: 1fr 1fr; padding: 80px 40px; } .p5-item.large { grid-column: span 2; }
+            .p6-title { font-size: 56px; }
+            .p8-items { max-width: 100%; } .p8-item { width: 100%; align-self: center !important; text-align: left !important; border-left: 2px solid var(--cy) !important; border-right: none !important; padding-left: 40px; }
+            .p10-grid { grid-template-columns: 1fr; gap: 20px; } .p10-card { height: 350px; }
+            .ovl-grid { grid-template-columns: repeat(3, 1fr); }
         }
-
-        .loading-bar-fill {
-            width: 0%; height: 100%;
-            background: linear-gradient(90deg, #00d4ff 0%, #00e676 100%);
-            animation: loadFill 1.2s cubic-bezier(0.4, 0, 0.2, 1) 1.6s forwards;
-            border-radius: 2px;
-        }
-
-        @keyframes loadFill { 0% { width: 0%; } 100% { width: 100%; } }
-
-        .loading-line-left, .loading-line-right {
-            position: absolute; top: 50%; height: 1px; width: 0;
-            animation: lineExpand 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
-        }
-
-        .loading-line-left {
-            right: 50%; margin-right: 75px;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25));
-        }
-
-        .loading-line-right {
-            left: 50%; margin-left: 75px;
-            background: linear-gradient(90deg, rgba(0, 230, 118, 0.25), transparent);
-        }
-
-        @keyframes lineExpand { to { width: 140px; } }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ============================================
-           MAIN CONTENT
-        ============================================ */
-        .main-content {
-            width: 100%; height: 100vh; position: relative;
-            opacity: 0; transition: opacity 1s ease; overflow: hidden;
-        }
-
-        .main-content.show { opacity: 1; }
-
-        .hero-section {
-            width: 100%; height: 100vh; position: relative;
-            background-image: url('ChatGPT Image Jul 9, 2026, 11_38_11 PM.png');
-            background-size: 100% 100%; background-position: center; background-repeat: no-repeat;
-        }
-
-        /* ============================================
-           HEADER LOGO
-        ============================================ */
-        .header-logo-container {
-            position: fixed; top: 0; left: 0; padding: 22px 24px;
-            z-index: 100; display: flex; align-items: center; height: 85px;
-        }
-
-        .initial-logos {
-            display: flex; align-items: center; gap: 14px; opacity: 1;
-            transform: translateX(0) scale(1);
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
-        }
-
-        .initial-logos img { display: block; height: 38px; width: auto; }
-
-        .scrolled-v-logo {
-            position: absolute; left: 24px; font-family: 'Cinzel', serif;
-            font-size: 38px; font-weight: 900; opacity: 0;
-            transform: translateX(-30px) scale(0.7);
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
-            pointer-events: none; user-select: none;
-            background: linear-gradient(180deg, #00d4ff 0%, #00e676 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.4));
-        }
-
-        .header-logo-container.scrolled .initial-logos {
-            opacity: 0; transform: translateX(-50px) scale(0.8); pointer-events: none;
-        }
-
-        .header-logo-container.scrolled .scrolled-v-logo {
-            opacity: 1; transform: translateX(0) scale(1); pointer-events: auto;
-        }
-
-        /* ============================================
-           INTERACTIVE LAYOUT
-        ============================================ */
-        .interactive-layout {
-            position: absolute; left: 80px; right: 80px; top: 50%;
-            transform: translateY(-50%); display: flex; align-items: center; height: 400px;
-        }
-
-        .main-title-box {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 35px 45px; cursor: pointer; text-align: left; outline: none;
-            width: 520px; position: relative; z-index: 5; flex-shrink: 0;
-            transition: background 0.4s ease, border-color 0.4s ease;
-            font-family: inherit;
-        }
-
-        .main-title-box.active-box {
-            background: rgba(255, 255, 255, 0.05); border-color: rgba(0, 212, 255, 0.4);
-        }
-
-        .main-title {
-            font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 38px;
-            color: #FFFFFF; text-transform: uppercase; letter-spacing: 4px; line-height: 1.3;
-        }
-
-        /* ============================================
-           LED CABLES
-        ============================================ */
-        .lines-container { position: relative; flex-grow: 1; height: 100%; pointer-events: none; }
-
-        .line-stem, .line-splitter-top, .line-splitter-bottom, .line-to-top-box, .line-to-bottom-box {
-            position: absolute; box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
-        }
-
-        .line-stem {
-            left: 0; top: 50%; transform: translateY(-50%);
-            width: 0; height: 2px;
-            background: linear-gradient(90deg, rgba(0,212,255,0.4) 0%, #00d4ff 50%, #00e676 100%);
-            background-size: 200% 100%; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.6s;
-        }
-
-        .line-splitter-top {
-            left: 80px; bottom: 50%; width: 2px; height: 0;
-            background: linear-gradient(0deg, rgba(0,212,255,0.4) 0%, #00d4ff 50%, #00e676 100%);
-            background-size: 100% 200%; transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
-        }
-
-        .line-splitter-bottom {
-            left: 80px; top: 50%; width: 2px; height: 0;
-            background: linear-gradient(180deg, rgba(0,212,255,0.4) 0%, #00d4ff 50%, #00e676 100%);
-            background-size: 100% 200%; transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
-            box-shadow: 0 0 8px rgba(0, 230, 118, 0.8);
-        }
-
-        .line-to-top-box {
-            left: 80px; top: 55px; width: 0; height: 2px;
-            background: linear-gradient(90deg, #00e676 0%, #00d4ff 50%, rgba(255,255,255,0.2) 100%);
-            background-size: 200% 100%; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
-            box-shadow: 0 0 8px rgba(0, 230, 118, 0.8);
-        }
-
-        .line-to-bottom-box {
-            left: 80px; bottom: 55px; width: 0; height: 2px;
-            background: linear-gradient(90deg, #00e676 0%, #00d4ff 50%, rgba(255,255,255,0.2) 100%);
-            background-size: 200% 100%; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
-            box-shadow: 0 0 8px rgba(0, 230, 118, 0.8);
-        }
-
-        .active-layout .line-stem { width: 80px; animation: ledFlowH 1.5s linear infinite; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0s; }
-        .active-layout .line-splitter-top { height: 145px; animation: ledFlowUp 1.5s linear infinite; transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s; }
-        .active-layout .line-splitter-bottom { height: 145px; animation: ledFlowDown 1.5s linear infinite; transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.3s; }
-        .active-layout .line-to-top-box, .active-layout .line-to-bottom-box { width: calc(100% - 80px); animation: ledFlowH 1.5s linear infinite; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.6s; }
-
-        @keyframes ledFlowH { 0% { background-position: 200% 0%; } 100% { background-position: -200% 0%; } }
-        @keyframes ledFlowUp { 0% { background-position: 0% 200%; } 100% { background-position: 0% -200%; } }
-        @keyframes ledFlowDown { 0% { background-position: 0% -200%; } 100% { background-position: 0% 200%; } }
-
-        /* ============================================
-           RIGHT INFO BOX
-        ============================================ */
-        .right-content-wrapper {
-            position: relative; display: flex; flex-direction: column;
-            justify-content: space-between; height: 100%; width: 450px; flex-shrink: 0;
-        }
-
-        .info-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 34px 40px; width: 100%; opacity: 0;
-            transform: translateX(-20px) scale(0.98); text-align: center;
-            position: relative; z-index: 5; font-family: 'Montserrat', sans-serif;
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0s, opacity 0.3s ease 0s,
-                        border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-        }
-
-        .info-box::before, .info-box::after {
-            content: ''; position: absolute; left: 50%; transform: translateX(-50%);
-            width: 0; height: 1px; transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .info-box::before { top: 12px; }
-        .info-box::after { bottom: 12px; }
-        .info-box.box-top::before, .info-box.box-top::after { background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent); }
-        .info-box.box-bottom::before, .info-box.box-bottom::after { background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.25), transparent); }
-        .active-layout .info-box::before, .active-layout .info-box::after { width: 80%; }
-
-        .info-box .box-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px;
-            margin-bottom: 8px; opacity: 0.35; transition: opacity 0.3s ease;
-        }
-        .active-layout .info-box .box-label { opacity: 1; }
-
-        .info-box .box-title {
-            font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 5px; line-height: 1.3;
-            display: inline-block; width: 100%; position: relative; transition: all 0.3s ease;
-        }
-
-        .box-top .box-label { color: #00d4ff; }
-        .box-bottom .box-label { color: #00e676; }
-
-        .box-top .box-title {
-            color: transparent; background: linear-gradient(90deg, #00d4ff 0%, #ffffff 50%, #00d4ff 100%);
-            background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .box-bottom .box-title {
-            color: transparent; background: linear-gradient(90deg, #00e676 0%, #ffffff 50%, #00e676 100%);
-            background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-
-        .active-layout .box-top .box-title { animation: titleShimmerBlue 3s linear infinite; }
-        .active-layout .box-bottom .box-title { animation: titleShimmerGreen 3s linear infinite; }
-        @keyframes titleShimmerBlue { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        @keyframes titleShimmerGreen { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
-        .active-layout .info-box {
-            opacity: 1; transform: translateX(0) scale(1);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.9s, opacity 0.4s ease 0.9s,
-                        border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-        }
-
-        .active-layout .info-box.box-top {
-            border-color: rgba(0, 212, 255, 0.15); background: rgba(0, 212, 255, 0.02);
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.05), inset 0 0 30px rgba(0, 212, 255, 0.015);
-        }
-        .active-layout .info-box.box-bottom {
-            border-color: rgba(0, 230, 118, 0.15); background: rgba(0, 230, 118, 0.02);
-            box-shadow: 0 0 25px rgba(0, 230, 118, 0.05), inset 0 0 30px rgba(0, 230, 118, 0.015);
-        }
-
-        .info-box { cursor: pointer; }
-        .info-box:hover.box-top { border-color: rgba(0, 212, 255, 0.35); box-shadow: 0 0 35px rgba(0, 212, 255, 0.1), inset 0 0 40px rgba(0, 212, 255, 0.03); }
-        .info-box:hover.box-bottom { border-color: rgba(0, 230, 118, 0.35); box-shadow: 0 0 35px rgba(0, 230, 118, 0.1), inset 0 0 40px rgba(0, 230, 118, 0.03); }
-        .info-box:hover .box-label { opacity: 0.7; }
-
-        /* ============================================
-           OVERLAY PANEL
-        ============================================ */
-        .overlay-panel {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            z-index: 200; display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px;
-        }
-
-        .overlay-panel.show { opacity: 1; pointer-events: auto; }
-
-        .panel-box {
-            background: rgba(10, 10, 24, 0.98);
-            border: 1px solid rgba(0, 230, 118, 0.06);
-            border-radius: 18px; position: relative;
-            transform: translateY(28px) scale(0.97);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 120px rgba(0, 230, 118, 0.03);
-            max-height: 92vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
-        }
-
-        .overlay-panel.show .panel-box { transform: translateY(0) scale(1); }
-
-        .panel-close {
-            position: absolute; top: 16px; right: 16px;
-            font-size: 22px; font-weight: 300; color: rgba(255,255,255,0.18);
-            cursor: pointer; width: 36px; height: 36px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; border: 1px solid rgba(255,255,255,0.04);
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif; line-height: 1; z-index: 10;
-        }
-
-        .panel-close:hover { color: #00e676; border-color: rgba(0, 230, 118, 0.25); background: rgba(0, 230, 118, 0.05); }
-
-        .panel-title {
-            font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 6px; text-align: center; padding: 30px 40px 0;
-            background: linear-gradient(90deg, #00d4ff, #00e676);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.2));
-        }
-
-        /* ============================================
-           GRID ITEMS (Identical for Social & Build)
-        ============================================ */
-        .social-panel-box, .build-panel-box { padding-bottom: 28px; max-width: 1060px; width: 100%; }
-
-        .social-grid, .build-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 12px; padding: 28px 28px;
-        }
-
-        .social-item, .build-item {
-            display: flex; align-items: center; gap: 14px;
-            cursor: pointer; padding: 16px 16px; border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.012);
-            opacity: 0; transform: scale(0.93);
-            transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                        background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .social-item.visible, .build-item.visible { opacity: 1; transform: scale(1); }
-
-        .social-item:hover, .build-item:hover {
-            background: rgba(0, 230, 118, 0.04);
-            border-color: rgba(0, 230, 118, 0.18);
-            box-shadow: 0 4px 24px -6px rgba(0, 230, 118, 0.15);
-        }
-
-        /* Styling for icons and logo images (Neat box shape) */
-        .social-item i, 
-        .social-item .social-logo-img, 
-        .build-logo {
-            width: 48px; height: 48px; min-width: 48px;
-            border-radius: 10px; object-fit: contain; padding: 4px;
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.2s ease;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; color: var(--c); /* For Font Awesome icon */
-        }
-
-        .social-item:hover i, 
-        .social-item:hover .social-logo-img, 
-        .build-item:hover .build-logo {
-            background: rgba(0, 230, 118, 0.05);
-            border-color: rgba(0, 230, 118, 0.15);
-        }
-
-        .social-item span, .build-item span {
-            font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 700;
-            color: rgba(255, 255, 255, 0.4); text-transform: uppercase;
-            letter-spacing: 0.5px; text-align: left; line-height: 1.35;
-            transition: color 0.2s ease;
-        }
-
-        .social-item:hover span, .build-item:hover span { color: rgba(255, 255, 255, 0.9); }
-
-        /* ============================================
-           RESPONSIVE — TABLET (iPad / Galaxy Tab)
-        ============================================ */
-        @media screen and (max-width: 1024px) {
-            .interactive-layout { left: 40px; right: 40px; height: 360px; }
-            .main-title-box { width: 380px; padding: 28px 32px; }
-            .main-title { font-size: 30px; letter-spacing: 3px; }
-            .right-content-wrapper { width: 320px; }
-            .info-box { padding: 26px 28px; }
-            .info-box .box-title { font-size: 17px; letter-spacing: 4px; }
-            .info-box .box-label { font-size: 7.5px; letter-spacing: 3px; }
-            .loading-letter { font-size: 54px; }
-
-            .social-grid, .build-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 22px 22px; }
-            .social-item, .build-item { padding: 14px; gap: 12px; }
-            .social-item i, .social-item .social-logo-img, .build-logo { width: 44px; height: 44px; min-width: 44px; font-size: 22px; }
-            .social-item span, .build-item span { font-size: 9px; }
-
-            .panel-title { font-size: 13px; letter-spacing: 5px; padding: 26px 30px 0; }
-        }
-
-        /* ============================================
-           RESPONSIVE — MOBILE
-        ============================================ */
-        @media screen and (max-width: 768px) {
-            .hero-section { background-size: cover; background-position: center; }
-            .header-logo-container { padding: 14px 16px; height: 64px; }
-            .initial-logos img { height: 28px; }
-            .initial-logos { gap: 10px; }
-            .scrolled-v-logo { font-size: 28px; left: 16px; }
-
-            .interactive-layout {
-                left: 16px; right: 16px; flex-direction: column;
-                height: auto; top: 50%; gap: 18px; align-items: stretch;
-            }
-            .main-title-box { width: 100%; padding: 22px 20px; }
-            .main-title { font-size: 22px; letter-spacing: 2px; line-height: 1.25; }
-            .lines-container { display: none; }
-            .right-content-wrapper { width: 100%; height: auto; gap: 14px; justify-content: flex-start; }
-            .info-box { padding: 22px 18px; transform: translateY(20px) scale(0.98); }
-            .active-layout .info-box { transform: translateY(0) scale(1); }
-            .info-box .box-title { font-size: 15px; letter-spacing: 3px; }
-            .info-box .box-label { font-size: 7px; letter-spacing: 3px; }
-
-            .loading-letter { font-size: 40px; }
-            .loading-bar-track { width: 180px; margin-top: 30px; }
-            .loading-line-left, .loading-line-right { animation: lineExpandMobile 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards; }
-            @keyframes lineExpandMobile { to { width: 80px; } }
-            .loading-line-left { margin-right: 50px; }
-            .loading-line-right { margin-left: 50px; }
-
-            .overlay-panel { align-items: flex-start; padding: 70px 12px 24px; }
-            .panel-box { max-height: none; margin: auto; width: 100%; }
-            .panel-title { font-size: 12px; letter-spacing: 4px; padding: 22px 18px 0; }
-
-            .social-panel-box, .build-panel-box { padding-bottom: 20px; }
-            .social-grid, .build-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 16px 14px; }
-            .social-item, .build-item { padding: 12px; gap: 10px; }
-            .social-item i, .social-item .social-logo-img, .build-logo { width: 40px; height: 40px; min-width: 40px; font-size: 20px; }
-            .social-item span, .build-item span { font-size: 8.5px; }
-
-            .panel-close { top: 12px; right: 12px; width: 32px; height: 32px; font-size: 20px; }
-        }
-
-        /* ============================================
-           RESPONSIVE — SMALL MOBILE
-        ============================================ */
-        @media screen and (max-width: 380px) {
-            .main-title { font-size: 18px; letter-spacing: 1.5px; }
-            .info-box .box-title { font-size: 13px; letter-spacing: 2px; }
-            .info-box .box-label { font-size: 6.5px; letter-spacing: 2px; }
-            .info-box { padding: 18px 14px; }
-            .loading-letter { font-size: 32px; }
-            .loading-bar-track { width: 150px; }
-            .loading-line-left, .loading-line-right { display: none; }
-
-            .social-grid, .build-grid { gap: 6px; padding: 12px 10px; }
-            .social-item, .build-item { padding: 10px; gap: 8px; }
-            .social-item i, .social-item .social-logo-img, .build-logo { width: 36px; height: 36px; min-width: 36px; font-size: 18px; }
-            .social-item span, .build-item span { font-size: 8px; }
-
-            .header-logo-container { padding: 12px 14px; height: 58px; }
-            .initial-logos img { height: 24px; }
-            .initial-logos { gap: 8px; }
-            .scrolled-v-logo { font-size: 24px; left: 14px; }
-        }
-
-        /* ============================================
-           RESPONSIVE — LANDSCAPE MOBILE
-        ============================================ */
-        @media screen and (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
-            .interactive-layout { flex-direction: row; height: 280px; gap: 14px; }
-            .lines-container { display: block; }
-            .main-title-box { width: 38%; padding: 18px 22px; }
-            .main-title { font-size: 20px; letter-spacing: 2px; line-height: 1.2; }
-            .right-content-wrapper { width: 36%; height: 100%; justify-content: space-between; }
-            .info-box { padding: 18px 14px; }
-            .info-box .box-title { font-size: 14px; letter-spacing: 3px; }
-            .info-box .box-label { font-size: 7px; margin-bottom: 5px; }
-            .loading-letter { font-size: 36px; }
+        @media (max-width: 768px) {
+            .hdr { padding: 14px 16px; height: 64px; } .init-logo img { height: 28px; } .scr-logo { font-size: 28px; left: 16px; }
+            .p1-layout { left: 16px; right: 16px; flex-direction: column; height: auto; gap: 18px; } .p1-box { width: 100%; padding: 22px 20px; } .p1-title { font-size: 22px; } .p1-lines { display: none; } .p1-right { width: 100%; }
+            .p2 { padding: 80px 20px; } .p2-title { font-size: 48px; } .p2-right { height: 250px; }
+            .p3-cont { padding: 80px 20px; } .p3-title { font-size: 40px; }
+            .p4 { padding: 80px 20px; } .p4-panel-content { padding: 40px 30px; } .p4-title { font-size: 32px; }
+            .p5 { grid-template-columns: 1fr; padding: 80px 20px; } .p5-item.large { grid-column: span 1; } .p5-item.large .p5-h { font-size: 32px; }
+            .p6-title { font-size: 40px; } .p6-text { font-size: 14px; } .p6-cont { margin-top: -10vh; }
+            .p7 { padding: 80px 20px; gap: 40px; } .p7-text-wrap h2 { font-size: 32px; } .p7-img-wrap { height: 250px; }
+            .p8 { padding: 80px 20px; } .p8-h-title { font-size: 40px; }
+            .p9-title { font-size: 36px; }
+            .p10 { padding: 80px 20px; }
+            .p11 { padding: 80px 20px; } .p11-title { font-size: 36px; }
+            .ovl-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px; } 
+            .ovl-item { padding: 15px; gap: 12px; }
+            .ovl-item i, .ovl-item .ovl-logo { width: 48px; height: 48px; min-width: 48px; font-size: 24px; }
+            .ovl-item span { font-size: 12px; }
+            .ovl-title { font-size: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================
-         LOADING SCREEN
-    ============================================ -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-line-left"></div>
-        <div class="loading-line-right"></div>
-        <div class="loading-letters-wrap">
-            <span class="loading-letter blue">I</span>
-            <span class="loading-letter blue">N</span>
-            <span class="loading-letter blue">F</span>
-            <span class="loading-letter blue">O</span>
-            <span class="loading-letter green">T</span>
-            <span class="loading-letter green">R</span>
-            <span class="loading-letter green">I</span>
-            <span class="loading-letter green">N</span>
-            <span class="loading-letter green">K</span>
+    <!-- Loading Screen -->
+    <div class="load-scr" id="loadScr">
+        <div class="load-let-wrap">
+            <span class="load-let b">I</span><span class="load-let b">N</span><span class="load-let b">F</span><span class="load-let b">O</span><span class="load-let g">T</span><span class="load-let g">R</span><span class="load-let g">I</span><span class="load-let g">N</span><span class="load-let g">K</span>
         </div>
-        <div class="loading-bar-track">
-            <div class="loading-bar-fill"></div>
-        </div>
+        <div class="load-bar"><div class="load-fill"></div></div>
     </div>
 
-    <!-- ============================================
-         MAIN CONTENT
-    ============================================ -->
-    <div class="main-content" id="mainContent">
-
-        <div class="header-logo-container" id="globalHeader">
-            <div class="initial-logos">
-                <img src="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png" alt="">
-                <img src="ChatGPT Image Jul 17, 2026, 03_25_26 PM(1).png" alt="">
+    <!-- Header & Hero (P1) -->
+    <div class="p1" id="p1">
+        <div class="hdr" id="hdr">
+            <div class="init-logo">
+                <img src="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png" alt="Logo 1">
+                <img src="ChatGPT Image Jul 17, 2026, 03_25_26 PM(1).png" alt="Logo 2">
             </div>
-            <div class="scrolled-v-logo">I</div>
+            <div class="scr-logo">I</div>
         </div>
-
-        <div class="hero-section">
-            <div class="interactive-layout" id="mainLayout">
-                <button class="main-title-box" id="mainTitleBox" onclick="toggleVlepingSystem()">
-                    <h1 class="main-title">Where Every<br>Journey Begins</h1>
+        <div class="p1-hero">
+            <div class="p1-layout" id="p1Layout">
+                <button class="p1-box" id="p1Box" onclick="toggleSystem()">
+                    <h1 class="p1-title">Where Every<br>Journey Begins</h1>
                 </button>
-                <div class="lines-container">
-                    <div class="line-stem"></div>
-                    <div class="line-splitter-top"></div>
-                    <div class="line-splitter-bottom"></div>
-                    <div class="line-to-top-box"></div>
-                    <div class="line-to-bottom-box"></div>
+                <div class="p1-lines">
+                    <div class="l-stem"></div><div class="l-top"></div><div class="l-bot"></div><div class="l-tt"></div><div class="l-tb"></div>
                 </div>
-                <div class="right-content-wrapper">
-                    <div class="info-box box-top" id="socialBox">
-                        <div class="box-label">Social Platform</div>
-                        <div class="box-title" id="socialTrigger">Social Media</div>
+                <div class="p1-right">
+                    <div class="p1-info lab-top" onclick="openOvl('socOvl')">
+                        <div class="p1-lab">Social Platform</div>
+                        <div class="p1-trig">Social Media</div>
                     </div>
-                    <div class="info-box box-bottom" id="buildBox">
-                        <div class="box-label">Development Project</div>
-                        <div class="box-title" id="buildTrigger">The results developed</div>
+                    <div class="p1-info lab-bot" onclick="openOvl('bldOvl')">
+                        <div class="p1-lab">Development Project</div>
+                        <div class="p1-trig">The results developed</div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- ===== SOCIAL MEDIA ===== -->
-    <div class="overlay-panel" id="socialOverlay">
-        <div class="panel-box social-panel-box">
-            <div class="panel-close" onclick="closePanel('socialOverlay')">&times;</div>
-            <div class="panel-title">Social Media</div>
-            <div class="social-grid">
+    <!-- P2: The Canvas of Potential -->
+    <section class="p2">
+        <div class="p2-cont">
+            <div class="p2-left">
+                <div class="p2-label">The Foundation</div>
+                <h1 class="p2-title">The Canvas of <span>Potential</span></h1>
+                <p class="p2-text">Space is not an absence. It is the structure that allows potential to breathe. By defining boundaries, shape is given to the boundless. The void holds the exact dimensions of what is yet to come, ensuring that when potential arrives, it finds a perfect fit.</p>
+            </div>
+            <div class="p2-right">
+                <img src="ChatGPT Image 18 Jul 2026, 19.07.23.png" class="p2-img" alt="The Canvas of Potential">
+            </div>
+        </div>
+    </section>
 
-                <div class="social-item" style="--c:#ff0050">
-                    <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
-                </div>
-                <div class="social-item" style="--c:#E1306C">
-                    <i class="fa-brands fa-instagram"></i><span>Instagram</span>
-                </div>
-                <div class="social-item" style="--c:#25D366">
-                    <i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span>
-                </div>
-                <div class="social-item" style="--c:#FF0000">
-                    <i class="fa-brands fa-youtube"></i><span>YouTube</span>
-                </div>
-                <div class="social-item" style="--c:#1877F2">
-                    <i class="fa-brands fa-facebook-f"></i><span>Facebook</span>
-                </div>
+    <!-- P3: Existence is Not Silent -->
+    <section class="p3">
+        <div class="p3-bg"></div>
+        <div class="p3-overlay"></div>
+        <div class="p3-cont">
+            <div class="p3-label">The Resonance</div>
+            <h1 class="p3-title">Existence is Not Silent.<br>It Ripples Outward.</h1>
+            <p class="p3-text">In a truly neutral space, a single presence does not merely occupy room; it creates a resonance. Every entity placed within this container sends silent waves outward, altering the atmosphere without disrupting the balance. The space absorbs these frequencies, allowing collective harmony to emerge naturally from isolated existences.</p>
+        </div>
+    </section>
 
-                <div class="social-item" style="--c:#a0a8b4">
-                    <i class="fa-brands fa-x-twitter"></i><span>X</span>
+    <!-- P4: Wheel & Panel -->
+    <section class="p4">
+        <div class="p4-cont">
+            <div class="p4-wheel">
+                <svg class="p4-svg" viewBox="0 0 200 200">
+                    <path class="p4-slice active" id="s1" d="M100,100 L100,20 A80,80 0 0,1 176.08,75.28 Z" onclick="wheel(1)"></path>
+                    <path class="p4-slice" id="s2" d="M100,100 L176.08,75.28 A80,80 0 0,1 147.02,164.72 Z" onclick="wheel(2)"></path>
+                    <path class="p4-slice" id="s3" d="M100,100 L147.02,164.72 A80,80 0 0,1 52.98,164.72 Z" onclick="wheel(3)"></path>
+                    <path class="p4-slice" id="s4" d="M100,100 L52.98,164.72 A80,80 0 0,1 23.92,75.28 Z" onclick="wheel(4)"></path>
+                    <path class="p4-slice" id="s5" d="M100,100 L23.92,75.28 A80,80 0 0,1 100,20 Z" onclick="wheel(5)"></path>
+                    <text class="p4-txt active" id="t1" x="126" y="64" transform="rotate(90 126 64)">01</text>
+                    <text class="p4-txt" id="t2" x="143" y="114" transform="rotate(90 143 114)">02</text>
+                    <text class="p4-txt" id="t3" x="100" y="145" transform="rotate(90 100 145)">03</text>
+                    <text class="p4-txt" id="t4" x="57" y="114" transform="rotate(90 57 114)">04</text>
+                    <text class="p4-txt" id="t5" x="74" y="64" transform="rotate(90 74 64)">05</text>
+                </svg>
+            </div>
+            <div class="p4-panel">
+                <div class="p4-panel-bg" id="wPanelBg"></div>
+                <div class="p4-panel-content">
+                    <div class="p4-label" id="wLab">Space 01</div>
+                    <h2 class="p4-title" id="wTitle">The Neutral Ground</h2>
+                    <p class="p4-text" id="wText">This environment acts as a completely neutral ground. It is a boundless container where various entities, ideas, and individuals can exist and be displayed without any bias or forced hierarchy.</p>
                 </div>
-                <div class="social-item" style="--c:#07C160">
-                    <i class="fa-brands fa-weixin"></i><span>WeChat</span>
-                </div>
-                <div class="social-item" style="--c:#26A5E4">
-                    <i class="fa-brands fa-telegram"></i><span>Telegram</span>
-                </div>
-                <div class="social-item" style="--c:#0A66C2">
-                    <i class="fa-brands fa-linkedin-in"></i><span>LinkedIn</span>
-                </div>
-                <div class="social-item" style="--c:#fff">
-                    <img class="social-logo-img" src="ChatGPT_Image_17_Jul_2026__19.01.14-removebg-preview(1).png" alt="BeReal">
-                    <span>BeReal</span>
-                </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="social-item" style="--c:#6264A7">
-                    <img class="social-logo-img" src="https://img.icons8.com/color/96/000000/microsoft-teams.png" alt="MS Teams">
-                    <span>MS Teams</span>
-                </div>
-                <div class="social-item" style="--c:#5865F2">
-                    <i class="fa-brands fa-discord"></i><span>Discord</span>
-                </div>
-                <div class="social-item" style="--c:#9146FF">
-                    <i class="fa-brands fa-twitch"></i><span>Twitch</span>
-                </div>
-                <div class="social-item" style="--c:#8B949E">
-                    <i class="fa-brands fa-github"></i><span>GitHub</span>
-                </div>
-                <div class="social-item" style="--c:#E1306C">
-                    <i class="fa-brands fa-threads"></i><span>Threads</span>
-                </div>
+    <!-- P5: Editorial Grid -->
+    <section class="p5">
+        <div class="p5-item large">
+            <div class="p5-content">
+                <div class="p5-num">01 // CORE</div>
+                <h2 class="p5-h">Absolute Neutrality</h2>
+                <p class="p5-p">A secure, unbiased environment where every entity is protected and valued equally without exception. The architecture is built upon principles that ensure absolute synergy.</p>
+            </div>
+        </div>
+        <div class="p5-item">
+            <div class="p5-content">
+                <div class="p5-num">02</div>
+                <h2 class="p5-h">Modular Design</h2>
+                <p class="p5-p">Flexible spaces adapting seamlessly.</p>
+            </div>
+        </div>
+        <div class="p5-item">
+            <div class="p5-content">
+                <div class="p5-num">03</div>
+                <h2 class="p5-h">Infinite Reach</h2>
+                <p class="p5-p">Bridging gaps across the landscape.</p>
+            </div>
+        </div>
+    </section>
 
-                <div class="social-item" style="--c:#0084FF">
-                    <i class="fa-brands fa-facebook-messenger"></i><span>Messenger</span>
-                </div>
+    <!-- P6: Horizon Grid -->
+    <section class="p6">
+        <div class="p6-grid-floor"></div>
+        <div class="p6-glow"></div>
+        <div class="p6-horizon"></div>
+        <div class="p6-cont">
+            <div class="p6-label">The Vantage Point</div>
+            <h1 class="p6-title">This is not a conclusion.<br><span>It is the Horizon.</span></h1>
+            <p class="p6-text">The ecosystem does not terminate. It expands into the periphery. The boundary seen is an illusion created by distance. The space continues, perpetually renewing itself at the edge of the unknown.</p>
+        </div>
+    </section>
 
+    <!-- P7: Zigzag Alternating -->
+    <section class="p7">
+        <div class="p7-row">
+            <div class="p7-img-wrap">
+                <img src="ChatGPT Image 18 Jul 2026, 19.17.18.png" class="p7-img" alt="Duality of Existence">
+            </div>
+            <div class="p7-text-wrap">
+                <h2>Duality of <b>Existence</b></h2>
+                <p>Every presence within the container creates a resonance. It sends silent waves outward, altering the atmosphere without disrupting the balance. The space absorbs these frequencies, allowing collective harmony to emerge naturally from isolated existences.</p>
+            </div>
+        </div>
+        <div class="p7-row rev">
+            <div class="p7-img-wrap">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" class="p7-img" alt="Structure of Void">
+            </div>
+            <div class="p7-text-wrap">
+                <h2>The <b>Structure</b> of Void</h2>
+                <p>Space is not merely an absence of matter. It is the fundamental structure that allows potential to breathe. By defining the boundaries of the container, shape is given to the boundless, ensuring a perfect fit for what is yet to come.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- P8: Timeline -->
+    <section class="p8">
+        <div class="p8-head">
+            <div class="p8-h-label">The Ascension</div>
+            <h1 class="p8-h-title">Steps To Maturity</h1>
+        </div>
+        <div class="p8-line"></div>
+        <div class="p8-items">
+            <div class="p8-item"><div class="p8-num">01</div><h3>Awareness</h3><p>Recognizing the diverse potentials that exist within the neutral container.</p></div>
+            <div class="p8-item"><div class="p8-num">02</div><h3>Alignment</h3><p>Bringing disparate elements into a shared, orderly structural vision.</p></div>
+            <div class="p8-item"><div class="p8-num">03</div><h3>Synergy</h3><p>Catalyzing silent connections that multiply collective impact naturally.</p></div>
+            <div class="p8-item"><div class="p8-num">04</div><h3>Ascension</h3><p>Transcending limitations to step forward into the broader digital world.</p></div>
+        </div>
+    </section>
+
+    <!-- P9: Manifesto -->
+    <section class="p9">
+        <div class="p9-cont">
+            <div class="p9-line"></div>
+            <h1 class="p9-title">Spaces are not merely built.<br><b>Potentials are cultivated.</b></h1>
+            <p class="p9-text">To be the definitive starting point where every meaningful journey is nurtured, recorded, and prepared before stepping into the broader world. Maintaining an orderly ecosystem with no rigid hierarchies, ensuring every entity holds equal weight and space to interact and grow naturally.</p>
+        </div>
+    </section>
+
+    <!-- P10: Image Triptych -->
+    <section class="p10">
+        <div class="p10-grid">
+            <div class="p10-card">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800" class="p10-img" alt="Vision">
+                <div class="p10-overlay">
+                    <h2 class="p10-h">Vision</h2>
+                    <div class="p10-line"></div>
+                    <p class="p10-p">To be the definitive starting point where every meaningful journey is nurtured and prepared before stepping into the broader world.</p>
+                </div>
+            </div>
+            <div class="p10-card">
+                <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=800" class="p10-img" alt="Mission">
+                <div class="p10-overlay">
+                    <h2 class="p10-h">Mission</h2>
+                    <div class="p10-line"></div>
+                    <p class="p10-p">Providing a neutral, boundless room where diverse initiatives can securely gather, exist without bias, and naturally align for greater impact.</p>
+                </div>
+            </div>
+            <div class="p10-card">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" class="p10-img" alt="Promise">
+                <div class="p10-overlay">
+                    <h2 class="p10-h">Promise</h2>
+                    <div class="p10-line"></div>
+                    <p class="p10-p">Maintaining an orderly ecosystem with no rigid hierarchies, ensuring every entity holds equal weight and space to interact and grow naturally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- P11: Finale -->
+    <section class="p11">
+        <div class="p11-glow"></div>
+        <div class="p11-cont">
+            <div class="p11-label">The Culmination</div>
+            <h1 class="p11-title">The Architecture is <b>Complete.</b></h1>
+            <p class="p11-text">The boundaries are drawn, and the structure holds firm. What exists within this space is no longer defined by its creation, but by its potential. The environment awaits the weight of infinite possibilities, ready to nurture whatever steps forward.</p>
+            <div class="p11-divider"></div>
+        </div>
+        <div class="p11-footer">
+            <div class="p11-line"></div>
+            <div class="p11-copy">© 2026 <span>INFOTRINK</span>. ALL RIGHTS RESERVED.</div>
+        </div>
+    </section>
+
+    <!-- Overlay: Social Media -->
+    <div class="ovl" id="socOvl">
+        <div class="ovl-box">
+            <div class="ovl-close" onclick="closeOvl('socOvl')">&times;</div>
+            <div class="ovl-title">Social Media</div>
+            <div class="ovl-grid" id="socGrid">
+                <div class="ovl-item" style="--c:#ff0050"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></div>
+                <div class="ovl-item" style="--c:#E1306C"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+                <div class="ovl-item" style="--c:#25D366"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></div>
+                <div class="ovl-item" style="--c:#FF0000"><i class="fa-brands fa-youtube"></i><span>YouTube</span></div>
+                <div class="ovl-item" style="--c:#1877F2"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></div>
+                <div class="ovl-item" style="--c:#a0a8b4"><i class="fa-brands fa-x-twitter"></i><span>X</span></div>
+                <div class="ovl-item" style="--c:#07C160"><i class="fa-brands fa-weixin"></i><span>WeChat</span></div>
+                <div class="ovl-item" style="--c:#26A5E4"><i class="fa-brands fa-telegram"></i><span>Telegram</span></div>
+                <div class="ovl-item" style="--c:#0A66C2"><i class="fa-brands fa-linkedin-in"></i><span>LinkedIn</span></div>
+                <div class="ovl-item" style="--c:#fff"><img class="ovl-logo" src="ChatGPT_Image_17_Jul_2026__19.01.14-removebg-preview(1).png" alt="BeReal"><span>BeReal</span></div>
+                <div class="ovl-item" style="--c:#6264A7"><img class="ovl-logo" src="https://img.icons8.com/color/96/000000/microsoft-teams.png" alt="MS Teams"><span>MS Teams</span></div>
+                <div class="ovl-item" style="--c:#5865F2"><i class="fa-brands fa-discord"></i><span>Discord</span></div>
+                <div class="ovl-item" style="--c:#9146FF"><i class="fa-brands fa-twitch"></i><span>Twitch</span></div>
+                <div class="ovl-item" style="--c:#8B949E"><i class="fa-brands fa-github"></i><span>GitHub</span></div>
+                <div class="ovl-item" style="--c:#E1306C"><i class="fa-brands fa-threads"></i><span>Threads</span></div>
+                <div class="ovl-item" style="--c:#0084FF"><i class="fa-brands fa-facebook-messenger"></i><span>Messenger</span></div>
             </div>
         </div>
     </div>
 
-    <!-- ===== PROJECTS ===== -->
-    <div class="overlay-panel" id="buildOverlay">
-        <div class="panel-box build-panel-box">
-            <div class="panel-close" onclick="closePanel('buildOverlay')">&times;</div>
-            <div class="panel-title">The results developed</div>
-            <div class="build-grid">
-
-                <div class="build-item">
-                    <img class="build-logo" src="Untitled_design-removebg-preview.png" alt="">
-                    <span>Geinia Nasional</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image 12 Jul 2026, 22.17.14(1).png" alt="">
-                    <span>Unevras International Hcap</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image Jul 5, 2026, 02_05_25 PM(1).png" alt="">
-                    <span>PT JRI Munawar Group</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image 5 Jul 2026, 14.36.14(1).png" alt="">
-                    <span>Vleping</span>
-                </div>
-
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image Jul 11, 2026, 06_17_43 PM(1).png" alt="">
-                    <span>Unisantara Media Digital</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image 17 Jul 2026, 17.13.45.png" alt="">
-                    <span>Konekda</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image Jul 15, 2026, 12_06_33 PM(1).png" alt="">
-                    <span>Zearvis Teknologi</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image Jul 17, 2026, 07_40_45 PM(1).png" alt="">
-                    <span>Sirankarta</span>
-                </div>
-
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image 15 Jul 2026, 12.06.43(1).png" alt="">
-                    <span>Xeagis Industri</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image 17 Jul 2026, 17.13.41.png" alt="">
-                    <span>Danabatri</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image 15 Jul 2026, 17.11.28(1).png" alt="">
-                    <span>Porinvex</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image Jul 17, 2026, 10_45_31 PM(1).png" alt="">
-                    <span>Padat</span>
-                </div>
-
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image Jul 14, 2026, 11_59_39 PM(1).png" alt="">
-                    <span>Bearbalck Security</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image 15 Jul 2026, 12.10.15(1).png" alt="">
-                    <span>Axitorium Lab</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image Jul 15, 2026, 12_08_43 AM(1).png" alt="">
-                    <span>Weilmy</span>
-                </div>
-                <div class="build-item">
-                    <img class="build-logo" src="ChatGPT Image Jul 15, 2026, 12_01_46 AM(1).png" alt="">
-                    <span>Siravex</span>
-                </div>
-
+    <!-- Overlay: Build Projects -->
+    <div class="ovl" id="bldOvl">
+        <div class="ovl-box">
+            <div class="ovl-close" onclick="closeOvl('bldOvl')">&times;</div>
+            <div class="ovl-title">The results developed</div>
+            <div class="ovl-grid" id="bldGrid">
+                <div class="ovl-item"><img class="ovl-logo" src="Untitled_design-removebg-preview.png" alt="Geinia Nasional"><span>Geinia Nasional</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 12 Jul 2026, 22.17.14(1).png" alt="Unevras"><span>Unevras International Hcap</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 5, 2026, 02_05_25 PM(1).png" alt="JRI"><span>PT JRI Munawar Group</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 5 Jul 2026, 14.36.14(1).png" alt="Vleping"><span>Vleping</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 11, 2026, 06_17_43 PM(1).png" alt="Unisantara"><span>Unisantara Media Digital</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 17 Jul 2026, 17.13.45.png" alt="Konekda"><span>Konekda</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 15, 2026, 12_06_33 PM(1).png" alt="Zearvis"><span>Zearvis Teknologi</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 17, 2026, 07_40_45 PM(1).png" alt="Sirankarta"><span>Sirankarta</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 15 Jul 2026, 12.06.43(1).png" alt="Xeagis"><span>Xeagis Industri</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 17 Jul 2026, 17.13.41.png" alt="Danabatri"><span>Danabatri</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 15 Jul 2026, 17.11.28(1).png" alt="Porinvex"><span>Porinvex</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 17, 2026, 10_45_31 PM(1).png" alt="Padat"><span>Padat</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 14, 2026, 11_59_39 PM(1).png" alt="Bearbalck"><span>Bearbalck Security</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 15 Jul 2026, 12.10.15(1).png" alt="Axitorium"><span>Axitorium Lab</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 15, 2026, 12_08_43 AM(1).png" alt="Weilmy"><span>Weilmy</span></div>
+                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 15, 2026, 12_01_46 AM(1).png" alt="Siravex"><span>Siravex</span></div>
             </div>
         </div>
     </div>
 
     <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loadingScreen').classList.add('done');
-                document.getElementById('mainContent').classList.add('show');
-            }, 3500);
+        // Loading and Scroll Events
+        window.addEventListener('load', () => { 
+            setTimeout(() => { 
+                document.getElementById('loadScr').classList.add('done'); 
+                document.getElementById('p1').classList.add('show'); 
+            }, 3500); 
         });
-
-        function toggleVlepingSystem() {
-            document.getElementById('mainLayout').classList.toggle('active-layout');
-            document.getElementById('mainTitleBox').classList.toggle('active-box');
+        
+        window.addEventListener('scroll', () => { 
+            const h = document.getElementById('hdr'); 
+            if (window.scrollY > 50) h.classList.add('scrolled'); 
+            else h.classList.remove('scrolled'); 
+        });
+        
+        function toggleSystem() { 
+            document.getElementById('p1Layout').classList.toggle('active'); 
+            document.getElementById('p1Box').classList.toggle('active'); 
         }
 
-        document.getElementById('socialTrigger').addEventListener('click', function(e) {
-            e.stopPropagation(); e.preventDefault();
-            closeAllPanels(); openPanel('socialOverlay');
-        });
-
-        document.getElementById('buildTrigger').addEventListener('click', function(e) {
-            e.stopPropagation(); e.preventDefault();
-            closeAllPanels(); openPanel('buildOverlay');
-        });
-
-        function closeAllPanels() {
-            document.querySelectorAll('.overlay-panel.show').forEach(function(o) {
-                o.classList.remove('show');
-                o.querySelectorAll('.social-item, .build-item').forEach(function(item) {
-                    item.classList.remove('visible');
-                });
-            });
+        // Overlay Logic
+        function openOvl(id) { 
+            const o = document.getElementById(id); 
+            o.classList.add('show'); 
+            o.scrollTop = 0; 
+            const items = o.querySelectorAll('.ovl-item'); 
+            items.forEach((it, i) => { 
+                it.classList.remove('vis'); 
+                setTimeout(() => it.classList.add('vis'), 100 + i * 30); 
+            }); 
         }
-
-        function openPanel(id) {
-            var overlay = document.getElementById(id);
-            overlay.classList.add('show');
-            overlay.scrollTop = 0;
-            var items = overlay.querySelectorAll('.social-item, .build-item');
-            items.forEach(function(item) { item.classList.remove('visible'); });
-            items.forEach(function(item, i) {
-                setTimeout(function() { item.classList.add('visible'); }, 120 + i * 35);
-            });
+        
+        function closeOvl(id) { 
+            document.getElementById(id).classList.remove('show'); 
         }
-
-        function closePanel(id) {
-            var overlay = document.getElementById(id);
-            overlay.classList.remove('show');
-            overlay.querySelectorAll('.social-item, .build-item').forEach(function(item) {
-                item.classList.remove('visible');
-            });
-        }
-
-        document.querySelectorAll('.overlay-panel').forEach(function(overlay) {
-            overlay.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    e.stopPropagation(); e.preventDefault();
-                    closePanel(this.id);
-                }
-            });
+        
+        document.querySelectorAll('.ovl').forEach(o => o.addEventListener('click', e => { 
+            if (e.target === o) closeOvl(o.id); 
+        }));
+        
+        document.addEventListener('keydown', e => { 
+            if (e.key === 'Escape') document.querySelectorAll('.ovl.show').forEach(o => closeOvl(o.id)); 
         });
 
-        document.querySelectorAll('.panel-box').forEach(function(box) {
-            box.addEventListener('click', function(e) { e.stopPropagation(); });
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.overlay-panel.show').forEach(function(o) { closePanel(o.id); });
+        // Wheel Data
+        const wData = [
+            { 
+                l: "Space 01", 
+                t: "The Neutral Ground", 
+                x: "This environment acts as a completely neutral ground. It is a boundless container where various entities, ideas, and individuals can exist and be displayed without any bias or forced hierarchy.",
+                img: "ChatGPT Image 18 Jul 2026, 19.23.41.png" 
+            },
+            { 
+                l: "Space 02", 
+                t: "The Gathering Point", 
+                x: "Serving as a central hub, it brings distinct elements into one shared proximity. It is the designated area where separate paths cross, allowing for natural interaction and mutual recognition.",
+                img: "ChatGPT Image 18 Jul 2026, 19.26.51.png" 
+            },
+            { 
+                l: "Space 03", 
+                t: "The Structured Openness", 
+                x: "Though open and accommodating, the space maintains a strict, orderly foundation. Every participant is given equal room to be seen and understood, ensuring clarity within the collective.",
+                img: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=1200" 
+            },
+            { 
+                l: "Space 04", 
+                t: "The Silent Catalyst", 
+                x: "By simply providing a shared room, this space naturally accelerates unseen connections. It allows isolated efforts to align and multiply their impact without requiring direct intervention.",
+                img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200" 
+            },
+            { 
+                l: "Space 05", 
+                t: "The Genesis Space", 
+                x: "More than just a container, it is the absolute starting line. It is the singular point where every potential is initially gathered, acknowledged, and prepared before stepping forward.",
+                img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200" 
             }
-        });
-
-        // Prevent double-tap zoom on mobile
-        var lastTouchEnd = 0;
-        document.addEventListener('touchend', function(e) {
-            var now = Date.now();
-            if (now - lastTouchEnd <= 300) { e.preventDefault(); }
-            lastTouchEnd = now;
+        ];
+        
+        document.getElementById('wPanelBg').style.backgroundImage = `url('${wData[0].img}')`;
+        
+        function wheel(i) {
+            document.querySelectorAll('.p4-slice').forEach(s => s.classList.remove('active')); 
+            document.getElementById('s'+i).classList.add('active');
+            document.querySelectorAll('.p4-txt').forEach(t => t.classList.remove('active')); 
+            document.getElementById('t'+i).classList.add('active');
+            
+            const data = wData[i-1];
+            document.getElementById('wLab').innerText = data.l;
+            document.getElementById('wTitle').innerText = data.t;
+            document.getElementById('wText').innerText = data.x;
+            document.getElementById('wPanelBg').style.backgroundImage = `url('${data.img}')`;
+        }
+        
+        document.addEventListener('touchend', e => { 
+            const n = Date.now(); 
+            if (n - (window.lt||0) <= 300) e.preventDefault(); 
+            window.lt = n; 
         }, { passive: false });
-
-        // Prevent pinch zoom
-        document.addEventListener('gesturestart', function(e) { e.preventDefault(); });
+        
+        document.addEventListener('gesturestart', e => e.preventDefault());
     </script>
-
 </body>
 </html>
