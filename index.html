@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#000000">
-    <!-- Kode untuk mencegah Google mengindeks gambar (Privasi Gambar) -->
+    <!-- Mencegah Google mengindeks gambar -->
     <meta name="robots" content="noimageindex">
     <title>INFOTRINK</title>
     <link rel="icon" type="image/png" href="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png">
@@ -27,17 +27,19 @@
             font-family: 'Montserrat', sans-serif; 
             scroll-behavior: smooth; 
         }
-        body { overflow-y: auto; }
+        body { 
+            overflow-y: auto; 
+            touch-action: manipulation; 
+        }
         :root { 
             --cy: #00d4ff; 
             --gr: #00e676; 
         }
 
-        /* LOADING SCREEN */
+        /* === LOADING SCREEN KELAS ATAS === */
         .load-scr { 
             position: fixed; 
             inset: 0; 
-            background: #000; 
             z-index: 9999; 
             display: flex; 
             flex-direction: column; 
@@ -45,32 +47,82 @@
             justify-content: center; 
             transition: opacity 0.8s ease; 
             padding: 20px;
+            background: radial-gradient(circle at 50% 30%, #0a1018 0%, #050507 60%, #000000 100%);
+            overflow: hidden;
         }
         .load-scr.done { 
             opacity: 0; 
             visibility: hidden; 
             pointer-events: none; 
         }
-        .load-let-wrap { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+        
+        /* Animasi Grid di Latar Belakang Loading */
+        .load-scr-grid {
+            position: absolute;
+            inset: -50%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(0, 230, 118, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 4s linear infinite;
+            mask-image: radial-gradient(circle at center, black 20%, transparent 70%);
+            -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 70%);
+            pointer-events: none;
+        }
+        @keyframes gridMove { 
+            0% { transform: translateY(0); } 
+            100% { transform: translateY(50px); } 
+        }
+
+        /* Cahaya di belakang teks */
+        .load-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 200px;
+            background: radial-gradient(ellipse, rgba(0, 212, 255, 0.12) 0%, rgba(0, 230, 118, 0.05) 40%, transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+            animation: pulseGlow 4s ease infinite;
+        }
+        @keyframes pulseGlow { 
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); } 
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } 
+        }
+
+        .load-content { position: relative; z-index: 10; text-align: center; width: 100%; max-width: 340px; }
+        
+        .load-let-wrap { 
+            display: flex; 
+            gap: 4px; 
+            flex-wrap: nowrap; /* Mencegah teks turun ke bawah */
+            justify-content: center; 
+            margin-bottom: 40px; 
+            white-space: nowrap;
+        }
         .load-let { 
             font-family: 'Cinzel', serif; 
-            font-size: 64px; 
+            /* Ukuran font dinamis agar muat di semua layar tanpa patah */
+            font-size: clamp(2rem, 13vw, 64px); 
             font-weight: 900; 
             opacity: 0; 
             transform: translateY(20px); 
             animation: lin 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+            line-height: 1;
         }
         .load-let.b { 
             background: linear-gradient(180deg, var(--cy), #0077b6); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4)); 
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5)); 
         }
         .load-let.g { 
             background: linear-gradient(180deg, var(--gr), #00a152); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.35)); 
+            filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.4)); 
         }
         .load-let:nth-child(1) { animation-delay: .2s; }
         .load-let:nth-child(2) { animation-delay: .32s; }
@@ -82,24 +134,49 @@
         .load-let:nth-child(8) { animation-delay: 1.04s; }
         .load-let:nth-child(9) { animation-delay: 1.16s; }
         @keyframes lin { to { opacity: 1; transform: translateY(0); } }
+
         .load-bar { 
-            width: 240px; 
+            width: 100%; 
             height: 2px; 
-            background: rgba(255,255,255,0.06); 
-            margin-top: 40px; 
+            background: rgba(255,255,255,0.08); 
+            margin: 0 auto; 
             border-radius: 2px; 
             overflow: hidden; 
             opacity: 0; 
             animation: fu 0.5s ease 1.4s forwards; 
+            position: relative;
         }
         .load-fill { 
-            width: 0%; 
+            width: 0%;; 
             height: 100%; 
             background: linear-gradient(90deg, var(--cy), var(--gr)); 
-            animation: lf 1.2s ease 1.6s forwards; 
+            box-shadow: 0 0 10px var(--cy);
+            transition: width 0.1s linear;
         }
-        @keyframes lf { to { width: 100%; } } 
+        /* Efek sapuan cahaya di loading bar */
+        .load-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: rgba(255,255,255,0.7);
+            filter: blur(4px);
+        }
         @keyframes fu { to { opacity: 1; } }
+
+        .load-info { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            width: 100%; 
+            margin: 15px auto 0; 
+            opacity: 0; 
+            animation: fu 0.5s ease 1.4s forwards; 
+        }
+        .load-percent { font-size: 12px; font-weight: 600; color: var(--cy); letter-spacing: 1px; }
+        .load-status { font-size: 8px; font-weight: 600; color: rgba(255,255,255,0.4); letter-spacing: 3px; text-transform: uppercase; }
 
         /* HEADER */
         .hdr { 
@@ -173,6 +250,7 @@
             display: flex; 
             align-items: center; 
             height: 400px; 
+            z-index: 5;
         }
         .p1-box { 
             background: rgba(255,255,255,0.02); 
@@ -416,7 +494,7 @@
         .p10-p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7); }
 
         /* P11 - Finale */
-        .p11 { width: 100%; min-height: 100vh; position: relative; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 40px; overflow: hidden; }
+        .p11 { width: 100%; min-height: 100vh; position: relative; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 40px 40px; overflow: hidden; }
         .p11-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; max-width: 90vw; max-height: 90vh; background: radial-gradient(circle, rgba(0, 230, 118, 0.05) 0%, transparent 70%); pointer-events: none; }
         .p11-cont { position: relative; z-index: 10; max-width: 700px; text-align: center; }
         .p11-label { font-size: 12px; font-weight: 600; color: var(--cy); text-transform: uppercase; letter-spacing: 6px; margin-bottom: 30px; }
@@ -424,10 +502,19 @@
         .p11-title b { font-weight: 800; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .p11-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.5); text-align: justify; margin-bottom: 60px; }
         .p11-divider { width: 1px; height: 60px; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.3), transparent); margin: 0 auto 40px auto; }
-        .p11-footer { position: absolute; bottom: 40px; left: 0; width: 100%; text-align: center; z-index: 10; }
-        .p11-line { width: 80px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 15px auto; }
-        .p11-copy { font-size: 10px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 3px; }
-        .p11-copy span { color: rgba(0, 230, 118, 0.4); }
+        
+        /* Footer Hak Cipta Profesional */
+        .p11-footer { 
+            position: relative; 
+            margin-top: 60px; 
+            width: 100%; 
+            text-align: center; 
+            z-index: 10; 
+            padding-bottom: 40px;
+        }
+        .p11-line { width: 80px; height: 1px; background: rgba(255,255,255,0.2); margin: 0 auto 20px auto; }
+        .p11-copy { font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 1px; font-weight: 500; }
+        .p11-copy span { color: rgba(0, 230, 118, 0.9); font-weight: 700; }
 
         /* OVERLAY PANEL */
         .ovl { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
@@ -455,9 +542,6 @@
             .p4-cont { grid-template-columns: 1fr; gap: 60px; } .p4-wheel { max-width: 260px; }
             .p5 { grid-template-columns: 1fr 1fr; padding: 80px 40px; } .p5-item.large { grid-column: span 2; }
             .p6-title { font-size: 56px; }
-            
-            /* Loading Text Responsive for Tablet */
-            .load-let { font-size: 48px; } .load-bar { width: 200px; margin-top: 30px; }
             
             /* Timeline Responsive for Tablet */
             .p8-items { max-width: 100%; padding-left: 15px; } 
@@ -498,15 +582,12 @@
             .p6-title { font-size: 40px; } .p6-text { font-size: 14px; } .p6-cont { margin-top: -10vh; }
             .p7 { padding: 80px 20px; gap: 40px; } .p7-text-wrap h2 { font-size: 32px; } .p7-img-wrap { height: 250px; }
             
-            /* Loading Text Responsive for Phone */
-            .load-let { font-size: 38px; } .load-bar { width: 160px; margin-top: 25px; } .load-let-wrap { gap: 2px; }
-            
             /* Timeline Responsive for Phone */
             .p8 { padding: 80px 20px; } .p8-h-title { font-size: 36px; } .p8-item { padding: 20px 20px 20px 35px; } .p8-item h3 { font-size: 20px; margin-bottom: 8px; } .p8-num { font-size: 36px; }
             
             .p9-title { font-size: 36px; }
             .p10 { padding: 80px 20px; }
-            .p11 { padding: 80px 20px; } .p11-title { font-size: 36px; }
+            .p11 { padding: 80px 20px 40px; } .p11-title { font-size: 36px; }
             .ovl-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px; } 
             .ovl-item { padding: 15px; gap: 12px; }
             .ovl-item i, .ovl-item .ovl-logo { width: 48px; height: 48px; min-width: 48px; font-size: 24px; }
@@ -517,12 +598,22 @@
 </head>
 <body>
 
-    <!-- Loading Screen -->
+    <!-- Loading Screen Kelas Atas -->
     <div class="load-scr" id="loadScr">
-        <div class="load-let-wrap">
-            <span class="load-let b">I</span><span class="load-let b">N</span><span class="load-let b">F</span><span class="load-let b">O</span><span class="load-let g">T</span><span class="load-let g">R</span><span class="load-let g">I</span><span class="load-let g">N</span><span class="load-let g">K</span>
+        <div class="load-scr-grid"></div>
+        <div class="load-glow"></div>
+        <div class="load-content">
+            <div class="load-let-wrap">
+                <span class="load-let b">I</span><span class="load-let b">N</span><span class="load-let b">F</span><span class="load-let b">O</span><span class="load-let g">T</span><span class="load-let g">R</span><span class="load-let g">I</span><span class="load-let g">N</span><span class="load-let g">K</span>
+            </div>
+            <div class="load-bar">
+                <div class="load-fill" id="loadFill"></div>
+            </div>
+            <div class="load-info">
+                <div class="load-status">System Initializing</div>
+                <div class="load-percent" id="loadPercent">0%</div>
+            </div>
         </div>
-        <div class="load-bar"><div class="load-fill"></div></div>
     </div>
 
     <!-- Header & Hero (P1) -->
@@ -731,9 +822,11 @@
             <p class="p11-text">The boundaries are drawn, and the structure holds firm. What exists within this space is no longer defined by its creation, but by its potential. The environment awaits the weight of infinite possibilities, ready to nurture whatever steps forward.</p>
             <div class="p11-divider"></div>
         </div>
+        
+        <!-- Teks Hak Cipta Profesional Standar Website -->
         <div class="p11-footer">
             <div class="p11-line"></div>
-            <div class="p11-copy">© 2026 <span>INFOTRINK</span>. ALL RIGHTS RESERVED.</div>
+            <div class="p11-copy">© 2026 <span>INFOTRINK</span>. All Rights Reserved.</div>
         </div>
     </section>
 
@@ -790,12 +883,34 @@
     </div>
 
     <script>
-        // Loading and Scroll Events
+        // Loading Logic with Percentage Counter
         window.addEventListener('load', () => { 
-            setTimeout(() => { 
-                document.getElementById('loadScr').classList.add('done'); 
-                document.getElementById('p1').classList.add('show'); 
-            }, 3500); 
+            const loadFill = document.getElementById('loadFill');
+            const loadPercent = document.getElementById('loadPercent');
+            let progress = 0;
+            
+            // Start counting after text animation finishes
+            setTimeout(() => {
+                const interval = setInterval(() => {
+                    // Increase progress randomly for smooth effect
+                    progress += Math.floor(Math.random() * 12) + 4;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        loadPercent.innerText = '100%';
+                        loadFill.style.width = '100%';
+                        
+                        // Hide loader
+                        setTimeout(() => { 
+                            document.getElementById('loadScr').classList.add('done'); 
+                            document.getElementById('p1').classList.add('show'); 
+                        }, 400);
+                    } else {
+                        loadPercent.innerText = progress + '%';
+                        loadFill.style.width = progress + '%';
+                    }
+                }, 50); // Speed of loading
+            }, 1600); // Delay before loading starts
         });
         
         window.addEventListener('scroll', () => { 
@@ -881,14 +996,6 @@
             document.getElementById('wText').innerText = data.x;
             document.getElementById('wPanelBg').style.backgroundImage = `url('${data.img}')`;
         }
-        
-        document.addEventListener('touchend', e => { 
-            const n = Date.now(); 
-            if (n - (window.lt||0) <= 300) e.preventDefault(); 
-            window.lt = n; 
-        }, { passive: false });
-        
-        document.addEventListener('gesturestart', e => e.preventDefault());
     </script>
 </body>
 </html>
