@@ -58,7 +58,6 @@
             pointer-events: none; 
         }
         
-        /* Animasi Grid di Latar Belakang Loading */
         .load-scr-grid {
             position: absolute;
             inset: -50%;
@@ -76,7 +75,6 @@
             100% { transform: translateY(50px); } 
         }
 
-        /* Cahaya di belakang teks */
         .load-glow {
             position: absolute;
             top: 50%;
@@ -148,7 +146,7 @@
             position: relative;
         }
         .load-fill { 
-            width: 0%;; 
+            width: 0%; 
             height: 100%; 
             background: linear-gradient(90deg, var(--cy), var(--gr)); 
             box-shadow: 0 0 10px var(--cy);
@@ -178,42 +176,61 @@
         .load-percent { font-size: 12px; font-weight: 600; color: var(--cy); letter-spacing: 1px; }
         .load-status { font-size: 8px; font-weight: 600; color: rgba(255,255,255,0.4); letter-spacing: 3px; text-transform: uppercase; }
 
-        /* HEADER */
+        /* HEADER & LOGO ANIMATION PREMIUM */
         .hdr { 
             position: fixed; 
             top: 0; 
             left: 0; 
+            width: 100%;
             padding: 22px 24px; 
             z-index: 100; 
             display: flex; 
             align-items: center; 
-            height: 85px; 
-            perspective: 300px; 
+            height: 90px; 
+            perspective: 600px; 
+            transition: height 0.4s ease, background 0.4s ease, padding 0.4s ease;
+        }
+        .hdr.scrolled {
+            height: 70px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px 24px;
         }
         .init-logo { 
             display: flex; 
             gap: 14px; 
+            align-items: center;
             opacity: 1; 
             transform: translateX(0) scale(1) rotateY(0deg); 
             transform-style: preserve-3d; 
-            transition: transform 0.6s ease, opacity 0.4s ease; 
+            transition: transform 0.5s cubic-bezier(0.34, 1.26, 0.64, 1), opacity 0.4s ease; 
         }
-        .init-logo img { height: 38px; width: auto; }
+        .init-logo img { height: 36px; width: auto; transition: height 0.4s ease; }
+        .hdr.scrolled .init-logo img { height: 30px; }
+        
         .scr-logo { 
             position: absolute; 
             left: 24px; 
-            font-family: 'Cinzel', serif; 
-            font-size: 38px; 
-            font-weight: 900; 
+            width: 42px;
+            height: 42px;
             opacity: 0; 
-            transform: translateX(-30px) scale(0.7) rotateY(-90deg); 
+            transform: translateX(-30px) scale(0.5) rotateY(-90deg); 
             transform-style: preserve-3d; 
-            transition: transform 0.6s ease, opacity 0.4s ease; 
-            background: linear-gradient(180deg, var(--cy), var(--gr)); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.4)); 
+            transition: transform 0.5s cubic-bezier(0.34, 1.26, 0.64, 1), opacity 0.4s ease; 
         }
+        .scr-logo svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5));
+            animation: spinQ 6s linear infinite;
+        }
+        @keyframes spinQ { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+        
         .hdr.scrolled .init-logo { 
             opacity: 0; 
             transform: translateX(-40px) scale(0.8) rotateY(90deg); 
@@ -260,6 +277,7 @@
             text-align: left; 
             outline: none; 
             width: 520px; 
+            max-width: 100%;
             flex-shrink: 0; 
             transition: all 0.4s ease; 
             font-family: inherit; 
@@ -566,40 +584,109 @@
         .ovl-item span { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3; }
         .ovl-item:hover span { color: #fff; }
 
-        /* RESPONSIVE */
+        /* === RESPONSIVE TATA LETAK PREMIUM === */
+        /* Tablet Landscape & Laptop Kecil */
         @media (max-width: 1024px) {
-            .p1-layout { left: 40px; right: 40px; height: 360px; } .p1-box { width: 380px; padding: 28px 32px; } .p1-title { font-size: 30px; letter-spacing: 3px; } .p1-right { width: 320px; } .p1-info { padding: 26px 28px; }
-            .p2-cont, .p7-row { grid-template-columns: 1fr; gap: 40px; } .p2-right { height: 350px; } .p7-row.rev .p7-img-wrap { order: 0; } .p7-img-wrap { height: 300px; }
-            .p3-bg, .p3-overlay { width: 100%; clip-path: none; } .p3-cont { max-width: 100%; padding: 100px 40px; }
-            .p4-cont { grid-template-columns: 1fr; gap: 60px; } .p4-wheel { max-width: 260px; }
-            .p5 { grid-template-columns: 1fr 1fr; padding: 80px 40px; } .p5-item.large { grid-column: span 2; }
+            .p1-layout { left: 40px; right: 40px; height: 360px; } 
+            .p1-box { width: 380px; padding: 28px 32px; } 
+            .p1-title { font-size: 30px; letter-spacing: 3px; } 
+            .p1-right { width: 320px; } 
+            .p1-info { padding: 26px 28px; }
+            
+            .p2 { padding: 100px 40px; }
+            .p2-cont, .p7-row { grid-template-columns: 1fr; gap: 40px; } 
+            .p2-right { height: 350px; } 
+            .p7-row.rev .p7-img-wrap { order: 0; } 
+            .p7-img-wrap { height: 300px; }
+            
+            .p3-bg, .p3-overlay { width: 100%; clip-path: none; } 
+            .p3-cont { max-width: 100%; padding: 100px 40px; }
+            
+            .p4-cont { grid-template-columns: 1fr; gap: 60px; } 
+            .p4-wheel { max-width: 260px; }
+            
+            .p5 { grid-template-columns: 1fr 1fr; padding: 100px 40px; } 
+            .p5-item.large { grid-column: span 2; }
+            
             .p6-title { font-size: 56px; }
+            
             .p8-items { max-width: 100%; padding-left: 15px; } 
             .p8-item { width: 100%; align-self: flex-start !important; text-align: left !important; border-left: 2px solid var(--cy) !important; border-right: none !important; padding: 25px 25px 25px 40px; } 
             .p8-item:nth-child(even) { border-left: 2px solid var(--gr) !important; }
             .p8-line { left: 15px; transform: translateX(0); height: 95%; top: 2.5%; }
             .p8-num { right: 20px; left: auto !important; top: 5px; font-size: 48px; }
-            .p10-grid { grid-template-columns: 1fr; gap: 20px; } .p10-card { height: 350px; }
+            
+            .p10-grid { grid-template-columns: 1fr; gap: 20px; } 
+            .p10-card { height: 350px; }
+            
             .ovl-grid { grid-template-columns: repeat(3, 1fr); }
         }
+        /* Tablet Potrait & Mobile Besar */
         @media (max-width: 768px) {
-            .hdr { padding: 14px 16px; height: 64px; } .init-logo img { height: 28px; } .scr-logo { font-size: 28px; left: 16px; }
-            .p1-layout { left: 16px; right: 16px; flex-direction: column; height: auto; gap: 18px; } .p1-box { width: 100%; padding: 22px 20px; } .p1-title { font-size: 22px; } .p1-lines { display: none; } .p1-right { width: 100%; }
-            .p2 { padding: 80px 20px; } .p2-title { font-size: 48px; } .p2-right { height: 250px; }
-            .p3-cont { padding: 80px 20px; } .p3-title { font-size: 40px; }
-            .p4 { padding: 80px 20px; } .p4-panel-content { padding: 40px 30px; } .p4-title { font-size: 32px; }
-            .p5 { grid-template-columns: 1fr; padding: 80px 20px; } .p5-item.large { grid-column: span 1; } .p5-item.large .p5-h { font-size: 32px; }
-            .p6-title { font-size: 40px; } .p6-text { font-size: 14px; } .p6-cont { margin-top: -10vh; }
-            .p7 { padding: 80px 20px; gap: 40px; } .p7-text-wrap h2 { font-size: 32px; } .p7-img-wrap { height: 250px; }
-            .p8 { padding: 80px 20px; } .p8-h-title { font-size: 36px; } .p8-item { padding: 20px 20px 20px 35px; } .p8-item h3 { font-size: 20px; margin-bottom: 8px; } .p8-num { font-size: 36px; }
-            .p9-title { font-size: 36px; }
+            .hdr { padding: 14px 16px; height: 70px; } 
+            .hdr.scrolled { height: 60px; padding: 10px 16px; }
+            .init-logo img { height: 26px; } 
+            .hdr.scrolled .init-logo img { height: 24px; }
+            .scr-logo { left: 16px; width: 34px; height: 34px; }
+            
+            .p1-layout { left: 16px; right: 16px; flex-direction: column; height: auto; gap: 18px; top: 80px; transform: translateY(0); } 
+            .p1-box { width: 100%; padding: 22px 20px; } 
+            .p1-title { font-size: 22px; letter-spacing: 2px; } 
+            .p1-lines { display: none; } 
+            .p1-right { width: 100%; }
+            
+            .p2 { padding: 80px 20px; } 
+            .p2-title { font-size: 40px; } 
+            .p2-right { height: 250px; }
+            
+            .p3-cont { padding: 80px 20px; } 
+            .p3-title { font-size: 32px; }
+            
+            .p4 { padding: 80px 20px; } 
+            .p4-panel-content { padding: 40px 30px; } 
+            .p4-title { font-size: 28px; }
+            
+            .p5 { grid-template-columns: 1fr; padding: 80px 20px; } 
+            .p5-item.large { grid-column: span 1; } 
+            .p5-item.large .p5-h { font-size: 32px; }
+            
+            .p6-title { font-size: 36px; } 
+            .p6-text { font-size: 14px; } 
+            .p6-cont { margin-top: -10vh; }
+            
+            .p7 { padding: 80px 20px; gap: 40px; } 
+            .p7-text-wrap h2 { font-size: 28px; } 
+            .p7-img-wrap { height: 250px; }
+            
+            .p8 { padding: 80px 20px; } 
+            .p8-h-title { font-size: 32px; } 
+            .p8-item { padding: 20px 20px 20px 35px; } 
+            .p8-item h3 { font-size: 20px; margin-bottom: 8px; } 
+            .p8-num { font-size: 36px; }
+            
+            .p9-title { font-size: 32px; }
+            
             .p10 { padding: 80px 20px; }
-            .p11 { padding: 80px 20px 40px; } .p11-title { font-size: 36px; }
+            
+            .p11 { padding: 80px 20px 40px; } 
+            .p11-title { font-size: 32px; }
+            
             .ovl-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px; } 
             .ovl-item { padding: 15px; gap: 12px; }
             .ovl-item i, .ovl-item .ovl-logo { width: 48px; height: 48px; min-width: 48px; font-size: 24px; }
             .ovl-item span { font-size: 12px; }
             .ovl-title { font-size: 12px; }
+        }
+        /* Mobile Kecil */
+        @media (max-width: 480px) {
+            .load-let { font-size: 48px; }
+            .p2-title { font-size: 32px; }
+            .p3-title { font-size: 26px; }
+            .p4-title { font-size: 24px; }
+            .p6-title { font-size: 28px; }
+            .p11-title { font-size: 26px; }
+            .p8-h-title { font-size: 28px; }
+            .ovl-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -627,10 +714,23 @@
     <div class="p1" id="p1">
         <div class="hdr" id="hdr">
             <div class="init-logo">
-                <img src="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png" alt="Logo 1">
-                <img src="ChatGPT Image Jul 17, 2026, 03_25_26 PM(1).png" alt="Logo 2">
+                <img src="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png" alt="Logo Icon">
+                <img src="ChatGPT Image Jul 17, 2026, 03_25_26 PM(1).png" alt="Logo Text">
             </div>
-            <div class="scr-logo">I</div>
+            <!-- Logo Scroll Animasi Geometris (Qloobe Icon) -->
+            <div class="scr-logo">
+                <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M25 5 C13.9543 5 5 13.9543 5 25 C5 36.0457 13.9543 45 25 45 C30.5228 45 35.5228 42.7614 39.1421 39.1421" stroke="url(#qGrad)" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M35 35 L45 45" stroke="url(#qGrad)" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="25" cy="25" r="4" fill="url(#qGrad)"/>
+                    <defs>
+                        <linearGradient id="qGrad" x1="0" y1="0" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#00d4ff"/>
+                            <stop offset="1" stop-color="#00e676"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
         </div>
         <div class="p1-hero">
             <div class="p1-layout" id="p1Layout">
