@@ -97,14 +97,13 @@
         .load-let-wrap { 
             display: flex; 
             gap: 4px; 
-            flex-wrap: nowrap; /* Mencegah teks turun ke bawah */
+            flex-wrap: nowrap; 
             justify-content: center; 
             margin-bottom: 40px; 
             white-space: nowrap;
         }
         .load-let { 
             font-family: 'Cinzel', serif; 
-            /* Ukuran font dinamis agar muat di semua layar tanpa patah */
             font-size: clamp(2rem, 13vw, 64px); 
             font-weight: 900; 
             opacity: 0; 
@@ -153,7 +152,6 @@
             box-shadow: 0 0 10px var(--cy);
             transition: width 0.1s linear;
         }
-        /* Efek sapuan cahaya di loading bar */
         .load-fill::after {
             content: '';
             position: absolute;
@@ -373,14 +371,8 @@
             background: transparent;
         }
         .p2-img { 
-            max-width: 100%; 
-            max-height: 100%; 
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            opacity: 0.9; 
-            filter: grayscale(20%) contrast(110%); 
-            transition: opacity 0.4s ease; 
+            max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain;
+            opacity: 0.9; filter: grayscale(20%) contrast(110%); transition: opacity 0.4s ease; 
         }
         .p2-right:hover .p2-img { opacity: 1; }
 
@@ -505,32 +497,69 @@
         
         /* Footer Hak Cipta Profesional */
         .p11-footer { 
-            position: relative; 
-            margin-top: 60px; 
-            width: 100%; 
-            text-align: center; 
-            z-index: 10; 
-            padding-bottom: 40px;
+            position: relative; margin-top: 60px; width: 100%; text-align: center; z-index: 10; padding-bottom: 40px;
         }
         .p11-line { width: 80px; height: 1px; background: rgba(255,255,255,0.2); margin: 0 auto 20px auto; }
         .p11-copy { font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 1px; font-weight: 500; }
         .p11-copy span { color: rgba(0, 230, 118, 0.9); font-weight: 700; }
 
-        /* OVERLAY PANEL */
-        .ovl { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
-        .ovl.show { opacity: 1; pointer-events: auto; }
-        .ovl-box { background: rgba(10,10,24,0.98); border: 1px solid rgba(0, 230, 118, 0.1); border-radius: 18px; position: relative; transform: translateY(28px) scale(0.97); transition: transform 0.5s ease; max-height: 92vh; overflow-y: auto; max-width: 1100px; width: 100%; }
-        .ovl.show .ovl-box { transform: translateY(0) scale(1); }
-        .ovl-close { position: absolute; top: 16px; right: 16px; font-size: 22px; color: rgba(255,255,255,0.2); cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; z-index: 10; }
-        .ovl-close:hover { color: var(--gr); border-color: rgba(0, 230, 118, 0.25); }
-        .ovl-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 6px; text-align: center; padding: 30px 40px 0; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* OVERLAY PANEL - ANIMASI PREMIUM & ELEGAN */
+        .ovl { 
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
+            backdrop-filter: blur(30px) brightness(0.5); -webkit-backdrop-filter: blur(30px) brightness(0.5); 
+            z-index: 200; display: flex; align-items: center; justify-content: center; 
+            opacity: 0; visibility: hidden; transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.6s; padding: 20px; 
+        }
+        .ovl.show { opacity: 1; visibility: visible; }
+        .ovl-box { 
+            background: linear-gradient(145deg, rgba(15,15,25,0.98), rgba(5,5,15,0.98)); 
+            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; position: relative; 
+            transform: scale(0.9) translateY(40px); opacity: 0; 
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease; 
+            max-height: 92vh; overflow-y: auto; max-width: 1100px; width: 100%; 
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02); 
+            overscroll-behavior: contain; /* Cegah scroll chaining ke background */
+        }
+        .ovl.show .ovl-box { transform: scale(1) translateY(0); opacity: 1; }
+        .ovl-box::-webkit-scrollbar { width: 6px; }
+        .ovl-box::-webkit-scrollbar-track { background: transparent; }
+        .ovl-box::-webkit-scrollbar-thumb { background: rgba(0, 230, 118, 0.2); border-radius: 10px; }
+
+        .ovl-close { 
+            position: absolute; top: 16px; right: 16px; font-size: 22px; color: rgba(255,255,255,0.4); 
+            cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; 
+            border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.03); 
+            transition: all 0.3s ease; z-index: 10; transform: scale(0) rotate(-90deg); 
+        }
+        .ovl.show .ovl-close { transform: scale(1) rotate(0deg); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s; }
+        .ovl-close:hover { color: #fff; background: rgba(255, 50, 50, 0.2); border-color: rgba(255, 50, 50, 0.4); transform: scale(1.1) rotate(90deg); }
+
+        .ovl-title { 
+            font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 6px; text-align: center; padding: 30px 40px 0; 
+            background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            opacity: 0; transform: translateY(-20px); transition: all 0.6s ease 0.2s; 
+        }
+        .ovl.show .ovl-title { opacity: 1; transform: translateY(0); }
+
         .ovl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 30px; }
-        .ovl-item { display: flex; align-items: center; gap: 15px; cursor: pointer; padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); opacity: 0; transform: scale(0.9); transition: all 0.3s ease; }
-        .ovl-item.vis { opacity: 1; transform: scale(1); }
-        .ovl-item:hover { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.2); transform: scale(1.02); }
-        .ovl-item i, .ovl-item .ovl-logo { width: 52px; height: 52px; min-width: 52px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--c); flex-shrink: 0; transition: all 0.2s ease; }
+        
+        .ovl-item { 
+            display: flex; align-items: center; gap: 15px; cursor: pointer; padding: 18px; border-radius: 12px; 
+            border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); 
+            opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(8px); 
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; 
+            text-decoration: none; color: inherit; 
+        }
+        .ovl-item.vis { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        .ovl-item:hover { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.3); transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .ovl-item i, .ovl-item .ovl-logo { 
+            width: 52px; height: 52px; min-width: 52px; border-radius: 12px; 
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.05); 
+            display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--c); 
+            flex-shrink: 0; transition: all 0.3s ease; 
+        }
         .ovl-item .ovl-logo { object-fit: contain; padding: 6px; }
-        .ovl-item:hover i, .ovl-item:hover .ovl-logo { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.15); }
+        .ovl-item:hover i, .ovl-item:hover .ovl-logo { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.15); transform: scale(1.1); }
         .ovl-item span { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3; }
         .ovl-item:hover span { color: #fff; }
 
@@ -542,33 +571,11 @@
             .p4-cont { grid-template-columns: 1fr; gap: 60px; } .p4-wheel { max-width: 260px; }
             .p5 { grid-template-columns: 1fr 1fr; padding: 80px 40px; } .p5-item.large { grid-column: span 2; }
             .p6-title { font-size: 56px; }
-            
-            /* Timeline Responsive for Tablet */
             .p8-items { max-width: 100%; padding-left: 15px; } 
-            .p8-item { 
-                width: 100%; 
-                align-self: flex-start !important; 
-                text-align: left !important; 
-                border-left: 2px solid var(--cy) !important; 
-                border-right: none !important; 
-                padding: 25px 25px 25px 40px; 
-            } 
-            .p8-item:nth-child(even) { 
-                border-left: 2px solid var(--gr) !important; 
-            }
-            .p8-line { 
-                left: 15px; 
-                transform: translateX(0); 
-                height: 95%; 
-                top: 2.5%;
-            }
-            .p8-num { 
-                right: 20px; 
-                left: auto !important; 
-                top: 5px; 
-                font-size: 48px; 
-            }
-            
+            .p8-item { width: 100%; align-self: flex-start !important; text-align: left !important; border-left: 2px solid var(--cy) !important; border-right: none !important; padding: 25px 25px 25px 40px; } 
+            .p8-item:nth-child(even) { border-left: 2px solid var(--gr) !important; }
+            .p8-line { left: 15px; transform: translateX(0); height: 95%; top: 2.5%; }
+            .p8-num { right: 20px; left: auto !important; top: 5px; font-size: 48px; }
             .p10-grid { grid-template-columns: 1fr; gap: 20px; } .p10-card { height: 350px; }
             .ovl-grid { grid-template-columns: repeat(3, 1fr); }
         }
@@ -581,10 +588,7 @@
             .p5 { grid-template-columns: 1fr; padding: 80px 20px; } .p5-item.large { grid-column: span 1; } .p5-item.large .p5-h { font-size: 32px; }
             .p6-title { font-size: 40px; } .p6-text { font-size: 14px; } .p6-cont { margin-top: -10vh; }
             .p7 { padding: 80px 20px; gap: 40px; } .p7-text-wrap h2 { font-size: 32px; } .p7-img-wrap { height: 250px; }
-            
-            /* Timeline Responsive for Phone */
             .p8 { padding: 80px 20px; } .p8-h-title { font-size: 36px; } .p8-item { padding: 20px 20px 20px 35px; } .p8-item h3 { font-size: 20px; margin-bottom: 8px; } .p8-num { font-size: 36px; }
-            
             .p9-title { font-size: 36px; }
             .p10 { padding: 80px 20px; }
             .p11 { padding: 80px 20px 40px; } .p11-title { font-size: 36px; }
@@ -836,21 +840,21 @@
             <div class="ovl-close" onclick="closeOvl('socOvl')">&times;</div>
             <div class="ovl-title">Social Media</div>
             <div class="ovl-grid" id="socGrid">
-                <div class="ovl-item" style="--c:#ff0050"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></div>
-                <div class="ovl-item" style="--c:#E1306C"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+                <a class="ovl-item" href="https://www.tiktok.com/@jrimunawar028?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" style="--c:#ff0050; text-decoration: none; color: inherit;"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
+                <a class="ovl-item" href="https://www.instagram.com/jri_munawar/?hl=id" target="_blank" rel="noopener noreferrer" style="--c:#E1306C; text-decoration: none; color: inherit;"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
                 <div class="ovl-item" style="--c:#25D366"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></div>
-                <div class="ovl-item" style="--c:#FF0000"><i class="fa-brands fa-youtube"></i><span>YouTube</span></div>
-                <div class="ovl-item" style="--c:#1877F2"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></div>
-                <div class="ovl-item" style="--c:#a0a8b4"><i class="fa-brands fa-x-twitter"></i><span>X</span></div>
+                <a class="ovl-item" href="https://www.youtube.com/@jrimunawar.028" target="_blank" rel="noopener noreferrer" style="--c:#FF0000; text-decoration: none; color: inherit;"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
+                <a class="ovl-item" href="https://www.facebook.com/profile.php?id=61563913847181" target="_blank" rel="noopener noreferrer" style="--c:#1877F2; text-decoration: none; color: inherit;"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></a>
+                <a class="ovl-item" href="https://x.com/FajriMunawar28" target="_blank" rel="noopener noreferrer" style="--c:#a0a8b4; text-decoration: none; color: inherit;"><i class="fa-brands fa-x-twitter"></i><span>X</span></a>
                 <div class="ovl-item" style="--c:#07C160"><i class="fa-brands fa-weixin"></i><span>WeChat</span></div>
                 <div class="ovl-item" style="--c:#26A5E4"><i class="fa-brands fa-telegram"></i><span>Telegram</span></div>
-                <div class="ovl-item" style="--c:#0A66C2"><i class="fa-brands fa-linkedin-in"></i><span>LinkedIn</span></div>
+                <a class="ovl-item" href="https://www.linkedin.com/in/muhammad-fajri-munawar-515864325/" target="_blank" rel="noopener noreferrer" style="--c:#0A66C2; text-decoration: none; color: inherit;"><i class="fa-brands fa-linkedin-in"></i><span>LinkedIn</span></a>
                 <div class="ovl-item" style="--c:#fff"><img class="ovl-logo" src="ChatGPT_Image_17_Jul_2026__19.01.14-removebg-preview(1).png" alt="BeReal"><span>BeReal</span></div>
-                <div class="ovl-item" style="--c:#6264A7"><img class="ovl-logo" src="https://img.icons8.com/color/96/000000/microsoft-teams.png" alt="MS Teams"><span>MS Teams</span></div>
+                <a class="ovl-item" href="https://teams.live.com/v2/" target="_blank" rel="noopener noreferrer" style="--c:#6264A7; text-decoration: none; color: inherit;"><img class="ovl-logo" src="https://img.icons8.com/color/96/000000/microsoft-teams.png" alt="MS Teams"><span>MS Teams</span></a>
                 <div class="ovl-item" style="--c:#5865F2"><i class="fa-brands fa-discord"></i><span>Discord</span></div>
                 <div class="ovl-item" style="--c:#9146FF"><i class="fa-brands fa-twitch"></i><span>Twitch</span></div>
-                <div class="ovl-item" style="--c:#8B949E"><i class="fa-brands fa-github"></i><span>GitHub</span></div>
-                <div class="ovl-item" style="--c:#E1306C"><i class="fa-brands fa-threads"></i><span>Threads</span></div>
+                <a class="ovl-item" href="https://github.com/fajrimunawar" target="_blank" rel="noopener noreferrer" style="--c:#8B949E; text-decoration: none; color: inherit;"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+                <a class="ovl-item" href="https://www.threads.com/@jri_munawar" target="_blank" rel="noopener noreferrer" style="--c:#E1306C; text-decoration: none; color: inherit;"><i class="fa-brands fa-threads"></i><span>Threads</span></a>
                 <div class="ovl-item" style="--c:#0084FF"><i class="fa-brands fa-facebook-messenger"></i><span>Messenger</span></div>
             </div>
         </div>
@@ -889,10 +893,8 @@
             const loadPercent = document.getElementById('loadPercent');
             let progress = 0;
             
-            // Start counting after text animation finishes
             setTimeout(() => {
                 const interval = setInterval(() => {
-                    // Increase progress randomly for smooth effect
                     progress += Math.floor(Math.random() * 12) + 4;
                     if (progress >= 100) {
                         progress = 100;
@@ -900,7 +902,6 @@
                         loadPercent.innerText = '100%';
                         loadFill.style.width = '100%';
                         
-                        // Hide loader
                         setTimeout(() => { 
                             document.getElementById('loadScr').classList.add('done'); 
                             document.getElementById('p1').classList.add('show'); 
@@ -909,14 +910,30 @@
                         loadPercent.innerText = progress + '%';
                         loadFill.style.width = progress + '%';
                     }
-                }, 50); // Speed of loading
-            }, 1600); // Delay before loading starts
+                }, 50);
+            }, 1600);
         });
         
         window.addEventListener('scroll', () => { 
             const h = document.getElementById('hdr'); 
             if (window.scrollY > 50) h.classList.add('scrolled'); 
             else h.classList.remove('scrolled'); 
+
+            // SISTEM AUTO CLOSE OVERLAY SAAT SCROLL
+            const openOvl = document.querySelector('.ovl.show');
+            if (openOvl) {
+                closeOvl(openOvl.id);
+            }
+        });
+
+        // SISTEM AUTO CLOSE OVERLAY SAAT SCROLL MOUSE / TOUCH DI LUAR BOX
+        ['wheel', 'touchmove'].forEach(evt => {
+            window.addEventListener(evt, (e) => {
+                const openOvl = document.querySelector('.ovl.show');
+                if (openOvl && !e.target.closest('.ovl-box')) {
+                    closeOvl(openOvl.id);
+                }
+            }, { passive: true });
         });
         
         function toggleSystem() { 
@@ -924,7 +941,7 @@
             document.getElementById('p1Box').classList.toggle('active'); 
         }
 
-        // Overlay Logic
+        // Overlay Logic dengan Animasi Premium (Blur to Focus)
         function openOvl(id) { 
             const o = document.getElementById(id); 
             o.classList.add('show'); 
@@ -932,51 +949,55 @@
             const items = o.querySelectorAll('.ovl-item'); 
             items.forEach((it, i) => { 
                 it.classList.remove('vis'); 
-                setTimeout(() => it.classList.add('vis'), 100 + i * 30); 
+                setTimeout(() => it.classList.add('vis'), 300 + i * 40); 
             }); 
         }
         
         function closeOvl(id) { 
-            document.getElementById(id).classList.remove('show'); 
+            const o = document.getElementById(id);
+            o.classList.remove('show'); 
+            const items = o.querySelectorAll('.ovl-item');
+            items.forEach(it => it.classList.remove('vis'));
         }
         
         document.querySelectorAll('.ovl').forEach(o => o.addEventListener('click', e => { 
-            if (e.target === o) closeOvl(o.id); 
+            if (e.target === o) {
+                closeOvl(o.id);
+            } 
         }));
         
         document.addEventListener('keydown', e => { 
-            if (e.key === 'Escape') document.querySelectorAll('.ovl.show').forEach(o => closeOvl(o.id)); 
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.ovl.show').forEach(o => {
+                    closeOvl(o.id);
+                }); 
+            }
         });
 
         // Wheel Data
         const wData = [
             { 
-                l: "Space 01", 
-                t: "The Neutral Ground", 
+                l: "Space 01", t: "The Neutral Ground", 
                 x: "This environment acts as a completely neutral ground. It is a boundless container where various entities, ideas, and individuals can exist and be displayed without any bias or forced hierarchy.",
                 img: "ChatGPT Image 18 Jul 2026, 19.23.41.png" 
             },
             { 
-                l: "Space 02", 
-                t: "The Gathering Point", 
+                l: "Space 02", t: "The Gathering Point", 
                 x: "Serving as a central hub, it brings distinct elements into one shared proximity. It is the designated area where separate paths cross, allowing for natural interaction and mutual recognition.",
                 img: "ChatGPT Image 18 Jul 2026, 19.26.51.png" 
             },
             { 
-                l: "Space 03", 
-                t: "The Structured Openness", 
+                l: "Space 03", t: "The Structured Openness", 
                 x: "Though open and accommodating, the space maintains a strict, orderly foundation. Every participant is given equal room to be seen and understood, ensuring clarity within the collective.",
                 img: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=1200" 
             },
             { 
-                l: "Space 04", 
-                t: "The Silent Catalyst", 
+                l: "Space 04", t: "The Silent Catalyst", 
                 x: "By simply providing a shared room, this space naturally accelerates unseen connections. It allows isolated efforts to align and multiply their impact without requiring direct intervention.",
                 img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200" 
             },
             { 
-                l: "Space 05", 
-                t: "The Genesis Space", 
+                l: "Space 05", t: "The Genesis Space", 
                 x: "More than just a container, it is the absolute starting line. It is the singular point where every potential is initially gathered, acknowledged, and prepared before stepping forward.",
                 img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200" 
             }
