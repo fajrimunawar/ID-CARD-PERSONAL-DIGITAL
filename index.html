@@ -42,6 +42,10 @@
         body { 
             overflow-y: auto; 
             touch-action: manipulation; 
+            user-select: none; /* Anti Seleksi Global */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
         :root { 
             --cy: #00d4ff; 
@@ -367,10 +371,12 @@
             position: relative; display: flex; flex-direction: column; justify-content: space-between; 
             height: 100%; width: 450px; flex-shrink: 0; 
         }
+        /* PERBAIKAN UTAMA: pointer-events: none ditambahkan di sini */
         .p1-info { 
             background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 34px 40px; 
             width: 100%; opacity: 0; transform: translateX(-20px) scale(0.98); text-align: center; 
             cursor: pointer; transition: all 0.4s ease; 
+            pointer-events: none; /* Ini memastikan kotak transparan tidak bisa diklik secara sembarangan */
         }
         .p1-info::before, .p1-info::after { 
             content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 0; height: 1px; 
@@ -396,7 +402,8 @@
             background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: tsg 3s linear infinite; 
         }
         @keyframes tsb { to { background-position: -200% 0; } } @keyframes tsg { to { background-position: -200% 0; } }
-        .active .p1-info { opacity: 1; transform: translateX(0) scale(1); transition: all 0.4s ease 0.9s; }
+        /* Saat aktif, pointer-events dikembalikan ke auto agar bisa diklik */
+        .active .p1-info { opacity: 1; transform: translateX(0) scale(1); transition: all 0.4s ease 0.9s; pointer-events: auto; }
 
         /* P2 - Asymmetric Image/Text */
         .p2 { 
@@ -1102,32 +1109,52 @@
 
         // === SISTEM KEAMANAN GAMBAR (Anti Klik Kanan, Anti Drag, Keyboard Shortcut) ===
         document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-            }
+            e.preventDefault(); // Blokir klik kanan di mana saja
         });
         document.addEventListener('dragstart', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-            }
+            e.preventDefault(); // Anti drag
         });
-        // Mencegah tombol shortcut inspect element (Ctrl+Shift+I / F12 / Ctrl+U)
+        // Mencegah tombol shortcut inspect element (Ctrl+Shift+I / F12 / Ctrl+U / Ctrl+Shift+C / Ctrl+Shift+J)
         document.addEventListener('keydown', function(e) {
             if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || (e.ctrlKey && e.key === 'U')) {
                 e.preventDefault();
+                return false;
             }
         });
 
         // === ANTI COPY-PASTE TEKS ===
         document.addEventListener('copy', function(e) { e.preventDefault(); return false; });
         document.addEventListener('cut', function(e) { e.preventDefault(); return false; });
+        document.addEventListener('paste', function(e) { e.preventDefault(); return false; });
         document.addEventListener('selectstart', function(e) {
             if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
                 e.preventDefault();
             }
         });
 
-        // NOTE: Script ANTI DEVELOPER TOOLS (DEVTOOLS DETECTION) telah dihapus agar Googlebot dapat merender dan mengindeks halaman ini dengan benar.
+        // === SISTEM KEAMANAN ANTI DEVTOOLS (MEMBUAT HACKER PEING) ===
+        (function() {
+            const threshold = 160;
+            setInterval(function() {
+                const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+                const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+                if (widthThreshold || heightThreshold) {
+                    // Jika developer tools terbuka, arahkan ke halaman blank
+                    window.location.href = "about:blank";
+                }
+            }, 1000);
+
+            // Deteksi console
+            const element = new Image();
+            Object.defineProperty(element, 'id', {
+                get: function() {
+                    window.location.href = "about:blank";
+                }
+            });
+            setInterval(function() {
+                console.log('%c', element);
+            }, 1000);
+        })();
 
         // Wheel Data
         const wData = [
