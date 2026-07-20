@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#000000">
     
-    <!-- KUNCI RAPAT 1: Melarang Google mengindeks apapun termasuk gambar -->
-    <meta name="robots" content="noindex, nofollow, noimageindex, noimageclick, nosnippet">
-    <!-- KUNCI RAPAT 2: Melindungi sumber gambar dari hotlinking -->
+    <!-- PERBAIKAN SEO: Mengizinkan Google untuk mengindeks halaman ini -->
+    <meta name="robots" content="index, follow">
+    
+    <!-- Melindungi sumber gambar dari hotlinking -->
     <meta name="referrer" content="no-referrer">
-    <!-- KUNCI RAPAT 3: Anti Iframe / Clickjacking (Website tidak bisa disisipkan di web lain) -->
+    <!-- Anti Iframe / Clickjacking (Website tidak bisa disisipkan di web lain) -->
     <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     
@@ -43,7 +44,7 @@
             --gr: #00e676; 
         }
 
-        /* === KUNCI RAPAT 4: GLOBAL IMAGE LOCKDOWN (Anti Klik, Anti Drag, Anti Seleksi) === */
+        /* === GLOBAL IMAGE LOCKDOWN (Anti Klik, Anti Drag, Anti Seleksi) === */
         img {
             -webkit-user-drag: none;
             -khtml-user-drag: none;
@@ -55,7 +56,7 @@
             pointer-events: none; /* Kursor tembus menembus gambar, tidak bisa diklik kanan */
         }
 
-        /* === KUNCI RAPAT 5: ANTI PRINT SCREEN (Ctrl+P) === */
+        /* === ANTI PRINT SCREEN (Ctrl+P) === */
         @media print {
             body { display: none !important; }
         }
@@ -606,7 +607,6 @@
         .ovl-item:hover span { color: #fff; }
 
         /* === RESPONSIVE TATA LETAK PREMIUM === */
-        /* Tablet Landscape & Laptop Kecil */
         @media (max-width: 1024px) {
             .p1-layout { left: 40px; right: 40px; height: 360px; } 
             .p1-box { width: 380px; padding: 28px 32px; } 
@@ -642,7 +642,6 @@
             
             .ovl-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        /* Tablet Potrait & Mobile Besar */
         @media (max-width: 768px) {
             .hdr { padding: 14px 16px; height: 70px; } 
             .hdr.scrolled { height: 60px; padding: 10px 16px; }
@@ -698,7 +697,6 @@
             .ovl-item span { font-size: 12px; }
             .ovl-title { font-size: 12px; }
         }
-        /* Mobile Kecil */
         @media (max-width: 480px) {
             .load-let { font-size: 48px; }
             .p2-title { font-size: 32px; }
@@ -1098,7 +1096,7 @@
             }
         });
 
-        // === KUNCI RAPAT 6: SISTEM KEAMANAN GAMBAR (Anti Klik Kanan, Anti Drag, Keyboard Shortcut) ===
+        // === SISTEM KEAMANAN GAMBAR (Anti Klik Kanan, Anti Drag, Keyboard Shortcut) ===
         document.addEventListener('contextmenu', function(e) {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
@@ -1116,7 +1114,7 @@
             }
         });
 
-        // === KUNCI RAPAT 7: ANTI COPY-PASTE TEKS ===
+        // === ANTI COPY-PASTE TEKS ===
         document.addEventListener('copy', function(e) { e.preventDefault(); return false; });
         document.addEventListener('cut', function(e) { e.preventDefault(); return false; });
         document.addEventListener('selectstart', function(e) {
@@ -1125,17 +1123,9 @@
             }
         });
 
-        // === KUNCI RAPAT 8: ANTI DEVELOPER TOOLS (DEVTOOLS DETECTION) ===
-        setInterval(function() {
-            let widthThreshold = window.outerWidth - window.innerWidth > 160;
-            let heightThreshold = window.outerHeight - window.innerHeight > 160;
-            if (widthThreshold || heightThreshold) {
-                // Jika DevTools terbuka, halaman akan dikosongkan
-                document.body.innerHTML = '';
-            }
-        }, 1000);
+        // NOTE: Script ANTI DEVELOPER TOOLS (DEVTOOLS DETECTION) telah dihapus agar Googlebot dapat merender dan mengindeks halaman ini dengan benar.
 
-        // Wheel Data (Link Unsplash Telah Dihapus Semua)
+        // Wheel Data
         const wData = [
             { 
                 l: "Space 01", t: "The Neutral Ground", 
