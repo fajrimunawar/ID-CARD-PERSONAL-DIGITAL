@@ -17,12 +17,9 @@
     <title>INFOTRINK</title>
     <link rel="icon" type="image/png" href="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- PERBAIKAN: Font dipindahkan dari @import ke <link> agar download paralel, tidak blokir render -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;800&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
-    
     <style>
         /* Global Reset & Variables */
         * { 
@@ -57,7 +54,7 @@
             user-drag: none;
             user-select: none;
             -webkit-user-select: none;
-            pointer-events: none;
+            pointer-events: none; /* Kursor tembus menembus gambar, tidak bisa diklik kanan */
         }
 
         /* === ANTI PRINT SCREEN (Ctrl+P) === */
@@ -1031,124 +1028,75 @@
     </div>
 
     <script>
-        /* ========================================
-           PERBAIKAN: Loading bar logic yang dipercepat
-           Sebelumnya pakai requestAnimationFrame naik 0.1% per frame 
-           (60fps × 0.1% = 6%/detik → ~16 detik sampai 100%)
-           Sekarang pakai setInterval yang lebih cepat & natural
-           ======================================== */
-        (function() {
-            var fill = document.getElementById('loadFill');
-            var perc = document.getElementById('loadPercent');
-            var scr = document.getElementById('loadScr');
-            var progress = 0;
-            var speed = 2.5; // naik 2.5% per 50ms → ~2 detik total
-
-            // Tunggu sampai animasi huruf selesai (1.16s delay + 0.6s animasi = ~1.8s)
-            // Bar muncul di 1.4s, jadi mulai progress dari 1.9s
-            setTimeout(function() {
-                var interval = setInterval(function() {
-                    // Perlambat di atas 80% untuk efek natural
-                    if (progress > 80) {
-                        speed = 1;
-                    }
-                    if (progress > 92) {
-                        speed = 0.5;
-                    }
-
-                    progress = Math.min(100, progress + speed);
-                    fill.style.width = progress + '%';
-                    perc.textContent = Math.floor(progress) + '%';
-
-                    if (progress >= 100) {
-                        clearInterval(interval);
-                        setTimeout(function() {
-                            scr.classList.add('done');
-                            document.getElementById('p1').classList.add('show');
-                        }, 300);
-                    }
-                }, 50);
-            }, 1900);
+        /* === PERBAIKAN LOADING: Cepat & smooth, bukan 10+ detik === */
+        (function(){
+            var fill=document.getElementById('loadFill');
+            var perc=document.getElementById('loadPercent');
+            var scr=document.getElementById('loadScr');
+            var p=0,s=2.5;
+            setTimeout(function(){
+                var iv=setInterval(function(){
+                    if(p>80)s=1;
+                    if(p>92)s=0.5;
+                    p=Math.min(100,p+s);
+                    fill.style.width=p+'%';
+                    perc.textContent=Math.floor(p)+'%';
+                    if(p>=100){clearInterval(iv);setTimeout(function(){scr.classList.add('done');document.getElementById('p1').classList.add('show');},300);}
+                },50);
+            },1900);
         })();
 
         /* Header scroll effect */
-        window.addEventListener('scroll', function() {
-            var hdr = document.getElementById('hdr');
-            if (window.scrollY > 80) {
-                hdr.classList.add('scrolled');
-            } else {
-                hdr.classList.remove('scrolled');
-            }
+        window.addEventListener('scroll',function(){
+            var h=document.getElementById('hdr');
+            if(window.scrollY>80){h.classList.add('scrolled');}else{h.classList.remove('scrolled');}
         });
 
         /* Toggle hero system lines */
-        var systemActive = false;
-        function toggleSystem() {
-            var layout = document.getElementById('p1Layout');
-            var box = document.getElementById('p1Box');
-            systemActive = !systemActive;
-            if (systemActive) {
-                layout.classList.add('active');
-                box.classList.add('active');
-            } else {
-                layout.classList.remove('active');
-                box.classList.remove('active');
-            }
+        var systemActive=false;
+        function toggleSystem(){
+            var l=document.getElementById('p1Layout');
+            var b=document.getElementById('p1Box');
+            systemActive=!systemActive;
+            if(systemActive){l.classList.add('active');b.classList.add('active');}
+            else{l.classList.remove('active');b.classList.remove('active');}
         }
 
         /* Overlay open/close */
-        function openOvl(id) {
-            var ovl = document.getElementById(id);
-            ovl.classList.add('show');
-            document.body.style.overflow = 'hidden';
-            // Staggered animation for items
-            var items = ovl.querySelectorAll('.ovl-item');
-            items.forEach(function(item, i) {
-                setTimeout(function() {
-                    item.classList.add('vis');
-                }, 200 + i * 80);
-            });
+        function openOvl(id){
+            var o=document.getElementById(id);
+            o.classList.add('show');
+            document.body.style.overflow='hidden';
+            var items=o.querySelectorAll('.ovl-item');
+            items.forEach(function(item,i){setTimeout(function(){item.classList.add('vis');},200+i*80);});
         }
-
-        function closeOvl(id) {
-            var ovl = document.getElementById(id);
-            ovl.classList.remove('show');
-            document.body.style.overflow = '';
-            var items = ovl.querySelectorAll('.ovl-item');
-            items.forEach(function(item) {
-                item.classList.remove('vis');
-            });
+        function closeOvl(id){
+            var o=document.getElementById(id);
+            o.classList.remove('show');
+            document.body.style.overflow='';
+            var items=o.querySelectorAll('.ovl-item');
+            items.forEach(function(item){item.classList.remove('vis');});
         }
-
-        function closeOvlCheck(e, id) {
-            if (e.target.classList.contains('ovl')) {
-                closeOvl(id);
-            }
+        function closeOvlCheck(e,id){
+            if(e.target.classList.contains('ovl')){closeOvl(id);}
         }
 
         /* P4 Wheel interaction */
-        var wheelData = [
-            { lab: 'Space 01', title: 'The Neutral Ground', text: 'This environment acts as a completely neutral ground. It is a boundless container where various entities, ideas, and individuals can exist and be displayed without any bias or forced hierarchy.' },
-            { lab: 'Space 02', title: 'Resonance Field', text: 'Every entity placed within the container generates a unique resonance. These frequencies interact silently, creating emergent patterns that no single element could produce alone.' },
-            { lab: 'Space 03', title: 'Structural Integrity', text: 'The framework maintains absolute stability regardless of content. No element can destabilize the whole. Each addition reinforces rather than compromises the system.' },
-            { lab: 'Space 04', title: 'Adaptive Capacity', text: 'The container does not resist change. It adapts. New configurations are absorbed seamlessly, with the architecture adjusting to accommodate without losing its core principles.' },
-            { lab: 'Space 05', title: 'Infinite Horizon', text: 'The boundary is not a wall. It is a horizon. The space extends conceptually beyond any physical limit, always suggesting that there is more room beyond what is currently visible.' }
+        var wheelData=[
+            {lab:'Space 01',title:'The Neutral Ground',text:'This environment acts as a completely neutral ground. It is a boundless container where various entities, ideas, and individuals can exist and be displayed without any bias or forced hierarchy.'},
+            {lab:'Space 02',title:'Resonance Field',text:'Every entity placed within the container generates a unique resonance. These frequencies interact silently, creating emergent patterns that no single element could produce alone.'},
+            {lab:'Space 03',title:'Structural Integrity',text:'The framework maintains absolute stability regardless of content. No element can destabilize the whole. Each addition reinforces rather than compromises the system.'},
+            {lab:'Space 04',title:'Adaptive Capacity',text:'The container does not resist change. It adapts. New configurations are absorbed seamlessly, with the architecture adjusting to accommodate without losing its core principles.'},
+            {lab:'Space 05',title:'Infinite Horizon',text:'The boundary is not a wall. It is a horizon. The space extends conceptually beyond any physical limit, always suggesting that there is more room beyond what is currently visible.'}
         ];
-
-        function wheel(n) {
-            // Reset all slices
-            for (var i = 1; i <= 5; i++) {
-                document.getElementById('s' + i).classList.remove('active');
-                document.getElementById('t' + i).classList.remove('active');
-            }
-            // Activate selected
-            document.getElementById('s' + n).classList.add('active');
-            document.getElementById('t' + n).classList.add('active');
-            // Update panel
-            var d = wheelData[n - 1];
-            document.getElementById('wLab').textContent = d.lab;
-            document.getElementById('wTitle').textContent = d.title;
-            document.getElementById('wText').textContent = d.text;
+        function wheel(n){
+            for(var i=1;i<=5;i++){document.getElementById('s'+i).classList.remove('active');document.getElementById('t'+i).classList.remove('active');}
+            document.getElementById('s'+n).classList.add('active');
+            document.getElementById('t'+n).classList.add('active');
+            var d=wheelData[n-1];
+            document.getElementById('wLab').textContent=d.lab;
+            document.getElementById('wTitle').textContent=d.title;
+            document.getElementById('wText').textContent=d.text;
         }
     </script>
 </body>
