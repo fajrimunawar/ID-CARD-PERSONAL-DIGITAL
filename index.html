@@ -5,361 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#000000">
     
-    <!-- PERBAIKAN SEO: Mengizinkan Google untuk mengindeks halaman ini -->
-    <meta name="robots" content="index, follow">
+    <!-- === SISTEM SEO TOP RANKING (Masuk Pencarian Google) === -->
+    <title>INFOTRINK | Official Digital Platform & Network Hub</title>
+    <meta name="description" content="INFOTRINK is the primary architectural bridge connecting distinct digital entities. The official central hub for PT JRI Munawar Group, PT Triliun Legacy Summit, and PT Noesan Clera Utama.">
+    <meta name="keywords" content="INFOTRINK, JRI Munawar, PT JRI Munawar Group, PT Triliun Legacy Summit, PT Noesan Clera Utama, Digital Ecosystem, Network Architecture">
+    <meta name="author" content="INFOTRINK">
+    <link rel="canonical" href="https://infotrink.com/">
     
-    <!-- Melindungi sumber gambar dari hotlinking -->
+    <!-- Open Graph / Social Media SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="INFOTRINK | Where Every Journey Begins">
+    <meta property="og:description" content="The primary architectural bridge connecting distinct digital entities and institutional bodies.">
+    <meta property="og:site_name" content="INFOTRINK">
+    
+    <!-- === SISTEM ANTI GOOGLE GAMBAR (Gambar tidak muncul di Google Images) === -->
+    <meta name="robots" content="index, follow, noimageindex, noarchive, nosnippet">
+    <meta name="googlebot" content="index, follow, noimageindex, noarchive, nosnippet">
     <meta name="referrer" content="no-referrer">
-    <!-- Anti Iframe / Clickjacking (Website tidak bisa disisipkan di web lain) -->
-    <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     
-    <title>INFOTRINK</title>
+    <!-- === SISTEM KEAMANAN TINGKAT TINGGI (Anti Clickjacking & Injection) === -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https: data:; frame-ancestors 'self'; object-src 'none'; base-uri 'self';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    
     <link rel="icon" type="image/png" href="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- PERBAIKAN 1: Font dipindah ke sini supaya tidak nge-blok render -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;800&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* Global Reset & Variables */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; 
-        }
-        html, body { 
-            width: 100%; 
-            max-width: 100%; 
-            overflow-x: hidden; 
-            background: #000; 
-            font-family: 'Montserrat', sans-serif; 
-            scroll-behavior: smooth; 
-        }
-        body { 
-            overflow-y: auto; 
-            touch-action: manipulation; 
-            user-select: none; /* Anti Seleksi Global */
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-        :root { 
-            --cy: #00d4ff; 
-            --gr: #00e676; 
-        }
-
-        /* === GLOBAL IMAGE LOCKDOWN (Anti Klik, Anti Drag, Anti Seleksi) === */
-        img {
-            -webkit-user-drag: none;
-            -khtml-user-drag: none;
-            -moz-user-drag: none;
-            -o-user-drag: none;
-            user-drag: none;
-            user-select: none;
-            -webkit-user-select: none;
-            pointer-events: none; /* Kursor tembus menembus gambar, tidak bisa diklik kanan */
-        }
-
-        /* === ANTI PRINT SCREEN (Ctrl+P) === */
-        @media print {
-            body { display: none !important; }
-        }
-
-        /* === LOADING SCREEN KELAS ATAS === */
-        .load-scr { 
-            position: fixed; 
-            inset: 0; 
-            z-index: 9999; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            transition: opacity 0.8s ease; 
-            padding: 20px;
-            background: radial-gradient(circle at 50% 30%, #0a1018 0%, #050507 60%, #000000 100%);
-            overflow: hidden;
-        }
-        .load-scr.done { 
-            opacity: 0; 
-            visibility: hidden; 
-            pointer-events: none; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        .load-scr-grid {
-            position: absolute;
-            inset: -50%;
-            background-image: 
-                linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px), 
-                linear-gradient(90deg, rgba(0, 230, 118, 0.04) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 4s linear infinite;
-            mask-image: radial-gradient(circle at center, black 20%, transparent 70%);
-            -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 70%);
-            pointer-events: none;
-        }
-        @keyframes gridMove { 
-            0% { transform: translateY(0); } 
-            100% { transform: translateY(50px); } 
-        }
+        /* SCROLL SETTINGS */
+        html { overflow-y: scroll; overflow-x: hidden; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+        body { width: 100%; max-width: 100%; background: #000; font-family: 'Montserrat', sans-serif; overflow-x: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
+        :root { --cy: #00d4ff; --gr: #00e676; }
 
-        .load-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px;
-            height: 200px;
-            background: radial-gradient(ellipse, rgba(0, 212, 255, 0.12) 0%, rgba(0, 230, 118, 0.05) 40%, transparent 70%);
-            filter: blur(40px);
-            pointer-events: none;
-            animation: pulseGlow 4s ease infinite;
-        }
-        @keyframes pulseGlow { 
-            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); } 
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } 
-        }
+        /* CUSTOM SCROLLBAR (Dark & Hidden) */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
 
+        /* === GLOBAL IMAGE LOCKDOWN === */
+        img { -webkit-user-drag: none; user-drag: none; user-select: none; -webkit-user-select: none; pointer-events: none; }
+        @media print { body { display: none !important; } }
+
+        /* LOADING SCREEN */
+        .load-scr { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease; padding: 20px; background: radial-gradient(circle at 50% 30%, #0a1018 0%, #050507 60%, #000000 100%); overflow: hidden; }
+        .load-scr.done { opacity: 0; visibility: hidden; pointer-events: none; }
+        .load-scr-grid { position: absolute; inset: -50%; background-image: linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 230, 118, 0.04) 1px, transparent 1px); background-size: 50px 50px; animation: gridMove 4s linear infinite; mask-image: radial-gradient(circle at center, black 20%, transparent 70%); -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 70%); pointer-events: none; }
+        @keyframes gridMove { 0% { transform: translateY(0); } 100% { transform: translateY(50px); } }
+        .load-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 200px; background: radial-gradient(ellipse, rgba(0, 212, 255, 0.12) 0%, rgba(0, 230, 118, 0.05) 40%, transparent 70%); filter: blur(40px); pointer-events: none; animation: pulseGlow 4s ease infinite; }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } }
         .load-content { position: relative; z-index: 10; text-align: center; width: 100%; max-width: 340px; }
-        
-        .load-let-wrap { 
-            display: flex; 
-            gap: 4px; 
-            flex-wrap: nowrap; 
-            justify-content: center; 
-            margin-bottom: 40px; 
-            white-space: nowrap;
-        }
-        .load-let { 
-            font-family: 'Cinzel', serif; 
-            font-size: clamp(2rem, 13vw, 64px); 
-            font-weight: 900; 
-            opacity: 0; 
-            transform: translateY(20px); 
-            animation: lin 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
-            line-height: 1;
-        }
-        .load-let.b { 
-            background: linear-gradient(180deg, var(--cy), #0077b6); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5)); 
-        }
-        .load-let.g { 
-            background: linear-gradient(180deg, var(--gr), #00a152); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.4)); 
-        }
-        .load-let:nth-child(1) { animation-delay: .2s; }
-        .load-let:nth-child(2) { animation-delay: .32s; }
-        .load-let:nth-child(3) { animation-delay: .44s; }
-        .load-let:nth-child(4) { animation-delay: .56s; }
-        .load-let:nth-child(5) { animation-delay: .68s; }
-        .load-let:nth-child(6) { animation-delay: .8s; }
-        .load-let:nth-child(7) { animation-delay: .92s; }
-        .load-let:nth-child(8) { animation-delay: 1.04s; }
-        .load-let:nth-child(9) { animation-delay: 1.16s; }
+        .load-let-wrap { display: flex; gap: 4px; flex-wrap: nowrap; justify-content: center; margin-bottom: 40px; white-space: nowrap; }
+        .load-let { font-family: 'Cinzel', serif; font-size: clamp(2rem, 13vw, 64px); font-weight: 900; opacity: 0; transform: translateY(20px); animation: lin 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; line-height: 1; }
+        .load-let.b { background: linear-gradient(180deg, var(--cy), #0077b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5)); }
+        .load-let.g { background: linear-gradient(180deg, var(--gr), #00a152); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.4)); }
+        .load-let:nth-child(1) { animation-delay: .2s; } .load-let:nth-child(2) { animation-delay: .32s; } .load-let:nth-child(3) { animation-delay: .44s; } .load-let:nth-child(4) { animation-delay: .56s; } .load-let:nth-child(5) { animation-delay: .68s; } .load-let:nth-child(6) { animation-delay: .8s; } .load-let:nth-child(7) { animation-delay: .92s; } .load-let:nth-child(8) { animation-delay: 1.04s; } .load-let:nth-child(9) { animation-delay: 1.16s; }
         @keyframes lin { to { opacity: 1; transform: translateY(0); } }
 
-        .load-bar { 
-            width: 100%; 
-            height: 2px; 
-            background: rgba(255,255,255,0.08); 
-            margin: 0 auto; 
-            border-radius: 2px; 
-            overflow: hidden; 
-            opacity: 0; 
-            animation: fu 0.5s ease 1.4s forwards; 
-            position: relative;
-        }
-        .load-fill { 
-            width: 0%; 
-            height: 100%; 
-            background: linear-gradient(90deg, var(--cy), var(--gr)); 
-            box-shadow: 0 0 10px var(--cy);
-            transition: width 0.1s linear;
-        }
-        .load-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 20px;
-            height: 100%;
-            background: rgba(255,255,255,0.7);
-            filter: blur(4px);
-        }
-        @keyframes fu { to { opacity: 1; } }
-
-        .load-info { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            width: 100%; 
-            margin: 15px auto 0; 
-            opacity: 0; 
-            animation: fu 0.5s ease 1.4s forwards; 
-        }
-        .load-percent { font-size: 12px; font-weight: 600; color: var(--cy); letter-spacing: 1px; }
-        .load-status { font-size: 8px; font-weight: 600; color: rgba(255,255,255,0.4); letter-spacing: 3px; text-transform: uppercase; }
-
-        /* HEADER & LOGO ANIMATION PREMIUM */
-        .hdr { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%;
-            padding: 22px 24px; 
-            z-index: 100; 
-            display: flex; 
-            align-items: center; 
-            height: 90px; 
-            perspective: 600px; 
-            transition: height 0.4s ease, background 0.4s ease, padding 0.4s ease;
-        }
-        .hdr.scrolled {
-            height: 70px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 15px 24px;
-        }
-        .init-logo { 
-            display: flex; 
-            gap: 14px; 
-            align-items: center;
-            opacity: 1; 
-            transform: translateX(0) scale(1) rotateY(0deg); 
-            transform-style: preserve-3d; 
-            transition: transform 0.5s cubic-bezier(0.34, 1.26, 0.64, 1), opacity 0.4s ease; 
-        }
+        /* HEADER */
+        .hdr { position: fixed; top: 0; left: 0; width: 100%; padding: 22px 24px; z-index: 100; display: flex; align-items: center; height: 90px; perspective: 600px; transition: height 0.4s ease, background 0.4s ease, padding 0.4s ease; }
+        .hdr.scrolled { height: 70px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 24px; }
+        .init-logo { display: flex; gap: 14px; align-items: center; opacity: 1; transform: translateX(0) scale(1) rotateY(0deg); transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.34, 1.26, 0.64, 1), opacity 0.4s ease; }
         .init-logo img { height: 36px; width: auto; transition: height 0.4s ease; }
         .hdr.scrolled .init-logo img { height: 30px; }
-        
-        .scr-logo { 
-            position: absolute; 
-            left: 24px; 
-            width: 42px;
-            height: 42px;
-            opacity: 0; 
-            transform: translateX(-30px) scale(0.5) rotateY(-90deg); 
-            transform-style: preserve-3d; 
-            transition: transform 0.5s cubic-bezier(0.34, 1.26, 0.64, 1), opacity 0.4s ease; 
-        }
-        .scr-logo svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5));
-            animation: spinQ 6s linear infinite;
-        }
-        @keyframes spinQ { 
-            0% { transform: rotate(0deg); } 
-            100% { transform: rotate(360deg); } 
-        }
-        
-        .hdr.scrolled .init-logo { 
-            opacity: 0; 
-            transform: translateX(-40px) scale(0.8) rotateY(90deg); 
-            pointer-events: none; 
-        }
-        .hdr.scrolled .scr-logo { 
-            opacity: 1; 
-            transform: translateX(0) scale(1) rotateY(0deg); 
-            pointer-events: auto; 
-        }
+        .scr-logo { position: absolute; left: 24px; width: 42px; height: 42px; opacity: 0; transform: translateX(-30px) scale(0.5) rotateY(-90deg); transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.34, 1.26, 0.64, 1), opacity 0.4s ease; }
+        .scr-logo svg { width: 100%; height: 100%; }
+        .logo-base { stroke: rgba(255, 255, 255, 0.15); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+        .logo-accent { stroke: url(#qGrad); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+        .logo-flow { stroke: url(#qGrad); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; fill: none; stroke-dasharray: 15 35; animation: flowDown 2s linear infinite; filter: drop-shadow(0 0 6px var(--cy)); }
+        @keyframes flowDown { 0% { stroke-dashoffset: 50; } 100% { stroke-dashoffset: 0; } }
+        .hdr.scrolled .init-logo { opacity: 0; transform: translateX(-40px) scale(0.8) rotateY(90deg); pointer-events: none; }
+        .hdr.scrolled .scr-logo { opacity: 1; transform: translateX(0) scale(1) rotateY(0deg); pointer-events: auto; }
 
-        /* P1 - HERO */
-        .p1 { 
-            width: 100%; 
-            height: 100vh; 
-            position: relative; 
-            opacity: 0; 
-            transition: opacity 1s ease; 
-            overflow: hidden; 
-        }
+        /* === PAGE 1 (HERO) === */
+        .p1 { width: 100%; height: 100vh; position: relative; opacity: 0; transition: opacity 1s ease; overflow: hidden; }
         .p1.show { opacity: 1; }
-        .p1-hero { 
-            width: 100%; 
-            height: 100vh; 
-            position: relative; 
-            background: url('ChatGPT Image Jul 9, 2026, 11_38_11 PM.png') center/cover no-repeat; 
-        }
-        .p1-layout { 
-            position: absolute; 
-            left: 80px; 
-            right: 80px; 
-            top: 50%; 
-            transform: translateY(-50%); 
-            display: flex; 
-            align-items: center; 
-            height: 400px; 
-            z-index: 5;
-        }
-        .p1-box { 
-            background: rgba(255,255,255,0.02); 
-            border: 1px solid rgba(255,255,255,0.15); 
-            padding: 35px 45px; 
-            cursor: pointer; 
-            text-align: left; 
-            outline: none; 
-            width: 520px; 
-            max-width: 100%;
-            flex-shrink: 0; 
-            transition: all 0.4s ease; 
-            font-family: inherit; 
-        }
-        .p1-box.active { 
-            background: rgba(255,255,255,0.05); 
-            border-color: rgba(0, 212, 255, 0.4); 
-        }
-        .p1-title { 
-            font-weight: 800; 
-            font-size: 38px; 
-            color: #fff; 
-            text-transform: uppercase; 
-            letter-spacing: 4px; 
-            line-height: 1.3; 
-        }
-        .p1-lines { 
-            position: relative; 
-            flex-grow: 1; 
-            height: 100%; 
-            pointer-events: none; 
-        }
-        .l-stem, .l-top, .l-bot, .l-tt, .l-tb { 
-            position: absolute; 
-            box-shadow: 0 0 8px rgba(0, 212, 255, 0.6); 
-        }
-        .l-stem { 
-            left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 2px; 
-            background: linear-gradient(90deg, rgba(0,212,255,0.4), var(--cy), var(--gr)); 
-            background-size: 200% 100%; transition: width 0.3s ease 0.6s; 
-        }
-        .l-top { 
-            left: 80px; bottom: 50%; width: 2px; height: 0; 
-            background: linear-gradient(0deg, rgba(0,212,255,0.4), var(--cy), var(--gr)); 
-            background-size: 100% 200%; transition: height 0.3s ease 0.3s; 
-        }
-        .l-bot { 
-            left: 80px; top: 50%; width: 2px; height: 0; 
-            background: linear-gradient(180deg, rgba(0,212,255,0.4), var(--cy), var(--gr)); 
-            background-size: 100% 200%; transition: height 0.3s ease 0.3s; 
-        }
-        .l-tt { 
-            left: 80px; top: 55px; width: 0; height: 2px; 
-            background: linear-gradient(90deg, var(--gr), var(--cy), rgba(255,255,255,0.2)); 
-            background-size: 200% 100%; transition: width 0.3s ease 0.3s; 
-        }
-        .l-tb { 
-            left: 80px; bottom: 55px; width: 0; height: 2px; 
-            background: linear-gradient(90deg, var(--gr), var(--cy), rgba(255,255,255,0.2)); 
-            background-size: 200% 100%; transition: width 0.3s ease 0.3s; 
-        }
+        .p1-hero { width: 100%; height: 100vh; position: relative; background: url('ChatGPT Image Jul 9, 2026, 11_38_11 PM.png') center/cover no-repeat; }
+        .p1-layout { position: absolute; left: 80px; right: 80px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; height: 400px; z-index: 5; }
+        .p1-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.15); padding: 35px 45px; cursor: pointer; text-align: left; outline: none; width: 520px; max-width: 100%; flex-shrink: 0; transition: all 0.4s ease; font-family: inherit; }
+        .p1-box.active { background: rgba(255,255,255,0.05); border-color: rgba(0, 212, 255, 0.4); }
+        .p1-title { font-weight: 800; font-size: 38px; color: #fff; text-transform: uppercase; letter-spacing: 4px; line-height: 1.3; }
+        .p1-lines { position: relative; flex-grow: 1; height: 100%; pointer-events: none; }
+        .l-stem, .l-top, .l-bot, .l-tt, .l-tb { position: absolute; box-shadow: 0 0 8px rgba(0, 212, 255, 0.6); }
+        .l-stem { left: 0; top: 50%; transform: translateY(-50%); width: 0; height: 2px; background: linear-gradient(90deg, rgba(0,212,255,0.4), var(--cy), var(--gr)); background-size: 200% 100%; transition: width 0.3s ease 0.6s; }
+        .l-top { left: 80px; bottom: 50%; width: 2px; height: 0; background: linear-gradient(0deg, rgba(0,212,255,0.4), var(--cy), var(--gr)); background-size: 100% 200%; transition: height 0.3s ease 0.3s; }
+        .l-bot { left: 80px; top: 50%; width: 2px; height: 0; background: linear-gradient(180deg, rgba(0,212,255,0.4), var(--cy), var(--gr)); background-size: 100% 200%; transition: height 0.3s ease 0.3s; }
+        .l-tt { left: 80px; top: 55px; width: 0; height: 2px; background: linear-gradient(90deg, var(--gr), var(--cy), rgba(255,255,255,0.2)); background-size: 200% 100%; transition: width 0.3s ease 0.3s; }
+        .l-tb { left: 80px; bottom: 55px; width: 0; height: 2px; background: linear-gradient(90deg, var(--gr), var(--cy), rgba(255,255,255,0.2)); background-size: 200% 100%; transition: width 0.3s ease 0.3s; }
         .active .l-stem { width: 80px; animation: flh 1.5s linear infinite; transition: width 0.3s ease 0s; }
         .active .l-top { height: 145px; animation: flu 1.5s linear infinite; }
         .active .l-bot { height: 145px; animation: fld 1.5s linear infinite; }
@@ -367,838 +105,978 @@
         @keyframes flh { 0% { background-position: 200% 0%; } 100% { background-position: -200% 0%; } }
         @keyframes flu { 0% { background-position: 0% 200%; } 100% { background-position: 0% -200%; } }
         @keyframes fld { 0% { background-position: 0% -200%; } 100% { background-position: 0% 200%; } }
-        .p1-right { 
-            position: relative; display: flex; flex-direction: column; justify-content: space-between; 
-            height: 100%; width: 450px; flex-shrink: 0; 
-        }
-        /* PERBAIKAN UTAMA: pointer-events: none ditambahkan di sini */
-        .p1-info { 
-            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 34px 40px; 
-            width: 100%; opacity: 0; transform: translateX(-20px) scale(0.98); text-align: center; 
-            cursor: pointer; transition: all 0.4s ease; 
-            pointer-events: none; /* Ini memastikan kotak transparan tidak bisa diklik secara sembarangan */
-        }
-        .p1-info::before, .p1-info::after { 
-            content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 0; height: 1px; 
-            transition: width 0.5s ease; background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent); 
-        }
+        .p1-right { position: relative; display: flex; flex-direction: column; justify-content: space-between; height: 100%; width: 450px; flex-shrink: 0; }
+        .p1-info { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 34px 40px; width: 100%; opacity: 0; transform: translateX(-20px) scale(0.98); text-align: center; cursor: pointer; transition: all 0.4s ease; pointer-events: none; }
+        .p1-info::before, .p1-info::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 0; height: 1px; transition: width 0.5s ease; background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent); }
         .active .p1-info::before, .active .p1-info::after { width: 80%; }
         .p1-info.lab-top::before, .p1-info.lab-top::after { background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent); }
         .p1-info.lab-bot::before, .p1-info.lab-bot::after { background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.25), transparent); }
         .p1-info::before { top: 12px; } .p1-info::after { bottom: 12px; }
-        .p1-lab { 
-            font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; 
-            margin-bottom: 8px; opacity: 0.35; transition: opacity 0.3s ease; 
-        }
+        .p1-lab { font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 8px; opacity: 0.35; transition: opacity 0.3s ease; }
         .active .p1-info .p1-lab { opacity: 1; }
         .p1-trig { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 5px; line-height: 1.3; }
         .lab-top .p1-lab { color: var(--cy); } .lab-bot .p1-lab { color: var(--gr); }
-        .lab-top .p1-trig { 
-            color: transparent; background: linear-gradient(90deg, var(--cy), #fff, var(--cy)); 
-            background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: tsb 3s linear infinite; 
-        }
-        .lab-bot .p1-trig { 
-            color: transparent; background: linear-gradient(90deg, var(--gr), #fff, var(--gr)); 
-            background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: tsg 3s linear infinite; 
-        }
+        .lab-top .p1-trig { color: transparent; background: linear-gradient(90deg, var(--cy), #fff, var(--cy)); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: tsb 3s linear infinite; }
+        .lab-bot .p1-trig { color: transparent; background: linear-gradient(90deg, var(--gr), #fff, var(--gr)); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: tsg 3s linear infinite; }
         @keyframes tsb { to { background-position: -200% 0; } } @keyframes tsg { to { background-position: -200% 0; } }
-        /* Saat aktif, pointer-events dikembalikan ke auto agar bisa diklik */
         .active .p1-info { opacity: 1; transform: translateX(0) scale(1); transition: all 0.4s ease 0.9s; pointer-events: auto; }
+        .scroll-ind { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 5; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
 
-        /* P2 - Asymmetric Image/Text */
-        .p2 { 
-            width: 100%; min-height: 100vh; position: relative; background: #050507; 
-            display: flex; align-items: center; padding: 120px 80px; overflow: hidden; 
-        }
-        .p2-cont { 
-            max-width: 1200px; width: 100%; margin: 0 auto; display: grid; 
-            grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; 
-        }
-        .p2-left { display: flex; flex-direction: column; gap: 30px; }
-        .p2-label { font-size: 11px; font-weight: 600; color: var(--gr); text-transform: uppercase; letter-spacing: 5px; }
-        .p2-title { font-size: 64px; font-weight: 300; color: #fff; line-height: 1.1; }
-        .p2-title span { font-weight: 800; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .p2-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.6); text-align: justify; }
-        .p2-right { 
-            position: relative; height: 500px; 
-            overflow: hidden; display: flex; align-items: center; justify-content: center;
-            background: transparent;
-        }
-        .p2-img { 
-            max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain;
-            opacity: 0.9; filter: grayscale(20%) contrast(110%); transition: opacity 0.4s ease; 
-        }
-        .p2-right:hover .p2-img { opacity: 1; }
+        /* === PAGE 2 (STRUCTURAL UNITY) === */
+        .p2 { width: 100%; min-height: 100vh; background: #030303; padding: 120px 80px; position: relative; overflow: hidden; display: flex; align-items: center; }
+        .p2-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%); -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%); }
+        .p2-container { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: stretch; }
+        .p2-visual { position: relative; display: flex; flex-direction: column; justify-content: center; }
+        .p2-img-wrap { position: relative; width: 100%; height: 100%; min-height: 450px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .p2-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%) contrast(1.1); transition: transform 1.2s ease, filter 0.6s ease; }
+        .p2-img-wrap:hover img { transform: scale(1.05); filter: grayscale(0%) contrast(1.2); }
+        .p2-img-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4)); pointer-events: none; }
+        .p2-frame-deco { position: absolute; width: 100px; height: 100px; border: 2px solid var(--cy); z-index: 5; pointer-events: none; transition: all 0.6s ease; }
+        .p2-frame-deco.top-left { top: -15px; left: -15px; border-right: none; border-bottom: none; box-shadow: -10px -10px 20px rgba(0, 212, 255, 0.1); }
+        .p2-frame-deco.bot-right { bottom: -15px; right: -15px; border-left: none; border-top: none; border-color: var(--gr); box-shadow: 10px 10px 20px rgba(0, 230, 118, 0.1); }
+        .p2-visual:hover .p2-frame-deco.top-left { transform: translate(-10px, -10px); }
+        .p2-visual:hover .p2-frame-deco.bot-right { transform: translate(10px, 10px); }
+        .p2-text-content { display: flex; flex-direction: column; gap: 15px; height: 100%; justify-content: center; }
+        .p2-tag { display: inline-flex; align-items: center; gap: 10px; color: var(--cy); font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; }
+        .p2-tag::before { content: ''; width: 30px; height: 2px; background: var(--cy); box-shadow: 0 0 10px var(--cy); }
+        .p2-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.8rem, 3.5vw, 32px); font-weight: 800; color: #fff; line-height: 1.3; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .p2-paragraph { color: rgba(255,255,255,0.7); font-size: 14px; text-align: justify; text-justify: inter-word; line-height: 1.7; margin-bottom: 10px; }
+        .p2-paragraph:last-of-type { margin-bottom: 0; }
+        .p2-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: auto; padding-top: 20px; }
+        .p2-feature { padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-left: 3px solid var(--cy); border-radius: 0 8px 8px 0; transition: all 0.4s ease; }
+        .p2-feature:nth-child(2) { border-left-color: var(--gr); }
+        .p2-feature:hover { background: rgba(255,255,255,0.05); transform: translateY(-3px); }
+        .p2-feature h4 { color: #fff; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .p2-feature p { color: rgba(255,255,255,0.5); font-size: 12px; text-align: justify; text-justify: inter-word; line-height: 1.6; }
 
-        /* P3 - Diagonal Split */
-        .p3 { width: 100%; min-height: 100vh; position: relative; background: #000; display: flex; align-items: center; overflow: hidden; }
-        .p3-bg { 
-            position: absolute; top: 0; right: 0; width: 60%; height: 100%; 
-            background: url('ChatGPT Image 18 Jul 2026, 19.17.18.png') center/cover no-repeat; 
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%); 
-        }
-        .p3-overlay { 
-            position: absolute; top: 0; right: 0; width: 60%; height: 100%; 
-            background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0.4)); 
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%); 
-        }
-        .p3-cont { position: relative; z-index: 10; max-width: 600px; padding: 120px 80px; }
-        .p3-label { font-size: 11px; font-weight: 600; color: var(--cy); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 20px; }
-        .p3-title { font-size: 56px; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 30px; }
-        .p3-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.7); text-align: justify; }
+        /* === PAGE 3 (ECOSYSTEM MATRIX) === */
+        .p3 { width: 100%; min-height: 100vh; background: #020202; padding: 120px 80px; position: relative; overflow: hidden; display: flex; align-items: center; }
+        .p3-bg-glow { position: absolute; top: 20%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0, 212, 255, 0.06) 0%, transparent 70%); filter: blur(100px); pointer-events: none; }
+        .p3-bg-glow.bot { top: auto; bottom: -10%; right: auto; left: -10%; background: radial-gradient(circle, rgba(0, 230, 118, 0.06) 0%, transparent 70%); }
+        .p3-container { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; display: grid; grid-template-columns: 0.8fr 1.5fr 1fr; gap: 40px; align-items: stretch; }
+        .p3-visual { position: relative; height: 500px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .p3-visual img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%) contrast(1.2); transition: filter 0.6s ease; }
+        .p3-visual:hover img { filter: grayscale(0%) contrast(1.1); }
+        .p3-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,212,255,0.1), rgba(0,0,0,0.6)); pointer-events: none; }
+        .p3-main-text { padding: 20px 0; display: flex; flex-direction: column; justify-content: center; }
+        .p3-sub { color: var(--cy); font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; display: block; }
+        .p3-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.5rem, 3vw, 28px); font-weight: 800; color: #fff; line-height: 1.3; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .p3-text { color: rgba(255,255,255,0.7); font-size: 15px; text-align: justify; text-justify: inter-word; line-height: 1.8; margin-bottom: 20px; }
+        .p3-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--cy), var(--gr)); border-radius: 2px; margin-top: 20px; }
+        .p3-cards-col { display: flex; flex-direction: column; gap: 25px; justify-content: center; }
+        .p3-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 25px; transition: all 0.4s ease; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); position: relative; overflow: hidden; }
+        .p3-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(0, 230, 118, 0.3); transform: translateX(-10px); }
+        .p3-card::before { content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 3px; background: var(--cy); border-radius: 0 2px 2px 0; box-shadow: 0 0 10px var(--cy); transition: all 0.4s ease; }
+        .p3-card:nth-child(2)::before { background: var(--gr); box-shadow: 0 0 10px var(--gr); }
+        .p3-card h4 { color: #fff; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding-left: 15px; }
+        .p3-card p { color: rgba(255,255,255,0.6); font-size: 13px; text-align: justify; text-justify: inter-word; line-height: 1.6; padding-left: 15px; }
 
-        /* P4 - Wheel & Image Panel */
-        .p4 { width: 100%; min-height: 100vh; position: relative; background: #020203; display: flex; align-items: center; justify-content: center; padding: 120px 60px; overflow: hidden; }
-        .p4-cont { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 300px 1fr; gap: 80px; align-items: center; }
-        .p4-wheel { width: 100%; max-width: 300px; margin: 0 auto; aspect-ratio: 1; }
-        .p4-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-        .p4-slice { fill: transparent; stroke: rgba(255,255,255,0.1); stroke-width: 1.5; cursor: pointer; transition: all 0.3s ease; }
-        .p4-slice:hover { fill: rgba(0, 212, 255, 0.05); }
-        .p4-slice.active { fill: rgba(0, 230, 118, 0.1); stroke: var(--gr); stroke-width: 2; filter: drop-shadow(0 0 10px rgba(0,230,118,0.3)); }
-        .p4-txt { fill: rgba(255,255,255,0.5); font-size: 14px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; transition: all 0.3s ease; }
-        .p4-txt.active { fill: var(--gr); font-size: 16px; }
-        .p4-panel { position: relative; min-height: 400px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
-        .p4-panel-bg { 
-            position: absolute; inset: 0; background-size: cover; background-position: center; 
-            background-repeat: no-repeat; opacity: 0.2; filter: blur(2px); transition: background-image 0.5s ease; 
-        }
-        .p4-panel-content { position: relative; z-index: 5; padding: 60px 50px; background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0.6)); height: 100%; min-height: 400px; display: flex; flex-direction: column; justify-content: center; }
-        .p4-label { font-size: 11px; font-weight: 600; color: var(--cy); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; }
-        .p4-title { font-size: 42px; font-weight: 800; color: #fff; margin-bottom: 30px; text-transform: uppercase; }
-        .p4-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.8); text-align: justify; max-width: 90%; }
+        /* === PAGE 4 (STRATEGIC FRAMEWORK - VERTICAL TIMELINE) === */
+        .p4 { width: 100%; min-height: 100vh; background: #030303; padding: 120px 0; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .p4-bg-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(0, 230, 118, 0.04) 0%, transparent 60%); pointer-events: none; }
+        .p4-container { max-width: 1000px; width: 100%; padding: 0 80px; position: relative; z-index: 2; }
+        .p4-header { text-align: center; margin-bottom: 80px; }
+        .p4-sub { color: var(--gr); font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .p4-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.8rem, 3.5vw, 32px); font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .p4-desc { max-width: 600px; margin: 0 auto; color: rgba(255,255,255,0.6); font-size: 15px; text-align: justify; text-justify: inter-word; line-height: 1.7; }
+        .p4-timeline { position: relative; }
+        .p4-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, transparent, var(--cy), var(--gr), transparent); transform: translateX(-50%); }
+        .p4-item { display: flex; align-items: center; margin-bottom: 60px; position: relative; }
+        .p4-item:last-child { margin-bottom: 0; }
+        .p4-item:nth-child(even) { flex-direction: row-reverse; }
+        .p4-node { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; background: #000; border: 2px solid var(--cy); border-radius: 50%; box-shadow: 0 0 15px var(--cy); z-index: 5; }
+        .p4-item:nth-child(even) .p4-node { border-color: var(--gr); box-shadow: 0 0 15px var(--gr); }
+        .p4-content { width: 45%; padding: 30px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; transition: all 0.4s ease; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+        .p4-content:hover { background: rgba(255,255,255,0.05); border-color: rgba(0, 212, 255, 0.3); transform: translateY(-5px); }
+        .p4-item:nth-child(even) .p4-content:hover { border-color: rgba(0, 230, 118, 0.3); }
+        .p4-content h4 { color: #fff; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .p4-content p { color: rgba(255,255,255,0.6); font-size: 13px; text-align: justify; text-justify: inter-word; line-height: 1.6; }
 
-        /* P5 - Editorial Grid */
-        .p5 { width: 100%; min-height: 100vh; position: relative; background: #030305; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; padding: 120px 80px; }
-        .p5-item { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; background: rgba(10, 10, 24, 0.4); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease; }
-        .p5-item:hover { background: rgba(10, 10, 24, 0.8); border-color: rgba(0, 212, 255, 0.2); }
-        .p5-content { position: relative; z-index: 3; }
-        .p5-num { font-size: 12px; font-weight: 700; color: var(--gr); letter-spacing: 3px; margin-bottom: 10px; }
-        .p5-h { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 10px; }
-        .p5-p { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.6); }
-        .p5-item.large { grid-column: span 2; grid-row: span 2; justify-content: center; }
-        .p5-item.large .p5-h { font-size: 48px; max-width: 600px; }
-        .p5-item.large .p5-p { font-size: 16px; max-width: 500px; }
+        /* === PAGE 5 (NETWORK SYNCHRONIZATION - DIAGONAL STAGGERED CARDS) === */
+        .p5 { width: 100%; min-height: 100vh; background: #020202; padding: 120px 80px; position: relative; overflow: hidden; display: flex; align-items: center; }
+        .p5-bg-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(0, 230, 118, 0.05) 0%, transparent 50%); pointer-events: none; }
+        .p5-container { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: center; }
+        .p5-text-block { display: flex; flex-direction: column; gap: 20px; }
+        .p5-sub { color: var(--cy); font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; }
+        .p5-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.8rem, 3.5vw, 32px); font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 1px; line-height: 1.3; }
+        .p5-desc { color: rgba(255,255,255,0.7); font-size: 14px; text-align: justify; text-justify: inter-word; line-height: 1.7; }
+        .p5-cards-wrap { display: flex; flex-direction: column; gap: 20px; }
+        .p5-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 30px; border-radius: 12px; transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); position: relative; overflow: hidden; }
+        .p5-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--cy); box-shadow: 0 0 15px var(--cy); }
+        .p5-card:nth-child(2) { margin-left: 40px; }
+        .p5-card:nth-child(2)::before { background: var(--gr); box-shadow: 0 0 15px var(--gr); }
+        .p5-card:nth-child(3) { margin-left: 80px; }
+        .p5-card:nth-child(3)::before { background: var(--cy); box-shadow: 0 0 15px var(--cy); }
+        .p5-card:hover { background: rgba(255,255,255,0.06); transform: translateX(-10px); border-color: rgba(255,255,255,0.15); }
+        .p5-card h4 { color: #fff; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding-left: 15px; }
+        .p5-card p { color: rgba(255,255,255,0.6); font-size: 13px; text-align: justify; text-justify: inter-word; line-height: 1.6; padding-left: 15px; }
 
-        /* P6 - 3D Horizon Grid */
-        .p6 { width: 100%; min-height: 100vh; position: relative; background: radial-gradient(circle at 50% 50%, #05050a 0%, #000000 80%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .p6-grid-floor { position: absolute; bottom: 0; left: 50%; width: 200%; height: 50vh; background-image: linear-gradient(rgba(0, 212, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 230, 118, 0.2) 1px, transparent 1px); background-size: 60px 60px; transform: translateX(-50%) perspective(400px) rotateX(70deg); transform-origin: bottom center; mask-image: linear-gradient(to top, black 20%, transparent 90%); -webkit-mask-image: linear-gradient(to top, black 20%, transparent 90%); animation: gridScroll 8s linear infinite; pointer-events: none; }
-        @keyframes gridScroll { 0% { background-position: 0 0; } 100% { background-position: 0 60px; } }
-        .p6-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 250px; background: radial-gradient(ellipse at center, rgba(0, 230, 118, 0.15) 0%, rgba(0, 212, 255, 0.05) 40%, transparent 70%); filter: blur(40px); pointer-events: none; }
-        .p6-horizon { position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--gr), var(--cy), transparent); box-shadow: 0 0 25px var(--gr), 0 0 50px var(--cy); pointer-events: none; }
-        .p6-cont { position: relative; z-index: 10; text-align: center; max-width: 800px; padding: 0 40px; margin-top: -20vh; }
-        .p6-label { font-size: 12px; font-weight: 600; color: var(--cy); text-transform: uppercase; letter-spacing: 6px; margin-bottom: 30px; }
-        .p6-title { font-size: 72px; font-weight: 200; color: #fff; line-height: 1; margin-bottom: 40px; text-shadow: 0 0 30px rgba(0,0,0,0.8); }
-        .p6-title span { display: block; font-weight: 800; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .p6-text { font-size: 16px; line-height: 1.9; color: rgba(255,255,255,0.8); text-align: justify; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
+        /* === PAGE 6 (SYMBIOTIC CULMINATION - 3D HOLOGRAPHIC MONOLITH) === */
+        .p6 { width: 100%; min-height: 100vh; background: #000; padding: 120px 80px; position: relative; overflow: hidden; display: flex; align-items: center; }
+        .p6-bg-matrix { position: absolute; inset: 0; background-image: linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 230, 118, 0.03) 1px, transparent 1px); background-size: 40px 40px; mask-image: radial-gradient(circle at 70% 50%, black, transparent 70%); -webkit-mask-image: radial-gradient(circle at 70% 50%, black, transparent 70%); pointer-events: none; }
+        .p6-container { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; }
+        .p6-side-text { display: flex; flex-direction: column; gap: 40px; }
+        .p6-item { display: flex; align-items: center; gap: 20px; }
+        .p6-line { width: 40px; height: 2px; background: var(--cy); box-shadow: 0 0 10px var(--cy); flex-shrink: 0; }
+        .p6-item:nth-child(2) .p6-line { background: var(--gr); box-shadow: 0 0 10px var(--gr); }
+        .p6-item-content h4 { color: #fff; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
+        .p6-item-content p { color: rgba(255,255,255,0.5); font-size: 12px; text-align: justify; text-justify: inter-word; line-height: 1.5; max-width: 300px; }
+        .p6-monolith { position: relative; background: linear-gradient(145deg, rgba(10, 15, 20, 0.9), rgba(0, 0, 0, 0.95)); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 4px; padding: 60px; transform: perspective(1200px) rotateY(-7deg); transition: transform 0.6s ease, border-color 0.4s ease; box-shadow: -20px 20px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(0, 212, 255, 0.05); }
+        .p6-monolith:hover { transform: perspective(1200px) rotateY(-3deg); border-color: rgba(0, 212, 255, 0.3); }
+        .p6-monolith::before { content: ''; position: absolute; top: 20px; bottom: 20px; left: 20px; width: 1px; background: linear-gradient(180deg, var(--cy), var(--gr)); box-shadow: 0 0 15px var(--cy); }
+        .p6-sub { color: var(--cy); font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; display: block; padding-left: 20px; }
+        .p6-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.8rem, 3.5vw, 32px); font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; padding-left: 20px; line-height: 1.3; }
+        .p6-text { color: rgba(255,255,255,0.7); font-size: 14px; text-align: justify; text-justify: inter-word; line-height: 1.8; padding-left: 20px; margin-bottom: 40px; }
+        .p6-footer-mark { font-family: 'Cinzel', serif; color: rgba(255,255,255,0.2); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; padding-left: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
-        /* P7 - Zigzag Alternating */
-        .p7 { width: 100%; min-height: 100vh; position: relative; background: #050507; display: flex; flex-direction: column; justify-content: center; gap: 80px; padding: 140px 80px; }
-        .p7-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; width: 100%; margin: 0 auto; }
-        .p7-row.rev .p7-img-wrap { order: 2; }
-        .p7-img-wrap { height: 400px; overflow: hidden; position: relative; }
-        .p7-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: grayscale(30%); }
-        .p7-img-wrap:hover .p7-img { transform: scale(1.05); filter: grayscale(0%); }
-        .p7-img-wrap::before { content: ''; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,0.1); z-index: 2; pointer-events: none; margin: 20px; }
-        .p7-text-wrap h2 { font-size: 42px; font-weight: 300; color: #fff; margin-bottom: 20px; }
-        .p7-text-wrap h2 b { font-weight: 800; color: var(--cy); }
-        .p7-text-wrap p { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.6); text-align: justify; }
+        /* === PAGE 7 (SYSTEM RESONANCE - BENTO GRID ASYMMETRIC) === */
+        .p7 { width: 100%; min-height: 100vh; background: #050505; padding: 120px 80px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .p7-container { max-width: 1000px; width: 100%; position: relative; z-index: 2; }
+        .p7-header { text-align: center; margin-bottom: 60px; }
+        .p7-grid { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto auto; gap: 20px; }
+        .p7-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); padding: 35px; border-radius: 12px; transition: all 0.4s ease; position: relative; overflow: hidden; }
+        .p7-card:hover { background: rgba(255,255,255,0.05); transform: translateY(-5px); }
+        .p7-card.large { grid-column: 1 / 2; grid-row: 1 / 3; display: flex; flex-direction: column; justify-content: center; border-left: 4px solid var(--cy); box-shadow: inset 10px 0 30px rgba(0, 212, 255, 0.03); }
+        .p7-card.small { border-top: 3px solid var(--gr); }
+        .p7-card.wide { grid-column: 1 / 3; grid-row: 3 / 4; border-bottom: 3px solid var(--cy); }
+        .p7-card h4 { color: #fff; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .p7-card.large h4 { font-size: 24px; }
+        .p7-card p { color: rgba(255,255,255,0.6); font-size: 14px; text-align: justify; text-justify: inter-word; line-height: 1.7; }
 
-        /* P8 - Timeline */
-        .p8 { width: 100%; min-height: 100vh; position: relative; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 140px 40px; overflow: hidden; }
-        .p8-head { text-align: center; margin-bottom: 80px; }
-        .p8-h-label { font-size: 11px; color: var(--gr); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px; }
-        .p8-h-title { font-size: 56px; font-weight: 200; color: #fff; }
-        .p8-line { width: 2px; height: 60%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2), transparent); position: absolute; top: 20%; left: 50%; transform: translateX(-50%); }
-        .p8-items { position: relative; width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 60px; }
-        .p8-item { width: 45%; position: relative; padding: 30px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
-        .p8-item:nth-child(odd) { align-self: flex-start; text-align: right; border-right: 2px solid var(--cy); }
-        .p8-item:nth-child(even) { align-self: flex-end; text-align: left; border-left: 2px solid var(--gr); }
-        .p8-item h3 { font-size: 24px; color: #fff; margin-bottom: 10px; font-weight: 700; }
-        .p8-item p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; }
-        .p8-num { font-family: 'Cinzel', serif; font-size: 64px; font-weight: 900; color: rgba(255,255,255,0.03); position: absolute; top: 10px; }
-        .p8-item:nth-child(odd) .p8-num { right: 20px; } .p8-item:nth-child(even) .p8-num { left: 20px; }
+        /* === PAGE 8 (COGNITIVE ARCHITECTURE - HORIZONTAL STACKED BANDS) === */
+        .p8 { width: 100%; min-height: 100vh; background: #000; padding: 120px 80px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .p8-header { text-align: center; margin-bottom: 60px; }
+        .p8-container { max-width: 900px; width: 100%; position: relative; z-index: 2; display: flex; flex-direction: column; gap: 15px; }
+        .p8-band { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 25px 30px; border-radius: 8px; display: flex; gap: 30px; align-items: center; transition: all 0.4s ease; }
+        .p8-band:hover { background: rgba(255,255,255,0.05); transform: translateX(10px); }
+        .p8-band:nth-child(odd) { border-left: 3px solid var(--cy); }
+        .p8-band:nth-child(even) { border-left: 3px solid var(--gr); margin-left: 60px; }
+        .p8-band-title { flex: 0 0 220px; font-size: 16px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+        .p8-band-text { flex: 1; font-size: 13px; color: rgba(255,255,255,0.6); text-align: justify; text-justify: inter-word; line-height: 1.6; }
 
-        /* P9 - Manifesto */
-        .p9 { width: 100%; min-height: 100vh; position: relative; background: #020203; display: flex; align-items: center; justify-content: center; padding: 120px 40px; overflow: hidden; }
-        .p9::before { content: 'I'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Cinzel', serif; font-size: 600px; font-weight: 900; color: rgba(255,255,255,0.01); pointer-events: none; }
-        .p9-cont { position: relative; z-index: 10; max-width: 800px; text-align: center; }
-        .p9-line { width: 100px; height: 1px; background: var(--cy); margin: 0 auto 40px auto; }
-        .p9-title { font-size: 48px; font-weight: 300; color: rgba(255,255,255,0.9); line-height: 1.3; margin-bottom: 40px; }
-        .p9-title b { font-weight: 800; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .p9-text { font-size: 16px; line-height: 1.9; color: rgba(255,255,255,0.5); text-align: justify; }
+        /* === PAGE 9 (ABSOLUTE CONVERGENCE - CENTERPIECE WITH PILLARS) === */
+        .p9 { width: 100%; min-height: 100vh; background: #030303; padding: 120px 80px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .p9-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0, 230, 118, 0.04), transparent 70%); filter: blur(80px); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+        .p9-wrapper { display: flex; align-items: stretch; gap: 30px; max-width: 800px; width: 100%; position: relative; z-index: 2; }
+        .p9-pillar { width: 2px; background: linear-gradient(180deg, transparent, var(--cy), var(--gr), transparent); box-shadow: 0 0 15px var(--cy); flex-shrink: 0; }
+        .p9-pillar.right { background: linear-gradient(180deg, transparent, var(--gr), var(--cy), transparent); box-shadow: 0 0 15px var(--gr); }
+        .p9-center { background: rgba(10, 10, 15, 0.6); border: 1px solid rgba(255,255,255,0.08); padding: 50px 40px; border-radius: 12px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); flex: 1; text-align: center; transition: all 0.4s ease; }
+        .p9-center:hover { border-color: rgba(255,255,255,0.15); transform: scale(1.01); }
+        .p9-center h4 { font-family: 'Cinzel', serif; font-size: 20px; color: #fff; margin-bottom: 20px; }
+        .p9-center p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; text-align: justify; margin-bottom: 30px; }
+        .p9-center .divider { width: 40px; height: 2px; background: var(--gr); margin: 30px auto; box-shadow: 0 0 10px var(--gr); }
 
-        /* P10 - Image Triptych */
-        .p10 { width: 100%; min-height: 100vh; position: relative; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 100px 40px; }
-        .p10-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; max-width: 1200px; width: 100%; }
-        .p10-card { position: relative; overflow: hidden; height: 450px; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; border: 1px solid rgba(255,255,255,0.1); }
-        .p10-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: opacity 0.4s ease, transform 0.6s ease; z-index: 1; filter: grayscale(50%); }
-        .p10-card:hover .p10-img { opacity: 0.8; transform: scale(1.05); }
-        .p10-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.9), transparent 70%); z-index: 2; }
-        .p10-overlay { position: relative; z-index: 3; }
-        .p10-h { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
-        .p10-line { width: 40px; height: 1px; background: var(--gr); margin-bottom: 15px; }
-        .p10-p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7); }
+        /* === PAGE 10 (INFINITE PARADIGM - ARCHITECTURAL BLUEPRINT) === */
+        .p10 { width: 100%; min-height: 100vh; background: #020202; padding: 120px 80px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+        .p10-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 230, 118, 0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%); -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%); }
+        .p10-container { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: stretch; }
+        .p10-main-box { position: relative; border: 1px dashed rgba(255, 255, 255, 0.15); padding: 50px; display: flex; flex-direction: column; justify-content: center; }
+        .p10-main-box::before, .p10-main-box::after { content: ''; position: absolute; width: 12px; height: 12px; }
+        .p10-main-box::before { top: -1px; left: -1px; border-top: 2px solid var(--cy); border-left: 2px solid var(--cy); }
+        .p10-main-box::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--gr); border-right: 2px solid var(--gr); }
+        .p10-tag { display: inline-flex; align-items: center; gap: 10px; color: var(--gr); font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; font-family: 'Cinzel', serif; }
+        .p10-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 3.5vw, 32px); font-weight: 900; color: #fff; line-height: 1.3; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .p10-text { color: rgba(255,255,255,0.7); font-size: 15px; text-align: justify; text-justify: inter-word; line-height: 1.8; margin-bottom: 20px; }
+        .p10-text:last-child { margin-bottom: 0; }
+        .p10-nodes-col { display: flex; flex-direction: column; gap: 30px; justify-content: center; position: relative; }
+        .p10-node { position: relative; padding-left: 30px; }
+        .p10-node::before { content: ''; position: absolute; left: 0; top: 5px; width: 12px; height: 12px; background: #000; border: 1px dashed var(--cy); border-radius: 50%; box-shadow: 0 0 10px var(--cy); }
+        .p10-node::after { content: ''; position: absolute; left: 5px; top: 20px; bottom: -30px; width: 1px; border-left: 1px dashed rgba(255,255,255,0.2); }
+        .p10-node:last-child::after { display: none; }
+        .p10-node h4 { color: #fff; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .p10-node p { color: rgba(255,255,255,0.5); font-size: 13px; text-align: justify; text-justify: inter-word; line-height: 1.6; }
+        .p10-status-bar { max-width: 1100px; margin: 40px auto 0; width: 100%; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; position: relative; z-index: 2; }
+        .p10-stat { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+        .p10-stat span { color: var(--cy); margin-left: 5px; }
 
-        /* P11 - Finale */
-        .p11 { width: 100%; min-height: 100vh; position: relative; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 40px 40px; overflow: hidden; }
-        .p11-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; max-width: 90vw; max-height: 90vh; background: radial-gradient(circle, rgba(0, 230, 118, 0.05) 0%, transparent 70%); pointer-events: none; }
-        .p11-cont { position: relative; z-index: 10; max-width: 700px; text-align: center; }
-        .p11-label { font-size: 12px; font-weight: 600; color: var(--cy); text-transform: uppercase; letter-spacing: 6px; margin-bottom: 30px; }
-        .p11-title { font-size: 56px; font-weight: 200; color: #fff; line-height: 1.1; margin-bottom: 40px; }
-        .p11-title b { font-weight: 800; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .p11-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.5); text-align: justify; margin-bottom: 60px; }
-        .p11-divider { width: 1px; height: 60px; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.3), transparent); margin: 0 auto 40px auto; }
+        /* === PAGE 11 (ABSOLUTE HORIZON - QUADRANT MATRIX) === */
+        .p11 { width: 100%; min-height: 100vh; background: #050505; padding: 120px 80px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .p11-cross-v { position: absolute; top: 20%; bottom: 20%; left: 50%; width: 1px; background: linear-gradient(180deg, transparent, rgba(0,212,255,0.2), rgba(0,230,118,0.2), transparent); z-index: 1; }
+        .p11-cross-h { position: absolute; left: 20%; right: 20%; top: 50%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), rgba(0,230,118,0.2), transparent); z-index: 1; }
+        .p11-core { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background: #000; border: 1px solid var(--cy); border-radius: 50%; box-shadow: 0 0 15px var(--cy); z-index: 3; }
         
-        /* Footer Hak Cipta Profesional */
-        .p11-footer { 
-            position: relative; margin-top: 60px; width: 100%; text-align: center; z-index: 10; padding-bottom: 40px;
-        }
-        .p11-line { width: 80px; height: 1px; background: rgba(255,255,255,0.2); margin: 0 auto 20px auto; }
-        .p11-copy { font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 1px; font-weight: 500; }
-        .p11-copy span { color: rgba(0, 230, 118, 0.9); font-weight: 700; }
+        .p11-grid { width: 100%; max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 60px; position: relative; z-index: 2; min-height: 400px; }
+        .p11-q { display: flex; flex-direction: column; justify-content: center; }
+        .p11-tl { text-align: right; align-items: flex-end; }
+        .p11-tr { text-align: left; align-items: flex-start; }
+        .p11-bl { text-align: right; align-items: flex-end; }
+        .p11-br { text-align: left; align-items: flex-start; }
+        
+        .p11-tag { color: var(--cy); font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; font-family: 'Cinzel', serif; }
+        .p11-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 4vw, 32px); font-weight: 900; color: #fff; line-height: 1.3; text-transform: uppercase; letter-spacing: 1px; }
+        .p11-text { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.8; text-align: justify; max-width: 350px; }
+        .p11-mark { font-family: 'Cinzel', serif; font-size: 12px; color: var(--gr); letter-spacing: 4px; border: 1px solid rgba(0,230,118,0.3); padding: 8px 16px; border-radius: 4px; text-transform: uppercase; }
 
-        /* OVERLAY PANEL - ANIMASI PREMIUM & ELEGAN */
-        .ovl { 
-            position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
-            backdrop-filter: blur(30px) brightness(0.5); -webkit-backdrop-filter: blur(30px) brightness(0.5); 
-            z-index: 200; display: flex; align-items: center; justify-content: center; 
-            opacity: 0; visibility: hidden; transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.6s; padding: 20px; 
-        }
+        /* === PAGE 12 (CULMINATION & COPYRIGHT - CENTERPIECE MONUMENTAL) === */
+        .p12 { width: 100%; min-height: 100vh; background: #000; padding: 120px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+        .p12-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,230,118,0.05), transparent 70%); filter: blur(80px); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+        .p12-content { max-width: 700px; width: 100%; position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+        .p12-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 42px); font-weight: 900; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px; line-height: 1.2; text-transform: uppercase; letter-spacing: 2px; }
+        .p12-text { color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.8; margin-bottom: 60px; text-align: justify; text-justify: inter-word; }
+        .p12-divider { width: 100px; height: 2px; background: rgba(255,255,255,0.1); margin-bottom: 40px; }
+        .p12-legal { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; width: 100%; max-width: 600px; }
+        .p12-legal span { color: var(--cy); margin-left: 5px; }
+        .p12-year { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 6px; color: rgba(255,255,255,0.4); margin-top: 30px; text-transform: uppercase; }
+
+        /* REVEAL ANIMATION */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-right { opacity: 0; transform: translateX(30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translateX(0); }
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+
+        /* OVERLAY & NAVIGATION SYSTEM */
+        .ovl { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(30px) brightness(0.5); -webkit-backdrop-filter: blur(30px) brightness(0.5); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.6s; padding: 20px; }
         .ovl.show { opacity: 1; visibility: visible; }
-        .ovl-box { 
-            background: linear-gradient(145deg, rgba(15,15,25,0.98), rgba(5,5,15,0.98)); 
-            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; position: relative; 
-            transform: scale(0.9) translateY(40px); opacity: 0; 
-            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease; 
-            max-height: 92vh; overflow-y: auto; max-width: 1100px; width: 100%; 
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02); 
-            overscroll-behavior: contain; 
-        }
+        .ovl-box { background: linear-gradient(145deg, rgba(15,15,25,0.98), rgba(5,5,15,0.98)); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; position: relative; transform: scale(0.9) translateY(40px); opacity: 0; transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease; max-height: 92vh; overflow-y: auto; max-width: 1100px; width: 100%; box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02); overscroll-behavior: contain; }
         .ovl.show .ovl-box { transform: scale(1) translateY(0); opacity: 1; }
         .ovl-box::-webkit-scrollbar { width: 6px; }
         .ovl-box::-webkit-scrollbar-track { background: transparent; }
         .ovl-box::-webkit-scrollbar-thumb { background: rgba(0, 230, 118, 0.2); border-radius: 10px; }
-
-        .ovl-close { 
-            position: absolute; top: 16px; right: 16px; font-size: 22px; color: rgba(255,255,255,0.4); 
-            cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; 
-            border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.03); 
-            transition: all 0.3s ease; z-index: 10; transform: scale(0) rotate(-90deg); 
-        }
+        .ovl-close { position: absolute; top: 16px; right: 16px; font-size: 22px; color: rgba(255,255,255,0.4); cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.03); transition: all 0.3s ease; z-index: 10; transform: scale(0) rotate(-90deg); }
         .ovl.show .ovl-close { transform: scale(1) rotate(0deg); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s; }
         .ovl-close:hover { color: #fff; background: rgba(255, 50, 50, 0.2); border-color: rgba(255, 50, 50, 0.4); transform: scale(1.1) rotate(90deg); }
-
-        .ovl-title { 
-            font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 6px; text-align: center; padding: 30px 40px 0; 
-            background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            opacity: 0; transform: translateY(-20px); transition: all 0.6s ease 0.2s; 
-        }
+        .ovl-back { position: absolute; top: 16px; left: 16px; font-size: 14px; color: rgba(255,255,255,0.6); cursor: pointer; padding: 8px 16px; display: flex; align-items: center; gap: 8px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.03); transition: all 0.3s ease; z-index: 10; opacity: 0; transform: translateX(-20px); pointer-events: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .ovl.show .ovl-back.sub-active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+        .ovl-back:hover { color: #fff; background: rgba(255, 255, 255, 0.1); }
+        .ovl-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 6px; text-align: center; padding: 30px 40px 0; background: linear-gradient(90deg, var(--cy), var(--gr)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-20px); transition: all 0.6s ease 0.2s; }
         .ovl.show .ovl-title { opacity: 1; transform: translateY(0); }
-
-        .ovl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 30px; }
-        
-        .ovl-item { 
-            display: flex; align-items: center; gap: 15px; cursor: pointer; padding: 18px; border-radius: 12px; 
-            border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); 
-            opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(8px); 
-            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; 
-            text-decoration: none; color: inherit; 
-        }
+        .view-wrap { position: relative; min-height: 300px; }
+        .view { padding: 30px; transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); width: 100%; }
+        .view.hide-view { opacity: 0; transform: translateY(-20px) scale(0.98); pointer-events: none; position: absolute; top: 0; left: 0; }
+        .main-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .menu-box { padding: 50px 30px; border-radius: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); cursor: pointer; text-align: center; transition: all 0.4s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(8px); position: relative; overflow: hidden; }
+        .menu-box.vis { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        .menu-box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05), transparent 70%); opacity: 0; transition: opacity 0.4s ease; }
+        .menu-box:hover::before { opacity: 1; }
+        .menu-box:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .menu-box.bx-blue:hover { border-color: rgba(0, 212, 255, 0.5); box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1); }
+        .menu-box.bx-green:hover { border-color: rgba(0, 230, 118, 0.5); box-shadow: 0 20px 40px rgba(0, 230, 118, 0.1); }
+        .menu-box-icon { width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); transition: all 0.4s ease; position: relative; }
+        .bx-blue .menu-box-icon { color: var(--cy); background: rgba(0, 212, 255, 0.05); border-color: rgba(0, 212, 255, 0.2); box-shadow: 0 0 30px rgba(0, 212, 255, 0.1), inset 0 0 20px rgba(0, 212, 255, 0.05); }
+        .bx-green .menu-box-icon { color: var(--gr); background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.2); box-shadow: 0 0 30px rgba(0, 230, 118, 0.1), inset 0 0 20px rgba(0, 230, 118, 0.05); }
+        .menu-box-icon svg { width: 38px; height: 38px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px currentColor); transition: all 0.4s ease; }
+        .menu-box:hover .menu-box-icon { transform: scale(1.1) rotate(5deg); }
+        .bx-blue:hover .menu-box-icon { box-shadow: 0 0 40px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1); }
+        .bx-green:hover .menu-box-icon { box-shadow: 0 0 40px rgba(0, 230, 118, 0.3), inset 0 0 20px rgba(0, 230, 118, 0.1); }
+        .menu-box h3 { font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #fff; position: relative; z-index: 2; }
+        .menu-box p { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; position: relative; z-index: 2; }
+        .ovl-sub-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+        .ovl-sub-title::after { content: ''; flex-grow: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent); }
+        .cat-blue { color: var(--cy); text-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+        .cat-green { color: var(--gr); text-shadow: 0 0 10px rgba(0, 230, 118, 0.3); }
+        .ovl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .ovl-item { display: flex; align-items: center; gap: 15px; cursor: pointer; padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(8px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; text-decoration: none; color: inherit; }
         .ovl-item.vis { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        .ovl-item:hover { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.3); transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .ovl-item i, .ovl-item .ovl-logo { 
-            width: 52px; height: 52px; min-width: 52px; border-radius: 12px; 
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.05); 
-            display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--c); 
-            flex-shrink: 0; transition: all 0.3s ease; 
-        }
+        .ovl-item:hover { background: rgba(255, 255, 255, 0.04); border-color: rgba(0, 230, 118, 0.3); transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .ovl-item i, .ovl-item .ovl-logo { width: 52px; height: 52px; min-width: 52px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--c); flex-shrink: 0; transition: all 0.3s ease; }
         .ovl-item .ovl-logo { object-fit: contain; padding: 6px; }
-        .ovl-item:hover i, .ovl-item:hover .ovl-logo { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.15); transform: scale(1.1); }
+        .ovl-item:hover i, .ovl-item:hover .ovl-logo { background: rgba(255, 255, 255, 0.08); transform: scale(1.1); }
         .ovl-item span { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3; }
         .ovl-item:hover span { color: #fff; }
 
-        /* === RESPONSIVE TATA LETAK PREMIUM === */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .p1-layout { left: 40px; right: 40px; height: 360px; } 
-            .p1-box { width: 380px; padding: 28px 32px; } 
-            .p1-title { font-size: 30px; letter-spacing: 3px; } 
-            .p1-right { width: 320px; } 
-            .p1-info { padding: 26px 28px; }
-            
-            .p2 { padding: 100px 40px; }
-            .p2-cont, .p7-row { grid-template-columns: 1fr; gap: 40px; } 
-            .p2-right { height: 350px; } 
-            .p7-row.rev .p7-img-wrap { order: 0; } 
-            .p7-img-wrap { height: 300px; }
-            
-            .p3-bg, .p3-overlay { width: 100%; clip-path: none; } 
-            .p3-cont { max-width: 100%; padding: 100px 40px; }
-            
-            .p4-cont { grid-template-columns: 1fr; gap: 60px; } 
-            .p4-wheel { max-width: 260px; }
-            
-            .p5 { grid-template-columns: 1fr 1fr; padding: 100px 40px; } 
-            .p5-item.large { grid-column: span 2; }
-            
-            .p6-title { font-size: 56px; }
-            
-            .p8-items { max-width: 100%; padding-left: 15px; } 
-            .p8-item { width: 100%; align-self: flex-start !important; text-align: left !important; border-left: 2px solid var(--cy) !important; border-right: none !important; padding: 25px 25px 25px 40px; } 
-            .p8-item:nth-child(even) { border-left: 2px solid var(--gr) !important; }
-            .p8-line { left: 15px; transform: translateX(0); height: 95%; top: 2.5%; }
-            .p8-num { right: 20px; left: auto !important; top: 5px; font-size: 48px; }
-            
-            .p10-grid { grid-template-columns: 1fr; gap: 20px; } 
-            .p10-card { height: 350px; }
-            
+            .p1-layout { left: 40px; right: 40px; height: 360px; } .p1-box { width: 380px; padding: 28px 32px; } .p1-title { font-size: 30px; letter-spacing: 3px; } .p1-right { width: 320px; } .p1-info { padding: 26px 28px; }
+            .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10, .p11, .p12 { padding: 100px 40px; }
+            .p2-container { grid-template-columns: 1fr; gap: 50px; align-items: flex-start; }
+            .p2-img-wrap { height: 350px; min-height: auto; }
+            .p3-container { grid-template-columns: 1fr; gap: 40px; }
+            .p3-visual { height: 300px; }
+            .p3-card:hover { transform: translateY(-5px); }
+            .p4-container { padding: 0 40px; }
+            .p5-container { grid-template-columns: 1fr; gap: 50px; }
+            .p5-card:nth-child(2), .p5-card:nth-child(3) { margin-left: 0; }
+            .p6-container { grid-template-columns: 1fr; gap: 50px; }
+            .p6-monolith { transform: perspective(1200px) rotateY(0deg); padding: 40px; }
+            .p7-grid { grid-template-columns: 1fr; }
+            .p7-card.large, .p7-card.small, .p7-card.wide { grid-column: 1 / 2; grid-row: auto; }
+            .p8-band:nth-child(even) { margin-left: 0; }
+            .p9-wrapper { flex-direction: column; }
+            .p9-pillar { display: none; }
+            .p10-container { grid-template-columns: 1fr; gap: 40px; }
+            .p10-main-box { padding: 30px; }
+            .p11-grid { grid-template-columns: 1fr; gap: 40px; }
+            .p11-cross-v, .p11-cross-h { display: none; }
+            .p11-core { display: none; }
+            .p11-tl, .p11-tr, .p11-bl, .p11-br { text-align: center; align-items: center; }
             .ovl-grid { grid-template-columns: repeat(3, 1fr); }
         }
         @media (max-width: 768px) {
-            .hdr { padding: 14px 16px; height: 70px; } 
-            .hdr.scrolled { height: 60px; padding: 10px 16px; }
-            .init-logo img { height: 26px; } 
-            .hdr.scrolled .init-logo img { height: 24px; }
-            .scr-logo { left: 16px; width: 34px; height: 34px; }
-            
-            .p1-layout { left: 16px; right: 16px; flex-direction: column; height: auto; gap: 18px; top: 80px; transform: translateY(0); } 
-            .p1-box { width: 100%; padding: 22px 20px; } 
-            .p1-title { font-size: 22px; letter-spacing: 2px; } 
-            .p1-lines { display: none; } 
-            .p1-right { width: 100%; }
-            
-            .p2 { padding: 80px 20px; } 
-            .p2-title { font-size: 40px; } 
-            .p2-right { height: 250px; }
-            
-            .p3-cont { padding: 80px 20px; } 
-            .p3-title { font-size: 32px; }
-            
-            .p4 { padding: 80px 20px; } 
-            .p4-panel-content { padding: 40px 30px; } 
-            .p4-title { font-size: 28px; }
-            
-            .p5 { grid-template-columns: 1fr; padding: 80px 20px; } 
-            .p5-item.large { grid-column: span 1; } 
-            .p5-item.large .p5-h { font-size: 32px; }
-            
-            .p6-title { font-size: 36px; } 
-            .p6-text { font-size: 14px; } 
-            .p6-cont { margin-top: -10vh; }
-            
-            .p7 { padding: 80px 20px; gap: 40px; } 
-            .p7-text-wrap h2 { font-size: 28px; } 
-            .p7-img-wrap { height: 250px; }
-            
-            .p8 { padding: 80px 20px; } 
-            .p8-h-title { font-size: 32px; } 
-            .p8-item { padding: 20px 20px 20px 35px; } 
-            .p8-item h3 { font-size: 20px; margin-bottom: 8px; } 
-            .p8-num { font-size: 36px; }
-            
-            .p9-title { font-size: 32px; }
-            
-            .p10 { padding: 80px 20px; }
-            
-            .p11 { padding: 80px 20px 40px; } 
-            .p11-title { font-size: 32px; }
-            
-            .ovl-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px; } 
-            .ovl-item { padding: 15px; gap: 12px; }
-            .ovl-item i, .ovl-item .ovl-logo { width: 48px; height: 48px; min-width: 48px; font-size: 24px; }
-            .ovl-item span { font-size: 12px; }
-            .ovl-title { font-size: 12px; }
+            .hdr { padding: 14px 16px; height: 70px; } .hdr.scrolled { height: 60px; padding: 10px 16px; } .init-logo img { height: 26px; } .hdr.scrolled .init-logo img { height: 24px; } .scr-logo { left: 16px; width: 34px; height: 34px; }
+            .p1-layout { left: 16px; right: 16px; flex-direction: column; height: auto; gap: 18px; top: 80px; transform: translateY(0); } .p1-box { width: 100%; padding: 22px 20px; } .p1-title { font-size: 22px; letter-spacing: 2px; } .p1-lines { display: none; } .p1-right { width: 100%; }
+            .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10, .p11, .p12 { padding: 80px 20px; }
+            .p2-features { grid-template-columns: 1fr; }
+            .p2-img-wrap { height: 250px; }
+            .p4-line { left: 20px; }
+            .p4-item, .p4-item:nth-child(even) { flex-direction: row; padding-left: 50px; }
+            .p4-node, .p4-item:nth-child(even) .p4-node { left: 20px; }
+            .p4-content, .p4-item:nth-child(even) .p4-content { width: 100%; }
+            .reveal-left, .reveal-right { transform: translateY(30px); }
+            .p6-monolith { padding: 30px; }
+            .p6-item p { max-width: 100%; }
+            .p8-band { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .p8-band-title { flex: none; }
+            .p10-status-bar { flex-direction: column; gap: 10px; align-items: flex-start; }
+            .p11-text { max-width: 100%; }
+            .main-menu { grid-template-columns: 1fr; } .menu-box { padding: 35px 20px; }
+            .ovl-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } .view { padding: 20px; } .ovl-item { padding: 15px; gap: 12px; } .ovl-item i, .ovl-item .ovl-logo { width: 48px; height: 48px; min-width: 48px; font-size: 24px; } .ovl-item span { font-size: 12px; }
         }
-        @media (max-width: 480px) {
-            .load-let { font-size: 48px; }
-            .p2-title { font-size: 32px; }
-            .p3-title { font-size: 26px; }
-            .p4-title { font-size: 24px; }
-            .p6-title { font-size: 28px; }
-            .p11-title { font-size: 26px; }
-            .p8-h-title { font-size: 28px; }
-            .ovl-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 480px) { .load-let { font-size: 48px; } .ovl-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- Loading Screen Kelas Atas -->
     <div class="load-scr" id="loadScr">
-        <div class="load-scr-grid"></div>
-        <div class="load-glow"></div>
-        <div class="load-content">
-            <div class="load-let-wrap">
-                <span class="load-let b">I</span><span class="load-let b">N</span><span class="load-let b">F</span><span class="load-let b">O</span><span class="load-let g">T</span><span class="load-let g">R</span><span class="load-let g">I</span><span class="load-let g">N</span><span class="load-let g">K</span>
-            </div>
-            <div class="load-bar">
-                <div class="load-fill" id="loadFill"></div>
-            </div>
-            <div class="load-info">
-                <div class="load-status">System Initializing</div>
-                <div class="load-percent" id="loadPercent">0%</div>
-            </div>
+        <div class="load-scr-grid"></div><div class="load-glow"></div>
+        <div class="load-content"><div class="load-let-wrap"><span class="load-let b">I</span><span class="load-let b">N</span><span class="load-let b">F</span><span class="load-let b">O</span><span class="load-let g">T</span><span class="load-let g">R</span><span class="load-let g">I</span><span class="load-let g">N</span><span class="load-let g">K</span></div></div>
+    </div>
+
+    <!-- Header -->
+    <div class="hdr" id="hdr">
+        <div class="init-logo"><img src="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png" alt="Logo Icon"><img src="ChatGPT Image Jul 17, 2026, 03_25_26 PM(1).png" alt="Logo Text"></div>
+        <div class="scr-logo">
+            <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5 H38 M25 5 V45 M12 45 H38" class="logo-base"/>
+                <path d="M12 5 H38 M12 45 H38" class="logo-accent"/>
+                <path d="M25 5 V45" class="logo-flow"/>
+                <defs>
+                    <linearGradient id="qGrad" x1="0" y1="0" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#00d4ff"/>
+                        <stop offset="1" stop-color="#00e676"/>
+                    </linearGradient>
+                </defs>
+            </svg>
         </div>
     </div>
 
-    <!-- Header & Hero (P1) -->
+    <!-- === PAGE 1: HERO === -->
     <div class="p1" id="p1">
-        <div class="hdr" id="hdr">
-            <div class="init-logo">
-                <img src="ChatGPT Image Jul 17, 2026, 03_37_39 PM(1).png" alt="Logo Icon">
-                <img src="ChatGPT Image Jul 17, 2026, 03_25_26 PM(1).png" alt="Logo Text">
-            </div>
-            <!-- Logo Scroll Animasi Geometris (Qloobe Icon) -->
-            <div class="scr-logo">
-                <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M25 5 C13.9543 5 5 13.9543 5 25 C5 36.0457 13.9543 45 25 45 C30.5228 45 35.5228 42.7614 39.1421 39.1421" stroke="url(#qGrad)" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M35 35 L45 45" stroke="url(#qGrad)" stroke-width="5" stroke-linecap="round"/>
-                    <circle cx="25" cy="25" r="4" fill="url(#qGrad)"/>
-                    <defs>
-                        <linearGradient id="qGrad" x1="0" y1="0" x2="50" y2="50" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#00d4ff"/>
-                            <stop offset="1" stop-color="#00e676"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
-        </div>
         <div class="p1-hero">
             <div class="p1-layout" id="p1Layout">
-                <button class="p1-box" id="p1Box" onclick="toggleSystem()">
-                    <h1 class="p1-title">Where Every<br>Journey Begins</h1>
-                </button>
-                <div class="p1-lines">
-                    <div class="l-stem"></div><div class="l-top"></div><div class="l-bot"></div><div class="l-tt"></div><div class="l-tb"></div>
-                </div>
+                <button class="p1-box" id="p1Box" onclick="toggleSystem()"><h1 class="p1-title">Where Every<br>Journey Begins</h1></button>
+                <div class="p1-lines"><div class="l-stem"></div><div class="l-top"></div><div class="l-bot"></div><div class="l-tt"></div><div class="l-tb"></div></div>
                 <div class="p1-right">
-                    <div class="p1-info lab-top" onclick="openOvl('socOvl')">
-                        <div class="p1-lab">Social Platform</div>
-                        <div class="p1-trig">Social Media</div>
+                    <div class="p1-info lab-top" onclick="openOvl('socOvl')"><div class="p1-lab">Social Platform</div><div class="p1-trig">Social Media</div></div>
+                    <div class="p1-info lab-bot" onclick="openOvl('bldOvl')"><div class="p1-lab">Development Project</div><div class="p1-trig">The results developed</div></div>
+                </div>
+            </div>
+            <div class="scroll-ind">
+                <span>Scroll Down</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PAGE 2: STRUCTURAL UNITY === -->
+    <div class="p2">
+        <div class="p2-bg-grid"></div>
+        <div class="p2-container">
+            <div class="p2-visual reveal">
+                <div class="p2-frame-deco top-left"></div>
+                <div class="p2-img-wrap">
+                    <img src="ChatGPT Image Jul 22, 2026, 05_19_09 AM.png" alt="Structural Hub">
+                </div>
+                <div class="p2-frame-deco bot-right"></div>
+            </div>
+            <div class="p2-text-content">
+                <div class="p2-tag reveal delay-1">Information</div>
+                <h2 class="p2-title reveal delay-1">Structural Unity</h2>
+                <p class="p2-paragraph reveal delay-2">This portal functions as the primary architectural bridge connecting distinct digital entities. It centralizes the flow of information, ensuring seamless interaction between corporate networks and institutional bodies.</p>
+                <p class="p2-paragraph reveal delay-2">The system eliminates complex routing barriers. By maintaining a streamlined infrastructure, it delivers precise access to required networks, optimizing the interaction between the user and the broader connected ecosystem.</p>
+                <div class="p2-features reveal delay-3">
+                    <div class="p2-feature">
+                        <h4>Unified Nodes</h4>
+                        <p>Direct structural links connect all entities without intermediate barriers. The architecture guarantees immediate routing and absolute continuity across the network.</p>
                     </div>
-                    <div class="p1-info lab-bot" onclick="openOvl('bldOvl')">
-                        <div class="p1-lab">Development Project</div>
-                        <div class="p1-trig">The results developed</div>
+                    <div class="p2-feature">
+                        <h4>Systematic Mapping</h4>
+                        <p>Every corporate and non-corporate entity is mapped logically. This structural clarity allows for precise navigation across the entire unified ecosystem.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- P2: The Canvas of Potential -->
-    <section class="p2">
-        <div class="p2-cont">
-            <div class="p2-left">
-                <div class="p2-label">The Foundation</div>
-                <h1 class="p2-title">The Canvas of <span>Potential</span></h1>
-                <p class="p2-text">Space is not an absence. It is the structure that allows potential to breathe. By defining boundaries, shape is given to the boundless. The void holds the exact dimensions of what is yet to come, ensuring that when potential arrives, it finds a perfect fit.</p>
-            </div>
-            <div class="p2-right">
-                <img src="ChatGPT Image 18 Jul 2026, 19.07.23.png" class="p2-img" alt="The Canvas of Potential">
-            </div>
-        </div>
-    </section>
-
-    <!-- P3: Existence is Not Silent -->
-    <section class="p3">
-        <div class="p3-bg"></div>
-        <div class="p3-overlay"></div>
-        <div class="p3-cont">
-            <div class="p3-label">The Resonance</div>
-            <h1 class="p3-title">Existence is Not Silent.<br>It Ripples Outward.</h1>
-            <p class="p3-text">In a truly neutral space, a single presence does not merely occupy room; it creates a resonance. Every entity placed within this container sends silent waves outward, altering the atmosphere without disrupting the balance. The space absorbs these frequencies, allowing collective harmony to emerge naturally from isolated existences.</p>
-        </div>
-    </section>
-
-    <!-- P4: Wheel & Panel -->
-    <section class="p4">
-        <div class="p4-cont">
-            <div class="p4-wheel">
-                <svg class="p4-svg" viewBox="0 0 200 200">
-                    <path class="p4-slice active" id="s1" d="M100,100 L100,20 A80,80 0 0,1 176.08,75.28 Z" onclick="wheel(1)"></path>
-                    <path class="p4-slice" id="s2" d="M100,100 L176.08,75.28 A80,80 0 0,1 147.02,164.72 Z" onclick="wheel(2)"></path>
-                    <path class="p4-slice" id="s3" d="M100,100 L147.02,164.72 A80,80 0 0,1 52.98,164.72 Z" onclick="wheel(3)"></path>
-                    <path class="p4-slice" id="s4" d="M100,100 L52.98,164.72 A80,80 0 0,1 23.92,75.28 Z" onclick="wheel(4)"></path>
-                    <path class="p4-slice" id="s5" d="M100,100 L23.92,75.28 A80,80 0 0,1 100,20 Z" onclick="wheel(5)"></path>
-                    <text class="p4-txt active" id="t1" x="126" y="64" transform="rotate(90 126 64)">01</text>
-                    <text class="p4-txt" id="t2" x="143" y="114" transform="rotate(90 143 114)">02</text>
-                    <text class="p4-txt" id="t3" x="100" y="145" transform="rotate(90 100 145)">03</text>
-                    <text class="p4-txt" id="t4" x="57" y="114" transform="rotate(90 57 114)">04</text>
-                    <text class="p4-txt" id="t5" x="74" y="64" transform="rotate(90 74 64)">05</text>
-                </svg>
-            </div>
-            <div class="p4-panel">
-                <div class="p4-panel-bg" id="wPanelBg"></div>
-                <div class="p4-panel-content">
-                    <div class="p4-label" id="wLab">Space 01</div>
-                    <h2 class="p4-title" id="wTitle">The Neutral Ground</h2>
-                    <p class="p4-text" id="wText">This environment acts as a completely neutral ground. It is a boundless container where various entities, ideas, and individuals can exist and be displayed without any bias or forced hierarchy.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- P5: Editorial Grid -->
-    <section class="p5">
-        <div class="p5-item large">
-            <div class="p5-content">
-                <div class="p5-num">01 // CORE</div>
-                <h2 class="p5-h">Absolute Neutrality</h2>
-                <p class="p5-p">A secure, unbiased environment where every entity is protected and valued equally without exception. The architecture is built upon principles that ensure absolute synergy.</p>
-            </div>
-        </div>
-        <div class="p5-item">
-            <div class="p5-content">
-                <div class="p5-num">02</div>
-                <h2 class="p5-h">Modular Design</h2>
-                <p class="p5-p">Flexible spaces adapting seamlessly.</p>
-            </div>
-        </div>
-        <div class="p5-item">
-            <div class="p5-content">
-                <div class="p5-num">03</div>
-                <h2 class="p5-h">Infinite Reach</h2>
-                <p class="p5-p">Bridging gaps across the landscape.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- P6: Horizon Grid -->
-    <section class="p6">
-        <div class="p6-grid-floor"></div>
-        <div class="p6-glow"></div>
-        <div class="p6-horizon"></div>
-        <div class="p6-cont">
-            <div class="p6-label">The Vantage Point</div>
-            <h1 class="p6-title">This is not a conclusion.<br><span>It is the Horizon.</span></h1>
-            <p class="p6-text">The ecosystem does not terminate. It expands into the periphery. The boundary seen is an illusion created by distance. The space continues, perpetually renewing itself at the edge of the unknown.</p>
-        </div>
-    </section>
-
-    <!-- P7: Zigzag Alternating -->
-    <section class="p7">
-        <div class="p7-row">
-            <div class="p7-img-wrap">
-                <img src="ChatGPT Image 18 Jul 2026, 19.17.18.png" class="p7-img" alt="Duality of Existence">
-            </div>
-            <div class="p7-text-wrap">
-                <h2>Duality of <b>Existence</b></h2>
-                <p>Every presence within the container creates a resonance. It sends silent waves outward, altering the atmosphere without disrupting the balance. The space absorbs these frequencies, allowing collective harmony to emerge naturally from isolated existences.</p>
-            </div>
-        </div>
-        <div class="p7-row rev">
-            <div class="p7-img-wrap">
-                <img src="ChatGPT Image 18 Jul 2026, 19.23.41.png" class="p7-img" alt="Structure of Void">
-            </div>
-            <div class="p7-text-wrap">
-                <h2>The <b>Structure</b> of Void</h2>
-                <p>Space is not merely an absence of matter. It is the fundamental structure that allows potential to breathe. By defining the boundaries of the container, shape is given to the boundless, ensuring a perfect fit for what is yet to come.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- P8: Timeline -->
-    <section class="p8">
-        <div class="p8-head">
-            <div class="p8-h-label">The Ascension</div>
-            <h1 class="p8-h-title">Steps To Maturity</h1>
-        </div>
-        <div class="p8-line"></div>
-        <div class="p8-items">
-            <div class="p8-item"><div class="p8-num">01</div><h3>Awareness</h3><p>Recognizing the diverse potentials that exist within the neutral container.</p></div>
-            <div class="p8-item"><div class="p8-num">02</div><h3>Alignment</h3><p>Bringing disparate elements into a shared, orderly structural vision.</p></div>
-            <div class="p8-item"><div class="p8-num">03</div><h3>Synergy</h3><p>Catalyzing silent connections that multiply collective impact naturally.</p></div>
-            <div class="p8-item"><div class="p8-num">04</div><h3>Ascension</h3><p>Transcending limitations to step forward into the broader digital world.</p></div>
-        </div>
-    </section>
-
-    <!-- P9: Manifesto -->
-    <section class="p9">
-        <div class="p9-cont">
-            <div class="p9-line"></div>
-            <h1 class="p9-title">Spaces are not merely built.<br><b>Potentials are cultivated.</b></h1>
-            <p class="p9-text">To be the definitive starting point where every meaningful journey is nurtured, recorded, and prepared before stepping into the broader world. Maintaining an orderly ecosystem with no rigid hierarchies, ensuring every entity holds equal weight and space to interact and grow naturally.</p>
-        </div>
-    </section>
-
-    <!-- P10: Image Triptych -->
-    <section class="p10">
-        <div class="p10-grid">
-            <div class="p10-card">
-                <img src="ChatGPT Image 18 Jul 2026, 19.23.41.png" class="p10-img" alt="Vision">
-                <div class="p10-overlay">
-                    <h2 class="p10-h">Vision</h2>
-                    <div class="p10-line"></div>
-                    <p class="p10-p">To be the definitive starting point where every meaningful journey is nurtured and prepared before stepping into the broader world.</p>
-                </div>
-            </div>
-            <div class="p10-card">
-                <img src="ChatGPT Image 18 Jul 2026, 19.17.18.png" class="p10-img" alt="Mission">
-                <div class="p10-overlay">
-                    <h2 class="p10-h">Mission</h2>
-                    <div class="p10-line"></div>
-                    <p class="p10-p">Providing a neutral, boundless room where diverse initiatives can securely gather, exist without bias, and naturally align for greater impact.</p>
-                </div>
-            </div>
-            <div class="p10-card">
-                <img src="ChatGPT Image 18 Jul 2026, 19.26.51.png" class="p10-img" alt="Promise">
-                <div class="p10-overlay">
-                    <h2 class="p10-h">Promise</h2>
-                    <div class="p10-line"></div>
-                    <p class="p10-p">Maintaining an orderly ecosystem with no rigid hierarchies, ensuring every entity holds equal weight and space to interact and grow naturally.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- P11: Finale -->
-    <section class="p11">
-        <div class="p11-glow"></div>
-        <div class="p11-cont">
-            <div class="p11-label">The Culmination</div>
-            <h1 class="p11-title">The Architecture is <b>Complete.</b></h1>
-            <p class="p11-text">The boundaries are drawn, and the structure holds firm. What exists within this space is no longer defined by its creation, but by its potential. The environment awaits the weight of infinite possibilities, ready to nurture whatever steps forward.</p>
-            <div class="p11-divider"></div>
-        </div>
+    <!-- === PAGE 3: ECOSYSTEM INTEGRATION === -->
+    <div class="p3">
+        <div class="p3-bg-glow"></div>
+        <div class="p3-bg-glow.bot"></div>
         
-        <!-- Teks Hak Cipta Profesional Standar Website -->
-        <div class="p11-footer">
-            <div class="p11-line"></div>
-            <div class="p11-copy">© 2026 <span>INFOTRINK</span>. All Rights Reserved.</div>
-        </div>
-    </section>
+        <div class="p3-container">
+            <div class="p3-visual reveal">
+                <img src="ChatGPT Image Jul 22, 2026, 05_44_53 AM.png" alt="Network Integration">
+            </div>
 
-    <!-- Overlay: Social Media -->
+            <div class="p3-main-text reveal delay-1">
+                <span class="p3-sub">Digital Ecosystem</span>
+                <h2 class="p3-title">Ecosystem Integration</h2>
+                <p class="p3-text">The platform acts as a catalyst for structural expansion. By linking isolated organizational nodes, it creates a centralized environment for resource exchange and institutional interaction. The design ensures information flows directly, supporting continuous development across all connected sectors.</p>
+                <p class="p3-text">Through strategic network application, the system accelerates the distribution of digital assets. This integration directly supports sustainable operational models and broadens the scope of structural participation.</p>
+                <div class="p3-divider"></div>
+            </div>
+
+            <div class="p3-cards-col">
+                <div class="p3-card reveal delay-2">
+                    <h4>Institutional Expansion</h4>
+                    <p>Connecting various organizational channels broadens systemic access. This integration allows resources and information to reach wider operational boundaries.</p>
+                </div>
+                <div class="p3-card reveal delay-3">
+                    <h4>Resource Allocation</h4>
+                    <p>Network application optimizes how structural resources are distributed. Efficient mapping ensures assets are placed where they generate the most systemic value.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PAGE 4: STRATEGIC FRAMEWORK (VERTICAL TIMELINE) === -->
+    <div class="p4">
+        <div class="p4-bg-glow"></div>
+        <div class="p4-container">
+            <div class="p4-header reveal">
+                <span class="p4-sub">Architectural Vision</span>
+                <h2 class="p4-title">Strategic Framework & Scalability</h2>
+                <p class="p4-desc">Building upon a connected structural foundation, the framework focuses on long-term scalability. The architecture is designed to adapt to shifting digital paradigms without losing core integrity. This forward-looking approach ensures that the ecosystem remains resilient, continuously expanding its capacity to handle complex organizational interactions.</p>
+            </div>
+            
+            <div class="p4-timeline">
+                <div class="p4-line"></div>
+                
+                <div class="p4-item">
+                    <div class="p4-node"></div>
+                    <div class="p4-content reveal-left">
+                        <h4>Adaptive Infrastructure</h4>
+                        <p>The framework utilizes modular design principles. This allows the system to integrate new structural advancements seamlessly, ensuring continuous operational relevance without disrupting existing network flows.</p>
+                    </div>
+                </div>
+
+                <div class="p4-item">
+                    <div class="p4-node"></div>
+                    <div class="p4-content reveal-right">
+                        <h4>Decentralized Expansion</h4>
+                        <p>By distributing network load and resources, the ecosystem avoids single points of failure. This structural distribution ensures sustained stability and consistent performance during rapid systemic scaling.</p>
+                    </div>
+                </div>
+
+                <div class="p4-item">
+                    <div class="p4-node"></div>
+                    <div class="p4-content reveal-left">
+                        <h4>Visionary Horizon</h4>
+                        <p>The ultimate objective is to establish a self-sustaining digital environment. One where structural and organizational growth compounds, creating an enduring foundation for future digital ecosystems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PAGE 5: NETWORK SYNCHRONIZATION (DIAGONAL STAGGERED CARDS) === -->
+    <div class="p5">
+        <div class="p5-bg-glow"></div>
+        <div class="p5-container">
+            <div class="p5-text-block reveal">
+                <span class="p5-sub">System Harmony</span>
+                <h2 class="p5-title">Network Synchronization</h2>
+                <p class="p5-desc">Synchronization across the portal ensures that every connected entity operates on a unified structural baseline. The architecture actively aligns disparate operational standards, creating a cohesive environment where information transfer is instantaneous and frictionless.</p>
+            </div>
+            
+            <div class="p5-cards-wrap">
+                <div class="p5-card reveal delay-1">
+                    <h4>Operational Cohesion</h4>
+                    <p>The alignment of different organizational structures into a single, cohesive digital framework prevents systemic friction. It establishes a common protocol for all connected nodes.</p>
+                </div>
+                <div class="p5-card reveal delay-2">
+                    <h4>Dynamic Adaptation</h4>
+                    <p>The portal continuously adjusts to structural shifts within the connected entities. This responsive design maintains uninterrupted systemic flow regardless of external changes.</p>
+                </div>
+                <div class="p5-card reveal delay-3">
+                    <h4>Centralized Governance</h4>
+                    <p>A unified structural protocol governs the interaction between corporate and institutional nodes. This oversight ensures data integrity and systemic balance across the ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PAGE 6: SYMBIOTIC CULMINATION (3D HOLOGRAPHIC MONOLITH) === -->
+    <div class="p6">
+        <div class="p6-bg-matrix"></div>
+        <div class="p6-container">
+            <div class="p6-side-text reveal">
+                <div class="p6-item">
+                    <div class="p6-line"></div>
+                    <div class="p6-item-content">
+                        <h4>Absolute Equilibrium</h4>
+                        <p>The ecosystem maintains perfect structural balance between corporate and institutional nodes.</p>
+                    </div>
+                </div>
+                <div class="p6-item">
+                    <div class="p6-line"></div>
+                    <div class="p6-item-content">
+                        <h4>Perpetual Continuity</h4>
+                        <p>Information flows without interruption, ensuring sustained operational harmony across the network.</p>
+                    </div>
+                </div>
+                <div class="p6-item">
+                    <div class="p6-line"></div>
+                    <div class="p6-item-content">
+                        <h4>Unified Frontier</h4>
+                        <p>A singular, cohesive environment that transcends traditional organizational boundaries.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p6-monolith reveal delay-1">
+                <span class="p6-sub">Core Synthesis</span>
+                <h2 class="p6-title">Symbiotic Culmination</h2>
+                <p class="p6-text">The culmination of this structural framework is a self-sustaining digital environment. Corporate entities and institutional bodies no longer merely connect; they operate as a single, symbiotic organism. The architecture continuously balances systemic loads, ensuring that every interaction reinforces the stability of the whole. This unified state represents the ultimate equilibrium between diverse operational nodes, creating a permanent foundation for future digital frontiers.</p>
+                <div class="p6-footer-mark">INFOTRINK CORE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PAGE 7: SYSTEM RESONANCE (BENTO GRID ASYMMETRIC) === -->
+    <div class="p7">
+        <div class="p7-container">
+            <div class="p7-header reveal">
+                <span class="p2-tag tag-green">Ambient Intelligence</span>
+                <h2 class="p2-title">System Resonance</h2>
+                <p class="p2-paragraph" style="max-width: 700px; margin: 0 auto;">The framework evolves beyond static synchronization into a state of autonomous resonance. The infrastructure continuously self-corrects, resolving friction before it manifests.</p>
+            </div>
+            <div class="p7-grid">
+                <div class="p7-card large reveal delay-1">
+                    <h4>Self-Healing Infrastructure</h4>
+                    <p>The network detects structural anomalies and automatically reroutes data. This autonomous correction ensures that information flow remains perpetually unbroken, even during localized failures. The architecture adapts instantaneously, maintaining absolute continuity.</p>
+                </div>
+                <div class="p7-card small reveal delay-2">
+                    <h4>Dynamic Load Balancing</h4>
+                    <p>Systemic weight is distributed in real-time based on current capacity. The architecture shifts resources instantly, preventing any single node from becoming overwhelmed.</p>
+                </div>
+                <div class="p7-card small reveal delay-3">
+                    <h4>Silent Synchronization</h4>
+                    <p>Updates propagate across the network without requiring external triggers. The ecosystem maintains its own rhythm, ensuring all entities remain perfectly aligned.</p>
+                </div>
+                <div class="p7-card wide reveal delay-3">
+                    <h4>Eternal Continuum</h4>
+                    <p>Operational parameters are generated internally through continuous feedback. The environment adapts to shifting variables, maintaining absolute equilibrium without oversight.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PAGE 8: COGNITIVE ARCHITECTURE (HORIZONTAL STACKED BANDS) === -->
+    <div class="p8">
+        <div class="p8-header reveal">
+            <span class="p2-tag">Cognitive Architecture</span>
+            <h2 class="p2-title">Predictive Logic</h2>
+        </div>
+        <div class="p8-container">
+            <div class="p8-band reveal delay-1">
+                <div class="p8-band-title">Cognitive Architecture</div>
+                <div class="p8-band-text">The framework evolves beyond static routing by embedding predictive logic into its core. Operational variables are processed instantaneously, allowing the infrastructure to anticipate structural shifts before they occur.</div>
+            </div>
+            <div class="p8-band reveal delay-2">
+                <div class="p8-band-title">Algorithmic Foresight</div>
+                <div class="p8-band-text">Systemic loads are balanced proactively. The architecture analyzes traffic patterns and node behavior in real-time, reallocating bandwidth and resources autonomously to prevent friction before it materializes.</div>
+            </div>
+            <div class="p8-band reveal delay-3">
+                <div class="p8-band-title">Decentralized Logic</div>
+                <div class="p8-band-text">Intelligence is distributed evenly across the network. Routing decisions are made locally at the node level, eliminating dependency on a central processor and accelerating data transmission across institutional boundaries.</div>
+            </div>
+            <div class="p8-band reveal delay-3">
+                <div class="p8-band-title">Perpetual Momentum</div>
+                <div class="p8-band-text">This proactive approach transforms the ecosystem into an unbroken continuum. Information flows not by reacting to requests, but by predicting structural needs, sustaining a state of absolute operational harmony.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PAGE 9: ABSOLUTE CONVERGENCE (CENTERPIECE WITH PILLARS) === -->
+    <div class="p9">
+        <div class="p9-glow"></div>
+        <div class="p9-wrapper reveal">
+            <div class="p9-pillar left"></div>
+            <div class="p9-center">
+                <h4>Unified Wavelength</h4>
+                <p>The architecture transcends traditional interoperability. Connected entities no longer require translation layers to exchange information. The infrastructure operates on a singular frequency, where data from corporate networks and institutional bodies flows as a single, indistinguishable current.</p>
+                <div class="divider"></div>
+                <h4>Absolute Convergence</h4>
+                <p>This convergence creates an environment of total transparency. Operational silos are dissolved entirely, replaced by a shared cognitive space. Every node, regardless of its origin, perceives and interacts with the ecosystem from a synchronized perspective.</p>
+            </div>
+            <div class="p9-pillar right"></div>
+        </div>
+    </div>
+
+    <!-- === PAGE 10: INFINITE PARADIGM (ARCHITECTURAL BLUEPRINT) === -->
+    <div class="p10">
+        <div class="p10-bg-grid"></div>
+        <div class="p10-container">
+            <div class="p10-main-box reveal delay-1">
+                <span class="p10-tag">Eternal Sustenance</span>
+                <h2 class="p10-title">Infinite Paradigm</h2>
+                <p class="p10-text">The absolute convergence of the ecosystem initiates a paradigm where structural decay is entirely negated. The environment operates in a state of infinite recursion, continuously regenerating its own operational capacity without external input.</p>
+                <p class="p10-text">This self-perpetuating reality transcends traditional digital lifecycles. The architecture remains eternally pristine, unburdened by the entropy that degrades lesser systems. It is a closed loop of absolute perfection.</p>
+            </div>
+            <div class="p10-nodes-col">
+                <div class="p10-node reveal delay-2">
+                    <h4>Temporal Irrelevance</h4>
+                    <p>The progression of time no longer affects system integrity. The infrastructure remains perpetually in its optimal state, impervious to technological obsolescence.</p>
+                </div>
+                <div class="p10-node reveal delay-3">
+                    <h4>Infinite Recursion</h4>
+                    <p>Operational loops are perfectly closed. Data and logic cycle through the ecosystem indefinitely without degradation, loss, or the accumulation of systemic noise.</p>
+                </div>
+                <div class="p10-node reveal delay-3">
+                    <h4>Transcendent Reality</h4>
+                    <p>The framework evolves beyond a mere tool for connection. It establishes a new digital reality, a self-contained universe of pure structural logic.</p>
+                </div>
+            </div>
+        </div>
+        <div class="p10-status-bar reveal">
+            <div class="p10-stat">System Status: <span>Eternal</span></div>
+            <div class="p10-stat">Entropy Level: <span>Zero</span></div>
+            <div class="p10-stat">Paradigm: <span>Infinite</span></div>
+        </div>
+    </div>
+
+    <!-- === PAGE 11: ABSOLUTE HORIZON (QUADRANT MATRIX) === -->
+    <div class="p11">
+        <div class="p11-cross-v"></div>
+        <div class="p11-cross-h"></div>
+        <div class="p11-core"></div>
+        
+        <div class="p11-grid">
+            <div class="p11-q p11-tl reveal">
+                <span class="p11-tag">Final Dimension</span>
+                <h2 class="p11-title">Absolute Horizon</h2>
+            </div>
+            <div class="p11-q p11-tr reveal delay-1">
+                <p class="p11-text">The ecosystem transcends structural boundaries, entering an omni-relational state. Connections between entities are no longer mapped paths, but an inherent state of existence. Every action is reflected instantly and universally across the network, eliminating the need for sequential logic.</p>
+            </div>
+            <div class="p11-q p11-bl reveal delay-2">
+                <p class="p11-text">This ubiquitous condition ensures the framework remains permanently self-contained. The digital environment perceives itself in its entirety, governing all interconnected organizational and institutional nodes as a single, indivisible consciousness.</p>
+            </div>
+            <div class="p11-q p11-br reveal delay-3">
+                <span class="p11-mark">System Integrity: 100%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PAGE 12: CULMINATION & COPYRIGHT === -->
+    <div class="p12">
+        <div class="p12-glow"></div>
+        <div class="p12-content reveal">
+            <h2 class="p12-title">Digital Culmination</h2>
+            <p class="p12-text">This marks the definitive end of the structural framework. A perfectly closed, eternally sustained digital environment where all entities coexist without friction. The architecture stands as an immutable monument to systemic perfection, operating in absolute silence.</p>
+            <div class="p12-divider"></div>
+            <div class="p12-legal">
+                Hak Cipta Dilindungi Undang-Undang <span>|</span> All Rights Reserved
+            </div>
+            <div class="p12-year">© 2026 INFOTRINK</div>
+        </div>
+    </div>
+
+    <!-- OVERLAY SOCIAL MEDIA -->
     <div class="ovl" id="socOvl">
         <div class="ovl-box">
             <div class="ovl-close" onclick="closeOvl('socOvl')">&times;</div>
+            <div class="ovl-back" id="socBack" onclick="backToMain()"><i class="fa-solid fa-arrow-left"></i> Back</div>
             <div class="ovl-title">Social Media</div>
-            <div class="ovl-grid" id="socGrid">
-                <a class="ovl-item" href="https://www.tiktok.com/@jrimunawar028?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" style="--c:#ff0050; text-decoration: none; color: inherit;"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
-                <a class="ovl-item" href="https://www.instagram.com/jri_munawar/?hl=id" target="_blank" rel="noopener noreferrer" style="--c:#E1306C; text-decoration: none; color: inherit;"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
-                <div class="ovl-item" style="--c:#25D366"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></div>
-                <a class="ovl-item" href="https://www.youtube.com/@jrimunawar.028" target="_blank" rel="noopener noreferrer" style="--c:#FF0000; text-decoration: none; color: inherit;"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
-                <a class="ovl-item" href="https://www.facebook.com/profile.php?id=61563913847181" target="_blank" rel="noopener noreferrer" style="--c:#1877F2; text-decoration: none; color: inherit;"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></a>
-                <a class="ovl-item" href="https://x.com/FajriMunawar28" target="_blank" rel="noopener noreferrer" style="--c:#a0a8b4; text-decoration: none; color: inherit;"><i class="fa-brands fa-x-twitter"></i><span>X</span></a>
-                <div class="ovl-item" style="--c:#07C160"><i class="fa-brands fa-weixin"></i><span>WeChat</span></div>
-                <div class="ovl-item" style="--c:#26A5E4"><i class="fa-brands fa-telegram"></i><span>Telegram</span></div>
-                <a class="ovl-item" href="https://www.linkedin.com/in/muhammad-fajri-munawar-515864325/" target="_blank" rel="noopener noreferrer" style="--c:#0A66C2; text-decoration: none; color: inherit;"><i class="fa-brands fa-linkedin-in"></i><span>LinkedIn</span></a>
-                <div class="ovl-item" style="--c:#fff"><img class="ovl-logo" src="ChatGPT_Image_17_Jul_2026__19.01.14-removebg-preview(1).png" alt="BeReal"><span>BeReal</span></div>
-                <a class="ovl-item" href="https://teams.live.com/v2/" target="_blank" rel="noopener noreferrer" style="--c:#6264A7; text-decoration: none; color: inherit;"><img class="ovl-logo" src="ChatGPT Image Jul 20, 2026, 02_13_28 PM(1).png" alt="MS Teams"><span>MS Teams</span></a>
-                <div class="ovl-item" style="--c:#5865F2"><i class="fa-brands fa-discord"></i><span>Discord</span></div>
-                <div class="ovl-item" style="--c:#9146FF"><i class="fa-brands fa-twitch"></i><span>Twitch</span></div>
-                <div class="ovl-item" style="--c:#ffffff"><img class="ovl-logo" src="ChatGPT Image Jul 19, 2026, 06_54_54 PM(1).png" alt="Qloobe"><span>Qloobe</span></div>
-                <a class="ovl-item" href="https://www.threads.com/@jri_munawar" target="_blank" rel="noopener noreferrer" style="--c:#E1306C; text-decoration: none; color: inherit;"><i class="fa-brands fa-threads"></i><span>Threads</span></a>
-                <div class="ovl-item" style="--c:#0084FF"><i class="fa-brands fa-facebook-messenger"></i><span>Messenger</span></div>
+            <div class="view-wrap">
+                <div class="view" id="socMainView">
+                    <div class="main-menu">
+                        <div class="menu-box bx-blue" onclick="showSub('publik')">
+                            <div class="menu-box-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                            <h3>Public Network</h3>
+                            <p>YouTube, Instagram, TikTok, Qloobe, etc</p>
+                        </div>
+                        <div class="menu-box bx-green" onclick="showSub('komunikasi')">
+                            <div class="menu-box-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+                            <h3>Direct Communication</h3>
+                            <p>WhatsApp, WeChat, Telegram, Teams, etc</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="view hide-view" id="socPublikView">
+                    <div class="ovl-sub-title cat-blue">Public Network</div>
+                    <div class="ovl-grid" id="gridPublik">
+                        <a class="ovl-item" href="https://www.youtube.com/@jrimunawar.028" target="_blank" rel="noopener noreferrer" style="--c:#FF0000; text-decoration: none; color: inherit;"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
+                        <a class="ovl-item" href="https://www.instagram.com/jri_munawar/?hl=id" target="_blank" rel="noopener noreferrer" style="--c:#E1306C; text-decoration: none; color: inherit;"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+                        <a class="ovl-item" href="https://www.tiktok.com/@jrimunawar028?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" style="--c:#ff0050; text-decoration: none; color: inherit;"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
+                        <a class="ovl-item" href="https://www.facebook.com/profile.php?id=61563913847181" target="_blank" rel="noopener noreferrer" style="--c:#1877F2; text-decoration: none; color: inherit;"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></a>
+                        <a class="ovl-item" href="https://x.com/FajriMunawar28" target="_blank" rel="noopener noreferrer" style="--c:#a0a8b4; text-decoration: none; color: inherit;"><i class="fa-brands fa-x-twitter"></i><span>X (Twitter)</span></a>
+                        <a class="ovl-item" href="https://www.linkedin.com/in/muhammad-fajri-munawar-515864325/" target="_blank" rel="noopener noreferrer" style="--c:#0A66C2; text-decoration: none; color: inherit;"><i class="fa-brands fa-linkedin-in"></i><span>LinkedIn</span></a>
+                        <a class="ovl-item" href="https://www.threads.com/@jri_munawar" target="_blank" rel="noopener noreferrer" style="--c:#E1306C; text-decoration: none; color: inherit;"><i class="fa-brands fa-threads"></i><span>Threads</span></a>
+                        <div class="ovl-item" style="--c:#fff"><img class="ovl-logo" src="ChatGPT_Image_17_Jul_2026__19.01.14-removebg-preview(1).png" alt="BeReal"><span>BeReal</span></div>
+                        <div class="ovl-item" style="--c:#9146FF"><i class="fa-brands fa-twitch"></i><span>Twitch</span></div>
+                        <div class="ovl-item" style="--c:#ffffff"><img class="ovl-logo" src="ChatGPT Image Jul 19, 2026, 06_54_54 PM(1).png" alt="Qloobe"><span>Qloobe</span></div>
+                    </div>
+                </div>
+                <div class="view hide-view" id="socKomunikasiView">
+                    <div class="ovl-sub-title cat-green">Direct Communication</div>
+                    <div class="ovl-grid" id="gridKomunikasi">
+                        <div class="ovl-item" style="--c:#25D366"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></div>
+                        <div class="ovl-item" style="--c:#07C160"><i class="fa-brands fa-weixin"></i><span>WeChat</span></div>
+                        <div class="ovl-item" style="--c:#26A5E4"><i class="fa-brands fa-telegram"></i><span>Telegram</span></div>
+                        <a class="ovl-item" href="https://teams.live.com/v2/" target="_blank" rel="noopener noreferrer" style="--c:#6264A7; text-decoration: none; color: inherit;"><img class="ovl-logo" src="ChatGPT Image Jul 20, 2026, 02_13_28 PM(1).png" alt="MS Teams"><span>MS Teams</span></a>
+                        <div class="ovl-item" style="--c:#5865F2"><i class="fa-brands fa-discord"></i><span>Discord</span></div>
+                        <div class="ovl-item" style="--c:#0084FF"><i class="fa-brands fa-facebook-messenger"></i><span>Messenger</span></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Overlay: Build Projects -->
+    <!-- OVERLAY BUILD PROJECTS -->
     <div class="ovl" id="bldOvl">
         <div class="ovl-box">
             <div class="ovl-close" onclick="closeOvl('bldOvl')">&times;</div>
-            <div class="ovl-title">The results developed</div>
-            <div class="ovl-grid" id="bldGrid">
-                <div class="ovl-item"><img class="ovl-logo" src="Untitled_design-removebg-preview.png" alt="Geinia Nasional"><span>Geinia Nasional</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 12 Jul 2026, 22.17.14(1).png" alt="Unevras"><span>Unevras International Hcap</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 5, 2026, 02_05_25 PM(1).png" alt="JRI"><span>PT JRI Munawar Group</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 5 Jul 2026, 14.36.14(1).png" alt="Vleping"><span>Vleping</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 11, 2026, 06_17_43 PM(1).png" alt="Unisantara"><span>Unisantara Media Digital</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 17 Jul 2026, 17.13.45.png" alt="Konekda"><span>Konekda</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 15, 2026, 12_06_33 PM(1).png" alt="Zearvis"><span>Zearvis Teknologi</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 17, 2026, 07_40_45 PM(1).png" alt="Sirankarta"><span>Sirankarta</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 15 Jul 2026, 12.06.43(1).png" alt="Xeagis"><span>Xeagis Industri</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 17 Jul 2026, 17.13.41.png" alt="Danabatri"><span>Danabatri</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 15 Jul 2026, 17.11.28(1).png" alt="Porinvex"><span>Porinvex</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 17, 2026, 10_45_31 PM(1).png" alt="Padat"><span>Padat</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 14, 2026, 11_59_39 PM(1).png" alt="Bearbalck"><span>Bearbalck Security</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 15 Jul 2026, 12.10.15(1).png" alt="Axitorium"><span>Axitorium Lab</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 15, 2026, 12_08_43 AM(1).png" alt="Weilmy"><span>Weilmy</span></div>
-                <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 15, 2026, 12_01_46 AM(1).png" alt="Siravex"><span>Siravex</span></div>
+            <div class="ovl-back" id="bldBack" onclick="backToBldMain()"><i class="fa-solid fa-arrow-left"></i> Back</div>
+            <div class="ovl-title">The Results Developed</div>
+            <div class="view-wrap">
+                <div class="view" id="bldMainView">
+                    <div class="main-menu">
+                        <div class="menu-box bx-blue" onclick="showBldSub('company')">
+                            <div class="menu-box-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V5l7-3v19M19 21V9l-7-3M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></div>
+                            <h3>Company</h3>
+                            <p>Official Registered Company</p>
+                        </div>
+                        <div class="menu-box bx-green" onclick="showBldSub('noncompany')">
+                            <div class="menu-box-icon"><svg viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M5 22V10"/><path d="M19 22V10"/><path d="M9 22V10"/><path d="M15 22V10"/><path d="M2 10h20"/><path d="M12 2L2 10h20L12 2z"/></svg></div>
+                            <h3>Not A Company</h3>
+                            <p>Institutions, Bodies & Organizations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="view hide-view" id="bldCompanyView">
+                    <div class="ovl-sub-title cat-blue">Company</div>
+                    <div class="ovl-grid" id="gridCompany">
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 5, 2026, 02_05_25 PM(1).png" alt="JRI"><span>PT JRI Munawar Group</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 22, 2026, 05_52_46 AM(1).png" alt="Logo"><span>PT Triliun Legacy Summit</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 22 Jul 2026, 06.00.35(1).png" alt="Logo"><span>PT Noesan Clera Utama</span></div>
+                    </div>
+                </div>
+                <div class="view hide-view" id="bldNonCompanyView">
+                    <div class="ovl-sub-title cat-green">Not A Company</div>
+                    <div class="ovl-grid" id="gridNonCompany">
+                        <div class="ovl-item"><img class="ovl-logo" src="Untitled_design-removebg-preview.png" alt="Geinia Nasional"><span>Geinia Nasional</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 12 Jul 2026, 22.17.14(1).png" alt="Unevras"><span>Unevras International Hcap</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 5 Jul 2026, 14.36.14(1).png" alt="Vleping"><span>Vleping</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 11, 2026, 06_17_43 PM(1).png" alt="Unisantara"><span>Unisantara Media Digital</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 17, 2026, 17.13.45.png" alt="Konekda"><span>Konekda</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 15, 2026, 12_06_33 PM(1).png" alt="Zearvis"><span>Zearvis Teknologi</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 17, 2026, 07_40_45 PM(1).png" alt="Sirankarta"><span>Sirankarta</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 15 Jul 2026, 12.06.43(1).png" alt="Xeagis"><span>Xeagis Industri</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 17 Jul 2026, 17.13.41.png" alt="Danabatri"><span>Danabatri</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 15 Jul 2026, 17.11.28(1).png" alt="Porinvex"><span>Porinvex</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 17, 2026, 10_45_31 PM(1).png" alt="Padat"><span>Padat</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 14, 2026, 11_59_39 PM(1).png" alt="Bearbalck"><span>Bearbalck Security</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image 15 Jul 2026, 12.10.15(1).png" alt="Axitorium"><span>Axitorium Lab</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 15, 2026, 12_08_43 AM(1).png" alt="Weilmy"><span>Weilmy</span></div>
+                        <div class="ovl-item"><img class="ovl-logo" src="ChatGPT Image Jul 15, 2026, 12_01_46 AM(1).png" alt="Siravex"><span>Siravex</span></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // PERBAIKAN 2: Menggunakan DOMContentLoaded supaya tidak nunggu gambar kelar download dulu
         document.addEventListener('DOMContentLoaded', () => { 
-            const loadFill = document.getElementById('loadFill');
-            const loadPercent = document.getElementById('loadPercent');
-            let progress = 0;
+            setTimeout(() => { document.getElementById('loadScr').classList.add('done'); document.getElementById('p1').classList.add('show'); }, 2500);
             
-            setTimeout(() => {
-                const interval = setInterval(() => {
-                    progress += Math.floor(Math.random() * 12) + 4;
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(interval);
-                        loadPercent.innerText = '100%';
-                        loadFill.style.width = '100%';
-                        
-                        setTimeout(() => { 
-                            document.getElementById('loadScr').classList.add('done'); 
-                            document.getElementById('p1').classList.add('show'); 
-                        }, 400);
-                    } else {
-                        loadPercent.innerText = progress + '%';
-                        loadFill.style.width = progress + '%';
+            // SCROLL REVEAL ANIMATION FOR ALL PAGES
+            const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
                     }
-                }, 50);
-            }, 1600);
+                });
+            }, { threshold: 0.15 });
+            revealEls.forEach(el => observer.observe(el));
         });
         
         window.addEventListener('scroll', () => { 
             const h = document.getElementById('hdr'); 
-            if (window.scrollY > 50) h.classList.add('scrolled'); 
-            else h.classList.remove('scrolled'); 
-
-            // SISTEM AUTO CLOSE OVERLAY SAAT SCROLL
+            if (window.scrollY > 50) h.classList.add('scrolled'); else h.classList.remove('scrolled'); 
             const openOvlEl = document.querySelector('.ovl.show');
-            if (openOvlEl) {
-                closeOvl(openOvlEl.id);
-            }
+            if (openOvlEl) { closeOvl(openOvlEl.id); }
         });
 
-        // SISTEM AUTO CLOSE OVERLAY SAAT SCROLL MOUSE / TOUCH DI LUAR BOX
         ['wheel', 'touchmove'].forEach(evt => {
             window.addEventListener(evt, (e) => {
                 const openOvlEl = document.querySelector('.ovl.show');
-                if (openOvlEl && !e.target.closest('.ovl-box')) {
-                    closeOvl(openOvlEl.id);
-                }
+                if (openOvlEl && !e.target.closest('.ovl-box')) { closeOvl(openOvlEl.id); }
             }, { passive: true });
         });
         
-        function toggleSystem() { 
-            document.getElementById('p1Layout').classList.toggle('active'); 
-            document.getElementById('p1Box').classList.toggle('active'); 
+        function toggleSystem() { document.getElementById('p1Layout').classList.toggle('active'); document.getElementById('p1Box').classList.toggle('active'); }
+
+        function triggerItemAnim(gridId) {
+            const items = document.querySelectorAll(`#${gridId} .ovl-item`);
+            items.forEach((it, i) => { 
+                it.classList.remove('vis'); 
+                setTimeout(() => it.classList.add('vis'), 200 + i * 50); 
+            });
         }
 
-        // Overlay Logic dengan Animasi Premium (Blur to Focus)
         function openOvl(id) { 
             const o = document.getElementById(id); 
             o.classList.add('show'); 
             o.scrollTop = 0; 
-            const items = o.querySelectorAll('.ovl-item'); 
-            items.forEach((it, i) => { 
-                it.classList.remove('vis'); 
-                setTimeout(() => it.classList.add('vis'), 300 + i * 40); 
-            }); 
+            
+            if(id === 'socOvl') {
+                backToMain(true);
+                const items = document.querySelectorAll('#socMainView .menu-box');
+                items.forEach((it, i) => { 
+                    it.classList.remove('vis'); 
+                    setTimeout(() => it.classList.add('vis'), 400 + i * 100); 
+                });
+            } else if (id === 'bldOvl') {
+                backToBldMain(true);
+                const items = document.querySelectorAll('#bldMainView .menu-box');
+                items.forEach((it, i) => { 
+                    it.classList.remove('vis'); 
+                    setTimeout(() => it.classList.add('vis'), 400 + i * 100); 
+                });
+            }
         }
         
         function closeOvl(id) { 
             const o = document.getElementById(id);
-            o.classList.remove('show'); 
-            const items = o.querySelectorAll('.ovl-item');
-            items.forEach(it => it.classList.remove('vis'));
+            const items = o.querySelectorAll('.ovl-item, .menu-box');
+            items.forEach((it, i) => { setTimeout(() => it.classList.remove('vis'), i * 15); });
+            setTimeout(() => { o.classList.remove('show'); }, 150);
         }
         
-        document.querySelectorAll('.ovl').forEach(o => o.addEventListener('click', e => { 
-            if (e.target === o) {
-                closeOvl(o.id);
-            } 
-        }));
-        
-        document.addEventListener('keydown', e => { 
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.ovl.show').forEach(o => {
-                    closeOvl(o.id);
-                }); 
-            }
-        });
+        // --- SOCIAL MEDIA NAVIGATION ---
+        function showSub(type) {
+            const mainView = document.getElementById('socMainView');
+            const publikView = document.getElementById('socPublikView');
+            const komunikasiView = document.getElementById('socKomunikasiView');
+            const backBtn = document.getElementById('socBack');
 
-        // === SISTEM KEAMANAN GAMBAR (Anti Klik Kanan, Anti Drag, Keyboard Shortcut) ===
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault(); // Blokir klik kanan di mana saja
-        });
-        document.addEventListener('dragstart', function(e) {
-            e.preventDefault(); // Anti drag
-        });
-        // Mencegah tombol shortcut inspect element (Ctrl+Shift+I / F12 / Ctrl+U / Ctrl+Shift+C / Ctrl+Shift+J)
+            mainView.classList.add('hide-view');
+            publikView.classList.add('hide-view');
+            komunikasiView.classList.add('hide-view');
+            
+            document.querySelectorAll('#socPublikView .ovl-item').forEach(it => it.classList.remove('vis'));
+            document.querySelectorAll('#socKomunikasiView .ovl-item').forEach(it => it.classList.remove('vis'));
+
+            setTimeout(() => {
+                if(type === 'publik') {
+                    publikView.classList.remove('hide-view');
+                    triggerItemAnim('socPublikView');
+                } else {
+                    komunikasiView.classList.remove('hide-view');
+                    triggerItemAnim('socKomunikasiView');
+                }
+                backBtn.classList.add('sub-active');
+            }, 300);
+        }
+
+        function backToMain(instant = false) {
+            const mainView = document.getElementById('socMainView');
+            const publikView = document.getElementById('socPublikView');
+            const komunikasiView = document.getElementById('socKomunikasiView');
+            const backBtn = document.getElementById('socBack');
+            
+            publikView.classList.add('hide-view');
+            komunikasiView.classList.add('hide-view');
+            backBtn.classList.remove('sub-active');
+
+            if(!instant) {
+                document.querySelectorAll('#socMainView .menu-box').forEach(it => it.classList.remove('vis'));
+                setTimeout(() => {
+                    mainView.classList.remove('hide-view');
+                    const items = document.querySelectorAll('#socMainView .menu-box');
+                    items.forEach((it, i) => { setTimeout(() => it.classList.add('vis'), i * 100); });
+                }, 300);
+            } else {
+                mainView.classList.remove('hide-view');
+            }
+        }
+
+        // --- BUILD PROJECTS NAVIGATION ---
+        function showBldSub(type) {
+            const mainView = document.getElementById('bldMainView');
+            const companyView = document.getElementById('bldCompanyView');
+            const nonCompanyView = document.getElementById('bldNonCompanyView');
+            const backBtn = document.getElementById('bldBack');
+
+            mainView.classList.add('hide-view');
+            companyView.classList.add('hide-view');
+            nonCompanyView.classList.add('hide-view');
+            
+            document.querySelectorAll('#bldCompanyView .ovl-item').forEach(it => it.classList.remove('vis'));
+            document.querySelectorAll('#bldNonCompanyView .ovl-item').forEach(it => it.classList.remove('vis'));
+
+            setTimeout(() => {
+                if(type === 'company') {
+                    companyView.classList.remove('hide-view');
+                    triggerItemAnim('bldCompanyView');
+                } else {
+                    nonCompanyView.classList.remove('hide-view');
+                    triggerItemAnim('bldNonCompanyView');
+                }
+                backBtn.classList.add('sub-active');
+            }, 300);
+        }
+
+        function backToBldMain(instant = false) {
+            const mainView = document.getElementById('bldMainView');
+            const companyView = document.getElementById('bldCompanyView');
+            const nonCompanyView = document.getElementById('bldNonCompanyView');
+            const backBtn = document.getElementById('bldBack');
+            
+            companyView.classList.add('hide-view');
+            nonCompanyView.classList.add('hide-view');
+            backBtn.classList.remove('sub-active');
+
+            if(!instant) {
+                document.querySelectorAll('#bldMainView .menu-box').forEach(it => it.classList.remove('vis'));
+                setTimeout(() => {
+                    mainView.classList.remove('hide-view');
+                    const items = document.querySelectorAll('#bldMainView .menu-box');
+                    items.forEach((it, i) => { setTimeout(() => it.classList.add('vis'), i * 100); });
+                }, 300);
+            } else {
+                mainView.classList.remove('hide-view');
+            }
+        }
+
+        document.querySelectorAll('.ovl').forEach(o => o.addEventListener('click', e => { if (e.target === o) { closeOvl(o.id); } }));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.querySelectorAll('.ovl.show').forEach(o => { closeOvl(o.id); }); } });
+
+        // ==========================================
+        // === SISTEM KEAMANAN TINGKAT TINGGI ===
+        // ==========================================
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('dragstart', function(e) { e.preventDefault(); });
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-                return false;
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || (e.ctrlKey && e.key === 'U') || (e.ctrlKey && e.key === 'S')) {
+                e.preventDefault(); return false;
             }
         });
-
-        // === ANTI COPY-PASTE TEKS ===
         document.addEventListener('copy', function(e) { e.preventDefault(); return false; });
         document.addEventListener('cut', function(e) { e.preventDefault(); return false; });
         document.addEventListener('paste', function(e) { e.preventDefault(); return false; });
         document.addEventListener('selectstart', function(e) {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-                e.preventDefault();
-            }
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') { e.preventDefault(); }
         });
 
-        // === SISTEM KEAMANAN ANTI DEVTOOLS (MEMBUAT HACKER PEING) ===
         (function() {
             const threshold = 160;
             setInterval(function() {
                 const widthThreshold = window.outerWidth - window.innerWidth > threshold;
                 const heightThreshold = window.outerHeight - window.innerHeight > threshold;
-                if (widthThreshold || heightThreshold) {
-                    // Jika developer tools terbuka, arahkan ke halaman blank
-                    window.location.href = "about:blank";
-                }
+                if (widthThreshold || heightThreshold) { window.location.href = "about:blank"; }
             }, 1000);
-
-            // Deteksi console
             const element = new Image();
-            Object.defineProperty(element, 'id', {
-                get: function() {
-                    window.location.href = "about:blank";
-                }
-            });
-            setInterval(function() {
-                console.log('%c', element);
-            }, 1000);
+            Object.defineProperty(element, 'id', { get: function() { window.location.href = "about:blank"; } });
+            setInterval(function() { console.log('%c', element); }, 1000);
         })();
-
-        // Wheel Data
-        const wData = [
-            { 
-                l: "Space 01", t: "The Neutral Ground", 
-                x: "This environment acts as a completely neutral ground. It is a boundless container where various entities, ideas, and individuals can exist and be displayed without any bias or forced hierarchy.",
-                img: "ChatGPT Image 18 Jul 2026, 19.23.41.png" 
-            },
-            { 
-                l: "Space 02", t: "The Gathering Point", 
-                x: "Serving as a central hub, it brings distinct elements into one shared proximity. It is the designated area where separate paths cross, allowing for natural interaction and mutual recognition.",
-                img: "ChatGPT Image 18 Jul 2026, 19.26.51.png" 
-            },
-            { 
-                l: "Space 03", t: "The Structured Openness", 
-                x: "Though open and accommodating, the space maintains a strict, orderly foundation. Every participant is given equal room to be seen and understood, ensuring clarity within the collective.",
-                img: "ChatGPT Image 18 Jul 2026, 19.17.18.png" 
-            },
-            { 
-                l: "Space 04", t: "The Silent Catalyst", 
-                x: "By simply providing a shared room, this space naturally accelerates unseen connections. It allows isolated efforts to align and multiply their impact without requiring direct intervention.",
-                img: "ChatGPT Image 18 Jul 2026, 19.07.23.png" 
-            },
-            { 
-                l: "Space 05", t: "The Genesis Space", 
-                x: "More than just a container, it is the absolute starting line. It is the singular point where every potential is initially gathered, acknowledged, and prepared before stepping forward.",
-                img: "ChatGPT Image 18 Jul 2026, 19.23.41.png" 
-            }
-        ];
-        
-        document.getElementById('wPanelBg').style.backgroundImage = `url('${wData[0].img}')`;
-        
-        function wheel(i) {
-            document.querySelectorAll('.p4-slice').forEach(s => s.classList.remove('active')); 
-            document.getElementById('s'+i).classList.add('active');
-            document.querySelectorAll('.p4-txt').forEach(t => t.classList.remove('active')); 
-            document.getElementById('t'+i).classList.add('active');
-            
-            const data = wData[i-1];
-            document.getElementById('wLab').innerText = data.l;
-            document.getElementById('wTitle').innerText = data.t;
-            document.getElementById('wText').innerText = data.x;
-            document.getElementById('wPanelBg').style.backgroundImage = `url('${data.img}')`;
-        }
     </script>
 </body>
 </html>
