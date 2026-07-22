@@ -18,12 +18,12 @@
     <meta property="og:description" content="The primary architectural bridge connecting distinct digital entities and institutional bodies.">
     <meta property="og:site_name" content="INFOTRINK">
     
-    <!-- === SISTEM ANTI GOOGLE GAMBAR (Gambar tidak muncul di Google Images) === -->
+    <!-- === SISTEM ANTI GOOGLE GAMBAR === -->
     <meta name="robots" content="index, follow, noimageindex, noarchive, nosnippet">
     <meta name="googlebot" content="index, follow, noimageindex, noarchive, nosnippet">
     <meta name="referrer" content="no-referrer">
     
-    <!-- === SISTEM KEAMANAN TINGKAT TINGGI (Anti Clickjacking & Injection) === -->
+    <!-- === SISTEM KEAMANAN TINGKAT TINGGI === -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https: data:; frame-ancestors 'self'; object-src 'none'; base-uri 'self';">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -38,19 +38,19 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        /* SCROLL SETTINGS */
+        /* SCROLL SETTINGS & ANTI SCROLL KIRI KANAN DI HP */
         html { overflow-y: scroll; overflow-x: hidden; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
         body { width: 100%; max-width: 100%; background: #000; font-family: 'Montserrat', sans-serif; overflow-x: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
         :root { --cy: #00d4ff; --gr: #00e676; }
 
-        /* CUSTOM SCROLLBAR (Dark & Hidden) */
+        /* CUSTOM SCROLLBAR */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #444; }
 
         /* === GLOBAL IMAGE LOCKDOWN === */
-        img { -webkit-user-drag: none; user-drag: none; user-select: none; -webkit-user-select: none; pointer-events: none; }
+        img { -webkit-user-drag: none; user-drag: none; user-select: none; -webkit-user-select: none; pointer-events: none; max-width: 100%; }
         @media print { body { display: none !important; } }
 
         /* LOADING SCREEN */
@@ -255,7 +255,7 @@
         .p8-band-title { flex: 0 0 220px; font-size: 16px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
         .p8-band-text { flex: 1; font-size: 13px; color: rgba(255,255,255,0.6); text-align: justify; text-justify: inter-word; line-height: 1.6; }
 
-        /* === PAGE 9 (ABSOLUTE CONVERGENCE - CENTERPIECE WITH PILLARS) === */
+        /* === PAGE 9 (ABSOLUTE CONVERGENCE - CENTERPIECE WITH PILLARS) === -->
         .p9 { width: 100%; min-height: 100vh; background: #030303; padding: 120px 80px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .p9-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0, 230, 118, 0.04), transparent 70%); filter: blur(80px); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .p9-wrapper { display: flex; align-items: stretch; gap: 30px; max-width: 800px; width: 100%; position: relative; z-index: 2; }
@@ -267,7 +267,7 @@
         .p9-center p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; text-align: justify; margin-bottom: 30px; }
         .p9-center .divider { width: 40px; height: 2px; background: var(--gr); margin: 30px auto; box-shadow: 0 0 10px var(--gr); }
 
-        /* === PAGE 10 (INFINITE PARADIGM - ARCHITECTURAL BLUEPRINT) === */
+        /* === PAGE 10 (INFINITE PARADIGM - ARCHITECTURAL BLUEPRINT) === -->
         .p10 { width: 100%; min-height: 100vh; background: #020202; padding: 120px 80px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
         .p10-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 230, 118, 0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%); -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%); }
         .p10-container { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: stretch; }
@@ -290,7 +290,7 @@
         .p10-stat { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
         .p10-stat span { color: var(--cy); margin-left: 5px; }
 
-        /* === PAGE 11 (ABSOLUTE HORIZON - QUADRANT MATRIX) === */
+        /* === PAGE 11 (ABSOLUTE HORIZON - QUADRANT MATRIX) === -->
         .p11 { width: 100%; min-height: 100vh; background: #050505; padding: 120px 80px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         .p11-cross-v { position: absolute; top: 20%; bottom: 20%; left: 50%; width: 1px; background: linear-gradient(180deg, transparent, rgba(0,212,255,0.2), rgba(0,230,118,0.2), transparent); z-index: 1; }
         .p11-cross-h { position: absolute; left: 20%; right: 20%; top: 50%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), rgba(0,230,118,0.2), transparent); z-index: 1; }
@@ -308,7 +308,7 @@
         .p11-text { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.8; text-align: justify; max-width: 350px; }
         .p11-mark { font-family: 'Cinzel', serif; font-size: 12px; color: var(--gr); letter-spacing: 4px; border: 1px solid rgba(0,230,118,0.3); padding: 8px 16px; border-radius: 4px; text-transform: uppercase; }
 
-        /* === PAGE 12 (CULMINATION & COPYRIGHT - CENTERPIECE MONUMENTAL) === */
+        /* === PAGE 12 (CULMINATION & COPYRIGHT - CENTERPIECE MONUMENTAL) === -->
         .p12 { width: 100%; min-height: 100vh; background: #000; padding: 120px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
         .p12-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,230,118,0.05), transparent 70%); filter: blur(80px); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .p12-content { max-width: 700px; width: 100%; position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
@@ -379,7 +379,7 @@
         .ovl-item span { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3; }
         .ovl-item:hover span { color: #fff; }
 
-        /* RESPONSIVE */
+        /* === RESPONSIVE TABELT & HP (SANGAT RAPI) === -->
         @media (max-width: 1024px) {
             .p1-layout { left: 40px; right: 40px; height: 360px; } .p1-box { width: 380px; padding: 28px 32px; } .p1-title { font-size: 30px; letter-spacing: 3px; } .p1-right { width: 320px; } .p1-info { padding: 26px 28px; }
             .p2, .p3, .p4, .p5, .p6, .p7, .p8, .p9, .p10, .p11, .p12 { padding: 100px 40px; }
